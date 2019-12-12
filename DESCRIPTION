@@ -1,0 +1,28 @@
+Package: fda.usc
+Type: Package
+Title: Functional Data Analysis and Utilities for Statistical Computing
+Version: 2.0.1
+Date: 2019-12-13
+Authors@R: c(person("Manuel Febrero Bande",role="aut", email = "manuel.febrero@usc.es"), person("Manuel Oviedo de la Fuente",role=c("aut","cre"), email="manuel.oviedo@usc.es"),
+             person("Pedro Galeano",role="ctb"),
+             person("Alicia Nieto",role="ctb"),
+             person("Eduardo Garcia-Portugues",role="ctb"))
+Depends: R (>= 2.10), fda, splines, MASS, mgcv 
+Imports: methods, grDevices, graphics, utils, stats, nlme, doParallel,  parallel, iterators, foreach
+Suggests: knitr
+Description: Routines for exploratory and descriptive analysis of functional data such as depth measurements, atypical curves detection, regression models, supervised classification, unsupervised classification and functional analysis of variance.
+License: GPL-2
+URL: https://github.com/moviedo5/fda.usc,
+ http://www.jstatsoft.org/v51/i04/
+BugReports: https://github.com/moviedo5/fda.usc
+LazyLoad: yes
+Author: Manuel Febrero Bande [aut],
+  Manuel Oviedo de la Fuente [aut, cre],
+  Pedro Galeano [ctb],
+  Alicia Nieto [ctb],
+  Eduardo Garcia-Portugues [ctb]
+Maintainer: Manuel Oviedo de la Fuente <manuel.oviedo@usc.es>
+NeedsCompilation: yes
+Repository: CRAN
+Encoding: UTF-8
+RoxygenNote: 7.0.1

@@ -1,0 +1,12 @@
+"0","# install.packages(""fda.usc"")
+# setwd(""C:/Users/moviedo/OneDrive - Universidade de Santiago de Compostela/GitHub/"")
+library(roxygen2)
+# install.packages(""fda.usc"")
+# setwd(""C:/Users/moviedo/OneDrive - Universidade de Santiago de Compostela/GitHub/"")
+library(roxygen2)
+roxygenize()
+"
+"1","Writing NAMESPACE
+"
+"2","
+"
