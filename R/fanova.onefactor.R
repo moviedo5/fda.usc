@@ -99,7 +99,7 @@ fanova.onefactor=function(object, group, nboot=100,
 wmestadis<-function(xm){
   nk=nrow(xm)
   D=metric.lp(xm)
-  estadis=sum(D[lower.tri(D)])
+  estadis=sum(D[lower.tri(D)]^2)
   return(estadis)
 }
 ####################################

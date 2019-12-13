@@ -14,6 +14,11 @@ c) New internal function predict.kmeans.fd.
 
 5) Modifications in ldata.cen
 
+6) A bug in S.LPR() has been fixed.
+
+7) A bug in internal function wmestadis() used in fanova.onefactor() has been fixed.
+
+
 
 
 Version 2.0.0 is a major release with several new features, including:

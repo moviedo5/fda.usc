@@ -86,7 +86,7 @@ return(res)}
 
 #' @rdname S.np
 #' @export 
-S.LPR<-function (tt, h, p=1, Ker = Ker.norm, w = NULL, cv = FALSE) 
+S.LPR <- function (tt, h, p=1, Ker = Ker.norm, w = NULL, cv = FALSE) 
 {
   if (is.matrix(tt)) {
     if (ncol(tt) != nrow(tt)) {
@@ -103,7 +103,8 @@ S.LPR<-function (tt, h, p=1, Ker = Ker.norm, w = NULL, cv = FALSE)
     w <- rep(1, nrow(tt))
   k = Ker(tt/h)/h	
   if (cv) diag(k) = 0
-  xx=outer(tt/h,0:p,function(a,b) a^b)
+  xx=outer(tt,0:p,function(a,b) a^b)
+  # xx=outer(tt/h,0:p,function(a,b) a^b)
   e=matrix(c(1,rep(0,dim(xx)[3]-1)),ncol=1)
   S=matrix(NA,nrow=nrow(tt),ncol=ncol(tt))
   for (i in 1:nrow(tt)){
