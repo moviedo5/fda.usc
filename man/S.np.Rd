@@ -65,16 +65,16 @@ Options:
   S2=S.LLR(tt,h=10,Ker=Ker.tri)
   S3=S.NW(tt,h=10,Ker=Ker.tri)
   S4=S.KNN(tt,h=5,Ker=Ker.tri)
-  par(mfrow=c(2,2))
+  par(mfrow=c(2,3))
   image(S)
   image(S2)
   image(S3)
   image(S4)
-  S5=S.LPR(tt,p=1, Ker=Ker.tri)
-  S6=S.LCR(tt,p=1, Ker=Ker.tri)
-  image(S4)
+  S5=S.LPR(tt,h=10,p=1, Ker=Ker.tri)
+  S6=S.LCR(tt,h=10,Ker=Ker.tri)
+  image(S5)
+  image(S6)
 }
-
 }
 \references{
 Ferraty, F. and Vieu, P. (2006). \emph{Nonparametric functional data analysis.} Springer Series in Statistics, New York. 

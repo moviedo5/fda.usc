@@ -84,11 +84,6 @@ Usage
 Manuel Oviedo PhD thesis [Advances in functional regression and classification models](http://hdl.handle.net/10347/18236)
 -->
 
-<!-- 
-## References
-Febrero-Bande, M. and Oviedo de la Fuente, M. (2012). Statistical Computing in Functional Data Analysis: The R Package fda.usc. *Journal of Statistical Software*, 51(4):1-28. <http://www.jstatsoft.org/v51/i04/>
-
-García-Portugués, E., González-Manteiga, W. and Febrero-Bande, M. (2014). A goodness-of-fit test for the functional linear model with scalar response. *Journal of Computational and Graphical Statistics*, 23(3):761-778. <http://doi.org/10.1080/10618600.2013.812519>
 
 -->
 
