@@ -1,6 +1,6 @@
 #' Integrate Smoothing Kernels.
 #' 
-#' Represent integrate kernels: normal, cosine, triweight, quartic and uniform.
+#' @description Represent integrate kernels: normal, cosine, triweight, quartic and uniform.
 #' 
 #' @details Type of integrate kernel: \tabular{ll}{ \tab Integrate Normal Kernel:
 #' \code{IKer.norm}\cr \tab Integrate Cosine Kernel: \code{IKer.cos}\cr \tab
@@ -32,8 +32,6 @@
 #' f=IKer.epa(y)
 #' f2=Kernel.integrate(u=y,Ker=Ker.epa)
 #' f-f2
-#' 
-#' 
 #' plot(d,type="l",ylab="Integrate Kernel")
 #' lines(e,col=2,type="l")
 #' lines(f,col=4,type="l") 

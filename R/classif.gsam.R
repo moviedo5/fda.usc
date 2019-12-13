@@ -33,7 +33,10 @@
 # @param basis.b List of basis for functional beta parameter estimation.
 #' @param CV =TRUE, Cross-validation (CV) is done.
 #' @param prob probability value used for binari discriminant.
-#' @param type 1 vs all (by default) or majority voting.
+#' @param type If type is\code{"1vsall"}  (by default) 
+#' a maximum probability scheme is applied: requires G binary classifiers.
+#' If type is \code{"majority"}  (only for multicalss classification G > 2) 
+#' a voting scheme is applied: requires  G (G - 1) / 2 binary classifiers.
 #' @param \dots Further arguments passed to or from other methods.
 # @param  boos,classif,par.classif,mfinal,coeflearn,control,verbose,n.cores,par.metric,par.np,offset aaaa
 # @param size,epsilon,trace,inverse,fdata1,fdata2,w bbbb

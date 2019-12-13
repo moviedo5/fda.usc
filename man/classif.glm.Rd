@@ -40,7 +40,10 @@ function, a family function or the result of a call to a family function.
 
 \item{basis.b}{List of basis for functional beta parameter estimation.}
 
-\item{type}{1 vs all (by default) or majority voting.}
+\item{type}{If type is\code{"1vsall"}  (by default) 
+a maximum probability scheme is applied: requires G binary classifiers.
+If type is \code{"majority"}  (only for multicalss classification G > 2) 
+a voting scheme is applied: requires  G (G - 1) / 2 binary classifiers.}
 
 \item{prob}{probability value used for binari discriminant.}
 

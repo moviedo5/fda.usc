@@ -30,12 +30,12 @@
 #' }
 #' }
 #' 
-#' @param yobs  A vector of the labels, true class or observed response. Can be \code{numeric, character, or factor}
-#' @param ypred A vector of the predicted labels, predicted class or predicted response. Can be \code{numeric, character, or factor}
-#' @param tab Confusion matrix (Contingency table: observed class by rows, predicted class by columns)
+#' @param yobs  A vector of the labels, true class or observed response. Can be \code{numeric}, \code{character}, or \code{factor}.
+#' @param ypred A vector of the predicted labels, predicted class or predicted response. Can be \code{numeric, character, or factor}.
+#' @param tab Confusion matrix (Contingency table: observed class by rows, predicted class by columns).
 #' @param measure Type of measure, see \code{details} section. 
-#' @param cost Cost value by class (only for input factors)
-#' @aliases cat2meas tab2meas pred2meas
+#' @param cost Cost value by class (only for input factors).
+#' @aliases cat2meas tab2meas pred2meas.
 #' 
 #' @rdname accuracy
 #' @export
@@ -197,7 +197,6 @@ tab2wkappa = function (tab) {
 
 #' @rdname accuracy
 #' @export pred.MSE
-# @format none
 pred.MSE = function (yobs, ypred) {
   mean((ypred- yobs)^2)
 }

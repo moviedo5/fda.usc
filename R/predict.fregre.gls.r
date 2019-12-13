@@ -972,3 +972,4 @@ predict.fregre.igls<-function (object, newx = NULL, data, df = df
   return(predictor)
 }
 
+

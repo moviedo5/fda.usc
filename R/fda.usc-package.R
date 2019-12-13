@@ -125,8 +125,7 @@
 #' 
 #' \tabular{ll}{ Package: \tab fda.usc\cr Type: \tab Package\cr Version: \tab
 #' 2.0.1\cr Date: \tab 2019-12-12\cr License: \tab GPL-2 \cr LazyLoad: \tab
-#' yes\cr Url: \url{http://eio.usc.es/pub/MAESFE/}, 
-#' \url{http://eio.usc.es/pub/gi1914/}, \url{https://github.com/moviedo5/fda.usc/} }
+#' yes\cr Url: \url{http://eamo.usc.es/pub/gi1914/index.php/es/}, \url{https://github.com/moviedo5/fda.usc/} }
 #' 
 #' @name fda.usc-package
 #' @aliases fda.usc-package fda.usc

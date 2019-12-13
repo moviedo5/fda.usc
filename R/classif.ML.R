@@ -42,7 +42,10 @@
 #' \code{='inverse'} for inverse-probability of weighting.   
 #' \item if \code{numeric} vector of length \code{n}, Weight values of each observation.
 #' }
-#' @param type 1 vs all (by default) or majority voting.
+#' @param type If type is\code{"1vsall"}  (by default) 
+#' a maximum probability scheme is applied: requires G binary classifiers.
+#' If type is \code{"majority"}  (only for multicalss classification G > 2) 
+#' a voting scheme is applied: requires  G (G - 1) / 2 binary classifiers.
 #' @param size number of units in the hidden layer. Can be zero if there are skip-layer units.
 #' @param laplace value used for Laplace smoothing (additive smoothing). Defaults to 0 (no Laplace smoothing).
 #' @param \dots Further arguments passed to or from other methods.

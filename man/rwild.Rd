@@ -29,11 +29,7 @@ For the construction of wild bootstrap residuals, sampling from a random variabl
  \item ``normal'', Sampling from a standard normal distribution.
  }
 }
-\references{
-Mammen, E. (1993). \emph{Bootstrap and wild bootstrap for high dimensional linear models}.
-    Annals of Statistics 21, 255 285.
-      Davidson, R. and E. Flachaire (2001). \emph{The wild bootstrap, tamed at last}. working paper IER1000, Queens University.
- @examples 
+\examples{
 n<-100
 # For golden wild bootstrap variable
 e.boot0=rwild(rep(1,len=n),"golden")
@@ -46,8 +42,11 @@ summary(e.boot1)
 summary(e.boot2)
 summary(e.boot3)
              
- @keywords {distribution}    
- @export
+}
+\references{
+Mammen, E. (1993). \emph{Bootstrap and wild bootstrap for high dimensional linear models}.
+    Annals of Statistics 21, 255 285.
+      Davidson, R. and E. Flachaire (2001). \emph{The wild bootstrap, tamed at last}. working paper IER1000, Queens University.
 }
 \seealso{
 \code{\link{flm.test}}, \code{\link{flm.Ftest}}, \code{\link{dfv.test}}, \code{\link{fregre.bootstrap}}
@@ -55,3 +54,4 @@ summary(e.boot3)
 \author{
 Eduardo Garcia-Portugues, Manuel Febrero-Bande and  Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}.
 }
+\keyword{{distribution}}

@@ -4,10 +4,11 @@
 \alias{accuracy}
 \alias{cat2meas}
 \alias{tab2meas}
-\alias{pred2meas}
+\alias{pred2meas.}
 \alias{pred.MSE}
 \alias{pred.RMSE}
 \alias{pred.MAE}
+\alias{pred2meas}
 \title{Performance measures for regression and classification models}
 \usage{
 cat2meas(yobs, ypred, measure = "accuracy", cost = rep(1, nlevels(yobs)))
@@ -23,15 +24,15 @@ pred.MAE(yobs, ypred)
 pred2meas(yobs, ypred, measure = "RMSE")
 }
 \arguments{
-\item{yobs}{A vector of the labels, true class or observed response. Can be \code{numeric, character, or factor}}
+\item{yobs}{A vector of the labels, true class or observed response. Can be \code{numeric}, \code{character}, or \code{factor}.}
 
-\item{ypred}{A vector of the predicted labels, predicted class or predicted response. Can be \code{numeric, character, or factor}}
+\item{ypred}{A vector of the predicted labels, predicted class or predicted response. Can be \code{numeric, character, or factor}.}
 
 \item{measure}{Type of measure, see \code{details} section.}
 
-\item{cost}{Cost value by class (only for input factors)}
+\item{cost}{Cost value by class (only for input factors).}
 
-\item{tab}{Confusion matrix (Contingency table: observed class by rows, predicted class by columns)}
+\item{tab}{Confusion matrix (Contingency table: observed class by rows, predicted class by columns).}
 }
 \description{
 \code{\link{cat2meas}} and \code{\link{tab2meas}} calculate the measures for a multiclass classification model.\cr

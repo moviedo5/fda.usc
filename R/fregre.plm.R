@@ -258,7 +258,7 @@ else {
  z$formula=formula
  z$data=data
 }
- class(z)<-"fregre.plm"
+class(z)<-c("fregre.plm","fregre.fd")
 z
 }
 

@@ -1,10 +1,13 @@
-#' DD-Classifier Based on DD-plot
+
+
+#' @name classif.DD
+#' @title DD-Classifier Based on DD-plot
 #' 
 #' @description Fits Nonparametric Classification Procedure Based on DD--plot
 #' (depth-versus-depth plot) for G dimensions (\eqn{G=g\times h}{G=g x p}, g
 #' levels and p data depth).
 #' 
-#' Make the group classification of a training dataset using DD-classifier
+#' @details Make the group classification of a training dataset using DD-classifier
 #' estimation in the following steps.\cr
 #' 
 #' \enumerate{ 
@@ -66,8 +69,8 @@
 #' \code{\link{classif.np}}.  
 #' }
 #' The user can be specify the parameters for classifier function in \code{par.classif} such as the smoothing parameter
-#' \code{par.classif[[``h'']]}, if \code{classif="np"} or the k-Nearest
-#' Neighbour \code{par.classif[[``knn'']]}, if \code{classif="knn"}.
+#' \code{par.classif[["h"]]}, if \code{classif="np"} or the k-Nearest
+#' Neighbour \code{par.classif[["knn"]]}, if \code{classif="knn"}.
 #' 
 #' In the case of polynomial classifier (\code{"DD1"}, \code{"DD2"} and
 #' \code{"DD3"}) uses the original procedure proposed by Li et al. (2012), by
@@ -128,7 +131,9 @@
 #' 
 #' \code{alpha}, the alpha transparency used in the background of DD--plot, a
 #' number in [0,1].
-#' @return \itemize{
+
+#' @return 
+#' \itemize{
 #' \item \code{group.est} {Estimated vector groups by classified method
 #' selected.}  
 #' \item \code{misclassification} { Probability of misclassification.} 
@@ -197,21 +202,22 @@
 #' summary(out20)
 #' summary(out21)
 #' }
-#' 
-#' @export
-classif.DD <- function(group,fdataobj,depth="FM",classif="glm",w,
-                       par.classif=list(),par.depth=list(),
-                       control=list(verbose=FALSE,draw=TRUE,col=NULL,alpha=.25)){
+
+#' @rdname classif.DD
+#' @export 
+classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
+                       par.classif = list(), par.depth = list(),
+                       control = list(verbose = FALSE,draw = TRUE, col = NULL, alpha = .25))  {
   ################################################################################
   # classif.DD: Fits Nonparametric Classification Procedure Based on DD-plot
   # File created by Manuel Oviedo de la Fuente  using code from paper:
   # Cuesta-Albertos, J.A., Febrero-Bande, M. and Oviedo de la Fuente, M.
   # The DDG-classifier in the functional setting. 
   ################################################################################
-  C<-match.call()
+  C <- match.call()
   if (!is.factor(group)) group<-factor(group)
-  lev<-levels(group)
-  group<-factor(group,levels=lev[which(table(group)>0)])
+  lev <- levels(group)
+  group <- factor(group,levels=lev[which(table(group)>0)])
   if (is.null(control$verbose))  control$verbose<-FALSE
   if (is.null(control$draw))  control$draw<-TRUE
   if (is.null(control$fine))  control$fine<-100
@@ -1224,4 +1230,5 @@ classif.DD <- function(group,fdataobj,depth="FM",classif="glm",w,
   output$fit <- func.clas
   class(output) <- "classif"
   return(output)
+  
 }

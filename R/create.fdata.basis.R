@@ -72,8 +72,9 @@ create.fdata.basis <-function(fdataobj, l = 1:5, maxl = max(l), type.basis = "bs
     as <- list()
     as$rangeval <- rangeval
     as$nbasis <- maxl
-    as$dropind <- setdiff(1:maxl, l)
     basis = do.call(aa1, as)
+    #basis$params <- diff(rangeval)
+    basis$dropind <- setdiff(1:maxl, l)
     if (class.out == "fdata") {
       nam <- basis$names[intersect(1:maxl, l)]
       basis = fdata(t(eval.basis(fdataobj$argvals, basis)), 
@@ -86,6 +87,7 @@ create.fdata.basis <-function(fdataobj, l = 1:5, maxl = max(l), type.basis = "bs
   }
   basis
 }
+
 
 scores.basis <-function(fdataobj,l=1:5,maxl=max(l),type.basis="bspline", lambda ){
       aa1 <- paste("create.",type.basis,".basis", sep = "")

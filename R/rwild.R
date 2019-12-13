@@ -27,7 +27,7 @@
 #'   Mammen, E. (1993). \emph{Bootstrap and wild bootstrap for high dimensional linear models}.
 #'     Annals of Statistics 21, 255 285.
 #'       Davidson, R. and E. Flachaire (2001). \emph{The wild bootstrap, tamed at last}. working paper IER1000, Queens University.
-#'  @examples 
+#' @examples 
 #' n<-100
 #' # For golden wild bootstrap variable
 #' e.boot0=rwild(rep(1,len=n),"golden")
@@ -40,7 +40,7 @@
 #' summary(e.boot2)
 #' summary(e.boot3)
 #'              
-#'  @keywords {distribution}    
+#' @keywords {distribution}    
 
 ##############################################
 ##          Functional Linear Model         ##
@@ -53,7 +53,7 @@
 ##############################################
 
 # Generation of centred random variables with unit variance for the wild bootstrap
-#'  @export
+#' @export
 rwild=function(residuals,type="golden"){
   n=length(residuals)
   res=switch(type,
