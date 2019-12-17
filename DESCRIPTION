@@ -24,4 +24,4 @@ Maintainer: Manuel Oviedo de la Fuente <manuel.oviedo@usc.es>
 NeedsCompilation: yes
 Repository: CRAN
 Encoding: UTF-8
-RoxygenNote: 7.0.1
+RoxygenNote: 7.0.2

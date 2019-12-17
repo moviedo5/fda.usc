@@ -54,4 +54,4 @@ Mammen, E. (1993). \emph{Bootstrap and wild bootstrap for high dimensional linea
 \author{
 Eduardo Garcia-Portugues, Manuel Febrero-Bande and  Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}.
 }
-\keyword{{distribution}}
+\keyword{distribution}

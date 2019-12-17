@@ -77,10 +77,20 @@ of Statistical Software*, 51(4):1-28.
 <http://www.jstatsoft.org/v51/i04/>
 
 <!--
+library(roxygen2)
+setwd("C:/Users/moviedo/github/fda.usc/")
+getwd()
+pkgbuild::compile_dll()
+roxygenize()
+devtools::document()
+
 library(devtools)
 # devtools::install_github("moviedo5/fda.usc.devel",auth_user="moviedo5")
 
-Usage
+R CMD build fda.usc
+R CMD check fda.usc_2.0.1.tar.gz --as-cran
+R CMD INSTALL fda.usc_2.0.1.tar.gz --build
+
 Manuel Oviedo PhD thesis [Advances in functional regression and classification models](http://hdl.handle.net/10347/18236)
 -->
 

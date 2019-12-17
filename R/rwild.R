@@ -40,7 +40,7 @@
 #' summary(e.boot2)
 #' summary(e.boot3)
 #'              
-#' @keywords {distribution}    
+#' @keywords distribution
 
 ##############################################
 ##          Functional Linear Model         ##
