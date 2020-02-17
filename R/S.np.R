@@ -12,14 +12,12 @@
 #'  \item Local Cubic Regression Estimator (S.LPR) with kernel \code{Ker}.
 #'  }
 #' @aliases S.np S.LLR S.KNN S.LPR S.LCR S.NW
-
 #' @param tt Vector of discretization points or distance matrix \code{mdist}
 #' @param h Smoothing parameter or bandwidth. In S.KNN, number of k-nearest neighbors.
 #' @param Ker Type of kernel used, by default normal kernel.
 #' @param w Optional case weights.
 #' @param cv If \code{TRUE}, cross-validation is done.
 #' @param p Polynomial degree.
-#' @param \dots Further arguments passed to or from other methods. Arguments to
 #' be passed by default to \link[fda]{create.basis}
 #' @return Return the smoothing matrix \code{S}.
 #' \itemize{
@@ -162,7 +160,7 @@ return(S)
 
 #' @rdname S.np
 #' @export 
-S.KNN<-function(tt,h=NULL,Ker=Ker.unif,w=NULL,cv=FALSE)      {
+S.KNN<-function(tt,h=NULL,Ker=Ker.unif,w=NULL,cv=FALSE){
   if (is.matrix(tt)) {
     if (ncol(tt)!=nrow(tt)) {
       if (ncol(tt)==1) {

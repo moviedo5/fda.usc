@@ -22,8 +22,7 @@ selec=2.  .}
 }
 \description{
 Summary function for \code{\link{fregre.gkam}} function.
-}
-\details{
+
 \tabular{ll}{ \tab -Family used.\cr \tab -Number or iteration of algorithm
 and if it has converged. \cr \tab -Residual and null deviance.\cr \tab
 -Number of data.\cr } Produces a list of summary information for a fitted

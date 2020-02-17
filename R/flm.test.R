@@ -620,7 +620,7 @@ flm.test=function(X.fdata,Y,beta0.fdata=NULL,B=5000,est.method="pls",
 		}
 		
 		# Plot
-		dev.new()
+		#dev.new()
 		plot(u,mean.proc,ylim=c(min(mean.proc,mean.boot.proc),max(mean.proc,mean.boot.proc))*1.05,type="l",xlab=expression(paste(symbol("\341"),list(X, gamma),symbol("\361"))),ylab=expression(R[n](u)),main="")
 		for(i in 1:B.plot) lines(u,mean.boot.proc[i,],lty=2,col=gray(0.8))
 		lines(u,mean.proc)

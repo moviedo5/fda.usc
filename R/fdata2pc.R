@@ -1,6 +1,6 @@
-#' Partial least squares components for functional data.
+#' @title Partial least squares components for functional data.
 #' 
-#' Compute penalized partial least squares (PLS) components for functional
+#' @description Compute penalized partial least squares (PLS) components for functional
 #' data. 
 #' 
 #' @details If \code{norm=TRUE}, computes the PLS by
@@ -173,7 +173,7 @@ fdata2pls<-function(fdataobj,y,ncomp = 2,lambda=0,P=c(0,0,1),norm=TRUE,...) {
   #   TT = X %*% V  ## son los scores
   l<-1:ncomp
   colnames(scores) <- paste("PLS", l, sep = "")
-  outlist = list(call=C,df = DoF, rotation=V2,x=scores,lambda=lambda,P=P,norm=norm,type="pls",
+  outlist = list(call=C,df = DoF, rotation=V2, x=scores, lambda=lambda,P=P,norm=norm,type="pls",
                  fdataobj=fdataobj,y=y0,l=l,fdataobj.cen=center$Xcen,mean=mean.X,Yhat = Yhat,yhat = yhat)
   #    Yhat = Yhat, coyhat = yhat,efficients = coefficients,intercept = intercept,
   #     RSS = RSS,TT=TT, sigmahat = sigmahat,covariance = covariance,

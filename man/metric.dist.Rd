@@ -26,8 +26,7 @@ function.}
 \description{
 This function computes the distances between the rows of a data matrix by
 using the specified distance measure.
-}
-\details{
+
 This function returns a distance matrix by using \code{\link{dist}}
 function. \cr The matrix dimension is (\code{n1} x \code{n1}) if
 \code{y=NULL}, (\code{n1} x \code{n2}) otherwise.

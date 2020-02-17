@@ -15,7 +15,7 @@
 #' \code{fdata} class objecct, \code{ncl} are the initial centers curves with
 #' \code{nrow(ncl)} number of groups.\cr
 #' 
-#' @aliases kmeans.fd kmeans.center.ini kmeans.centers.update
+#' @aliases kmeans.fd 
 #' 
 #' @param fdataobj \code{\link{fdata}} class object.
 #' @param ncl See details section.
@@ -57,9 +57,9 @@
 #' @keywords cluster
 #' @examples
 #' \dontrun{
+#' library(fda.usc)
 #' data(phoneme)
 #' mlearn<-phoneme$learn[c(1:50,101:150,201:250),]
-#' 
 #' # Unsupervised classification
 #' out.fd1=kmeans.fd(mlearn,ncl=3,draw=TRUE)
 #' out.fd2=kmeans.fd(mlearn,ncl=3,draw=TRUE,method="exact")
@@ -146,77 +146,34 @@ if (is.vector(ncl)) {
 }
  ngroups=nrow(out1$centers[["data"]])
  a=0;aa<-i<-1
-# C <- match.call()
-# mf <- match.call(expand.dots = FALSE)
  same_centers=FALSE
-#while ((i<max.iter) && (a!=aa)) {
 if (is.null(colnames(out1$d))) 
   cnames<-colnames(out1$d)<-1:NCOL(out1$d)
+else cnames<-colnames(out1$d)
 while ((i<max.iter) && (!same_centers)) {
   iterar<-FALSE
-# print(i)
-# print("1. assign")
-  out3=kmeans.assig.groups(out1,draw=draw)
+ out3=kmeans.assig.groups(out1,draw=draw)
   names(out3$cluster) <- cnames
-  # print("tala out 3")
-  # print(table(out3$cluster))
-  # print("tala out 4")
+ 
   tab <- table(out3$cluster)
   imin <- which.min(tab)[1]
-# print(tab)  
-# print(imin)
   if (cluster.size > tab[imin] ) {
-# print("entra tab")
-    # ngroups <- ngroups-1
     warning(paste0(" One of the clusters only has ",tab[imin]
     , " curves and the minimum cluster size is ", cluster.size
     ,".\n The cluster is completed with the closest curves of the other clusters."))
     # names(sort(aa)[1:5])
     iclust <- out3$cluster == imin
     dist.aux <- out1$d[imin,]
-## print(dist.aux)
-    # print(sum(iclust))
-    #dist.aux[iclust] <- Inf
-    
-#    # print(dist.aux)
-    # print(which(iclust))
     icambios <- as.numeric(names(sort( out1$d[imin,])[1:cluster.size]))
-    #icambios <- which.min(dist.aux[-iclust])
-    
-# print(icambios)    
-# print("a ver oho 1")
-# print(table(out3$cluster))
-# print("a ver oho 2")
-# print(out3$cluster[icambios] )
     #out1$d[imin,iclust]<- 0
     out1$d[imin,icambios]<- 0
     #out1$d[icambios,icambios]<- 0
     out1$z.dist<-out1$d
-# print("a ver oho 3")
-# print(tab[imin])
-# print("a ver oho 4")
-out3$cluster[icambios] <- imin
-# print("a ver oho 5")
-# print(table(out3$cluster))
-# print("a ver oho 6")
-# print(out3$cluster[icambios] )
-    #out3$cluster <- out1$cluster
-    # act
-    #grupo <- apply(d[(nr+1):(nr+ngroups),],2,which.min)
-    
-    #out1$centers <- out1$centers[-imin]
-    #grupo <- apply(d[(nr+1):(nr+ngroups),],2,which.min)
+    out3$cluster[icambios] <- imin
     out2<-out3
-    #out2$cluster<-
      out1$cluster <- out3$cluster
-# print("0000000000000000000")    
-# print(c(icambios,which(iclust)))
-    #par.dfunc$fdataobj<-fdataobj[c(icambios,which(iclust))]
     par.dfunc$fdataobj<-fdataobj[c(icambios)]
-# print("1111111111111111111")    
-# print(out1$centers[imin]$data[1:3])
     out1$centers[imin]=do.call(dfunc,par.dfunc)
-    # print(out1$centers[imin]$data[1:3])
     iterar <-TRUE
     i=i+1
     

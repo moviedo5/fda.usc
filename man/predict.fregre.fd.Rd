@@ -58,8 +58,7 @@ If \code{se.fit =TRUE} a list with the following components is returned:
 Computes predictions for regression between functional explanatory variables
 and scalar response using: basis representation, Principal Components
 Analysis, Partial least squares or nonparametric kernel estimation.
-}
-\details{
+
 Predicts from a fitted \code{fregre.basis} object,see
 \code{\link{fregre.basis}} or \code{\link{fregre.basis.cv}}\cr Predicts from
 a fitted \code{fregre.pc} object,see \code{\link{fregre.pc}} or

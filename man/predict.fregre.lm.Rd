@@ -7,7 +7,7 @@
 \alias{predict.fregre.gsam}
 \alias{predict.fregre.lm}
 \alias{predict.fregre.plm}
-\title{Predict method for functional regression model}
+\title{Predict method for functional linear model}
 \usage{
 \method{predict}{fregre.gkam}(object, newx = NULL, type = "response", ...)
 
@@ -39,7 +39,8 @@
 to predict. If omitted, the fitted values are used. List of new explanatory
 data.}
 
-\item{type}{Type of prediction (response or model term).}
+\item{type}{a character vector, Type of prediction: (\code{response}, \code{terms} for model terms or \code{effects}  for model terms where
+the partial effects are summarized for each functional variable.}
 
 \item{\dots}{Further arguments passed to or from other methods.}
 

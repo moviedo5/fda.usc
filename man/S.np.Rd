@@ -30,9 +30,7 @@ S.KNN(tt, h = NULL, Ker = Ker.unif, w = NULL, cv = FALSE)
 
 \item{cv}{If \code{TRUE}, cross-validation is done.}
 
-\item{p}{Polynomial degree.}
-
-\item{\dots}{Further arguments passed to or from other methods. Arguments to
+\item{p}{Polynomial degree.
 be passed by default to \link[fda]{create.basis}}
 }
 \value{

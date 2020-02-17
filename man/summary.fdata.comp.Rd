@@ -4,44 +4,38 @@
 \alias{summary.fdata.comp}
 \title{Correlation for functional data by Principal Component Analysis}
 \usage{
-\method{summary}{fdata.comp}(object, y = NULL, biplot = TRUE, corplot = FALSE, ...)
+\method{summary}{fdata.comp}(object, biplot = TRUE, ...)
 }
 \arguments{
 \item{object}{fdata.comp class object calculated by: \code{fdata2pc},
 \code{fdata2pls}, \code{fregre.pc} or \code{fregre.pls}.}
 
-\item{y}{(optional) The argument is only necessary if corplot=TRUE.}
-
 \item{biplot}{=TRUE draw the biplot and PC (or PLS) components.}
-
-\item{corplot}{=TRUE draw correlations between y and PC (or PLS) components.}
 
 \item{\dots}{Further arguments passed to or from other methods.}
 }
 \value{
 If \code{corplot}=TRUE, are displaying the biplot between the PC (or PLS) components.\cr
- If \code{corplot}=TRUE, are displaying the correlations between the PC (or PLS) components and response \code{y}.\cr 
  If \code{ask}=TRUE, draw each graph in a window, waiting to confirm the change
 of page with a click of the mouse or pressing ENTER.  If \code{ask}=FALSE draw graphs in one window.
 }
 \description{
-Compute correlation principal components of functional data and scalar
-response \code{y}.
+Summary of functional principal components
 }
 \examples{
 \dontrun{
-n= 200
-tt= seq(0,1,len=101)
-x0<-rproc2fdata(n,tt,sigma="wiener")
-x1<-rproc2fdata(n,tt,sigma=0.1)
-x<-x0*3+x1
-beta = tt*sin(2*pi*tt)^2
-fbeta = fdata(beta,tt)
-y<-inprod.fdata(x,fbeta)+rnorm(n,sd=0.1)
-pc1=fdata2pc(x)
-summary(pc1,y)
-pls1=fdata2pls(x,y)
-summary(pls1,cor=TRUE)
+n <- 200
+tt <- seq(0,1,len=101)
+x0 <- rproc2fdata(n,tt,sigma="wiener")
+x1 <- rproc2fdata(n,tt,sigma=0.1)
+x <- x0*3+x1
+beta <- tt*sin(2*pi*tt)^2
+fbeta <- fdata(beta,tt)
+y <- inprod.fdata(x,fbeta) + rnorm(n,sd=0.1)
+pc1 <- fdata2pc(x,3)
+summary(pc1)
+pls1 <- fdata2pls(x,y)
+summary(pls1)
 }
 
 }

@@ -1,14 +1,17 @@
 # @S3method predict fregre.glm
 #' @rdname predict.fregre.lm
 #' @export 
-predict.fregre.glm<-function(object,newx=NULL,type="response",...){
+predict.fregre.glm<-function(object, newx = NULL, type = "response",...){
  if (is.null(object)) stop("No fregre.glm object entered")
  if (is.null(newx)) {
-    yp=predict.glm(object,type=type,...)
-    print("No newx entered")
-    return(yp)
+    if (type == "effects"){
+      fake  = predict.glm(object, type = "terms", ...) 
+      yp <- effect.fake(object,fake)
+    } else{
+      yp  = predict.glm(object, type = type, ...)
     }
- else {
+  return(yp)
+ } else {
  data=newx
  basis.x=object$basis.x
  basis.b=object$basis.b
@@ -114,11 +117,15 @@ if (length(vfunc)>0)  {
 
         
         }
-if (first) return(rep(object$coefficient,length=nrow(newx[[1]])) )        
-if (!is.data.frame(XX)) XX=data.frame(XX)         
- yp=predict.glm(object=object,newdata=XX,type=type,x=TRUE,y=TRUE,...)
-return(yp)
+ if (first) return(rep(object$coefficient,length=nrow(newx[[1]])) )        
+ if (!is.data.frame(XX)) XX=data.frame(XX)    
+ if (type == "effects"){
+   fake  = predict.glm(object, newdata = XX, type = "terms",x=TRUE,y=TRUE, ...)
+   yp <- effect.fake(object,fake)
+ } else{
+   yp <- predict.glm(object = object, newdata = XX, type = type, x=TRUE,y=TRUE,...)
+ }
+ # yp=predict.glm(object=object,newdata=XX,type=type,x=TRUE,y=TRUE,...)
+ return(yp)
 }
 }
-
-

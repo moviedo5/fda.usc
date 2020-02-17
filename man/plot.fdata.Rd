@@ -15,11 +15,11 @@
 
 title.fdata(x, main = NULL, xlab = NULL, ylab = NULL, rownames = NULL)
 
-\method{plot}{bifd}(x, argvals.s, argvals.t, ...)
-
 \method{plot}{mdepth}(x, trim, levgray = 0.9, ...)
 
 \method{plot}{depth}(x, trim, levgray = 0.9, ...)
+
+\method{plot}{bifd}(x, argvals.s, argvals.t, ...)
 }
 \arguments{
 \item{x}{\code{fdata} class object with:  \itemize{ 
@@ -72,16 +72,16 @@ class).}
 
 \item{rownames}{Row names.}
 
+\item{trim}{The alpha of the trimming.}
+
+\item{levgray}{A vector of desired gray levels between 0 and 1; zero
+indicates "black" and one indicates "white".}
+
 \item{argvals.s}{a vector of argument values for the first argument s of the
 functional data object to be evaluated.}
 
 \item{argvals.t}{a vector of argument values for the second argument t of
 the functional data object to be evaluated.}
-
-\item{trim}{The alpha of the trimming.}
-
-\item{levgray}{A vector of desired gray levels between 0 and 1; zero
-indicates "black" and one indicates "white".}
 }
 \description{
 Plot object of class \code{fdata}.

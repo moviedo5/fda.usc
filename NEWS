@@ -1,3 +1,16 @@
+Version 2.0.2:
+fdata.bootstrap and fregre.bootstrap functions addapted to parallel backend.
+Corrected bug in kmeans.fd() function.
+Bug corrected in predict.fregre.glm(), predict.fregre.lm() and predict.gsam(), now works with type="effects".
+The "main", "xlab" and "ylab" arguments can be used in the plot.bifd() function.
+plot.ldata() draws each curve according to the factor indicated in the argument "var.name".
+Minor changes in ldata(), "na.rm = T" is removed in the sweep function.
+The documentation for the argument '...' that is not included in the "usage" was deleted.
+Modification in internal function wmestadis() used in fanova.onefactor(), now it replicates the statistic defined by Cuevas, 2004.
+Deleted arguments "y" and "corplot" in summary.fdata.comp() function.
+Deleted dev.new() in code of summary.fdata.comp() function.
+
+
 Version 2.0.1:
 1) Modification in fdata() function to avoid class()== and class()!= instead use is(), 
 sog in R 4.0.0, will a matrix() be an "array", e.g., 'class(diag(1))' is c("matrix", "array")' 

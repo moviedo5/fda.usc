@@ -67,8 +67,7 @@ functional point shows the probability of each possible group membership.}
 \description{
 Computes functional classification using functional (and non functional)
 explanatory variables by basis representation.
-}
-\details{
+
 The first item in the \code{data} list is called \emph{"df"} and is a data
 frame with the response and non functional explanatory variables, as
 \code{\link{glm}}.\cr

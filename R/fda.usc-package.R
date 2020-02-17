@@ -1,6 +1,6 @@
 #' Functional Data Analysis and Utilities for Statistical Computing (fda.usc)
 #' 
-#' This package carries out exploratory and descriptive analysis of functional
+#' This devel version carries out exploratory and descriptive analysis of functional
 #' data exploring its most important features: such as depth measurements or
 #' functional outliers detection, among others. \cr It also helps to explain
 #' and model the relationship between a dependent variable and independent
@@ -124,7 +124,7 @@
 #' \tab \code{\link{semimetric.basis}} \cr }
 #' 
 #' \tabular{ll}{ Package: \tab fda.usc\cr Type: \tab Package\cr Version: \tab
-#' 2.0.1\cr Date: \tab 2019-12-12\cr License: \tab GPL-2 \cr LazyLoad: \tab
+#' 2.0.2\cr Date: \tab 2020-02-17\cr License: \tab GPL-2 \cr LazyLoad: \tab
 #' yes\cr Url: \url{http://eamo.usc.es/pub/gi1914/index.php/es/}, \url{https://github.com/moviedo5/fda.usc/} }
 #' 
 #' @name fda.usc-package

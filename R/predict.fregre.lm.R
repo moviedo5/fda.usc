@@ -1,4 +1,4 @@
-#' @title Predict method for functional regression model
+#' @title Predict method for functional linear model
 #' 
 #' @description 
 #' Computes predictions for regression between functional (and non functional)
@@ -39,7 +39,8 @@
 #' @param newx An optional data list in which to look for variables with which
 #' to predict. If omitted, the fitted values are used. List of new explanatory
 #' data.
-#' @param type Type of prediction (response or model term).
+#' @param type a character vector, Type of prediction: (\code{response}, \code{terms} for model terms or \code{effects}  for model terms where
+#' the partial effects are summarized for each functional variable.
 #' @param se.fit =TRUE (not default) standard error estimates are returned for
 #' each prediction.
 #' @param scale Scale parameter for std.err. calculation.
@@ -120,10 +121,16 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
   if (is.null(object)) 
     stop("No fregre.lm object entered")
   if (is.null(newx)) {
-    yp = predict.lm(object, type = type, se.fit = se.fit, 
-                    interval = interval, level = level, weights = weights, 
-                    pred.var = pred.var, df = df, scale = scale, ...)
-    print("No newx entered")
+    if (type == "effects"){
+      fake  = predict.lm(object, type = "terms", se.fit = se.fit, 
+                      interval = interval, level = level, weights = weights, 
+                      pred.var = pred.var, df = df, scale = scale, ...)
+      yp <- effect.fake(object,fake)
+    } else{
+      yp = predict.lm(object, type = type, se.fit = se.fit, 
+                      interval = interval, level = level, weights = weights, 
+                      pred.var = pred.var, df = df, scale = scale, ...)
+    }
     return(yp)
   }
   else {
@@ -255,12 +262,22 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
     nn <- nrow(XX)
     if (!is.data.frame(XX)) 
       XX = data.frame(XX)
-    if (!object$rn) 
-      return(predict.lm(object = object, newdata = XX, 
-                        type = type, se.fit = se.fit, interval = interval, 
-                        level = level, weights = weights, pred.var = pred.var, 
-                        df = df, scale = scale, , ...))
+    if (!object$rn) {
+      
+      if (type == "effects"){
+        fake  = predict.lm(object, newdata = XX, type = "terms", se.fit = se.fit, 
+                           interval = interval, level = level, weights = weights, 
+                           pred.var = pred.var, df = df, scale = scale, ...)
+        return(effect.fake(object,fake))
+      } else{
+        return(predict.lm(object = object, newdata = XX, 
+                          type = type, se.fit = se.fit, interval = interval, 
+                          level = level, weights = weights, pred.var = pred.var, 
+                          df = df, scale = scale, , ...))
+        }
+    }
     else {
+      if (type!="response") warning("Only response type implemented for penalization")
       for (i in 1:length(vfunc)) {
         if (object$call[[1]] == "fregre.pls") 
           return(predict.lm(object = object, newdata = XX, 
@@ -309,5 +326,27 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
   }
   return(drop(yp))
 }
-
- 
+#################################
+#################################
+effect.fake <- function(object,terms){
+  #fake<-predict(object,type = "terms")
+  fake <- terms
+  vfunc <- names(object$JJ)
+  nfunc <- length(vfunc)
+  tr <- attr(object$terms,"term.labels")
+  #effects.df <- intersect(tr,colnames(object$data$df))
+  #effects<-fake[,effects.df ,drop=F]
+  effects<-NULL
+  vf <- NULL
+  for (i in 1:nfunc){
+    ifunc<-colnames(object$JJ[[i]])
+    dfnames <- intersect(tr,ifunc)
+    vf <- c(vf,dfnames)
+    effects<-cbind(effects,rowSums(fake[,dfnames,drop=F]))
+  }
+  colnames(effects)<-vfunc
+  dfnames <- setdiff(tr,vf)
+  effects<-cbind(fake[,dfnames,drop=F],effects)
+  effects  
+}
+#################################

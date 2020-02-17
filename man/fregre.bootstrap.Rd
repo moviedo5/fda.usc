@@ -2,6 +2,7 @@
 % Please edit documentation in R/fregre.bootstrap.r
 \name{fregre.bootstrap}
 \alias{fregre.bootstrap}
+\alias{fregre.bootstrap2}
 \title{Bootstrap regression}
 \usage{
 fregre.bootstrap(
@@ -84,7 +85,7 @@ procedure is recommended (by default).
 \examples{
 \dontrun{ 
 data(tecator)
-iest<-1:129
+iest<-1:215
 x=tecator$absorp.fdata[iest]
 y=tecator$y$Fat[iest]
 nb<-25  ## Time-consuming

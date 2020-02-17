@@ -115,52 +115,55 @@ for (i in 1:dm[1]) {
 #if (ask) {   par(mfrow=c(1,1),ask=ask)     }
 z <- x[["data"]][i,,]
 if (len.dm==3) {
-switch (type,
-"persp"={                          
-par(bg = "white")
-xx <- x[["argvals"]][[1]]
-y <- x[["argvals"]][[2]]
-
-
-#nrz <- nrow(z);
-#ncz <- ncol(z)
-#jet.colors <- colorRampPalette( c("yellow", "red") ) 
-#nbcol <- length(xx)
-#color <- jet.colors(nbcol)
-#zfacet <- z[-1, -1] + z[-1, -ncz] + z[-nrz, -1] + z[-nrz, -ncz]
-#facetcol <- cut(zfacet, nbcol)
- persp(x=xx,y=y,z=z,xlim=x[["rangeval"]][[1]],ylim=x[["rangeval"]][[2]],zlim=rng,
- main = paste(x$names$main," ",dimnames(x$data)[[1]][i],sep=""),xlab = x$names$xlab[1], ylab =  x$names$xlab[2],...) 
-# main =  x$names$main[i],xlab = x$names$xlab[1], ylab =  x$names$xlab[2],...)
-#, col=color[facetcol],...)
-# par(op)
-},
-"filled.contour"={
-filled.contour(x=x[["argvals"]][[1]],y=x[["argvals"]][[2]],z=z,
-xlim=x[["rangeval"]][[1]],ylim=x[["rangeval"]][[2]],
-plot.title=title(main = paste(x$names$main," ",dimnames(x$data)[[1]][i],sep=""),
-xlab =x$names$xlab[1], ylab =  x$names$xlab[2]),...)},
-
-"contour"={contour(x=x[["argvals"]][[1]],y=x[["argvals"]][[2]],z=z,zlim=rng,
-xlim=x[["rangeval"]][[1]],ylim=x[["rangeval"]][[2]],
-plot.title=title(main =  paste(x$names$main," ",dimnames(x$data)[[1]][i],sep=""),
-    xlab = x$names$xlab[1], ylab =  x$names$xlab[2]),...)},#labels repetidos
-    
-"image"={image(x = x[["argvals"]][[1]],y = x[["argvals"]][[2]],z=z,
-xlim = x[["rangeval"]][[1]],ylim = x[["rangeval"]][[2]],zlim=rng,
-main = paste(x$names$main," ",dimnames(x$data)[[1]][i],sep=""),
-    xlab = x$names$xlab[1], ylab =  x$names$xlab[2],...)},
-"image.contour"={image(x = x[["argvals"]][[1]],y = x[["argvals"]][[2]],z=z,
-xlim = x[["rangeval"]][[1]],ylim = x[["rangeval"]][[2]],zlim=rng,
-main = paste(x$names$main," ",dimnames(x$data)[[1]][i],sep=""),
-    xlab = x$names$xlab[1], ylab =  x$names$xlab[2],...)
-    contour(x=x[["argvals"]][[1]],y=x[["argvals"]][[2]],z=z,add = TRUE, drawlabels = FALSE,...)
-    }#lattice plot    
-#"contourplot"={contourplot(data=z,
-#xlim = x[["rangeval"]][[1]],ylim = x[["rangeval"]][[2]],...)}    
-)
+  if (missing(main))  main <- paste(x$names$main," ",dimnames(x$data)[[1]][i],sep="")
+  if (missing(xlab))  xlab <- x$names$xlab[1]
+  if (missing(ylab)) ylab =  x$names$xlab[2]
+  
+  switch (type,
+  "persp"={                          
+  par(bg = "white")
+  xx <- x[["argvals"]][[1]]
+  y <- x[["argvals"]][[2]]
+  
+  
+  #nrz <- nrow(z);
+  #ncz <- ncol(z)
+  #jet.colors <- colorRampPalette( c("yellow", "red") ) 
+  #nbcol <- length(xx)
+  #color <- jet.colors(nbcol)
+  #zfacet <- z[-1, -1] + z[-1, -ncz] + z[-nrz, -1] + z[-nrz, -ncz]
+  #facetcol <- cut(zfacet, nbcol)
+  
+   persp(x=xx,y=y,z=z,xlim=x[["rangeval"]][[1]],ylim=x[["rangeval"]][[2]],zlim=rng,
+   main = ,xlab = xlab, ylab =  ylab,...) 
+  # main =  x$names$main[i],xlab = x$names$xlab[1], ylab =  x$names$xlab[2],...)
+  #, col=color[facetcol],...)
+  # par(op)
+  },
+  "filled.contour"={
+  filled.contour(x=x[["argvals"]][[1]],y=x[["argvals"]][[2]],z=z,
+  xlim=x[["rangeval"]][[1]],ylim=x[["rangeval"]][[2]],
+  plot.title=title(main = main, xlab =xlab, ylab =ylab),...)},
+  
+  "contour"={
+    contour(x=x[["argvals"]][[1]],y=x[["argvals"]][[2]],z=z,zlim=rng,
+  xlim=x[["rangeval"]][[1]],ylim=x[["rangeval"]][[2]],
+  plot.title=title(main =  main, xlab = xlab, ylab = ylab),...)},#labels repetidos
+      
+  "image"={
+    image(x = x[["argvals"]][[1]],y = x[["argvals"]][[2]],z=z,
+  xlim = x[["rangeval"]][[1]],ylim = x[["rangeval"]][[2]],zlim=rng,
+  main = main, xlab = xlab, ylab = ylab,...)},
+  "image.contour"={
+    image(x = x[["argvals"]][[1]],y = x[["argvals"]][[2]],z=z,
+  xlim = x[["rangeval"]][[1]],ylim = x[["rangeval"]][[2]],zlim=rng,
+  main = main,    xlab = xlab, ylab =  ylab,...)
+      contour(x=x[["argvals"]][[1]],y=x[["argvals"]][[2]],z=z,add = TRUE, drawlabels = FALSE,...)
+      }#lattice plot    
+  #"contourplot"={contourplot(data=z,
+  #xlim = x[["rangeval"]][[1]],ylim = x[["rangeval"]][[2]],...)}    
+  )
 }
-
 
 if (names(dev.cur())!="pdf" & j==npar) {
    Sys.sleep(time)
@@ -180,6 +183,7 @@ if (missing(type)) type="l"
 if (missing(main)) main=x[["names"]][["main"]]
 if (missing(xlab)) xlab=x[["names"]][["xlab"]]
 if (missing(ylab)) ylab=x[["names"]][["ylab"]]
+
 if (is.vector(x[["data"]])) fda::matplot(x[["argvals"]],(x[["data"]]),type=type,lty=lty,main=main,ylab=ylab,xlab=xlab,...)
 else fda::matplot(x[["argvals"]],t(x[["data"]]),type=type,lty=lty,main=main,ylab=ylab,xlab=xlab,...)
 }
@@ -208,21 +212,6 @@ if (!is.null(ylab)) x[["names"]][["ylab"]]<-ylab
 x
 }
 
-#' @rdname plot.fdata
-#' @export
-plot.bifd<-function(x,argvals.s,argvals.t,...){
-  if (missing(argvals.s)){
-    nfine.s = max(c(201,10*x$sbasis$nbasis+1))
-    argvals.s = seq(x$sbasis$rangeval[1],x$sbasis$rangeval[2],len=nfine.s)
-  }
-  if (missing(argvals.t)){
-    nfine.t = max(c(201,10*x$tbasis$nbasis+1))
-    argvals.t = seq(x$tbasis$rangeval[1],x$tbasis$rangeval[2],len=nfine.t)
-  }
-  tt<-list(argvals.s,argvals.t)
-  rtt<-list(x$sbasis$rangeval,x$tbasis$rangeval)
-  plot(fdata(eval.bifd(argvals.s,argvals.t,x),tt,rtt,fdata2d=TRUE),... )
-}
 
 #' @rdname plot.fdata
 #' @export
@@ -412,3 +401,53 @@ color.bar <- function(colores, min, max=-min, nticks=length(colores)+1,
 }
 
         
+#' @rdname plot.fdata
+#' @export
+plot.bifd<-function(x,argvals.s,argvals.t,...){
+  if (missing(argvals.s)){
+    nfine.s = max(c(201,10*x$sbasis$nbasis+1))
+    argvals.s = seq(x$sbasis$rangeval[1],x$sbasis$rangeval[2],len=nfine.s)
+  }
+  if (missing(argvals.t)){
+    nfine.t = max(c(201,10*x$tbasis$nbasis+1))
+    argvals.t = seq(x$tbasis$rangeval[1],x$tbasis$rangeval[2],len=nfine.t)
+  }
+  tt <- list(argvals.s,argvals.t)
+  rtt <- list(x$sbasis$rangeval,x$tbasis$rangeval)
+  plot(fdata(eval.bifd(argvals.s,argvals.t,x),tt,rtt,fdata2d=TRUE),... )
+}
+
+
+
+# plot.lfdata<-function(lfdata,ask=FALSE,color,...){
+#   mf=5
+#   nvar<-length(lfdata)
+#   if (nvar>4) ask=TRUE
+#   if (ask) {par(mfrow = c(1, 1))
+#             dev.interactive()
+#             oask <- devAskNewPage(TRUE)
+#             on.exit(devAskNewPage(oask))}
+#   else{    mf<-switch(nvar,
+#                       "1"={c(1,1)},
+#                       "2"={c(1,2)},
+#                       "3"={c(1,3)},
+#                       "4"={c(2,2)})            
+#            par(mfrow =mf)                    }
+#   names1<-names2<-names<-lfdata[[1]][["names"]]
+#   names1$main<-"Multivariate Functional Data"
+#   #    tr<-paste("mode.tr",trim*100,"\u0025",sep="")         
+#   nam<-names(lfdata)
+#   
+#   if (is.null(nam)) nam<-1:nvar
+#   for (idat in 1:nvar) {
+#     data<-lfdata[[idat]]$data
+#     tt<-lfdata[[idat]]$argvals
+#     rtt<-lfdata[[idat]]$rangeval
+#     if (missing(color)) color2<-1
+#     else {
+#       if (is.list(color)) color2<-color[[idat]]
+#       else color2<-color
+#     }
+#     plot.fdata(lfdata[[idat]], col =  color2, main =nam[idat],...)
+#   }
+# }

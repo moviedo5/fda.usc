@@ -384,6 +384,7 @@ fregre.igls<-function (formula, data, basis.x = NULL, basis.b = NULL, correlatio
     e <- z$residuals <- XX[, 1] - z$fitted.values
     it <- 1
     eps = 0.001
+    eps2 = 1e-10
     err2 = sqrt(sum(coefs^2))
     MM <- matrix(1:n, ncol = 1)
     corStruct <- list()
@@ -614,7 +615,10 @@ fregre.igls<-function (formula, data, basis.x = NULL, basis.b = NULL, correlatio
       coefs <- drop(coefs)
       e <- y - yp
       err3 <- coefs
-      err4 <- max(abs((err3 - err2)/err2))
+      # err4 <- max(abs((err3 - err2)/err2))
+      # riq <- diff(summary(e)[c(2,5)])
+      riq <- diff(quantile(e,probs=c(.25,.75)))
+      err4 <- max(abs(err3 - err2)*riq)/max(abs(err2)+eps2)
       if (err4 < eps) 
         error <- FALSE
       else {

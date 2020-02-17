@@ -1,6 +1,6 @@
-#' Classification Fitting Functional Generalized Linear Models
+#' @title Classification Fitting Functional Generalized Linear Models
 #' 
-#' Computes functional classification using functional (and non functional)
+#' @description Computes functional classification using functional (and non functional)
 #' explanatory variables by basis representation.
 #' 
 #' The first item in the \code{data} list is called \emph{"df"} and is a data
@@ -88,14 +88,11 @@
 classif.glm<-function (formula, data, family = binomial(), weights = "equal", 
           basis.x = NULL, basis.b = NULL, type= "1vsall", prob=0.5,
           CV = FALSE,...) {
-  
-  
   C <- match.call()
   a <- list()
   mf <- match.call(expand.dots = FALSE)
   m <- match(c("formula", "data", "family", "weights","basis.x", "basis.b"
                 ,"type", "CV","prob"), names(mf), 0L)
-  
   tf <- terms.formula(formula)
   terms <- attr(tf, "term.labels")
   nt <- length(terms)
@@ -117,13 +114,12 @@ classif.glm<-function (formula, data, family = binomial(), weights = "equal",
     if (length(weights)!=n) 
       stop("length weights != length response")
   }
-  
-  
   newdata <- data
   ny <- levels(y)
   prob2<-prob1 <- ngroup <- nlevels(y)
   if (ngroup == 2) {
-    newy <- ifelse(y == ny[1], 1, 0)
+    #newy <- ifelse(y == ny[1], 0, 1)
+    newy <- y
     newdata$df$y <- newy
     a[[1]] <- suppressWarnings(fregre.glm(formula, data = newdata, 
                                           family = family, weights = weights, 

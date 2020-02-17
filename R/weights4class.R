@@ -6,14 +6,15 @@
 #' 
 #' @aliases weights4class
 #' @rdname weights4class
-#' @export 
-weights4class<-function(x,type=c("equal","inverse")){
+#' @export weights4class
+weights4class <- function(x,type=c("equal","inverse")){
   output<-  switch(type[1],
                    equal=rep(1,len=length(x)),
                    inverse=weights.inverse(x)
   )
   output
 }
+
 weights.inverse<-function(x){
   tab<-table(x)
   ii <- sum(tab)/tab

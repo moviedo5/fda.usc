@@ -3,7 +3,6 @@
 \name{kmeans.center.ini}
 \alias{kmeans.center.ini}
 \alias{kmeans.fd}
-\alias{kmeans.centers.update}
 \title{K-Means Clustering for functional data}
 \usage{
 kmeans.center.ini(
@@ -89,9 +88,9 @@ a vector of integers, indicating the position of the initial centers with
 }
 \examples{
 \dontrun{
+library(fda.usc)
 data(phoneme)
 mlearn<-phoneme$learn[c(1:50,101:150,201:250),]
-
 # Unsupervised classification
 out.fd1=kmeans.fd(mlearn,ncl=3,draw=TRUE)
 out.fd2=kmeans.fd(mlearn,ncl=3,draw=TRUE,method="exact")

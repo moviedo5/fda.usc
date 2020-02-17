@@ -204,33 +204,37 @@ plot.ldata <- function(x, ask=FALSE, color, var.name,...){
   #if (is.ldata) stop("No ldata class object")
   col.bar=FALSE
   if (!missing(var.name)){
-    if (missing(color)) color=c("red","blue")
     var.color <- x$df[,var.name]
     col.bar<-TRUE
     if (!is.factor(var.color))  {
+      if (missing(color)) color=c("red","blue")
       nticks <- 5
-      color=colorRampPalette(color, alpha = TRUE)(nticks)
-      xfact=cut( var.color,quantile( var.color,seq(0,1,len=nticks+1))
+      color <- colorRampPalette(color, alpha = TRUE)(nticks)
+      xfact <- cut( var.color,quantile( var.color,seq(0,1,len=nticks+1))
                  ,include.lowest=TRUE)
-      min.col=min(var.color)
-      max.col=max(var.color)
+      min.col <- min(var.color)
+      max.col <- max(var.color)
+      ticks <- var.color
       
     }   else {
-      nticks <-nlevels(var.color)
-      color=colorRampPalette(color, alpha = FALSE)(nticks)
-      xfact<-var.color
-      min.col=0#min(as.numeric(var.color))
-      max.col=1#max(as.numeric(var.color))
-      min.col=min(as.numeric(var.color))
-      max.col=max(as.numeric(var.color))
+      nticks <- nlevels(var.color)
+      if (missing(color)) color=1:nticks
+      color <- colorRampPalette(color, alpha = FALSE)(nticks)
+      xfact <- var.color
+      min.col <- 0#min(as.numeric(var.color))
+      max.col <- 1#max(as.numeric(var.color))
+      min.col <- min(as.numeric(var.color))
+      max.col <- max(as.numeric(var.color))
+      ticks <- levels(var.color)
     }
   }  else     {
-    if (missing(color)) color=1:NROW(x$df)
-    xfact<-1:NROW(x$df)
+    if (missing(color)) color= 1:NROW(x$df)
+    xfact <- 1:NROW(x$df)
+    ticks <- NULL
   }
-  mf=5
-  nvar<-length(x)-1
-  if (nvar>4) ask=TRUE
+  mf <- 5
+  nvar <- length(x)-1
+  if (nvar > 4) ask=TRUE
   if (ask) {par(mfrow = c(1, 1))
     dev.interactive()
     oask <- devAskNewPage(TRUE)
@@ -263,11 +267,10 @@ plot.ldata <- function(x, ask=FALSE, color, var.name,...){
           main  = x[[idat]]$names$main,...)
     
     #plot.fdata(ab,lty=1,col=colores[cfat],main="Original Trajectories")
-    if (col.bar)    color.bar(color,min.col,max.col,ro=0,ticks=var.color)
+    if (col.bar)    color.bar(color,min.col,max.col,ro=0,ticks=ticks)
     #if (col.bar)    color.bar(color,min.col,max.col,ro=0)
   }
 }
-
 ################################################################################
 # "[.lfdata"=function(lfdata,i){
 #   if (missing(i)) return(lfdata)
@@ -340,12 +343,12 @@ ldata.cen<- function (x, meanX = mean.ldata(x))
   }
   if (sum(aux1)==1)    {nam<- nam[-idf]}
   for (i in 1:length(nam)){
-      x[[nam[i]]]$data <- sweep(x[[nam[i]]]$data
-                          , 2, meanX[[nam[i]]]$data, FUN = "-",na.rm=T)
+    x[[nam[i]]]$data <- sweep(x[[nam[i]]]$data
+                          , 2, meanX[[nam[i]]]$data[1,], FUN = "-")
   }
-  #print("sale ldata.cen")
   return(list(Xcen = x, meanX = meanX))
 }
+
 # names(xmean$df)
 # (xmean$df)
 # x <- ldata(aemet$df[ii,ivar],"temp"=aemet$temp[ii],"wind"=aemet$wind.speed[ii])
@@ -693,3 +696,5 @@ ncol.mfdata <- function (x)
 #       stop("No ldata or list object")
 #   lapply(x,func.mean)
 # }
+
+

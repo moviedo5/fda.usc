@@ -71,6 +71,8 @@ tab2meas <- function(tab, measure="accuracy", cost=rep(1,nrow(tab))){
                      precision=P,
                      NPvalue=TN/(TN+FN),
                      Fmeasure=2/(1/R+1/P),
+                     F1=2*P*R/(R+P),
+                     F2=5*P*R/(4*R+P),
                      Gmean=sqrt(R*TN/(TN+FP)),
                      accuracy=tab2accuracy(tab),
                      kappa=tab2kappa(tab),
@@ -81,27 +83,44 @@ tab2meas <- function(tab, measure="accuracy", cost=rep(1,nrow(tab))){
     names(meas) = measure
     return(meas)
   } else {
+    TP = diag(tab)
+    Tobs  <- rowSums(tab)
+    Tpred <- colSums(tab)
+    R <- TP/Tobs
+    P <- TP/Tpred
+    #FN = tab[2,1] 
+    #FP = tab[1,2]
+    #TN = tab[1,1]
+    #R = TP/(TP+FN)
+    #P = TP/(TP+FP) 
     nmeas = length(measure)
     meas = numeric(nmeas)
-    for (i in 1:nmeas){
-      meas[i]=switch(measure[i],
-                     #      recall=R,                    TPrate=R,
-                     #sensitivity=R,           specificity=TN/(TN+FP),
-                     # Sensitivity of each class can be calculated from its TP/(TP+FN) and
-                     # specificity of each class can be calculated from its TN/(TN+FP)
-                     #TNrate=TN/(TN+FP),FPrate=FP/(TN+FP),FNrate=FN/(TP+FN),
-                     #     precision=P,NPvalue=TN/(TN+FN),Fmeasure=2/(1/R+1/P),Gmean=sqrt(R*TN/(TN+FP)),
-                     # cost=1-sum(c(FN,FP)*cost)/sum(table(yobs)*cost),
+    if (nmeas>1) warning("For multiclass problems only the first measure is returned")
+    #for (i in 1:nmeas){
+      meas=switch(measure[1],
+                     recall= R,
+                     sensitivity=R,
+                     TPrate=R,
+                     #specificity=TN/(TN+FP), 
+                     #TNrate=TN/(TN+FP),
+                     #FPrate=FP/(TN+FP),
+                     #FNrate=FN/(TP+FN),
+                     precision= P,
+                     #NPvalue=TN/(TN+FN),
+                     Fmeasure=2/(1/R+1/P),
+                     F1=2*P*R/(R+P),
+                     F2=5*P*R/(4*R+P),
+                     #Gmean=sqrt(R*TN/(TN+FP)),
                      cost=sum(diag(tab)/rowSums(tab)*cost)/sum(cost),
                      accuracy=tab2accuracy(tab),
                      #waccuracy=tab2waccuracy(tab),
                      kappa=tab2kappa(tab)
       )
     }
-    names(meas) = measure
+    #names(meas) = measure
     return(meas)
   }
-}
+
 
 cat2alpha <-function(yobs, ypred, weights, coeflearn="Freund"){
   ind <- as.numeric(yobs != ypred) 

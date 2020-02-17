@@ -1,6 +1,6 @@
-#' Summarizes information from fregre.fd objects.
+#' @title Summarizes information from fregre.fd objects.
 #' 
-#' Summary function for \code{\link{fregre.pc}}, \code{\link{fregre.basis}},
+#' @description Summary function for \code{\link{fregre.pc}}, \code{\link{fregre.basis}},
 #' \code{\link{fregre.pls}}, \code{\link{fregre.np}}\cr and
 #' \code{\link{fregre.plm}} functions.
 #' 
@@ -19,8 +19,8 @@
 #' one window, by default. If \code{ask}=TRUE, draw each graph in a window,
 #' waiting to confirm.
 #' 
-#' @aliases summary.fregre.fd print.fregre.fd summary.fregre.lm plot.summary.lm
-#' summary.fregre.igls print.fregre.igls 
+#' @aliases summary.fregre.fd  summary.fregre.lm plot.summary.lm
+#' summary.fregre.igls print.fregre.igls  print.fregre.plm print.fregre.fd
 #' @param object Estimated by functional regression, \code{fregre.fd} object.
 #' @param times.influ Limit for detect possible infuence curves.
 #' @param times.sigma Limit for detect possible oultiers or atypical curves.
@@ -140,7 +140,7 @@ summary.fregre.fd<-function(object,times.influ=3,times.sigma=3,draw=TRUE,...){
 #-Variability for each  Partial Least Squares -PLS- (%):\n")
 #    print(round(pr.x[object$l] * 100, 2))
     }
-    if (object$call[[1]]=="fregre.ppls") {
+     if (object$call[[1]]=="fregre.ppls") {
      cat(" *** Summary Functional Regression with Penalized Partial Least Squares ***\n")
             cat("-Call: ");    print(object$call)
             cat("\n")
@@ -158,8 +158,7 @@ summary.fregre.fd<-function(object,times.influ=3,times.sigma=3,draw=TRUE,...){
 # ,2),"%\n of the variability of explicative variables. \n -Variability for each Partial Least Squares -PLS- (%):\n")
 #    print(round(pr.x[object$l] * 100, 2))
     }
-
-    if (object$call[[1]]=="fregre.basis") {
+     if (object$call[[1]]=="fregre.basis") {
      cat(" *** Summary Functional Data Regression with representation in Basis *** \n")
      if (object$lambda==0)     {object$lm$call<-object$call
                                 print(summary(object$lm))}
@@ -172,8 +171,8 @@ summary.fregre.fd<-function(object,times.influ=3,times.sigma=3,draw=TRUE,...){
             object$sr2,"on ",n-object$df," degrees of freedom\n")
             }
     }
-  if (object$call[[1]]=="fregre.basis.cv") {
-     cat(" *** Summary Functional Data Regression with representation in Basis *** \n\n")
+     if (object$call[[1]]=="fregre.basis.cv") {
+      cat(" *** Summary Functional Data Regression with representation in Basis *** \n\n")
       cat("-Call: ");    print(object$call)
             cat("\n")
             print(object$coefficients)
@@ -186,36 +185,35 @@ cat("\n-Residual variance: ",
       cat("\n-Optimal lambda penalty=",object$lambda.opt,"\n")
 #      print(object$Lfdobj)
     }
-    if (object$call[[1]]=="fregre.np") {
-     cat(" *** Summary Functional Non-linear Model *** \n\n")
-     cat("-Call: ");    print(object$call)
-     cat("\n-Bandwidth (h): ",object$h.opt)
-    cat("\n-R squared: ",object$r2)
-#    cat("\n-Residual variance: ",object$sr2,"\n")
-cat("\n-Residual variance: ",
-            object$sr2,"on ",n-object$df," degrees of freedom\n")
-    }
-  if (object$call[[1]]=="fregre.np.cv") {
-
-     cat(" *** Summary Functional Non-linear Model *** \n\n")
-     cat("-Call: ");    print(object$call)
-     cat("\n-Bandwidth (h): ",object$h.opt)
-    cat("\n-R squared: ",object$r2)
-#    cat("\n-Residual variance: ",object$sr2,"\n")
-cat("\n-Residual variance: ",
+     if (object$call[[1]]=="fregre.np") {
+       cat(" *** Summary Functional Non-linear Model *** \n\n")
+       cat("-Call: ");    print(object$call)
+       cat("\n-Bandwidth (h): ",object$h.opt)
+       cat("\n-R squared: ",object$r2)
+   #   cat("\n-Residual variance: ",object$sr2,"\n")
+       cat("\n-Residual variance: ",
+              object$sr2,"on ",n-object$df," degrees of freedom\n")
+      }
+     if (object$call[[1]]=="fregre.np.cv") {
+      cat(" *** Summary Functional Non-linear Model *** \n\n")
+      cat("-Call: ");    print(object$call)
+      cat("\n-Bandwidth (h): ",object$h.opt)
+      cat("\n-R squared: ",object$r2)
+    #    cat("\n-Residual variance: ",object$sr2,"\n")
+      cat("\n-Residual variance: ",
             object$sr2,"on ",n-object$df," degrees of freedom\n")
     }
      if (object$call[[1]]=="fregre.plm") {
-     cat(" *** Summary Functional Semi-linear Model *** \n\n")
-     cat("-Call: ");    print(object$call)
-     cat("\n-Coefficients:  non functional covariates\n")
-     print(object$coefficients)
-      cat("\n-Bandwidth (h): ",object$h.opt)
-    cat("\n-R squared: ",object$r2)
-#    cat("\n-Residual variance: ",object$sr2,"\n")
-cat("\n-Residual variance: ",
-            object$sr2,"on ",n-object$df," degrees of freedom\n")
-     }
+       cat(" *** Summary Functional Semi-linear Model *** \n\n")
+       cat("-Call: ");    print(object$call)
+       cat("\n-Coefficients:  non functional covariates\n")
+       print(object$coefficients)
+       cat("\n-Bandwidth (h): ",object$h.opt)
+       cat("\n-R squared: ",object$r2)
+      #    cat("\n-Residual variance: ",object$sr2,"\n")
+       cat("\n-Residual variance: ",
+              object$sr2,"on ",n-object$df," degrees of freedom\n")
+       }
     if (!isfdata) {
      cat("-Names of possible atypical curves: ");
      if (is.na(i.atypical[1]))     cat("No atypical curves \n")
@@ -283,9 +281,9 @@ return(invisible(list("Influence"=influence,"i.influence"=i.influence,
 }
 
 
-#' Summarizes information from fregre.gkam objects.
+#' @title Summarizes information from fregre.gkam objects.
 #' 
-#' Summary function for \code{\link{fregre.gkam}} function.
+#' @description Summary function for \code{\link{fregre.gkam}} function.
 #' 
 #' \tabular{ll}{ \tab -Family used.\cr \tab -Number or iteration of algorithm
 #' and if it has converged. \cr \tab -Residual and null deviance.\cr \tab
@@ -327,7 +325,9 @@ return(invisible(list("Influence"=influence,"i.influence"=i.influence,
 #' }
 #' 
 #' @export 
-summary.fregre.gkam<-function(object,draw=TRUE,selec=NULL,times.influ=3,...){
+summary.fregre.gkam<-function(object,draw=TRUE,selec=NULL
+                              ,times.influ=3,...){
+  #effects=TRUE
    cat(" *** Summary Functional Data Regression with backfiting algorithm *** \n")
  print(object$family,"\n")
     nobs <- n<-length(object$y)
@@ -432,13 +432,16 @@ text(influence[i.influence],i.influence,rowname[i.influence],cex=0.7)
           oask <- devAskNewPage(TRUE)
           on.exit(devAskNewPage(oask))
     if (!ask) {
-              dev.new()
+              #dev.new()
               cc<-if(le>6) {cc<-c(ceiling(le/3), 3)}
               else {
               if (le>=2) cc<-c(ceiling(le/2), 2)
               else cc<-c(1,1)
               }
               par(mfrow = cc)
+              #for (kk in 1:(cc[1]*cc[2])){
+               # plot(0, xaxt = 'n', yaxt = 'n', bty = 'n', pch = '', ylab = '', xlab = '')
+              #}
     }
     else {
           par(mfrow=c(1,1))
@@ -560,3 +563,34 @@ kgam.H<-function(object,inverse="svd") {
   HH
   }
  }
+
+
+#' @export 
+print.fregre.fd<-function (x, digits = max(3, getOption("digits") - 3), ...)
+{
+  cat("\n-Call: ", deparse(x$call), "\n", sep = "")
+  if (length(coef(x))) {
+    cat("\n-Coefficients:\n")
+    print.default(format(coef(x), digits = digits), print.gap = 2,
+                  quote = FALSE)
+    if (x$call[[1]]=="fregre.lm")      print(x$beta.est[[2]])
+  }
+  else {
+    if (x$call[[1]]=="fregre.np" || x$call[[1]]=="fregre.np.cv") {
+      cat("\n-Bandwidth (h): ",x$h.opt)
+    }
+  }
+  cat("\n-R squared: ",x$r2)
+  cat("\n-Residual variance: ",x$sr2,"\n")
+  invisible(x)
+}
+
+#' @export 
+print.fregre.plm<-function (x, digits = max(3, getOption("digits") - 3), ...)
+{
+  cat("-Call: ");    print(x$call)
+  cat("-Coefficients:  non functional covariates\n")
+  print(x$coefficients)
+  cat("-Bandwidth (h): ",x$h.opt)
+  cat("\n-R squared: ",x$r2," -Residual variance: ",x$sr2)
+}

@@ -70,8 +70,8 @@ predict.fregre.gls<-function(object, newx = NULL, type = "response",se.fit= FALS
   class(object) <- c("gls","lm","fregre.lm")
  if (is.null(object)) stop("No fregre.lm object entered")
  if (is.null(newx)) {
-    yp=predict(object,type=type,se.fit=se.fit,interval=interval,...)    
-    print("No newx entered")
+    yp=predict(object, type = type, se.fit = se.fit, interval = interval,...)    
+    #print("No newx entered")
     return(yp)
     } 
  else {
@@ -610,7 +610,8 @@ if (se.fit || interval != "none") {
 #     print(object$formula)
 # print(se.fit)
 #print("lo hace pq")    
-     yp=predict(object,newdata=XX,type=type,se.fit=se.fit,interval=interval,weights=weights,df=df,scale=scale,...)
+     yp=predict(object,newdata=XX,type = type, se.fit = se.fit, interval = interval
+                ,weights = weights, df = df, scale = scale,...)
 #print(12)
      if (is.null(newx$corStruct)) {
         ype=predict(object$corStruct,se.fit=se.fit,n.ahead=nn)
@@ -889,8 +890,13 @@ predict.fregre.igls<-function (object, newx = NULL, data, df = df
   if (is.null(object)) 
     stop("No object entered")
   if (is.null(newx)) {
-    yp <- object$fitted.values
-    print("No newx entered")
+    #yp <- object$fitted.values
+    # print("No newx entered")
+    yp <- predict.fregre.lm(object, #type=type,  se.fit = se.fit, 
+                      #scale = scale,
+                      df = df,
+                      #interval = interval,
+                      weights = weights, pred.var = pred.var, ...)
     return(yp)
   }
   else {
@@ -971,5 +977,3 @@ predict.fregre.igls<-function (object, newx = NULL, data, df = df
   }
   return(predictor)
 }
-
-

@@ -67,7 +67,7 @@ fanova.onefactor=function(object, group, nboot=100,
   for (i in 1:nk){cov[,,i]<-cov(fdata[[1]][group==levels(group)[i],])}
   wmest<-wmestadis(media)
   if (plot){  
-    dev.new(width=21,height=7)   
+    # dev.new(width=21,height=7)   
     palette("default")  
     par(mfrow=c(1,3)) 
     mycols <- adjustcolor(palette("default"), alpha.f = 0.25)

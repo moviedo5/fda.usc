@@ -118,7 +118,7 @@ fdata2model <- function(vfunc, vnf, response, data, basis.x=NULL,pf,tf){
    else pf <- tf
   pf<-as.formula(pf)
   if (!is.data.frame(XX)) XX=data.frame(XX)
-  #print("sale fdata2model")  
+#  print("sale fdata2model")  
   return(list(pf=pf,vs.list=vs.list,mean.list=mean.list,XX=XX,basis.x=basis.x))
 }
 #####################################################

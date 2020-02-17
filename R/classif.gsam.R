@@ -120,14 +120,13 @@ classif.gsam<-function (formula, data, family = binomial(),  weights = "equal",
     if (length(weights)!=n) 
       stop("length weights != length response")
   }
-  
-  
   newdata <- data
   ny <- levels(y)
   prob2<-prob1 <- ngroup <- nlevels(y)
   prob.group <- array(NA, dim = c(n, ngroup))
   if (ngroup == 2) {
-    newy <- ifelse(y == ny[1], 1, 0)
+    #newy <- ifelse(y == ny[1], 1, 0)
+    newy <- y
     newdata$df$y <- newy
     a[[1]] <- fregre.gsam(formula, data = newdata, family = family, 
                           weights = weights, basis.x = basis.x, basis.b = basis.x, 
@@ -161,7 +160,6 @@ classif.gsam<-function (formula, data, family = binomial(),  weights = "equal",
     }
     else { # One vs Other
       prob.group<-array(NA,dim=c(n,ngroup))
-      
       colnames(prob.group)<-ny
       for (i in 1:ngroup) {
         igroup  <- y==ny[i]

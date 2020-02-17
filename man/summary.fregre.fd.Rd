@@ -2,11 +2,12 @@
 % Please edit documentation in R/summary.fregre.fd.r
 \name{summary.fregre.fd}
 \alias{summary.fregre.fd}
-\alias{print.fregre.fd}
 \alias{summary.fregre.lm}
 \alias{plot.summary.lm}
 \alias{summary.fregre.igls}
 \alias{print.fregre.igls}
+\alias{print.fregre.plm}
+\alias{print.fregre.fd}
 \title{Summarizes information from fregre.fd objects.}
 \usage{
 \method{summary}{fregre.fd}(object, times.influ = 3, times.sigma = 3, draw = TRUE, ...)
@@ -33,8 +34,7 @@
 Summary function for \code{\link{fregre.pc}}, \code{\link{fregre.basis}},
 \code{\link{fregre.pls}}, \code{\link{fregre.np}}\cr and
 \code{\link{fregre.plm}} functions.
-}
-\details{
+
 Shows:\cr \tabular{ll}{ \tab -Call.\cr \tab -R squared.\cr \tab -Residual
 variance.\cr \tab -Index of possible atypical curves or possible
 outliers.\cr \tab -Index of possible influence curves.\cr } If the

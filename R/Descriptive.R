@@ -110,8 +110,11 @@ func.mean<-function (x) {
   #  x <- fdata(x)
 #print("func.mean")  
   if (is.fdata(x)) {
-    x[["data"]] <- matrix(colMeans(x[["data"]], 
+     cnames <- colnames(x[["data"]])
+     x[["data"]] <- matrix(colMeans(x[["data"]], 
                                    na.rm = TRUE), nrow = 1)
+    
+    if (!is.null(cnames)) colnames(x[["data"]]) <- cnames
     x$names$main <- "mean"
     xnew<-x
   } 
@@ -137,6 +140,7 @@ func.mean<-function (x) {
   }
   xnew
 }
+
 
 
 # func.mean <- function(fdataobj){

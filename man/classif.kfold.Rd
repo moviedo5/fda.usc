@@ -38,8 +38,6 @@ a symbolic description of the model to be fitted. The procedure only considers f
 \item{models}{\code{logical}. If \code{TRUE}, return a list of the fitted models used,  (k-fold -1) X (number of parameters)}
 
 \item{verbose}{\code{logical}. If \code{TRUE}, print some internal results.}
-
-\item{\ldots}{Further arguments passed to or from other methods.}
 }
 \value{
 Best fitted model computed by the k-fold CV  using the method indicated 
@@ -70,16 +68,16 @@ Parameters for k-fold cross validation:
 \dontrun{
 data(tecator)    
 cutpoint <- 18
-tecator$y$class <-factor(ifelse(tecator$y$Fat<cutpoint,0,1))
+tecator$y$class <- factor(ifelse(tecator$y$Fat<cutpoint,0,1))
 table(tecator$y$class )
-x<-tecator[[1]]
-x2<-fdata.deriv(tecator[[1]],2)
-data<- list("df"=tecator$y,x=x,x2=x2)
-formula<- formula(class~x+x2)
+x <- tecator[[1]]
+x2 <- fdata.deriv(tecator[[1]],2)
+data  <-   list("df"=tecator$y,x=x,x2=x2)
+formula  <-   formula(class~x+x2)
 
 # ex: default excution of classifier (no k-fold CV)
-classif="classif.glm";
-out.default<-classif.kfold(formula, data, classif = classif)
+classif="classif.glm"
+out.default <- classif.kfold(formula, data, classif = classif)
 out.default
 out.default$param.min
 out.default$params.error
@@ -88,8 +86,8 @@ summary(out.default)
 # ex: Number of PC basis elements selected by 10-fold CV
 # Logistic classifier
 kfold = 10
-param.kfold <- list("x"=list("pc"=c(1:8)),"x2"=list("pc"=c(1:8)))
-out.kfold1 <- classif.kfold(formula, data, classif = classif,
+param.kfold   <-   list("x"=list("pc"=c(1:8)),"x2"=list("pc"=c(1:8)))
+out.kfold1   <-   classif.kfold(formula, data, classif = classif,
                             kfold = kfold,param.kfold = param.kfold)
 out.kfold1$param.min
 min(out.kfold1$params.error)
@@ -118,13 +116,13 @@ summary(out.kfold3)
 # ex: Number of k-nearest neighbors selected by 10-fold CV
 # non-parametric classifier  (only for a functional covariate)
 
-output<-classif.kfold( class ~ x, data, classif = "classif.knn",
-                       param.kfold= list("x"=list("knn"=c(1,3,5,9))))
+output <- classif.kfold( class ~ x, data, classif = "classif.knn",
+                       param.kfold= list("x"=list("knn"=c(3,5,9,13))))
 output$param.min
 output$params.error
 
-output<-classif.kfold( class ~ x2, data, classif = "classif.knn",
-                       param.kfold= list("x2"=list("knn"=c(1,3,5,9))))
+output <- classif.kfold( class ~ x2, data, classif = "classif.knn",
+                       param.kfold= list("x2"=list("knn"=c(3,5,9,13))))
 output$param.min
 output$params.error 
 }

@@ -1,12 +1,18 @@
 #' @rdname predict.fregre.lm
 #' @export 
-predict.fregre.gsam <- function(object, newx=NULL, type="response",...){
+predict.fregre.gsam <- function(object, newx = NULL, type = "response",...){
  if (is.null(object)) stop("No fregre.gsam object entered")
- if (is.null(newx)) {
-    yp=predict.gam(object,...)
-    print("No newx entered")
-    return(yp)
+  
+
+  if (is.null(newx)) {
+    if (type == "effects"){
+      fake  = predict.gam(object, type = "terms", ...) 
+      yp <- effect.gam(object,fake)
+    } else{
+      yp  = predict.gam(object, type = type, ...)
     }
+    return(yp)
+  }
  else {
  data=newx
  basis.x=object$basis.x
@@ -47,8 +53,8 @@ for (i in 1:nterms) if (!is.na(specials[i]))     speci<-c(speci,specials[i])
 #names.vfunc<-rep("",ndata)
    #if (object$nnf!=0) {  for (i in 1:ndata) names.vfunc[i]<-names(data)[i+1] }
 #else  { for (i in 1:ndata) {    names.vfunc[i]<-names(data)[i]    }}
-names.vfunc<-object$vfunc
-ndata<-length(object$vfunc)+object$nnf
+names.vfunc <- object$vfunc
+ndata <- length(object$vfunc)+object$nnf
 for (i in 1:nterms) {
          if (any(terms[i]==names(data$df))){
                      vnf<-c(vnf,terms[i] )
@@ -275,8 +281,45 @@ k=1
    }
         }
 if (!is.data.frame(XX)) XX=data.frame(XX)
- yp=predict.gam(object=object,newdata=XX,type=type,...)
+ #yp=predict.gam(object=object,newdata=XX,type=type,...)
+ if (type == "effects"){
+  fake  = predict.gam(object, newdata = XX, type = "terms",...)
+  yp <- effect.gam(object,fake)
+ } else{
+  yp <- predict.gam(object = object, newdata = XX, type = type,...)
+}                                                       
 return(yp)
 }
 }
  
+##############################
+effect.gam <- function(object,terms){
+  #fake<-predict(object,type = "terms")
+  fake <- terms
+  ff<-colnames(fake)
+  nc <- nchar(ff)
+  ismo <- which(substr(ff,1,2)=="s(")
+  ilin <- which(substr(ff,1,2)!="s(")
+  nam.smo <- substr(ff[ismo],3,nc[ismo]-1)
+  nam.lin <- ff[-ismo]
+  #nam <- c(nam.lin,nam.smo)
+  vfunc <- names(object$JJ)
+  nfunc <- length(vfunc)
+  effects <- NULL
+  vf <- NULL
+  for (i in 1:nfunc){
+    ifunc <- colnames(object$JJ[[i]])
+    #dfnames <- intersect(nam,ifunc)
+    iss<-intersect(nam.smo,ifunc)
+    if (length(iss)>0)  dfnames <- paste0("s(",ifunc,")")
+    else  dfnames <- ifunc
+    vf <- c(vf,dfnames)
+    effects <- cbind(effects,rowSums(fake[,dfnames,drop=F]))
+  }
+  colnames(effects)<-vfunc
+  effects <- cbind(fake[,setdiff(ff,vf),drop=F],effects)
+  # colnames(effects) <- c(effects.df,vfunc )
+  effects  
+}
+##############################
+

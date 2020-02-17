@@ -2,6 +2,7 @@
 % Please edit documentation in R/fdata.bootstrap.r
 \name{fdata.bootstrap}
 \alias{fdata.bootstrap}
+\alias{fdata.bootstrap2}
 \title{Bootstrap samples of a functional statistic}
 \usage{
 fdata.bootstrap(
@@ -97,7 +98,6 @@ control=list("col"=c("grey","blue","cyan"),"lty"=c(2,1,1),"lwd"=c(1,3,1))
 out.boot=fdata.bootstrap(absorp,statistic=func.med.mode,
 draw=TRUE,draw.control=control)
 }
-
 }
 \references{
 Cuevas A., Febrero-Bande, M. and Fraiman, R. (2007).

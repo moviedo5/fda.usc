@@ -1,4 +1,4 @@
-#' Semi-functional partially linear model with scalar response.
+#' @title Semi-functional partially linear model with scalar response.
 #' 
 #' @description Computes functional regression between functional (and non functional)
 #' explanatory variables and scalar response using asymmetric kernel

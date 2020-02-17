@@ -1,9 +1,9 @@
 #' @rdname predict.fregre.lm
 #' @export 
-predict.fregre.plm<-function(object,newx=NULL,...){
+predict.fregre.plm<-function(object, newx = NULL,...){
  if (is.null(object)) stop("No fregre.plm object entered")
  if (is.null(newx)) {
-    cat("No newx entered \n")
+    #cat("No newx entered \n")
     newx=object$fdataobj # los XX
     }
  data=newx
@@ -86,6 +86,6 @@ else {
 # print(names(object))
 # yp=predict.fregre.fd(object,data[[vfunc[1]]],...)
  }
- yp
+ drop(yp)
 }
 

@@ -1,6 +1,6 @@
-#' Predict method for functional linear model (fregre.fd class)
+#' @title Predict method for functional linear model (fregre.fd class)
 #' 
-#' Computes predictions for regression between functional explanatory variables
+#' @description Computes predictions for regression between functional explanatory variables
 #' and scalar response using: basis representation, Principal Components
 #' Analysis, Partial least squares or nonparametric kernel estimation.
 #' 
@@ -183,7 +183,7 @@ else{
 else {
  if (object$call[[1]]=="fregre.basis" || object$call[[1]]=="fregre.basis.cv" ){
   x=newx
-  basis.x=object$basis.x.opt             #
+  basis.x=object$basis.x.opt            
   xcen<-fdata.cen(new.fdataobj,object$mean)[[1]]
 	x.fd=Data2fd(argvals=tt,y=t(xcen$data),basisobj=basis.x)
   C=t(x.fd$coefs)
@@ -218,7 +218,7 @@ else return(predictor)
  np <- ncol(x)
  if (is.null(rownames(newx)))         rownames(newx) <- 1:nn
  par.S<-object$par.S
- bs=as<-list()
+ bs=as<-list() 
  Ker=object$Ker
    par.metric<-attr(object$mdist,"par.metric")
    par.metric[["fdata1"]]<-new.fdataobj
