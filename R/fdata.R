@@ -289,7 +289,7 @@ out[["rangeval"]]<-rangeval
 if ((np!=lentt) && (nc==lentt)) {
          out[["data"]]=matrix(out[["data"]],ncol=nc)
          nc<-1
-         print("Warning: The transposed data is returned")      }
+         warning("The transposed data is returned")       }
 else    out[["data"]]=out[["data"]]
 if (is.null(dimnames(mdata))) {
 #rownames(out[["data"]])<-1:nc
