@@ -11,10 +11,10 @@ dis.cos.cor(fdata1, fdata2 = NULL, as.dis = FALSE)
 
 \item{fdata2}{Functional data 2 or curve 2.}
 
-\item{as.dis}{Returns the distance matrix from class \code{dist}.}
+\item{as.dis}{Returns the distance matrix como 1-cor(fdata1,fdata2).}
 }
 \value{
-Returns a proximities matrix between functional data.
+Returns a proximity/distance matrix (depending on \code{as.dis})  between functional data.
 }
 \description{
 Computes the cosine correlation distance between two functional dataset of
