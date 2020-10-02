@@ -38,8 +38,7 @@ summary.fdata.comp=function(object,biplot=TRUE,...) {
   if (inherits(object, "fdata.comp"))         {
      a1=TRUE
      pr.com<-object
-     if (is.null(y)) {
-        if (object$call[[1]]=="fdata2pls" | object$call[[1]]=="fdata2ppls")
+     if (object$call[[1]]=="fdata2pls" | object$call[[1]]=="fdata2ppls"){
          y<-object$y                  
      }
   } else if (inherits(object, "fregre.fd"))     {
@@ -63,9 +62,9 @@ summary.fdata.comp=function(object,biplot=TRUE,...) {
  }
  C<-match.call()
  lenC=length(C)
- cor.y.pc=rep(NA,le)
- xxx=cbind(y,pr.com$x)
- cor.y.pc=round(cor(xxx[,c(1,l+1)]),3)[1,-1]
+ # cor.y.pc=rep(NA,le)
+ # xxx=cbind(y,pr.com$x)
+ # cor.y.pc=round(cor(xxx[,c(1,l+1)]),3)[1,-1]
  types<-colnames(pr.com$x)
  cat("\n     - SUMMARY:  ",object$call[[1]]," object   -\n")
  #if (object$call[[1]]=="fdata2pc" | object$call[[1]]=="fdata2ppc") 

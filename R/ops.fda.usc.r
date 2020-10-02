@@ -23,6 +23,7 @@ par.fda.usc$eps <- as.double(.Machine[[1]]*10)
 #' @param int.method see \code{method} argument in \code{\link{int.simpson}} function.
 #' @param eps epsilon parameter.
 #' @param ncores integer. Number of CPU cores on the current host.
+#' @param reset \code{logical}.  If \code{TRUE} creates a new Parallel Socket Cluster (ncores>1) or a sequential parallel backend (ncores=1). It is useful when worker initialization failed or after a crush.
 #' @author Manuel Oviedo de la Fuente (\email{manuel.oviedo@@usc.es}).
 #' @examples
 #' \dontrun{
@@ -40,10 +41,14 @@ par.fda.usc$eps <- as.double(.Machine[[1]]*10)
 #' @export 
 ops.fda.usc = function(verbose = FALSE,trace = FALSE,warning = FALSE,
                        ncores = NULL,
-                       int.method = "TRAPZ",
+                       int.method = "TRAPZ",reset = FALSE,
                        eps = as.double(.Machine[[1]]*10)){
+  
+  if (reset)   foreach::registerDoSEQ()
   if (is.null(ncores)) ncores = max(parallel::detectCores() -1,1)
-  #print("entra ops.fda.usc")
+  # If worker initialization failed, please execute this code
+ 
+   #print("entra ops.fda.usc")
   .par.fda.usc = list()
   .par.fda.usc$verbose = verbose
   .par.fda.usc$trace = trace
@@ -53,7 +58,7 @@ ops.fda.usc = function(verbose = FALSE,trace = FALSE,warning = FALSE,
   .par.fda.usc$eps =  eps
  # stp <- FALSE
   #par.fda.usc <- eval(parse(text="par.fda.usc"), envir=.GlobalEnv)
-#cat(" ncores:",ncores)
+ #cat(" ncores:",ncores)
   #if (foreach:::getDoParRegistered())
   ## Use a dummy loop to suppress possible (non-)warning from
   ## initial call to %dopar% with a sequential backend...
@@ -67,6 +72,7 @@ ops.fda.usc = function(verbose = FALSE,trace = FALSE,warning = FALSE,
       doParallel::registerDoParallel(cl)
     }
   }
+  
 # foo <- suppressWarnings(foreach::"%dopar%"(foreach::foreach(i=1), {}))
 #  e <- new.env()
   #unlockEnvironment <- function (env) {
@@ -84,3 +90,5 @@ ops.fda.usc = function(verbose = FALSE,trace = FALSE,warning = FALSE,
 }
 
 # max(parallel::detectCores() -1,1)
+# stopCluster(cl)
+# ops.fda.usc(ncores=1)

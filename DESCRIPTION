@@ -1,8 +1,8 @@
 Package: fda.usc
 Type: Package
 Title: Functional Data Analysis and Utilities for Statistical Computing
-Version: 2.0.2
-Date: 2020-02-17
+Version: 2.0.3
+Date: 2020-10-02
 Authors@R: c(person("Manuel Febrero Bande",role="aut", email = "manuel.febrero@usc.es"), person("Manuel Oviedo de la Fuente",role=c("aut","cre"), email="manuel.oviedo@usc.es"),
              person("Pedro Galeano",role="ctb"),
              person("Alicia Nieto",role="ctb"),
