@@ -94,7 +94,6 @@ R CMD INSTALL fda.usc_2.0.2.tar.gz --build
 Manuel Oviedo PhD thesis [Advances in functional regression and classification models](http://hdl.handle.net/10347/18236)
 -->
 
-
 -->
 
 <!-- ```{r example} -->
@@ -103,4 +102,3 @@ Manuel Oviedo PhD thesis [Advances in functional regression and classification m
 
 <!-- 
 <img src="inst/figures/baseplot.png" height="300"/>
--->
