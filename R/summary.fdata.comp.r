@@ -55,7 +55,6 @@ summary.fdata.comp=function(object,biplot=TRUE,...) {
  #print(types)
  l<-object$l
  le=length(l)
- #rotation=aperm(pr.com$rotation$data)
  if (is.null(object$rn)) rn<-0
  if (ccall=="fdata2pc"){
 

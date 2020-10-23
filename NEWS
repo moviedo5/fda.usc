@@ -1,5 +1,5 @@
 Version 2.0.3:
-summary.fdata.comp: the argument "y" is removed
+summary.fdata.comp: Several changes on summary.fdata.comp (23/10/2020)
 
 Version 2.0.2:
 fdata.bootstrap and fregre.bootstrap functions addapted to parallel backend.
@@ -209,7 +209,7 @@ A bug in predict.fregre.gsam() when PLS are previously estimated using norm=TRUE
 
 Release 1.2.0:
 New functions, 
-classif.DD, fits Nonparametric Classification Procedure Based on DD–plot (depth-versus-depth plot) for G groups.
+classif.DD, fits Nonparametric Classification Procedure Based on DDï¿½plot (depth-versus-depth plot) for G groups.
 depth.FMp, depth.modep and depth.RPp functions provide the depth measure for a list of p--functional data objects.
 metric.ldata, computes distance for a list of p--functional data objects.
 metric.hausdorff, computes hausdorff distance.
