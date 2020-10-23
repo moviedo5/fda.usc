@@ -5,7 +5,7 @@ Minverse<-function (X, tol = sqrt(.Machine$double.eps))
   if (!is.matrix(X)) 
     X <- as.matrix(X)
   Minv <-try(solve(X),silent=TRUE)  
-  if (class(Minv)!="try-error") {   
+  if (!is(Minv,"try-error")) {   
     Minv
   }
   else{ 
