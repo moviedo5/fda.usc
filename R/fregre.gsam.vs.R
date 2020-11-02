@@ -134,7 +134,7 @@ fregre.gsam.vs  <- function(data = list(), y,
                           #,smooth = TRUE
                           ){
   #0-
-  verbose = FALSE
+  verbose = trace
   #criterio = "sp"
   if (missing(y)) 
     stop("The name of the response must be specified in the 'y' argument")  
@@ -238,9 +238,9 @@ fregre.gsam.vs  <- function(data = list(), y,
   ycen <- data$df[,y]-mean(data$df[,y])
   gof <- NULL
   anyfdata <- FALSE
-  res.prev <- gam(as.formula(paste0(form.nl,1)),data=data$df)
+  res.prev <- gam(as.formula(paste0(form.nl,1)),data=data$df,family=family)
   while (!parar){
-    # print("3 Seleccion variable-Regresion")
+     print("3 Seleccion variable-Regresion")
     #      print("bucle")    
     esfactor <- FALSE #SE UTILIZA PARA NO PONER s(factor)
     #3- seleccion dcor mas elevada
@@ -248,7 +248,13 @@ fregre.gsam.vs  <- function(data = list(), y,
     ind.xentra <- which.max(dist_resp)
     xentra <- nam[ind.xentra]
     #dd <- dcor.ttest(ldist0[[resp]],ldist0[[xentra]],distance=TRUE)
+    print("peta1")
+    print(dim(ldist0[[resp]]))
+    print("peta2")
+    print(xentra)
+    print(dim(ldist0[[xentra]]))
     dd <- dcor.test(ldist0[[resp]],ldist0[[xentra]],n=n.edf)
+    print("peta4")
     #if (trace){      print(dd);      print(xentra)    }   
     if (verbose) {
       print(it);      print(n.edf);      print(nam)
@@ -281,9 +287,10 @@ fregre.gsam.vs  <- function(data = list(), y,
         par.basis.ipred$x <- xentra
         par.basis.ipred$data <- data
         if (!ncomp.fix)      {
-          #print("entra gsam.CV")
+          print("entra gsam.CV")
           res <-  fregre.gsam.cv(data,resp,xentra, alpha = alpha
                                #,type.basis=type.basis, kbs = kbs
+                               ,family=family
                                ,type.basis=tbasis, kbs = kbs
                                ,ncomp=ncomp,ncomp.fix=ncomp.fix)  
 #print(summary(res))
@@ -317,6 +324,7 @@ fregre.gsam.vs  <- function(data = list(), y,
           basisb[[xentra]] <- basis2
         }
       }       
+      print(parar)
       if (!parar) {
         xentran <- c(xentran,xentra)
         ind.xentra2 <- which(xentra==names(ldist0))
@@ -338,6 +346,8 @@ fregre.gsam.vs  <- function(data = list(), y,
         par.model$data <- data
         par.model[["basis.x"]] <- basisx
         par.model[["basis.b"]] <- basisb
+        par.model[["family"]] <-  family
+        if (trace) print(par.model$formula )
         res.nl  <- do.call(nam.model,par.model)    
         mejora <- res.prev$gcv.ubre > res.nl$gcv.ubre
         if (it>1 & mejora){
@@ -387,12 +397,14 @@ fregre.gsam.vs  <- function(data = list(), y,
   xentran <- xentran[-length(xentran)]
   }
   }
-  }  }
+    } 
+    if (trace) print("fin parar while")
+    }
   # print(dim(gof));print(gof)
   gof <- data.frame(xentran,(gof))
   if (is.null(xentran)) {
     warning("No variable selected, a null model is estimated")    
-    res.nl <- fregre.gsam(as.formula(paste(resp,"~1",sep="")),data=data)
+    res.nl <- fregre.gsam(as.formula(paste(resp,"~1",sep="")),data=data,family=family)
     suma <- summary(res.nl)
     gof <- data.frame(rbind(c(1,AIC(res.nl),deviance(res.nl),
                             res.nl$df.residual,suma$r.sq,
