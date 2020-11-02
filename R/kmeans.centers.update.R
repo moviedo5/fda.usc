@@ -28,10 +28,10 @@ kmeans.centers.update=function(out,group
          else   {
             par.dfunc$fdataobj<-centers
             par.dfunc$fdataobj$data<-dm
-            stat=do.call(dfunc,par.dfunc)
-         }
+            stat=do.call(dfunc,par.dfunc)        
          if (is.fdata(stat)) xm[j,]=stat[["data"]]
          else  xm[j,]=stat
+         }
      #} 
  }
 centers$data=xm
