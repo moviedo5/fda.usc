@@ -4,7 +4,8 @@
 \name{MCO}
 \alias{MCO}
 \title{Mithochondiral calcium overload (MCO) data set}
-\format{Elements of MCO:\cr \code{..$intact}: \code{fdata} class object with
+\format{
+Elements of MCO:\cr \code{..$intact}: \code{fdata} class object with
 ``intact cells''curves,\cr \itemize{ \item \code{"data"}: Matrix of class
 \code{fdata} with 89 intact cells curves (rows) measured every 10 seconds
 during an hour in isolated mouse cardiac cell. \item \code{"argvals"}, 360
@@ -24,7 +25,8 @@ measured every 10 seconds during an hour in isolated mouse cardiac cell.
 with: \code{main} an overall title "Control Intact Treatment", \code{xlab}
 title for \code{x} axis "seconds" and \code{ylab} title for \code{y} axis
 "Ca". } \code{..$classpermea}: Factor levels of ``permeabilized cells''
-curves: "1" control group and "2" treatment group.\cr}
+curves: "1" control group and "2" treatment group.\cr
+}
 \description{
 The mithochondiral calcium overload (MCO) was measured in two groups
 (control and treatment) every 10 seconds during an hour in isolated mouse

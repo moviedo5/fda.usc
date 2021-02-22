@@ -10,6 +10,7 @@ ops.fda.usc(
   warning = FALSE,
   ncores = NULL,
   int.method = "TRAPZ",
+  reset = FALSE,
   eps = as.double(.Machine[[1]] * 10)
 )
 }
@@ -23,6 +24,8 @@ ops.fda.usc(
 \item{ncores}{integer. Number of CPU cores on the current host.}
 
 \item{int.method}{see \code{method} argument in \code{\link{int.simpson}} function.}
+
+\item{reset}{\code{logical}.  If \code{TRUE} creates a new Parallel Socket Cluster (ncores>1) or a sequential parallel backend (ncores=1). It is useful when worker initialization failed or after a crush.}
 
 \item{eps}{epsilon parameter.}
 }

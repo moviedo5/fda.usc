@@ -4,7 +4,8 @@
 \name{poblenou}
 \alias{poblenou}
 \title{poblenou data}
-\format{The format is:\cr \code{..$nox}: \code{fdata} class object with: \cr
+\format{
+The format is:\cr \code{..$nox}: \code{fdata} class object with: \cr
 i.- \code{"data"}: Matrix with 115 curves (rows) discretized in 24 points or
 argvals (columns).\cr ii.- \code{"argvals": 0:23}\cr iii.-
 \code{"rangeval"=(0,23)}: range(\code{"argvals"}), \cr iv.- \code{"names"}
@@ -14,7 +15,8 @@ for \code{x} axis "Hours" and \code{ylab} title for \code{y} axis "NOx
 "date" in the first column.\cr Second column ("day.week").  Factor levels:
 "Monday" 1, "Tuesday" 2, "Wednesday" 3, "Thursday" 4, "Friday" 5, "Saturday"
 6 and "Sunday" 7.\cr Third column "day.festive".  Factor levels: "non
-festive day" 0 and "festive day" 1.\cr}
+festive day" 0 and "festive day" 1.\cr
+}
 \source{
 \url{http://mediambient.gencat.cat}
 }

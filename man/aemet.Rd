@@ -4,7 +4,8 @@
 \name{aemet}
 \alias{aemet}
 \title{aemet data}
-\format{Elements of aemet:\cr \code{..$df:} Data frame with information of
+\format{
+Elements of aemet:\cr \code{..$df:} Data frame with information of
 each wheather station:
 \itemize{
 \item \code{ind:} Indicated weather station.
@@ -27,7 +28,8 @@ period 1980-2009 (in m/s).
 the period 1980-2009 (in log mm). Negligible precipitation 
 (less than 1 tenth of mm) is replaced by \code{0.05} and no precipitation
 (0.0 mm) is replaced by \code{0.01}.  Then the logarithm is applied.
-}}
+}
+}
 \source{
 The data were obtained from the FTP of AEMET in 2009.
 }

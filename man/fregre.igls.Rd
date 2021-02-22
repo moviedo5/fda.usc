@@ -32,12 +32,15 @@ terms, separated by \code{+} operators, on the right.}
 
 \item{basis.b}{List of basis for \eqn{\beta(t)} parameter estimation.}
 
-\item{correlation}{an optional \code{\link{corStruct}} object describing the
-within-group correlation structure. See the documentation of
-\code{\link{corClasses}} for a description of the available \code{corStruct}
-classes. If a grouping variable is to be used, it must be specified in
-the \code{form} argument to the \code{corStruct} constructor. Defaults to 
-\code{NULL}, corresponding to uncorrelated errors.}
+\item{correlation}{List  describing the  correlation structure. Defaults to 
+\code{NULL}, corresponding to uncorrelated errors.
+See the following internal functions  for a description and a code example in script file.
+\itemize{
+\item \code{corUnstruc(x)}, fit an unstrutured correlation.
+\item \code{cor.AR(x, order.max = 8, p=1, method = "lm")} fit an Autoregressive Models to Time Series using \code{\link{ar}} function.
+\item \code{cor.ARMA(x, p, d = 0, q = 0, method = "lm", order.max = 1)} Fit an ARIMA model to a univariate time series using \code{\link{arima}} function.
+\item \code{corExpo(xy,range, method = "euclidean",p=2)} Fit an exponential correlation structure.
+}}
 
 \item{maxit}{Number of maximum of interactions.}
 
@@ -45,42 +48,18 @@ the \code{form} argument to the \code{corStruct} constructor. Defaults to
 
 \item{lambda}{List of Roughness penalty parameter.}
 
-\item{weights}{An optional \code{\link{varFunc}} object or one-sided formula
-describing the within-group heteroscedasticity structure. If given as
-a formula, it is used as the argument to \code{\link{varFixed}},
-corresponding to fixed variance weights. See the documentation on
-\code{\link{varClasses}} for a description of the available \code{\link{varFunc}}
-classes. Defaults to \code{NULL}, corresponding to homoscedastic errors.}
+\item{weights}{weights}
 
 \item{control}{Control parameters.}
 
 \item{\dots}{Further arguments passed to or from other methods.}
 }
 \value{
-An object of class \code{"gls"} representing the functional linear model
-fit. Generic functions such as \code{print}, \code{plot}, and \code{summary} have
-methods to show the results of the fit. 
-
- See \code{\link{glsObject}} for the components of the fit. The functions
- \code{\link{resid}}, \code{\link{coef}} and \code{\link{fitted}}, can be used to
-  extract some of its components. 
-Beside, the class(z) is  "gls", "lm" and "fregre.lm" with the following objects:
+An object of class \code{"fregre.igls"} representing the functional linear model
+fit with temporal dependence errors.
+Beside, the class(z) is  similar to "fregre.lm" plus the following objects:
 \itemize{
- \item{sr2}{ Residual variance.}
- \item{Vp}{ Estimated covariance matrix for the parameters.}
- \item{lambda}{ A roughness penalty.}	
- \item{basis.x}{ Basis used for \code{fdata} or \code{fd} covariates.}
- \item{basis.b}{ Basis used for beta parameter estimation.}
- \item{beta.l}{ List of estimated beta parameter of functional covariates.}
- \item{data}{ List that containing the variables in the model.}
- \item{formula}{ formula used in ajusted model.}
- \item{formula.ini}{ formula in call.}
- \item{XX}{ desing matrix }
- \item{W}{ inverse of covariance matrix}
- \item{fdataob}{ }
- \item{rn}{ rn}
- \item{vs.list}{ }
- \item{correlation}{ See glsObject for the components of the fit. }
+ \item{corStruct}{ Fitted  AR or ARIMA model.  }
  }
 }
 \description{
@@ -114,10 +93,10 @@ res.gls$corStruct
 }
 }
 \references{
-Oviedo de la Fuente, M., Febrero-Bande, M., Pilar Munoz,
-and Dominguez, A. Predicting seasonal influenza transmission using Functional 
-Regression Models with Temporal Dependence. arXiv:1610.08718.
- \url{https://arxiv.org/abs/1610.08718}
+Oviedo de la Fuente, M., Febrero-Bande, M., Pilar Munoz, and
+Dominguez, A.  (2018). Predicting seasonal influenza transmission using 
+functional regression models with temporal dependence. PloS one, 13(4), e0194250.
+\url{https://doi.org/10.1371/journal.pone.0194250}
 }
 \keyword{models}
 \keyword{regression}

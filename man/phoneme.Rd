@@ -4,7 +4,8 @@
 \name{phoneme}
 \alias{phoneme}
 \title{phoneme data}
-\format{Elements of phoneme:\cr \code{..$learn}: learning sample of curves.
+\format{
+Elements of phoneme:\cr \code{..$learn}: learning sample of curves.
 \code{fdata} class object with: i.- \code{"data"}: Matrix of class
 \code{fdata} with 250 curves (rows) discretized in 150 points or argvals
 (columns).\cr, ii.- \code{"argvals"}, iii.- \code{"rangeval"}:
@@ -20,7 +21,8 @@ with: \code{main} an overall title "Phoneme learn", \code{xlab} title for
 "log-periodograms".\cr \cr \code{..$classlearn}:learning class numbers (as
 factor). Factor levels: "sh" 1, "iy" 2, "dcl" 3, "aa" 4 and "ao" 5.\cr \cr
 \code{..$classtest}: testing class numbers (as factor). Factor levels: "sh"
-1, "iy" 2, "dcl" 3, "aa" 4 and "ao" 5.\cr}
+1, "iy" 2, "dcl" 3, "aa" 4 and "ao" 5.\cr
+}
 \source{
 \url{http://www.math.univ-toulouse.fr/staph/npfda/npfda-datasets.html}
 }
