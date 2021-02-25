@@ -27,7 +27,7 @@
 #' @references
 #'   Cuevas, A., Febrero, M., & Fraiman, R. (2004). \emph{An anova test for functional data.} Computational statistics & data analysis, \bold{47}(1), 111-122.
 #' @author Juan A. Cuesta-Albertos, Manuel Febrero-Bande, Manuel Oviedo de la
-#' Fuente\cr \email{manuel.oviedo@@usc.es}
+#' Fuente\cr \email{manuel.oviedo@@udc.es}
 #' @seealso  See Also as: \code{\link{fanova.RPm}}
 #' @examples
 #' \dontrun{

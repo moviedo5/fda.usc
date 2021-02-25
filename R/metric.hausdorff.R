@@ -21,7 +21,7 @@
 #' object is (\code{n2} x \code{m}), where \code{n2} is the number of points
 #' observed in \code{t} coordinates with lenght \code{m}.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @keywords cluster
 #' @examples
 #' \dontrun{   
@@ -60,9 +60,9 @@ metric.hausdorff=function (fdata1, fdata2 = fdata1)
     }
     else {
         if (is.vector(fdata1)) 
-            fdata1 <- as.matrix(t(fdata1))
+            fdata1 <- data.matrix(t(fdata1))
         if (is.vector(fdata2)) 
-            fdata2 <- as.matrix(t(fdata2))
+            fdata2 <- data.matrix(t(fdata2))
         DATA1 <- fdata1
         DATA2 <- fdata2
         range.t <- c(1, ncol(DATA1))

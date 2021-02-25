@@ -2,8 +2,8 @@ Package: fda.usc
 Type: Package
 Title: Functional Data Analysis and Utilities for Statistical Computing
 Version: 2.0.3
-Date: 2020-10-02
-Authors@R: c(person("Manuel Febrero Bande",role="aut", email = "manuel.febrero@usc.es"), person("Manuel Oviedo de la Fuente",role=c("aut","cre"), email="manuel.oviedo@usc.es"),
+Date: 2021-02-22
+Authors@R: c(person("Manuel Febrero Bande",role="aut", email = "manuel.febrero@usc.es"), person("Manuel Oviedo de la Fuente",role=c("aut","cre"), email="manuel.oviedo@udc.es"),
              person("Pedro Galeano",role="ctb"),
              person("Alicia Nieto",role="ctb"),
              person("Eduardo Garcia-Portugues",role="ctb"))
@@ -20,8 +20,8 @@ Author: Manuel Febrero Bande [aut],
   Pedro Galeano [ctb],
   Alicia Nieto [ctb],
   Eduardo Garcia-Portugues [ctb]
-Maintainer: Manuel Oviedo de la Fuente <manuel.oviedo@usc.es>
+Maintainer: Manuel Oviedo de la Fuente <manuel.oviedo@udc.es>
 NeedsCompilation: yes
 Repository: CRAN
 Encoding: UTF-8
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1

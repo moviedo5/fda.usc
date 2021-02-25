@@ -55,7 +55,7 @@
 #' (multivariate covariates), the function compute a standard \code{\link{glm}}
 #' procedure.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{fregre.glm}}.\cr %Alternative method:
 #' \code{\link{classif.gsam}} and \code{\link{classif.gkam}}.
 #' @references Ramsay, James O., and Silverman, Bernard W. (2006), \emph{
@@ -70,7 +70,7 @@
 #' @keywords classif
 #' @examples 
 #' \dontrun{
-#' require(fda.usc)
+#' require(fda.usc.devel)
 #' data(phoneme)
 #' mlearn<-phoneme[["learn"]]
 #' glearn<-phoneme[["classlearn"]]

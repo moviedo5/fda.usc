@@ -155,8 +155,8 @@ MCR.mof<-function(k,x,y,xx,yy,Dff,Dgg,n1,n2,nn1,nn2){
   #print("MCR.mof")
   #print(length(cls))
   #print(dim(rbind(x,y)))
-  xx0 <- as.matrix(xx[k*Dff[1:nn1]==Dgg[1:nn1],])
-  yy0 <- as.matrix(yy[k*Dff[(nn1+1):(nn1+nn2)]==Dgg[(nn1+1):(nn1+nn2)],])
+  xx0 <- data.matrix(xx[k*Dff[1:nn1]==Dgg[1:nn1],])
+  yy0 <- data.matrix(yy[k*Dff[(nn1+1):(nn1+nn2)]==Dgg[(nn1+1):(nn1+nn2)],])
   if (ncol(xx0)==1) xx0 <- t(xx0)
   if (ncol(yy0)==1) yy0 <- t(yy0)
   mis.x <- 0
@@ -260,8 +260,8 @@ AMCR <- function(a,Dff,Dgg,nn1,nn2,tt){
 MCR1.p <- function(a,x,y,xx,yy,Dff,Dgg,n1,n2,nn1,nn2){
   p <- .5
   cls <- factor(c(rep(1,n1),rep(2,n2)))
-  xx0 <- as.matrix(xx[sapply(Dff[1:nn1],RR,a=a)==Dgg[1:nn1],])
-  yy0 <- as.matrix(yy[sapply(Dff[(nn1+1):(nn1+nn2)],RR,a=a)==Dgg[(nn1+1):(nn1+nn2)],])
+  xx0 <- data.matrix(xx[sapply(Dff[1:nn1],RR,a=a)==Dgg[1:nn1],])
+  yy0 <- data.matrix(yy[sapply(Dff[(nn1+1):(nn1+nn2)],RR,a=a)==Dgg[(nn1+1):(nn1+nn2)],])
   if (ncol(xx0)==1) xx0 <- t(xx0)
   if (ncol(yy0)==1) yy0 <- t(yy0)
   mis.x <- 0

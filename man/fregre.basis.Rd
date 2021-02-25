@@ -35,26 +35,26 @@ fregre.basis(
 \value{
 Return:
 \itemize{
-\item {call}{ The matched call.} 
-\item {coefficients}{ A named vector of coefficients}
-\item {residuals}{ \code{y} minus \code{fitted values}.} 
-\item {fitted.values}{ Estimated scalar response.} 
-\item {beta.est}{ beta parameter estimated of class \code{fd}} 
-\item {weights}{(only for' weighted fits) the specified weights.} 
-\item {df}{ The residual degrees of' freedom.} 
-\item {r2}{ Coefficient of determination.} 
-\item {sr2}{ Residual' variance.} 
-\item {Vp}{ Estimated covariance matrix for the parameters.}
-\item {H}{ Hat matrix.} 
-\item {y}{ Response.}
-\item {fdataobj}{ Functional explanatory data of class \code{fdata}.}
-\item {a.est}{ Intercept parameter estimated} 
-\item {x.fd}{ Centered functional explanatory data of class \code{fd}.} 
-\item {basis.b}{ Basis used' for beta parameter estimation.} 
-\item {lambda.opt}{ A roughness penalty.}
-\item {Lfdobj}{ Order of a derivative or a linear differential operator.}
-\item {P}{ Penalty matrix.} 
-\item {lm}{ Return \code{lm} object }
+\item {call:}{ The matched call.} 
+\item {coefficients:}{ A named vector of coefficients}
+\item {residuals:}{ \code{y} minus \code{fitted values}.} 
+\item {fitted.values:}{ Estimated scalar response.} 
+\item {beta.est:}{ beta parameter estimated of class \code{fd}} 
+\item {weights:}{(only for' weighted fits) the specified weights.} 
+\item {df.residual:}{ The residual degrees of' freedom.} 
+\item {r2:}{ Coefficient of determination.} 
+\item {sr2:}{ Residual' variance.} 
+\item {Vp:}{ Estimated covariance matrix for the parameters.}
+\item {H:}{ Hat matrix.} 
+\item {y:}{ Response.}
+\item {fdataobj:}{ Functional explanatory data of class \code{fdata}.}
+\item {a.est:}{ Intercept parameter estimated} 
+\item {x.fd:}{ Centered functional explanatory data of class \code{fd}.} 
+\item {basis.b:}{ Basis used' for beta parameter estimation.} 
+\item {lambda.opt:}{ A roughness penalty.}
+\item {Lfdobj:}{ Order of a derivative or a linear differential operator.}
+\item {P:}{ Penalty matrix.} 
+\item {lm:}{ Return \code{lm} object }
 }
 }
 \description{
@@ -142,6 +142,6 @@ Alternative method: \code{\link{fregre.pc}} and \code{\link{fregre.np}}.
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{regression}

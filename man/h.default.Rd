@@ -10,15 +10,17 @@ h.default(
   len = 51,
   metric = metric.lp,
   type.S = "S.NW",
+  Ker = Ker.norm,
   ...
 )
 }
 \arguments{
 \item{fdataobj}{\code{\link{fdata}} class object.}
 
-\item{prob}{Range of probabilities for the quantiles of the distance matrix.}
+\item{prob}{Vector of probabilities for extracting the quantiles of the distance matrix. If \code{length(prob)=2} 
+a sequence between \code{prob[1]} and \code{prob[2]} of length \code{len}.}
 
-\item{len}{Vector length of smoothing parameter \code{h} to return.}
+\item{len}{Vector length of smoothing parameter \code{h} to return only used when \code{length(prob)=2}.}
 
 \item{metric}{If is a function: name of the function to calculate the
 distance matrix between the curves, by default \code{\link{metric.lp}}.  If
@@ -28,6 +30,9 @@ kernel.}
 \item{type.S}{Type of smothing matrix \code{S}.  Possible values are:
 Nadaraya-Watson estimator \emph{"S.NW"} and K nearest neighbors estimator
 \emph{"S.KNN"}}
+
+\item{Ker}{Kernel function. By default, \emph{Ker.norm}. Useful for scaling the bandwidth values
+according to Kernel}
 
 \item{\dots}{Arguments to be passed for metric argument.}
 }
@@ -57,6 +62,6 @@ See Also as \code{\link{metric.lp}}, \code{\link{Kernel}} and
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{nonparametric}

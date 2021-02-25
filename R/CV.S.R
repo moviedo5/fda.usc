@@ -27,7 +27,7 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return { Returns CV score calculated for input parameters.  }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \code{\link{optim.np}} \cr Alternative method:
 #' \code{\link{GCV.S}}
 #' @references Wasserman, L. \emph{All of Nonparametric Statistics}. Springer

@@ -132,8 +132,8 @@ floor((ncol(DATA1) - nderiv - 4)/2), floor(ncol(DATA1)/3)),...)
   range.t<-rtt
  }
 else {      
-     	if(is.vector(fdata1)) fdata1 <- as.matrix(t(fdata1))
-    	if(is.vector(fdata2)) fdata2 <- as.matrix(t(fdata2)) 
+     	if(is.vector(fdata1)) fdata1 <- data.matrix(t(fdata1))
+    	if(is.vector(fdata2)) fdata2 <- data.matrix(t(fdata2)) 
       DATA1<-fdata1
       DATA2<-fdata2
       range.t<-c(1,ncol(DATA1))
@@ -232,8 +232,8 @@ floor((ncol(DATA1) - nderiv - 4)/2), floor(ncol(DATA1)/3)), period=NULL,...)
   range.t<-rtt
  }
 else {      
-     	if(is.vector(fdata1)) fdata1 <- as.matrix(t(fdata1))
-    	if(is.vector(fdata2)) fdata2 <- as.matrix(t(fdata2)) 
+     	if(is.vector(fdata1)) fdata1 <- data.matrix(t(fdata1))
+    	if(is.vector(fdata2)) fdata2 <- data.matrix(t(fdata2)) 
       DATA1<-fdata1
       DATA2<-fdata2
       range.t<-c(1,ncol(DATA1))
@@ -329,8 +329,8 @@ semimetric.hshift <- function(fdata1,fdata2=fdata1, t=1:ncol(DATA1),...)
   DATA2<-fdata2[["data"]]
  }
 else {      
-     	if(is.vector(fdata1)) fdata1 <- as.matrix(t(fdata1))
-    	if(is.vector(fdata2)) fdata2 <- as.matrix(t(fdata2)) 
+     	if(is.vector(fdata1)) fdata1 <- data.matrix(t(fdata1))
+    	if(is.vector(fdata2)) fdata2 <- data.matrix(t(fdata2)) 
       DATA1<-fdata1
       DATA2<-fdata2
       }
@@ -390,8 +390,8 @@ semimetric.mplsr <- function(fdata1,fdata2=fdata1, q=2, class1,...)
   range.t<-rtt
  }
 else {      
-     	if(is.vector(fdata1)) fdata1 <- as.matrix(t(fdata1))
-    	if(is.vector(fdata2)) fdata2 <- as.matrix(t(fdata2)) 
+     	if(is.vector(fdata1)) fdata1 <- data.matrix(t(fdata1))
+    	if(is.vector(fdata2)) fdata2 <- data.matrix(t(fdata2)) 
       DATA1<-fdata1
       DATA2<-fdata2
       range.t<-c(1,ncol(DATA1))
@@ -465,8 +465,8 @@ semimetric.pca <- function(fdata1, fdata2=fdata1, q=1,...)
   range.t<-rtt
  }
 else {      
-     	if(is.vector(fdata1)) fdata1 <- as.matrix(t(fdata1))
-    	if(is.vector(fdata2)) fdata2 <- as.matrix(t(fdata2)) 
+     	if(is.vector(fdata1)) fdata1 <- data.matrix(t(fdata1))
+    	if(is.vector(fdata2)) fdata2 <- data.matrix(t(fdata2)) 
       DATA1<-fdata1
       DATA2<-fdata2
       range.t<-c(1,ncol(DATA1))
@@ -517,8 +517,8 @@ mplsr <- function(X, Y, ncomp = 2,lambda=0,P=c(0,0,1),...)
   else arg<-1:J
   K<-ncomp
   tol <- 1e-10
-  X <- as.matrix(X)
-  Y <- as.matrix(Y)
+  X <- data.matrix(X)
+  Y <- data.matrix(Y)
   nbclass <- ncol(Y)
   #	xbar <- apply(X, 2, sum)/dx[1]
   #	ybar <- apply(Y, 2, sum)/dx[1]

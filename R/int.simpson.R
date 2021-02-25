@@ -23,7 +23,7 @@
 #' default).
 #' @param method Method for numerical integration, see details.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See also \code{\link{integrate}}.
 #' @keywords cluster
 #' @examples

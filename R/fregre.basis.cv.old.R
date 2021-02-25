@@ -210,7 +210,7 @@ fregre.basis.cv.old <- function(fdataobj,y,basis.x=NULL,basis.b=NULL,
   #if (lenlambda==1)  gcv<-gcv[,,1]
   if (fou)  {
    nbasis12<-paste(nbasis12,nbasis2,sep="")
-   gcv<-as.matrix(apply(gcv,3,diag))
+   gcv<-data.matrix(apply(gcv,3,diag))
    rownames(gcv)<-nbasis12
    colnames(gcv)<-lambda2
       }

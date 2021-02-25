@@ -19,7 +19,7 @@
 #' @return Return the quantile for conditional distribution function.
 #' 
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' 
 #' @seealso See Also as: \code{\link{cond.F}} and \code{\link{cond.mode}}.
 #' 

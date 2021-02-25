@@ -10,7 +10,7 @@
 #' centered fdata.} \item{meanX}{ Functional mean substracted.}
 #' 
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' 
 #' @seealso See Also as \code{\link{fdata}}
 #' 

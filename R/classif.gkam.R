@@ -49,7 +49,7 @@
 #' \item \code{max.prob}{ Highest probability of correct classification.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{fregre.gkam}}.\cr Alternative method:
 #' \code{\link{classif.glm}}.
 #' @references Febrero-Bande M. and Gonzalez-Manteiga W. (2012).

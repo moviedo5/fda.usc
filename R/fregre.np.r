@@ -49,7 +49,7 @@
 #' \item {h.opt}{ smoothing parameter or' bandwidth.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{fregre.np.cv}},
 #' \code{\link{summary.fregre.fd}} and \code{\link{predict.fregre.fd}} .\cr
 #' Alternative method: \code{\link{fregre.basis}},cand \code{\link{fregre.pc}}.
@@ -125,7 +125,7 @@ rtt<-fdataobj[["rangeval"]]
 C<-match.call()
 mf <- match.call(expand.dots = FALSE)
 m<-match(c("fdataobj", "y","h","Ker","metric","type.S","par.S"),names(mf),0L)
-#    if (is.vector(x))         x <- t(as.matrix(x))
+#    if (is.vector(x))         x <- t(data.matrix(x))
 n = nrow(x)
 np <- ncol(x)   
    if (!isfdata) {
@@ -133,7 +133,7 @@ np <- ncol(x)
    if (is.null(rownames(x)))         rownames(x) <- 1:n
    if (is.null(colnames(x)))         colnames(x) <- 1:np
    if (is.vector(y)) y.mat<-matrix(y,ncol=1)
-   else y.mat<-as.matrix(y)
+   else y.mat<-data.matrix(y)
    ny = nrow(y.mat)
    npy <- ncol(y.mat)
    }

@@ -60,7 +60,7 @@
 #' \code{bcdcor.dist} returns the bias corrected distance correlation
 #' statistic.
 #' 
-#' @author Manuel Oviedo de la Fuente \email{manuel.oviedo@@usc.es} and Manuel
+#' @author Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es} and Manuel
 #' Febrero Bande
 #' 
 #' @seealso \code{\link{metric.lp}} amd \code{\link{metric.dist}}.
@@ -109,7 +109,7 @@ dcor.xy<-function (x, y,test=TRUE,metric.x,metric.y,par.metric.x,par.metric.y,n)
   if (missing(n)) n <- nrow(x)
   isfdata2<-is.fdata(y)
   if (isfdata1)         par.metric.x$fdata1<-x
-  else                  par.metric.x$x<-as.matrix(x)
+  else                  par.metric.x$x <- data.matrix(x)
   D1=do.call(metric.x,par.metric.x)
   if (missing(metric.y)){
           if (isfdata2) metric.y="metric.lp"
@@ -117,10 +117,10 @@ dcor.xy<-function (x, y,test=TRUE,metric.x,metric.y,par.metric.x,par.metric.y,n)
   }
   if (missing(par.metric.y)) par.metric.y<-list()
   if (isfdata2)        par.metric.y$fdata1<-y
-  else                 par.metric.y$x<-as.matrix(y)
+  else                 par.metric.y$x <- data.matrix(y)
   D2=do.call(metric.y,par.metric.y)
-  D1<-as.matrix(D1)
-  D2<-as.matrix(D2)
+  D1 <- data.matrix(D1)
+  D2 <- data.matrix(D2)
   if (test) {
    rval<-dcor.test(D1, D2,n)
    rval$D1<-D1
@@ -206,7 +206,7 @@ dcor.test <- function (D1, D2,n)
 
 
 Astar2<-function(d,n){
-  #  d <- as.matrix(d)
+  #  d <- data.matrix(d)
   m <- rowMeans(d)
   M <- mean(d)
   a <- sweep(d, 1, m)

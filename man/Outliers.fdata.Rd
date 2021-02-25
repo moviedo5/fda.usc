@@ -93,6 +93,6 @@ Journal of Statistical Software, 51(4), 1-28. \url{http://www.jstatsoft.org/v51/
 See Also: \code{\link{fdata.bootstrap}}, \code{\link{Depth}}.
 }
 \author{
-Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}
+Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 }
 \keyword{outliers}

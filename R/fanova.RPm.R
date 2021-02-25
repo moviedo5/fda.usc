@@ -81,7 +81,7 @@
 #' }
 #' @note If \code{hetero=TRUE} then all factors must be categorical.
 #' @author Juan A. Cuesta-Albertos, Manuel Febrero-Bande, Manuel Oviedo de la
-#' Fuente\cr \email{manuel.oviedo@@usc.es}
+#' Fuente\cr \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{fanova.onefactor}}
 #' @references Cuesta-Albertos, J.A., Febrero-Bande, M. \emph{A simple multiway
 #' ANOVA for functional data.} TEST 2010, DOI \bold{10.1007/s11749-010-0185-3}.
@@ -121,7 +121,7 @@
 fanova.RPm=function(object,formula,data.fac,RP=min(30,ncol(object)),alpha=0.95,
                    zproj=NULL,par.zproj=list(norm=TRUE),hetero=TRUE,
                    pr=FALSE,w=rep(1,ncol(object)),nboot=0,contrast=NULL,...){
-  if (class(object)[1] %in% c("matrix","data.frame")) dataM=as.matrix(object)
+  if (class(object)[1] %in% c("matrix","data.frame")) dataM=data.matrix(object)
   else if (is.fdata(object)) dataM=object[["data"]]
   lfac=unlist(lapply(data.fac,is.factor))
   min.data.fac<-min(table(data.fac[,lfac]))

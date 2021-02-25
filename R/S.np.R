@@ -28,7 +28,7 @@
 #'  \item {\code{S.LCR}}{ return the smoothing matrix by Cubic Polynomial Regression.}
 #'  }
 #'   
-#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@@usc.es}
+#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \code{\link{S.basis}}
 #' @references
 #' Ferraty, F. and Vieu, P. (2006). \emph{Nonparametric functional data analysis.} Springer Series in Statistics, New York. 
@@ -146,7 +146,7 @@ if (is.null(h)) {
   }
 }
 if (cv)  diag(tt)=Inf
-tt2<-as.matrix(sweep(tt,1,h,FUN="/"))
+tt2<-data.matrix(sweep(tt,1,h,FUN="/"))
 k<-Ker(tt2)
 #print(any(is.na(tt2)))  
 if (is.null(w)) w<-rep(1,len=ncol(tt))

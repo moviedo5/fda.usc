@@ -21,7 +21,7 @@
 #' @param u Data.
 #' @return  Returns symmetric kernel.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @references Ferraty, F. and Vieu, P. (2006). \emph{Nonparametric functional
 #' data analysis.} Springer Series in Statistics, New York. \cr
 #' 

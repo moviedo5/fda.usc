@@ -84,6 +84,6 @@ See also \code{\link{metric.lp}} and \code{\link{fdata}}
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{cluster}

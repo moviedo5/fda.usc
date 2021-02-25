@@ -89,7 +89,7 @@ procedure.
 }
 \examples{
 \dontrun{
-require(fda.usc)
+require(fda.usc.devel)
 data(phoneme)
 mlearn<-phoneme[["learn"]]
 glearn<-phoneme[["classlearn"]]
@@ -121,6 +121,6 @@ See Also as: \code{\link{fregre.glm}}.\cr %Alternative method:
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{classif}

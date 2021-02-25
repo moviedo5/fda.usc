@@ -50,6 +50,6 @@ access on line at \url{http://www.lsp.ups-tlse.fr/staph/npfda/}
 }
 \author{
 Manuel Febrero-Bande and Manuel Oviedo de la Fuente
-<manuel.oviedo@usc.es>
+<manuel.oviedo@udc.es>
 }
 \keyword{datasets}

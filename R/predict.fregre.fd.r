@@ -41,7 +41,7 @@
 # estimates, otherwise an array of predictions of scalar response is returned.
 
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{fregre.basis}},
 #' \code{\link{fregre.basis.cv}}, \code{\link{fregre.np}},
 #' \code{\link{fregre.np.cv}}, \cr \code{\link{fregre.pc}},

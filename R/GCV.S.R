@@ -26,7 +26,7 @@
 #' 
 #' @return { Returns GCV score calculated for input parameters.  }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \code{\link{optim.np}} \cr Alternative method:
 #' \code{\link{CV.S}}
 #' @references 

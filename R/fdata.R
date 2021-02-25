@@ -31,7 +31,7 @@
 #' }
 #' 
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' 
 #' @seealso See Also as \code{\link{plot.fdata}}
 #' 
@@ -199,7 +199,7 @@ matrix={
         out[["data"]]=mdata
         out},
 data.frame={
-            out[["data"]]=as.matrix(mdata)
+            out[["data"]]=data.matrix(mdata)
             out},
 ftable={
   mdata<-matrix(mdata,nrow=dm[1])

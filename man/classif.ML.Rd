@@ -5,6 +5,7 @@
 \alias{classif.nnet}
 \alias{classif.rpart}
 \alias{classif.randomForest}
+\alias{classif.cv.glmnet}
 \alias{classif.svm}
 \alias{classif.ksvm}
 \alias{classif.naiveBayes}
@@ -134,6 +135,7 @@ Wrapper versions for multivariate and functional classification:
 \item \code{classif.svm},\code{classif.naiveBayes}: uses \code{svm} and  \code{naiveBayes} functions and requires \code{e1071} package.
 \item \code{classif.ksvm}: uses \code{weighted.ksvm } function and requires \code{personalized} package.
 \item \code{classif.randomForest}: uses \code{randomForest} function and requires \code{randomForest} package.
+\item \code{classif.cv.glmnet}: uses \code{cv.glmnet} function and requires \code{glmnet} package.
 }
 }
 \examples{
@@ -144,8 +146,9 @@ glearn<-phoneme[["classlearn"]]
 mtest<-phoneme[["test"]]
 gtest<-phoneme[["classtest"]]
 dataf<-data.frame(glearn)
-dat=list("df"=dataf,"x"=mlearn)
+dat=ldata("df"=dataf,"x"=mlearn)
 a1<-classif.rpart(glearn~x,data=dat)
+a1<-classif.nnet(glearn~x,data=dat)
 summary(a1)
 newdat<-list("x"=mtest)
 p1<-predict(a1,newdat,type="class")

@@ -19,9 +19,9 @@ semimetric.pc<-function (fdata1, fdata2 = fdata1, q = 1, ...)
     }
     else {
         if (is.vector(fdata1)) 
-            fdata1 <- as.matrix(t(fdata1))
+            fdata1 <- data.matrix(t(fdata1))
         if (is.vector(fdata2)) 
-            fdata2 <- as.matrix(t(fdata2))
+            fdata2 <- data.matrix(t(fdata2))
         DATA1 <- fdata1
         DATA2 <- fdata2
         range.t <- c(1, ncol(DATA1))

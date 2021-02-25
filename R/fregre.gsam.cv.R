@@ -124,6 +124,7 @@ fregre.gsam.cv<-function(data, y, x, family = gaussian()
        #as.formula(form.ini,fpredictors.nl)
        par.model$formula<-form.nl #as.formula(form.nl)
        par.model$data<-xdata
+       par.model$family<- family
        res[[k]]<-do.call(nam.model,par.model)             
        
        aic[k] <- res[[k]]$gcv.ubre
@@ -198,8 +199,8 @@ fregre.gsam.cv<-function(data, y, x, family = gaussian()
  return(z)
 }
 ###################################################
-#sp<-fda.usc:::sp
-#pvalue.anova<-fda.usc:::pvalue.anova
+#sp<-fda.usc.devel:::sp
+#pvalue.anova<-fda.usc.devel:::pvalue.anova
  # res.gsam.cv<-fregre.gsam.cv(la,resp,alpha=0.05,
  #                             type.basis="basis",
  #                             criterio="sp",ncomp=5)

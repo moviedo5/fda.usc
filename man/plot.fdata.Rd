@@ -117,6 +117,6 @@ See Also as \code{\link{fdata}}
 }
 \author{
 Manuel Febrero Bande and Manuel Oviedo de la Fuente
-<manuel.oviedo@usc.es>
+<manuel.oviedo@udc.es>
 }
 \keyword{hplot}

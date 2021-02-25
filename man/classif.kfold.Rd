@@ -129,6 +129,6 @@ output$params.error
  
 }
 \author{
-Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}
+Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 }
 \keyword{classif}

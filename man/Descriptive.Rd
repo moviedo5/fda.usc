@@ -172,6 +172,6 @@ fda.usc.} Journal of Statistical Software, 51(4), 1-28.
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{descriptive}

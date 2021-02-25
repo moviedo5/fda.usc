@@ -338,8 +338,8 @@ ldata.cen<- function (x, meanX = mean.ldata(x))
   lenl <- length(x)
 
   if (sum(ifac)>0){
-  x$df[,nam_df[ifac]] <- sweep(as.matrix(x$df[,nam_df[ifac],drop=F]),
-                    2, as.matrix(meanX$df[,nam_df[ifac],drop=F]), FUN = "-")
+  x$df[,nam_df[ifac]] <- sweep(data.matrix(x$df[,nam_df[ifac],drop=F]),
+                    2, data.matrix(meanX$df[,nam_df[ifac],drop=F]), FUN = "-")
   }
   if (sum(aux1)==1)    {nam<- nam[-idf]}
   for (i in 1:length(nam)){

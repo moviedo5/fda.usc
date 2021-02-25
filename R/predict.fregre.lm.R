@@ -64,7 +64,7 @@
 #' \item {df}{ degrees of freedom for residual.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' 
 #' @seealso See Also as: \code{\link{fregre.lm}}, \code{\link{fregre.plm}},
 #' \code{\link{fregre.glm}}, \code{\link{fregre.gsam}} and
@@ -182,7 +182,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
     }
     if (length(vnf) > 0) {
       spm <- matrix(object$coefficients[names(XX)], ncol = 1)
-      yp <- as.matrix(XX) %*% spm
+      yp <- data.matrix(XX) %*% spm
     }
     else yp <- object$coefficients[1] * rep(1, len = nrow(newx[[vfunc[1]]]))
     if (length(vfunc) > 0) {
@@ -301,7 +301,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
           yp <- yp + b1
         }
       }
-      XX2 <- as.matrix(cbind(rep(1, len = nn), XX))
+      XX2 <- data.matrix(cbind(rep(1, len = nn), XX))
       predictor <- drop(yp)
       if (se.fit || interval != "none") {
         ip <- rowSums((XX2 %*% object$Vp * XX2))

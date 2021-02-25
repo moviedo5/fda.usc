@@ -68,6 +68,6 @@ See also \code{\link{classif.np}} \code{\link{classif.glm}},
 \code{\link{classif.gsam}} and \code{\link{classif.gkam}} .
 }
 \author{
-Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}
+Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 }
 \keyword{classif}

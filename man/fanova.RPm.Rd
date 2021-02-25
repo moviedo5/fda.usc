@@ -164,6 +164,6 @@ See Also as: \code{\link{fanova.onefactor}}
 }
 \author{
 Juan A. Cuesta-Albertos, Manuel Febrero-Bande, Manuel Oviedo de la
-Fuente\cr \email{manuel.oviedo@usc.es}
+Fuente\cr \email{manuel.oviedo@udc.es}
 }
 \keyword{anova}

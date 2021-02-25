@@ -66,6 +66,6 @@ See Also as: \code{\link{cond.F}}, \code{\link{cond.quantile}} and
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{distribution}

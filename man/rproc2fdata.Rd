@@ -89,6 +89,6 @@ plot(rproc2fdata(200,t=tt,sigma="wiener"))
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{datagen}

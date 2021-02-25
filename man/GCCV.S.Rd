@@ -104,6 +104,6 @@ See Also as \code{\link{optim.np}}. \cr Alternative method
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{utilities}

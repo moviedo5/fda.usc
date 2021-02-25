@@ -5,7 +5,7 @@ wlda2<-function (x, grouping, weights = rep(1, nrow(x)),
 {
   if (is.null(dim(x))) 
     stop("'x' is not a matrix")
-  x <- as.matrix(x)
+  x <- data.matrix(x)
   if (any(!is.finite(x))) 
     stop("infinite, NA or NaN values in 'x'")
   n <- nrow(x)
@@ -79,11 +79,11 @@ train <- sample(nrow(PimaIndiansDiabetes), 500)
 ws <- as.numeric(1/table(PimaIndiansDiabetes$diabetes)
                  [PimaIndiansDiabetes$diabetes])
 sum(ws[train])
-fit <- locClass:::wlda.default(as.matrix(PimaIndiansDiabetes[train,-9]),
+fit <- locClass:::wlda.default(data.matrix(PimaIndiansDiabetes[train,-9]),
                                PimaIndiansDiabetes[train,"diabetes"],
             , weights = ws[train])
 
-fit2 <- wlda2(as.matrix(PimaIndiansDiabetes[train,-9]),
+fit2 <- wlda2(data.matrix(PimaIndiansDiabetes[train,-9]),
               PimaIndiansDiabetes[train,"diabetes"],
               , weights = rev(ws[train]))
 pred <- predict(fit, newdata = PimaIndiansDiabetes[-train,-9])

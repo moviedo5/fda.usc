@@ -44,29 +44,29 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Return:\cr 
 #' \itemize{
-#' \item {call}{ The matched call.} 
-#' \item {coefficients}{ A named vector of coefficients} 
-#' \item {residuals}{ \code{y} minus \code{fitted values}.} 
-#' \item {fitted.values}{ Estimated scalar response.} 
-#' \item {beta.est}{ beta parameter estimated of class \code{fd}} 
-#' \item {weights}{(only for weighted fits) the specified weights.}
-#' \item {df}{ The residual degrees of freedom.} 
-#' \item {r2}{ Coefficient of determination.} 
-#' \item {sr2}{ Residual variance.} 
-#' \item {H}{ Hat matrix.} 
-#' \item {y}{ Scalar response.}
-#' \item {fdataobj}{ Functional explanatory data of class \code{fdata}.}
-#' \item {x.fd}{ Centered functional explanatory data of class \code{fd}.}
-#' \item {lambda.opt}{ \code{lambda} value that minimizes CV or GCV method.}
-#' \item {gcv.opt}{ Minimum value of CV or GCV method.} 
-#' \item {basis.x.opt}{ Basis used for functional explanatory data estimation \code{fdata}.}
-#' \item {basis.b.opt}{ Basis used for for functional \code{beta} parameter
+#' \item {call:}{ The matched call.} 
+#' \item {coefficients:}{ A named vector of coefficients} 
+#' \item {residuals:}{ \code{y} minus \code{fitted values}.} 
+#' \item {fitted.values:}{ Estimated scalar response.} 
+#' \item {beta.est:}{ beta parameter estimated of class \code{fd}} 
+#' \item {weights:}{(only for weighted fits) the specified weights.}
+#' \item {df.residual:}{ The residual degrees of freedom.} 
+#' \item {r2:}{ Coefficient of determination.} 
+#' \item {sr2:}{ Residual variance.} 
+#' \item {H:}{ Hat matrix.} 
+#' \item {y:}{ Scalar response.}
+#' \item {fdataobj:}{ Functional explanatory data of class \code{fdata}.}
+#' \item {x.fd:}{ Centered functional explanatory data of class \code{fd}.}
+#' \item {lambda.opt:}{ \code{lambda} value that minimizes CV or GCV method.}
+#' \item {gcv.opt:}{ Minimum value of CV or GCV method.} 
+#' \item {basis.x.opt:}{ Basis used for functional explanatory data estimation \code{fdata}.}
+#' \item {basis.b.opt:}{ Basis used for for functional \code{beta} parameter
 #' estimation.} 
 #' \item {a.est}{ Intercept parameter estimated} 
 #' \item {lm}{ Return \code{lm} object.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{fregre.basis}},
 #' \code{\link{summary.fregre.fd}} and \code{\link{predict.fregre.fd}} .\cr
 #' Alternative method: \code{\link{fregre.pc.cv}} and
@@ -314,7 +314,7 @@ fregre.basis.cv <- function(fdataobj,y,basis.x=NULL,basis.b=NULL,
   #if (lenlambda==1)  gcv<-gcv[,,1]
   if (fou)  {
    nbasis12<-paste(nbasis12,nbasis2,sep="")
-   gcv<-as.matrix(apply(gcv,3,diag))
+   gcv<-data.matrix(apply(gcv,3,diag))
    rownames(gcv)<-nbasis12
    colnames(gcv)<-lambda2
       }

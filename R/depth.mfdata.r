@@ -91,7 +91,7 @@
 #' \item {dist} { Distance matrix between curves or functional data.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \code{\link{Descriptive}}.
 #' @references Cuevas, A., Febrero-Bande, M. and Fraiman, R. (2007).
 #' \emph{Robust estimation and classification for functional data via

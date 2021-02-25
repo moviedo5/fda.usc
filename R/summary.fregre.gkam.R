@@ -29,7 +29,7 @@
 #' @param times.influ Limit for detect possible infuence curves.
 #' @param \dots Further arguments passed to or from other methods.
 #' 
-#' @author Manuel Febrero-Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@@usc.es}
+#' @author Manuel Febrero-Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #' @seealso Summary function for \code{\link{fregre.gkam}}.
 #' @keywords print
 #' @examples

@@ -12,6 +12,7 @@
 #' \item \code{classif.svm},\code{classif.naiveBayes}: uses \code{svm} and  \code{naiveBayes} functions and requires \code{e1071} package.
 #' \item \code{classif.ksvm}: uses \code{weighted.ksvm } function and requires \code{personalized} package.
 #' \item \code{classif.randomForest}: uses \code{randomForest} function and requires \code{randomForest} package.
+#' \item \code{classif.cv.glmnet}: uses \code{cv.glmnet} function and requires \code{glmnet} package.
 #' }
 #' 
 #' @details 
@@ -29,7 +30,7 @@
 #' functional principal components basis (see \code{\link{create.pc.basis}} or
 #' \code{\link{pca.fd}}) the argument \code{basis.b} is ignored.
 #' 
-#' @aliases classif.rpart classif.nnet classif.randomForest 
+#' @aliases classif.rpart classif.nnet classif.randomForest classif.cv.glmnet
 #' classif.svm classif.ksvm classif.naiveBayes classif.lda classif.qda classif.multinom
 #' @param formula an object of class \code{formula} (or one that can be coerced
 #' to that class): a symbolic description of the model to be fitted. The
@@ -83,8 +84,9 @@
 #' mtest<-phoneme[["test"]]
 #' gtest<-phoneme[["classtest"]]
 #' dataf<-data.frame(glearn)
-#' dat=list("df"=dataf,"x"=mlearn)
+#' dat=ldata("df"=dataf,"x"=mlearn)
 #' a1<-classif.rpart(glearn~x,data=dat)
+#' a1<-classif.nnet(glearn~x,data=dat)
 #' summary(a1)
 #' newdat<-list("x"=mtest)
 #' p1<-predict(a1,newdat,type="class")
@@ -137,7 +139,7 @@ classif.nnet=function(formula, data, basis.x=NULL
   group <- y <- data$df[[response]]
   
   # 2019/04/24
-  out.func <- fdata2model(vfunc,vnf,response, data, basis.x,pf,tf)  
+  out.func <- fdata2model(vfunc,vnf,response, data, basis.x = basis.x ,pf = pf ,tf = tf)  
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
@@ -273,7 +275,7 @@ classif.multinom=function(formula, data, basis.x=NULL
   group <- y <- data$df[[response]]
   
   # 2019/04/24
-  out.func <- fdata2model(vfunc,vnf,response, data, basis.x,pf,tf)  
+  out.func <- fdata2model(vfunc,vnf,response, data, basis.x = basis.x ,pf = pf ,tf = tf)  
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
@@ -381,7 +383,7 @@ classif.rpart=function(formula, data, basis.x=NULL ,weights="equal",type="1vsall
   lev <- levels(y)
   prob2<-prob1 <- ny <- length(lev)
   # 2019/04/24
-  out.func <- fdata2model(vfunc,vnf,response, data, basis.x,pf,tf)  
+  out.func <- fdata2model(vfunc,vnf,response, data, basis.x = basis.x ,pf = pf ,tf = tf)  
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
@@ -502,7 +504,7 @@ classif.svm=function(formula, data, basis.x=NULL
   lev <- levels(y)
   ny <- nlevels(y)
   # 2019/04/24
-  out.func <- fdata2model(vfunc,vnf,response, data, basis.x,pf,tf)  
+  out.func <- fdata2model(vfunc,vnf,response, data, basis.x = basis.x ,pf = pf ,tf = tf)  
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
@@ -671,7 +673,7 @@ classif.ksvm=function(formula, data, basis.x=NULL ,weights = "equal",...){
   if (!is.factor(y)) y <-factor(y)
   lev <- levels(y)
   # 2019/04/24
-  out.func <- fdata2model(vfunc,vnf,response, data, basis.x,pf,tf)  
+  out.func <- fdata2model(vfunc,vnf,response, data, basis.x = basis.x ,pf = pf ,tf = tf)  
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
@@ -703,7 +705,7 @@ classif.ksvm=function(formula, data, basis.x=NULL ,weights = "equal",...){
     #out2glm <- classif2groups(a,y,prob,lev)
     par.method<-c(list(y=y,x=XX[,-1],weights=weights),par.method)
     z=do.call("weighted.ksvm",par.method)
-    pr <- predict(z, newx = as.matrix(XX[,-1]))
+    pr <- predict(z, newx = data.matrix(XX[,-1]))
     out$group.est = factor(pr,labels=lev)
     out$fit <- list(z)
   }   else {
@@ -727,7 +729,7 @@ classif.ksvm=function(formula, data, basis.x=NULL ,weights = "equal",...){
       par.method$x=XX[i2a2,-1]
       par.method$weights=weights[i2a2]
       a[[ivot]]<-do.call("weighted.ksvm",par.method)
-      a[[ivot]]$group.est <- predict(a[[ivot]], newx = as.matrix(XX[i2a2,-1]))
+      a[[ivot]]$group.est <- predict(a[[ivot]], newx = data.matrix(XX[i2a2,-1]))
       #  suppressWarnings(fregre.glm(formula,data=newdata,family=family, weights =  weights
       #                                       ,basis.x=basis.x,basis.b=basis.b,CV=CV,subset = i2a2,...))
       
@@ -820,7 +822,7 @@ classif.randomForest=function(formula, data, basis.x=NULL,
   prob2<-prob1 <- ny <- nlevels(y)
   
   # 2019/04/24
-  out.func <- fdata2model(vfunc,vnf,response, data, basis.x,pf,tf)  
+  out.func <- fdata2model(vfunc,vnf,response, data, basis.x = basis.x ,pf = pf ,tf = tf)  
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
@@ -957,7 +959,7 @@ classif.lda=function(formula, data, basis.x=NULL
   lev <- levels(y)
   prob2<-prob1 <- ny <- nlevels(y)
   # 2019/04/24
-  out.func <- fdata2model(vfunc,vnf,response, data, basis.x,pf,tf)  
+  out.func <- fdata2model(vfunc,vnf,response, data, basis.x = basis.x ,pf = pf ,tf = tf)  
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
@@ -1112,7 +1114,7 @@ classif.qda=function(formula, data, basis.x=NULL
   lev <- levels(y)
   prob2<-prob1 <- ny <- nlevels(y)
   # 2019/04/24
-  out.func <- fdata2model(vfunc,vnf,response, data, basis.x,pf,tf)  
+  out.func <- fdata2model(vfunc,vnf,response, data, basis.x = basis.x ,pf = pf ,tf = tf)  
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
@@ -1265,7 +1267,7 @@ classif.naiveBayes=function(formula, data, basis.x=NULL, laplace = 0,...)
   group <- y <- data$df[[response]]
   lev <- levels(y)
   # 2019/04/24
-  out.func <- fdata2model(vfunc,vnf,response, data, basis.x,pf,tf)  
+  out.func <- fdata2model(vfunc,vnf,response, data, basis.x = basis.x ,pf = pf ,tf = tf)  
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
@@ -1339,4 +1341,137 @@ classif.naiveBayes=function(formula, data, basis.x=NULL, laplace = 0,...)
   #class(out)<-c("classif",class(z))
   class(out) <- "classif"
   out
+}
+
+
+
+# library(glmnet)
+# NFOLDS = 4;
+# res.glmnet = cv.glmnet( x= data.matrix(train[,-101]), y = as.factor(train[,101]),
+#                         family = 'multinomial',
+#                         alpha = 1,
+#                         #                        grouped = TRUE,
+#                         type.measure = "class",
+#                         nfolds = NFOLDS,
+#                         thresh = 1e-3,
+#                         maxit = 1e3)   
+#' @export classif.cv.glmnet
+classif.cv.glmnet=function(formula, data, basis.x=NULL 
+                      ,weights = "equal"
+                      # subset, na.action =na.omit, scale = TRUE
+                      ,...) 
+{
+  # data <- dat
+  # formula <- formula(glearn~x)
+  # basis.x=NULL 
+  
+  rqr <- "glmnet"
+  if (!(rqr %in% rownames(installed.packages()))) {
+    stop("Please install package 'glmnet'") }
+  
+  #require(eval(rqr)[1], quietly = TRUE, warn.conflicts = FALSE)
+  suppressWarnings(rqr2<-require(eval(rqr), 
+                                 character.only = TRUE,quietly = TRUE, 
+                                 warn.conflicts = FALSE))
+  if (!rqr2) 
+    stop("Please, load the namespace of the package for  method")
+  
+  prob=0.5
+  C <- match.call()  
+  mf <- match.call(expand.dots = FALSE)
+  m <- match(c("formula","data","basis.x","weights","size"), names(mf), 0L)
+  mf <- mf[c(1L, m)]
+  mf$drop.unused.levels <- TRUE
+ 
+  tf <- terms.formula(formula)
+  terms <- attr(tf, "term.labels")
+  nt <- length(terms)
+  if (attr(tf, "response") > 0) {
+    response <- as.character(attr(tf, "variables")[2])
+    pf <- rf <- paste(response, "~", sep = "")
+  } else pf <- rf <- "~"
+  vtab<-rownames(attr(tf,"factors"))
+  vnf=intersect(terms,names(data$df))
+  # vnf2=intersect(vtab[-1],names(data$df)[-1])
+  vfunc2=setdiff(terms,vnf)
+  vint=setdiff(terms,vtab)
+  vfunc=setdiff(vfunc2,vint)
+  off<-attr(tf,"offset")
+  name.coef=nam=beta.l=list()
+  group <- y <- data$df[[response]]
+  
+  # 2019/04/24
+  out.func <- fdata2model(vfunc,vnf,response, data, basis.x = basis.x ,pf = pf ,tf = tf)  
+  pf <- out.func$pf          
+  basis.x <- out.func$basis.x
+  XX <- out.func$XX
+  vs.list <- out.func$vs.list
+  mean.list=out.func$mean.list
+  rm(out.func)
+  n <- ndatos <-NROW(XX)
+  
+  # if (!is.numeric(weights))      stop("'weights' must be a numeric vector")
+  if (is.character(weights)) {
+    weights<-weights4class(y,type=weights)
+  } else {
+    if (length(weights)!=n) 
+      stop("length weights != length response")
+  }
+  if (any(weights < 0)) 
+    stop("negative weights not allowed")
+  
+  #  if (length(method)>1) method=method[1]
+  #  if (missing(par.method))      par.method=list()
+  #  par.method<-c(list(formula=pf, data=XX),par.method)
+  #  if (length(vfunc)==0 & length(vnf)==0)      {
+  #   par.method$pf<-as.formula(paste(pf,1,sep=""))
+  #   z=do.call(method,par.method)
+  #   class(z)<-c(class(z),"classif")
+  #   z$formula.ini=pf
+  #   z$XX=XX
+  #   z$data<-data
+  #   return(z)
+  # }  
+  
+  #   par.method$size <- 4
+  #   par.method$trace<- FALSE  }
+  #par.method=list()
+  #par.method<-c(list(formula=pf, data=XX),par.method)
+  #par.method$weights= wt
+  par.method <- as.list(substitute(list(...)))[-1L]
+
+  #par.method<-c(list(x=XX, y=y, family = "multinomial",weights=weights),par.method)
+  par.method<-c(list(x=data.matrix(XX[,-1]), y = y, family = "multinomial",weights=weights),par.method)
+  z=do.call("cv.glmnet",par.method)
+  out<-list()
+  out$formula.ini=formula
+  out$data=data
+  out$XX=XX
+  out$C <- C[1:2]
+  out$prob <- prob
+  out$group <- group
+  out$group.est <- predict(object = z, par.method$x,type = "class")
+  out$group.est <- factor(out$group.est ,levels=levels(group))
+  out$max.prob <- mean(group==out$group.est) 
+  out$fit <- z
+  out$basis.x=basis.x
+  out$mean=mean.list
+  out$formula=pf
+  out$vs.list=vs.list
+  out$weights = weights
+  tab <- table(out$group.est,group)
+  ny <- levels(y)
+  prob2<-prob1 <- ngroup <- nlevels(y)
+  prob.group <- array(NA, dim = c(ndatos, ngroup))
+  prob.group <- prob.group/apply(prob.group, 1, sum)
+  for (i in 1:ngroup) {
+    prob1[i] = tab[i, i]/sum(tab[, i])
+  }
+  names(prob1) <- z$levels
+  colnames(prob.group) <- z$levels
+  out$prob.classification <- prob1
+  out$fit$call<-  out$fit$call[1]
+  #class(out)<-c("classif",class(z))
+  class(out) <- "classif"
+  return(out)
 }

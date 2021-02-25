@@ -85,17 +85,17 @@ used to extract some of its components.\cr
 Beside, the class(z) is "gls", "lm" and "fregre.lm" with the following
 objects: 
 \itemize{
-\item \code{sr2}{ Residual variance.} 
-\item \code{Vp}{ Estimated covariance matrix for the parameters.} 
-\item \code{lambda}{ A roughness penalty.}
-\item \code{basis.x}{ Basis used for \code{fdata} or \code{fd} covariates.}
-\item \code{basis.b}{ Basis used for beta parameter estimation.} 
-\item \code{beta.l}{ List of estimated beta parameter of functional covariates.} 
-\item \code{data}{ List that containing the variables in the model.} 
-\item \code{formula}{ formula used in ajusted model.} 
-\item \code{formula.ini}{ formula in call.}
-\item \code{W}{ inverse of covariance matrix} 
-\item \code{correlation}{ See glsObject for the components of the fit. }
+\item \code{sr2:}{ Residual variance.} 
+\item \code{Vp:}{ Estimated covariance matrix for the parameters.} 
+\item \code{lambda:}{ A roughness penalty.}
+\item \code{basis.x:}{ Basis used for \code{fdata} or \code{fd} covariates.}
+\item \code{basis.b:}{ Basis used for beta parameter estimation.} 
+\item \code{beta.l:}{ List of estimated beta parameter of functional covariates.} 
+\item \code{data:}{ List that containing the variables in the model.} 
+\item \code{formula:}{ formula used in ajusted model.} 
+\item \code{formula.ini:}{ formula in call.}
+\item \code{W:}{ inverse of covariance matrix} 
+\item \code{correlation:}{ See glsObject for the components of the fit. }
 }
 }
 \description{
@@ -127,9 +127,9 @@ summary(res.gls)
 }
 \references{
 Oviedo de la Fuente, M., Febrero-Bande, M., Pilar Munoz, and
-Dominguez, A. Predicting seasonal influenza transmission using Functional
-Regression Models with Temporal Dependence. arXiv:1610.08718.
-\url{https://arxiv.org/abs/1610.08718}
+Dominguez, A.  (2018). Predicting seasonal influenza transmission using 
+functional regression models with temporal dependence. PloS one, 13(4), e0194250.
+\url{https://doi.org/10.1371/journal.pone.0194250}
 }
 \keyword{models}
 \keyword{regression}

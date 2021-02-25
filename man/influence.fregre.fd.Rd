@@ -63,6 +63,6 @@ See Also as:  \code{\link{fregre.pc}}, \code{\link{fregre.basis}},
  \code{\link{influence_quan}}
 }
 \author{
-Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}
+Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 }
 \keyword{outliers}

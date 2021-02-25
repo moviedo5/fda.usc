@@ -188,6 +188,6 @@ See Also as: \code{\link{lm}}, \code{\link{gam}},
 \code{\link{dcor.xy}}.
 }
 \author{
-Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}
+Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 }
 \keyword{regression}

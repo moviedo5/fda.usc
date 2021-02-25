@@ -4,8 +4,9 @@
 #' nonparametric kernel estimation.
 #' 
 #' @param fdataobj \code{\link{fdata}} class object.
-#' @param prob Range of probabilities for the quantiles of the distance matrix.
-#' @param len Vector length of smoothing parameter \code{h} to return.
+#' @param prob Vector of probabilities for extracting the quantiles of the distance matrix. If \code{length(prob)=2} 
+#' a sequence between \code{prob[1]} and \code{prob[2]} of length \code{len}.
+#' @param len Vector length of smoothing parameter \code{h} to return only used when \code{length(prob)=2}.
 #' @param metric If is a function: name of the function to calculate the
 #' distance matrix between the curves, by default \code{\link{metric.lp}}.  If
 #' is a matrix: distance matrix between the curves.
@@ -14,10 +15,12 @@
 #' @param type.S Type of smothing matrix \code{S}.  Possible values are:
 #' Nadaraya-Watson estimator \emph{"S.NW"} and K nearest neighbors estimator
 #' \emph{"S.KNN"}
+#' @param Ker Kernel function. By default, \emph{Ker.norm}. Useful for scaling the bandwidth values
+#' according to Kernel
 #' @param \dots Arguments to be passed for metric argument.
 #' @return Returns the vector of smoothing parameter or bandwidth \code{h}.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \code{\link{metric.lp}}, \code{\link{Kernel}} and
 #' \code{\link{S.NW}}. \cr Function used in \code{\link{fregre.np}} and
 #' \code{\link{fregre.np.cv}} function.
@@ -35,7 +38,7 @@
 #' }
 #' @export
 h.default=function (fdataobj, prob=c(0.025,0.25),len=51,
-                    metric = metric.lp,type.S ="S.NW",...)
+                    metric = metric.lp,type.S ="S.NW",Ker=Ker.norm,...)
 {
     #type.S<-deparse(substitute(type.S))
  # print(type.S)
@@ -48,32 +51,24 @@ h.default=function (fdataobj, prob=c(0.025,0.25),len=51,
     
     if (!is.fdata(fdataobj))   fdataobj = fdata(fdataobj)
     n=nrow(fdataobj)
-  #  if (is.function(Ker))    if (body(Ker)==body(AKer.norm))  Ker= "AKer.norm"
-  # S.LLR<-function (tt, h, Ker = Ker.norm,w=NULL,cv=FALSE)
-  # S.LPR<-function (tt, h, p=1, Ker = Ker.norm, w = NULL, cv = FALSE) 
-  # S.LCR<-function(tt, h, Ker=Ker.norm, w=NULL, cv=FALSE
-  # S.NW<-function (tt, h=NULL, Ker = Ker.norm,w=NULL,cv=FALSE)
-  # S.KNN<-function(tt,h=NULL,Ker=Ker.unif,w=NULL,cv=FALSE)
-      
+    ck=integrate(function(u){Ker(u)^2},-4,4)$value
+    dk=integrate(function(u){u^2*Ker(u)},-4,4)$value
+    c0=(ck/dk^2)^(1/5)/1.3510   #1.3510 from unif      
       if (type.S %in% c("S.NW","S.LLR","S.LPR","S.LCR")) {
         if (is.matrix(metric)) {mdist=metric}
         else {mdist=metric(fdataobj,fdataobj,...)}
         diag(mdist) = Inf
-        #h0 <- apply(mdist, 1, min, na.rm = TRUE)
-        #h.max = max(h0)
-        #h.med = median(h0)
         class(mdist)<-"matrix"
-        q.min = quantile(mdist, probs = prob[1], na.rm = TRUE,type=4)
-        q.max = quantile(mdist, probs = prob[2], na.rm = TRUE,type=4)
-        #h.min = max(c(drop(q.min),h.max))#h.med
-        #h.max = max(c(drop(q.max), h.max))
-        #if (Ker== "AKer.norm" ) {
-        #        h.max = min(q.max, h.max)
-        #        h.min = min(q.min, h.med)
-        #}
+		  if (length(prob)>2) {
+		  qua=quantile(mdist,probs=prob,na.rm=TRUE,type=4)
+		  h=sort(unique(qua))*c0
+			} else {
+        q.min = quantile(mdist, probs = min(prob), na.rm = TRUE,type=4)
+        q.max = quantile(mdist, probs = max(prob), na.rm = TRUE,type=4)
         h.min = q.min
         h.max = max(h.min,q.max)
-        h = unique(seq(h.min, h.max, len = len))
+        h = unique(seq(h.min, h.max, len = len))*c0
+		  }
         #h<-h+h*0.0001
         #if (any(h==0)) h<-h[(which(h==0)+1):len]
         h <- h[h>0]
@@ -81,8 +76,8 @@ h.default=function (fdataobj, prob=c(0.025,0.25),len=51,
         else if (type.S=="S.KNN") {
          # print("S.knnn")
            if (len>n) {len=n-2;print("len=nrow-2")}
-           h.min = min(1,max(1,floor(prob[1]*n)))
-           h.max = max(h.min,floor(prob[2]*n))
+           h.min = min(1,max(1,floor(min(prob)*n)))
+           h.max = max(h.min,floor(max(prob)*n))
            if (len==1)           h = h.max
            else  h = seq_len(h.max)# h.min:h.max
          # print(h)

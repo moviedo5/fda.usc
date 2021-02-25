@@ -23,17 +23,17 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return \code{fdata2pls} function return: 
 #' \itemize{
-#' \item {df}{ degree of freedom}
-#' \item {rotation}{ \code{\link{fdata}} class object.} 
-#' \item {x}{ Is true the value of the rotated data (the centred data multiplied by the rotation matrix) is returned.}
-#' \item {fdataobj.cen}{ The centered \code{fdataobj} object.} 
-#' \item {mean}{ mean of \code{fdataobj}.} 
-#' \item {l}{Vector of index of principal components.} 
-#' \item {C}{ The matched call.}
-#' \item {lambda}{ Amount of penalization.} 
-#' \item {P}{ Penalty matrix.}
+#' \item {df,}{ degree of freedom}
+#' \item {rotation,}{ \code{\link{fdata}} class object.} 
+#' \item {x,}{ Is true the value of the rotated data (the centred data multiplied by the rotation matrix) is returned.}
+#' \item {fdataobj.cen,}{ The centered \code{fdataobj} object.} 
+#' \item {mean,}{ mean of \code{fdataobj}.} 
+#' \item {l,}{ vector of index of principal components.} 
+#' \item {C,}{ the matched call.}
+#' \item {lambda,}{ amount of penalization.} 
+#' \item {P,}{ penalty matrix.}
 #' }
-#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@@usc.es}
+#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@@udc.es}
 #' @seealso  Used in:
 #' \code{\link{fregre.pls}}, \code{\link{fregre.pls.cv}}.
 #' Alternative method: \code{\link{fdata2pc}}.
@@ -217,7 +217,7 @@ fdata2pls<-function(fdataobj,y,ncomp = 2,lambda=0,P=c(0,0,1),norm=TRUE,...) {
 #' \item {P}{ Penalty matrix.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \link[base]{svd} and \link[stats]{varimax}.
 #' @references Venables, W. N. and B. D. Ripley (2002). \emph{Modern Applied
 #' Statistics with S}. Springer-Verlag.

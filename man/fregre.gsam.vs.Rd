@@ -142,6 +142,6 @@ Alternative methods: \code{\link{fregre.glm}}, \code{\link{fregre.gsam}}
 }
 \author{
 Manuel Feb-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{regression}

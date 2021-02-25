@@ -18,7 +18,7 @@
 #' function.
 #' @param \dots Further arguments passed to \code{\link{dist}} function.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See also \code{\link{dist}} for multivariate date case and
 #' \code{\link{metric.lp} for functional data case}
 #' @keywords cluster
@@ -31,7 +31,7 @@
 #' @export
 metric.dist <- function(x,y=NULL,method="euclidean",p=2,dscale=1,...){
 if (is.vector(x)) x<-matrix(x,nrow=1)
-else x<-as.matrix(x)
+else x<-data.matrix(x)
 ynull<-is.null(y)
 if (method=="mahalanobis"){
     if (ynull)   {
@@ -39,7 +39,7 @@ if (method=="mahalanobis"){
         vc <- var(x)
         }
     else {
-    y <- as.matrix(y)
+    y <- data.matrix(y)
     vc <- var(rbind(x, y))
     }
     n <- nrow(x)

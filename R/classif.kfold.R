@@ -372,7 +372,7 @@ all.vars1 <- function (form)
 #' }
 #' 
 #' @author
-#'   Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@@usc.es}
+#'   Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #'   
 #' @keywords  classif
 #'   

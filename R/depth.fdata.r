@@ -110,7 +110,7 @@
 #' \item {dist}{ Distance matrix between curves or functional data.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \code{\link{Descriptive}}.
 #' @references Cuevas, A., Febrero-Bande, M., Fraiman, R. (2007). Robust
 #' estimation and classification for functional data via projection-based depth
@@ -903,7 +903,7 @@ depth.MB<-function (fdataobj, fdataori = NULL,trim=0.25, scale=FALSE,
   x<-fdataobj$data
   n <- nrow(x)
   d <- ncol(x)
-  x <- as.matrix(x)
+  x <- data.matrix(x)
   tt<-fdataobj$argvals
   rtt<-diff(fdataobj$rangeval)
   dtt<-diff(tt/rtt)
@@ -1030,7 +1030,7 @@ depth.MB<-function (fdataobj, fdataori = NULL,trim=0.25, scale=FALSE,
   else {
     if (!is.fdata(fdataori)) fdataori=fdata(fdataori)
     xRef<-fdataori$data
-    xRef <- as.matrix(xRef)
+    xRef <- data.matrix(xRef)
     if (ncol(xRef) != d) {
       stop("Dimensions of x and xRef do not match")
     }

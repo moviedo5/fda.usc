@@ -86,6 +86,6 @@ See Also as: \code{\link{cond.F}} and \code{\link{cond.mode}}.
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{distribution}

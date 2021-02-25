@@ -44,7 +44,7 @@
 #' and input parameters is printed. Default is \code{FALSE}.}
 #'  }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \code{\link{S.basis}}. \cr Alternative method:
 #' \code{\link{optim.np}}
 #' @references Ramsay, James O., and Silverman, Bernard W. (2006), \emph{

@@ -17,7 +17,7 @@
 #' \item \code{prob.group} the matrix of predicted probability by factor level. 
 #' }
 #' 
-#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@@usc.es}
+#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #' 
 #' @seealso See also \code{\link{classif.np}} \code{\link{classif.glm}},
 #' \code{\link{classif.gsam}} and \code{\link{classif.gkam}} .
@@ -240,7 +240,7 @@ pred2lda <- function(object, new.fdataobj = NULL,  ...) {
   nn <- nrow(new.fdataobj)
   prob.group <- array(NA, dim = c(nn, ngroup))
   colnames(prob.group) <- lev								  
-  #new.fdataobj <- as.matrix(new.fdataobj)
+  #new.fdataobj <- data.matrix(new.fdataobj)
   if (ngroup == 2 | object$type != "majority") {
     #print("2 grupos o 1vsAll")
     #print(class(object$fit[[1]]))
@@ -275,7 +275,7 @@ pred2ksvm <- function(object, new.fdataobj = NULL,  ...) {
   nn <- nrow(new.fdataobj)
   prob.group <- array(NA, dim = c(nn, ngroup))
   colnames(prob.group) <- lev								  
-  new.fdataobj <- as.matrix(new.fdataobj)
+  new.fdataobj <- data.matrix(new.fdataobj)
   if (ngroup == 2) {
     #yest <- predict(object$fit[[1]], newx = new.fdataobj,...)
     #yest <- ifelse(probs > object$prob, lev[2], lev[1])
@@ -386,7 +386,7 @@ pred2np <- function(object, new.fdataobj = NULL, ...) {
     tt <- new.fdataobj[["argvals"]]
     rtt <- new.fdataobj[["rangeval"]]
   }
-  else newx <- as.matrix(new.fdataobj)
+  else newx <- data.matrix(new.fdataobj)
   nn <- nrow(new.fdataobj)
   x = object$fdataobj
   y = object$y

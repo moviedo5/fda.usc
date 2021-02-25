@@ -27,15 +27,15 @@ acceleration.  If P is a matrix: the penalty matrix object.}
 \value{
 \code{fdata2pls} function return: 
 \itemize{
-\item {df}{ degree of freedom}
-\item {rotation}{ \code{\link{fdata}} class object.} 
-\item {x}{ Is true the value of the rotated data (the centred data multiplied by the rotation matrix) is returned.}
-\item {fdataobj.cen}{ The centered \code{fdataobj} object.} 
-\item {mean}{ mean of \code{fdataobj}.} 
-\item {l}{Vector of index of principal components.} 
-\item {C}{ The matched call.}
-\item {lambda}{ Amount of penalization.} 
-\item {P}{ Penalty matrix.}
+\item {df,}{ degree of freedom}
+\item {rotation,}{ \code{\link{fdata}} class object.} 
+\item {x,}{ Is true the value of the rotated data (the centred data multiplied by the rotation matrix) is returned.}
+\item {fdataobj.cen,}{ The centered \code{fdataobj} object.} 
+\item {mean,}{ mean of \code{fdataobj}.} 
+\item {l,}{ vector of index of principal components.} 
+\item {C,}{ the matched call.}
+\item {lambda,}{ amount of penalization.} 
+\item {P,}{ penalty matrix.}
 }
 }
 \description{
@@ -81,6 +81,6 @@ Used in:
 Alternative method: \code{\link{fdata2pc}}.
 }
 \author{
-Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@usc.es}
+Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@udc.es}
 }
 \keyword{multivariate}

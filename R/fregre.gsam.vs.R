@@ -16,7 +16,7 @@
 #' to specify that the linear predictor depends on smooth functions of predictors using smooth 
 #' terms \code{\link{s}} and \code{\link{te}} as in  \code{\link{gam}} (or linear functionals of 
 #' these as \eqn{Z\beta} and \eqn{\big<X(t),\beta\big>}{< X(t),\beta(t) >} in \code{\link{fregre.glm}}). 
-                                                                                                
+
 #' @param data List that containing the variables in the model. 
 #' "df" element is a data.frame containing the response and scalar covariates 
 #' (numeric and factors variables are allowed). Functional covariates of class
@@ -76,7 +76,7 @@
 #'  the function compute a standard  \code{\link{gam}} procedure.
 #' 
 #' @author Manuel Feb-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' 
 #' @seealso See Also as:  \code{\link{predict.fregre.gsam}} and \code{\link{summary.gam}}.
 #' Alternative methods: \code{\link{fregre.glm}}, \code{\link{fregre.gsam}}
@@ -125,15 +125,15 @@
 #' 
 #' @export
 fregre.gsam.vs  <- function(data = list(), y, 
-                          include = "all", exclude = "none"
-                          ,family = gaussian(), weights = NULL 
-                          , basis.x = NULL 
-                          #,CV = TRUE,
-                          ,kbs , dcor.min = 0.1, alpha = 0.05
-                          , par.model, xydist, trace = FALSE
-                          #,smooth = TRUE
-                          ){
-  #0-
+                            include = "all", exclude = "none"
+                            ,family = gaussian(), weights = NULL 
+                            , basis.x = NULL 
+                            #,CV = TRUE,
+                            ,kbs , dcor.min = 0.1, alpha = 0.05
+                            , par.model, xydist, trace = FALSE
+                            #,smooth = TRUE
+){
+  #0-   print(0)  
   verbose = trace
   #criterio = "sp"
   if (missing(y)) 
@@ -166,6 +166,8 @@ fregre.gsam.vs  <- function(data = list(), y,
     #    xdatos <- as.list(data$df[,infunc,drop=F])
     #    xdatos <- c(xdatos,data[ifunc])
   } 
+  #print(1)  
+  
   # var.name <- names(x)
   # a <- sapply(x, class, USE.NAMES = T)
   # x <- x[, a != "character", drop = F]
@@ -223,7 +225,8 @@ fregre.gsam.vs  <- function(data = list(), y,
     }
   }  
   #type.basis = "pc",  ncomp,ncomp.fix = FALSE
-    
+  #  print(2)  
+  
   dcor=matrix(0,nrow= nvar,ncol= nvar)
   colnames(dcor)=c(names(ipredictors))
   rownames(dcor)=1:nvar
@@ -240,7 +243,7 @@ fregre.gsam.vs  <- function(data = list(), y,
   anyfdata <- FALSE
   res.prev <- gam(as.formula(paste0(form.nl,1)),data=data$df,family=family)
   while (!parar){
-     print("3 Seleccion variable-Regresion")
+    #print("3 Seleccion variable-Regresion")
     #      print("bucle")    
     esfactor <- FALSE #SE UTILIZA PARA NO PONER s(factor)
     #3- seleccion dcor mas elevada
@@ -248,13 +251,18 @@ fregre.gsam.vs  <- function(data = list(), y,
     ind.xentra <- which.max(dist_resp)
     xentra <- nam[ind.xentra]
     #dd <- dcor.ttest(ldist0[[resp]],ldist0[[xentra]],distance=TRUE)
-    print("peta1")
-    print(dim(ldist0[[resp]]))
-    print("peta2")
-    print(xentra)
-    print(dim(ldist0[[xentra]]))
+    # print(names(ldist0))
+    # print(n.edf)
+    # print(dim(ldist0[[resp]]))
+    # print(dim(ldist0[[xentra]]))
+    # 
+    # print(dcor[it,names(dist_resp)])
+    # print(dist_resp)
+    # print(dist_resp*(dist_resp > dcor.min))
+    # 
+    # print(xentra)
+    # print(xentran)
     dd <- dcor.test(ldist0[[resp]],ldist0[[xentra]],n=n.edf)
-    print("peta4")
     #if (trace){      print(dd);      print(xentra)    }   
     if (verbose) {
       print(it);      print(n.edf);      print(nam)
@@ -263,143 +271,158 @@ fregre.gsam.vs  <- function(data = list(), y,
     if (is.null(basisx)) {
       basisb <- basisx <- list()
     }
-    if (dd$p.value > alpha) {
+    #print(dd$p.value);    print(alpha)
+    if (dd$p.value > alpha ) {
       parar=TRUE
       if (trace) print("The algorithm ends because no variable is significant")
-    }    else{
-      rownames(dcor)[it] <- xentra
-      if (trace)      cat("Covariate: ")
-      if (trace)       print(xentra)
-      if (is.fdata(ldata0[[xentra]]) & !basis.list) {
-        par.basis.ipred <- list()
-        anyfdata <- TRUE
-        par.basis.ipred$fdataobj <- ldata0[[xentra]]
-        if (xentra %in% names(type.basis)){
-          itype <- which(xentra== names(type.basis))
-          type.basis.ipred <- type.basis[itype]
-        }    else {type.basis.ipred <- type.basis[1]}
-        tbasis <- type.basis.ipred
-        if (type.basis.ipred=="fourier") tbasis <- "basis"
-        if (type.basis.ipred=="bspline") tbasis <- "basis"
-        nam <- "fregre.gsam.cv"
-        #  par.basis.ipred <- list()
-        par.basis.ipred$y <- resp#entra la etiqueta y no toda la variable como en el basis.cv o pc.cv
-        par.basis.ipred$x <- xentra
-        par.basis.ipred$data <- data
-        if (!ncomp.fix)      {
-          print("entra gsam.CV")
-          res <-  fregre.gsam.cv(data,resp,xentra, alpha = alpha
-                               #,type.basis=type.basis, kbs = kbs
-                               ,family=family
-                               ,type.basis=tbasis, kbs = kbs
-                               ,ncomp=ncomp,ncomp.fix=ncomp.fix)  
-#print(summary(res))
-#print(res$ncomp.opt)
-
-          if (tbasis!="basis"){
-           res$basis.x[[xentra]]$basis <- res$basis.x[[xentra]]$basis[res$ncomp.opt,]
+    }  
+    else{
+      if (dd$estimate < dcor.min ) {
+        parar=TRUE
+        if (trace) print("The algorithm ends because dcor < dcor.min")
+        
+      }
+      else {
+        rownames(dcor)[it] <- xentra
+        if (trace)      cat("Covariate: ")
+        if (trace)       print(xentra)
+        if (is.fdata(ldata0[[xentra]]) & !basis.list) {
+          par.basis.ipred <- list()
+          anyfdata <- TRUE
+          par.basis.ipred$fdataobj <- ldata0[[xentra]]
+          if (xentra %in% names(type.basis)){
+            itype <- which(xentra== names(type.basis))
+            type.basis.ipred <- type.basis[itype]
+          }    else {type.basis.ipred <- type.basis[1]}
+          tbasis <- type.basis.ipred
+          if (type.basis.ipred=="fourier") tbasis <- "basis"
+          if (type.basis.ipred=="bspline") tbasis <- "basis"
+          nam <- "fregre.gsam.cv"
+          #  par.basis.ipred <- list()
+          par.basis.ipred$y <- resp#entra la etiqueta y no toda la variable como en el basis.cv o pc.cv
+          par.basis.ipred$x <- xentra
+          par.basis.ipred$data <- data
+          if (!ncomp.fix)      {
+           print("entra gsam.CV")
+            res <-  fregre.gsam.cv(data,resp,xentra, alpha = alpha
+                                   ,family=family
+                                   #,type.basis=type.basis, kbs = kbs
+                                   ,type.basis=tbasis, kbs = kbs
+                                   ,ncomp=ncomp,ncomp.fix=ncomp.fix)  
+            #print(summary(res))
+            #print(res$ncomp.opt)
+            
+            if (tbasis!="basis"){
+              res$basis.x[[xentra]]$basis <- res$basis.x[[xentra]]$basis[res$ncomp.opt,]
+            }
+            res$basis.x[[xentra]]$l <- res$ncomp.opt
+            basisx[[xentra]] <- res$basis.x[[xentra]]
+            basisb[[xentra]] <- res$basis.b[[xentra]]
+            if (trace)   print("results of internal function fregre.gsam.cv")
+            if (trace)   print(summary(res))
+            # parar=TRUE
+          }        else{
+            # print("NO entra gsam.CV")
+            switch(tbasis,
+                   "pc"={
+                     best.pc <- 1:ncomp#[xentra]
+                     basis1 <- create.pc.basis(ldata0[[xentra]],best.pc) #es lo mismo ?
+                   },
+                   "pls"={
+                     best.pc <- 1:ncomp#[xentra]
+                     basis1 <- create.pls.basis(ldata0[[xentra]],ldata0[[resp]],best.pc)
+                   },"basis"={
+                     #            best.pc <- 1:kmax
+                     basis1 <- create.bspline.basis(ldata0[[xentra]]$rangeval,nbasis=ncomp)
+                     basis2 <- basis1
+                   })
+            basisx[[xentra]] <- basis1
+            basisb[[xentra]] <- basis2
           }
-          res$basis.x[[xentra]]$l <- res$ncomp.opt
-          basisx[[xentra]] <- res$basis.x[[xentra]]
-          basisb[[xentra]] <- res$basis.b[[xentra]]
-          if (trace)   print("results of internal function fregre.gsam.cv")
-          if (trace)   print(summary(res))
-          # parar=TRUE
-        }        else{
-         # print("NO entra gsam.CV")
-          switch(tbasis,
-                 "pc"={
-                   best.pc <- 1:ncomp#[xentra]
-                   basis1 <- create.pc.basis(ldata0[[xentra]],best.pc) #es lo mismo ?
-                 },
-                 "pls"={
-                   best.pc <- 1:ncomp#[xentra]
-                   basis1 <- create.pls.basis(ldata0[[xentra]],ldata0[[resp]],best.pc)
-                 },"basis"={
-                   #            best.pc <- 1:kmax
-                   basis1 <- create.bspline.basis(ldata0[[xentra]]$rangeval,nbasis=ncomp)
-                   basis2 <- basis1
-                 })
-          basisx[[xentra]] <- basis1
-          basisb[[xentra]] <- basis2
+        }       
+        if (!parar) {
+          xentran <- c(xentran,xentra)
+          ind.xentra2 <- which(xentra==names(ldist0))
+          ldist0 <- ldist0[-ind.xentra2]
+          #ipredictors[xentra] <- ipredictors[xentra]+1
+          #4- contruccion del modelo para esta variable #consido un catalogo de 4 posibilidades (lineal/nolineal, funcional/scalar)
+          if (is.factor(ldata0[[xentra]])) esfactor=TRUE                 
+          fx=FALSE
+          if (esfactor)      {
+            fpredictors.nl <- xentra  
+          }
+          else         {   
+            fpredictors.nl <- paste("s(",xentra,",k=",kbs,",","fx=",fx,")",
+                                    sep="",collapse="+")
+          }
+          nam.model <- "fregre.gsam"          
+          form.nl <- (paste(form.nl,"+",fpredictors.nl,sep=""))  
+          par.model$formula <- as.formula(form.nl)
+          par.model$data <- data
+          par.model[["basis.x"]] <- basisx
+          par.model[["basis.b"]] <- basisb
+          par.model[["family"]] <- family
+          res.nl  <- do.call(nam.model,par.model)    
+          mejora <- res.prev$aic > res.nl$aic
+        #  print(res.nl);          print(it);          print(res.prev);          print(mejora);          print(res.prev$gcv.ubre);          print(res.nl$gcv.ubre)
+          if (it>1 & mejora){
+            aov <- anova(res.nl,res.prev,test="F")
+            mejora <- aov[["Pr(>F)"]][2] < alpha
+            if (length(mejora)==0)       mejora <- TRUE
+              #is.na(mejora)) mejora <- TRUE
+          } 
+          #cat("mejora",res.prev$gcv.ubre, res.nl$gcv.ubre,res.prev$gcv.ubre > res.nl$gcv.ubre,"\n")      
+          if (mejora){
+            suma <- summary(res.nl)          
+            dd <- res.nl$dims
+            df <- dd[["p"]]
+            edf <- dd[["N"]] - dd[["p"]]    
+            #         sr2 <- sum(res.nl$residuals^2)/edf
+            r2 <- 1 - sum(res.nl$residuals^2)/sum(ycen^2)
+            if (n.edf.correction) n.edf <-  edf
+            ldata0[[resp]] <- res.nl$residuals
+            ldist0[[resp]] <- as.matrix(dist(ldata0[[resp]]), diag =TRUE, upper = TRUE,     p = 2)
+            #2- caclulo correlacion  de cada la distancia de la respuesta vs distancia del resto de objetos
+            #print(it)
+            #print(npredictors)
+            if (it==(npredictors-1)) {
+              #print("iiiiittttttttt")          
+              parar=TRUE
+              #gof <- rbindgof,c(suma$logLik,suma$BIC,suma$AIC,edf,r2))
+              gof <- rbind(gof,c(AIC(res.nl),deviance(res.nl),res.nl$df.residual,suma$r.sq,suma$dev.expl,res.nl$gcv.ubre))
+            }        else{
+              it <- it+1
+              # print("3 calculando correlaciones")
+              dist_resp <- dcor.y(ldist0,resp)
+              # LO PONE A 0
+              dcor[it,names(dist_resp)]=dist_resp*(dist_resp > dcor.min)
+              #  print(dcor[it,names(dist_resp)])
+            }
+            #     print(summary(res.nl))
+            if (!parar){ 
+              # print("12")
+              #            gof <- rbind(gof,drop(c(suma$logLik,suma$BIC,suma$AIC,edf,r2)))
+              gof <- rbind(gof,c(AIC(res.nl),deviance(res.nl),
+                                 res.nl$df.residual,suma$r.sq,
+                                 suma$dev.expl,res.nl$gcv.ubre))
+            }
+            else { 
+              cat("The variable ",xentra,"does not improve the fit of the model\n")
+            }
+            res.prev <- res.nl
+          }   else{
+            #print("NOOOOOOO MEJORAAAAAAAA")
+            if (it==nvar) parar=TRUE
+            res.nl <- res.prev
+            # ipredictors <- ipredictors[-length(ipredictors)]
+            #      print(xentran)
+            xentran <- xentran[-length(xentran)]
+            dist_resp[xentra]<-0
+            if (all(dist_resp==0)) parar=TRUE
+          }
         }
-      }       
-      print(parar)
-      if (!parar) {
-        xentran <- c(xentran,xentra)
-        ind.xentra2 <- which(xentra==names(ldist0))
-        ldist0 <- ldist0[-ind.xentra2]
-        ipredictors[xentra] <- ipredictors[xentra]+1
-        #4- contruccion del modelo para esta variable #consido un catalogo de 4 posibilidades (lineal/nolineal, funcional/scalar)
-        if (is.factor(ldata0[[xentra]])) esfactor=TRUE                 
-        fx=FALSE
-        if (esfactor)      {
-          fpredictors.nl <- xentra  
-        }
-        else         {   
-          fpredictors.nl <- paste("s(",xentra,",k=",kbs,",","fx=",fx,")",
-                                sep="",collapse="+")
-        }
-        nam.model <- "fregre.gsam"          
-        form.nl <- (paste(form.nl,"+",fpredictors.nl,sep=""))  
-        par.model$formula <- as.formula(form.nl)
-        par.model$data <- data
-        par.model[["basis.x"]] <- basisx
-        par.model[["basis.b"]] <- basisb
-        par.model[["family"]] <-  family
-        if (trace) print(par.model$formula )
-        res.nl  <- do.call(nam.model,par.model)    
-        mejora <- res.prev$gcv.ubre > res.nl$gcv.ubre
-        if (it>1 & mejora){
-          aov <- anova(res.nl,res.prev,test="F")
-          mejora <- aov[["Pr(>F)"]][2] < alpha
-          if (is.na(mejora)) mejora <- TRUE
-        } 
-        if (mejora){
-        suma <- summary(res.nl)          
-        dd <- res.nl$dims
-        df <- dd[["p"]]
-        edf <- dd[["N"]] - dd[["p"]]    
-        #         sr2 <- sum(res.nl$residuals^2)/edf
-        r2 <- 1 - sum(res.nl$residuals^2)/sum(ycen^2)
-        if (n.edf.correction) n.edf <-  edf
-        ldata0[[resp]] <- res.nl$residuals
-        ldist0[[resp]] <- as.matrix(dist(ldata0[[resp]]), diag =TRUE, upper = TRUE,     p = 2)
-        #2- caclulo correlacion  de cada la distancia de la respuesta vs distancia del resto de objetos
-        #print(it)
-        #print(npredictors)
-        if (it==(npredictors-1)) {
-          #print("iiiiittttttttt")          
-          parar=TRUE
-          #gof <- rbindgof,c(suma$logLik,suma$BIC,suma$AIC,edf,r2))
-          gof <- rbind(gof,c(AIC(res.nl),deviance(res.nl),res.nl$df.residual,suma$r.sq,suma$dev.expl,res.nl$gcv.ubre))
-        }        else{
-          it <- it+1
-          #print("3 calculando correlaciones")
-          dist_resp <- dcor.y(ldist0,resp)
-          dcor[it,names(dist_resp)]=dist_resp*(dist_resp > dcor.min)
-        }
-        #     print(summary(res.nl))
-        if (!parar){ 
-          #            gof <- rbind(gof,drop(c(suma$logLik,suma$BIC,suma$AIC,edf,r2)))
-          gof <- rbind(gof,c(AIC(res.nl),deviance(res.nl),
-                           res.nl$df.residual,suma$r.sq,
-                           suma$dev.expl,res.nl$gcv.ubre))
-        }
-        else { 
-          cat("The variable ",xentra,"does not improve the fit of the model\n")
-        }
-        res.prev <- res.nl
-  }   else{
-  if (it==nvar) parar=TRUE
-  res.nl <- res.prev
-  # ipredictors <- ipredictors[-length(ipredictors)]
-  xentran <- xentran[-length(xentran)]
-  }
-  }
-    } 
-    if (trace) print("fin parar while")
-    }
+      }  } }
+  #print(4)
   # print(dim(gof));print(gof)
   gof <- data.frame(xentran,(gof))
   if (is.null(xentran)) {
@@ -407,22 +430,24 @@ fregre.gsam.vs  <- function(data = list(), y,
     res.nl <- fregre.gsam(as.formula(paste(resp,"~1",sep="")),data=data,family=family)
     suma <- summary(res.nl)
     gof <- data.frame(rbind(c(1,AIC(res.nl),deviance(res.nl),
-                            res.nl$df.residual,suma$r.sq,
-                            suma$dev.expl,res.nl$gcv.ubre)))      
+                              res.nl$df.residual,suma$r.sq,
+                              suma$dev.expl,res.nl$gcv.ubre)))      
   }  
+  if (length(gof)==1) gof <- numeric(7)
   names(gof) <- c("xentra","AIC","deviance","df.residual","r.sq","dev.expl","GCV.ubre")
   res.nl$gof <- gof
-  res.nl$i.predictor = ipredictors
+  res.nl$i.predictor[xentran] = 1
   res.nl$ipredictors = xentran
   res.nl$xydist = xydist
   res.nl$dcor = dcor[1:(it-1),]
+  #print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
   return(res.nl)
 }
 ########################################################
-# dist.list <- fda.usc:::dist.list
-# dcor.y <- fda.usc:::dcor.y
-# sp <- fda.usc:::sp
-# pvalue.anova <- fda.usc:::pvalue.anova
+# dist.list <- fda.usc.devel:::dist.list
+# dcor.y <- fda.usc.devel:::dcor.y
+# sp <- fda.usc.devel:::sp
+# pvalue.anova <- fda.usc.devel:::pvalue.anova
 ########################################################
 # res.gam2 <- fregre.gsam.vs(data=ldat, y="Fat", include = covar)
 # summary(res.gam2)
@@ -470,3 +495,13 @@ fregre.gsam.vs  <- function(data = list(), y,
 # res.gam2 <- fregre.gsam.vs(data=ldat, y="Fat",basis.x=basis2)
 # summary(res.gam2)
 # anova(res.gam1,res.gam2)
+
+# dist.list <- fda.usc.devel:::dist.list
+# dcor.y <-  fda.usc.devel:::dcor.y
+
+########################################################
+# dist.list <- fda.usc.devel:::dist.list
+# dcor.y <- fda.usc.devel:::dcor.y
+# sp <- fda.usc.devel:::sp
+# pvalue.anova <- fda.usc.devel:::pvalue.anova
+

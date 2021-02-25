@@ -32,7 +32,7 @@ Return:
 \item \code{fitted.values}{ Estimated scalar response.} 
 \item \code{residuals}{\code{y}-\code{fitted values}.} 
 \item \code{H}{ Hat matrix.} 
-\item \code{df}{ The residual degrees of freedom.} 
+\item \code{df.residual}{ The residual degrees of freedom.} 
 \item \code{r2}{ Coefficient of determination.}
 \item \code{GCV}{ GCV criterion.} 
 \item \code{sr2}{ Residual variance.} 
@@ -103,6 +103,6 @@ See Also as: \code{\link{P.penalty}} and
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{regression}

@@ -45,7 +45,7 @@
 #' \item \code{residuals}{ \code{y}-\code{fitted values}.} 
 #' \item \code{fitted.values}{ Estimated scalar response.} 
 #' \item \code{beta.est}{ beta coefficient estimated of class \code{fdata}}
-#' \item \code{df}{ The residual degrees of freedom. In ridge regression, \code{df(rn)} is the effective degrees of freedom.} 
+#' \item \code{df.residual}{ The residual degrees of freedom. In ridge regression, \code{df(rn)} is the effective degrees of freedom.} 
 #' \item \code{r2}{ Coefficient of determination.}
 #' \item \code{sr2}{ Residual variance.} 
 #' \item \code{Vp}{ Estimated covariance matrix for the parameters.} 
@@ -59,7 +59,7 @@
 #' \item \code{y}{ Scalar response.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{fregre.pc.cv}},
 #' \code{\link{summary.fregre.fd}} and \code{\link{predict.fregre.fd}}.
 #' 
@@ -199,13 +199,13 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
     std.error = sqrt(diag(S) *sr2)
     Vp<-sr2*S 
     t.value = coefs/std.error
-    p.value = 2 * pt(abs(t.value), n - df, lower.tail = FALSE)
+    p.value = 2 * pt(abs(t.value), rdf, lower.tail = FALSE)
     coefficients <- cbind(coefs, std.error, t.value, p.value)
     colnames(coefficients) <- c("Estimate", "Std. Error",
                                 "t value", "Pr(>|t|)")
     class(object.lm) <- "lm"
     out <- list(call = C, beta.est = beta.est,coefficients=coefs,
-                fitted.values =yp,residuals = e,H=H,df = df,r2=r2,#GCV=GCV,
+                fitted.values =yp,residuals = e,H=H,df.residual = rdf,r2=r2,#GCV=GCV,
                 sr2 = sr2,Vp=Vp,l = l,lambda=lambda,fdata.comp=pc,lm=object.lm,
                 coefs=coefficients,fdataobj = fdataobj,y = y)
     ##################################
@@ -236,7 +236,7 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
     #     GCV <- sum(e^2)/(n - df)^2
     out <- list(call = C, coefficients=object.lm$coefficients,residuals = e,
                 fitted.values =object.lm$fitted.values,weights=weights,beta.est = beta.est,
-                df = df,r2=r2,sr2 = sr2,Vp=Vp,H=H, l = l,lambda=lambda,P=P,fdata.comp=pc,
+                df.residual = n-df,r2=r2,sr2 = sr2,Vp=Vp,H=H, l = l,lambda=lambda,P=P,fdata.comp=pc,
                 lm=object.lm,XX=Z, fdataobj = fdataobj,y = y)
   }
   class(out) = "fregre.fd"
@@ -288,7 +288,7 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
 #' \item \code{fitted.values}{ Estimated scalar response.} 
 #' \item \code{residuals}{\code{y}-\code{fitted values}.} 
 #' \item \code{H}{ Hat matrix.} 
-#' \item \code{df}{ The residual degrees of freedom.} 
+#' \item \code{df.residual}{ The residual degrees of freedom.} 
 #' \item \code{r2}{ Coefficient of determination.}
 #' \item \code{GCV}{ GCV criterion.} 
 #' \item \code{sr2}{ Residual variance.} 
@@ -300,7 +300,7 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
 #' \item \code{y}{ Scalar response.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{P.penalty}} and
 #' \code{\link{fregre.pls.cv}}.\cr Alternative method: \code{\link{fregre.pc}}.
 #' @references Preda C. and Saporta G. \emph{PLS regression on a stochastic
@@ -409,13 +409,13 @@ fregre.pls=function(fdataobj, y=NULL, l = NULL,lambda=0,P=c(0,0,1),...){
   
   std.error = sqrt(diag(S) *sr2)
   t.value =object.lm$coefficients/std.error
-  p.value = 2 * pt(abs(t.value), n - df, lower.tail = FALSE)
+  p.value = 2 * pt(abs(t.value), rdf, lower.tail = FALSE)
   coefficients <- cbind(object.lm$coefficients, std.error, t.value, p.value)
   colnames(coefficients) <- c("Estimate", "Std. Error","t value", "Pr(>|t|)")
   
   out <- list(call = C,coefficients=object.lm$coefficients, residuals = object.lm$residuals,
               fitted.values =object.lm$fitted.values, beta.est = beta.est,coefs=coefficients,
-              H=H,df = df,r2=r2, sr2 = sr2, Vp=Vp,l = l,lambda=lambda,P=P, fdata.comp=pc,
+              H=H,df.residual = rdf,r2=r2, sr2 = sr2, Vp=Vp,l = l,lambda=lambda,P=P, fdata.comp=pc,
               lm=object.lm,fdataobj = fdataobj,y = y)
   class(out) = "fregre.fd"
   return(out)
@@ -482,7 +482,7 @@ fregre.pls=function(fdataobj, y=NULL, l = NULL,lambda=0,P=c(0,0,1),...){
 #' }
 #' @note \code{criteria=``CV''} is not recommended: time-consuming.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See also as:\code{\link{fregre.pc}} .
 #' @references Preda C. and Saporta G. \emph{PLS regression on a stochastic
 #' process}. Comput. Statist. Data Anal. 48 (2005): 149-158.
@@ -551,7 +551,7 @@ fregre.pls.cv=function (fdataobj, y, kmax=8,lambda=0,P=c(0,0,1),
           pls2<-pls
           pls2$rotation<-pls$rotation[1:j]
           out = fregre.pls(pls2,y,lambda=lambda[r],P=P,...)
-          ck<-out$df
+          ck<-n-out$df.residual
           s2 <- sum(out$residuals^2)/n  #(n-ck)
           cv.AIC[r,j]<-switch(criteria,
                               "AIC"=log(s2) + 2 * (ck)/n,
@@ -578,7 +578,7 @@ fregre.pls.cv=function (fdataobj, y, kmax=8,lambda=0,P=c(0,0,1),
         for (r in 1:lenrn) {
           for (i in 1:n){
             out = fregre.pls(fdataobj[-i], y[-i],lambda=lambda[r],P=P,...)
-            ck<-out$df
+            ck<-n-out$df.residual
             a1<-out$coefficients[1]
             out$beta.est$data<-matrix(out$beta.est$data,nrow=1)
             b1<-inprod.fdata(fdata.cen(fdataobj[i],out$fdata.comp$mean)[[1]],out$beta.est)
@@ -688,7 +688,7 @@ fregre.pls.cv=function (fdataobj, y, kmax=8,lambda=0,P=c(0,0,1),
 #' }
 #' @note \code{criteria=``CV''} is not recommended: time-consuming.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See also as:\code{\link{fregre.pc}} .
 #' @references Febrero-Bande, M., Oviedo de la Fuente, M. (2012).
 #' \emph{Statistical Computing in Functional Data Analysis: The R Package
@@ -790,7 +790,7 @@ fregre.pc.cv = function (fdataobj, y, kmax=8,lambda=0,P=c(0,0,1),criteria = "SIC
             pc2$rotation <- pc$rotation#[c1[, j]]
             pc2$l <- pc$l[c1[, j]]
             out = fregre.pc(pc2, y,l=c1[, j],lambda=lambda[r],P=P,weights=weights,...)
-            ck<-out$df
+            ck<-n-out$df.residual
             s2 <- sum(out$residuals^2)/n
             cv.AIC[j]<-switch(criteria,
                               "AIC"=log(s2) + 2 * (ck)/n,
@@ -860,7 +860,7 @@ fregre.pc.cv = function (fdataobj, y, kmax=8,lambda=0,P=c(0,0,1),criteria = "SIC
               pc2$rotation<-pcl[[i]]$rotation#[c1[,j]]
               pc2$l<-pcl[[i]]$l[c1[,j]]
               out = fregre.pc(pc2,y[-i],l=c1[,j],weights=weights[-i],...) #####
-              ck<-out$df
+              ck<-n-out$df.residual
               residuals2[i] <- ((y[i] - predict(out,fdataobj[i,]))/(n-ck))^2
             }
             cv.AIC[j] <-sum(residuals2)/n

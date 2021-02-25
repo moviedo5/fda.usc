@@ -71,7 +71,7 @@ cor.AR <- function (x, order.max = 8, p=1, method = "lm")   {
     if (method == "pc") {
       x <- t(x)
       if (!is.matrix(x)) 
-        x <- as.matrix(x)
+        x <- data.matrix(x)
       Xcen <- x
       eigenres <- svd(Xcen)
       v <- eigenres$v
@@ -153,7 +153,7 @@ cor.ARMA<-function (x, p, d = 0, q = 0, method = "lm", order.max = 1)
   if (method == "pc") {
     x <- t(x)
     if (!is.matrix(x)) 
-      x <- as.matrix(x)
+      x <- data.matrix(x)
     Xcen <- x
     eigenres <- svd(Xcen)
     v <- eigenres$v
@@ -204,8 +204,8 @@ cor.ARMA<-function (x, p, d = 0, q = 0, method = "lm", order.max = 1)
 ###############################################################################
 ###############################################################################
 corExpo<-function(xy,range, method = "euclidean",p=2){
- if (is.data.frame(xy)) xy<-as.matrix(xy)
- if (class(xy)=="dist") dxy<-as.matrix(xy)
+ if (is.data.frame(xy)) xy <-data.matrix(xy)
+ if (class(xy)=="dist") dxy<-data.matrix(xy)
  else dxy<- as.matrix(dist(xy,method=method,p=p,diag =TRUE, upper = TRUE))
  vdxy<-as.vector(dxy)
 if (missing(range)) range<-quantile(vdxy,.9)/3

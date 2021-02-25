@@ -32,7 +32,7 @@
 #' \item {i.influence}{ Index of possible influence curves.} 
 #' \item {i.atypical}{ Index of possible atypical curves or possible outliers.}
 #' }
-#' @author Manuel Febrero-Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@@usc.es}
+#' @author Manuel Febrero-Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #' @seealso Summary function for \code{\link{fregre.pc}},
 #' \code{\link{fregre.basis}}, \code{\link{fregre.pls}}, \cr
 #' \code{\link{fregre.np}} and \code{\link{fregre.plm}}.

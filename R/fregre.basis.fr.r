@@ -63,22 +63,22 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Return:
 #' \itemize{
-#' \item \code{call}{ The matched call.} 
-#' \item \code{a.est}{ Intercept parameter estimated.} 
-#' \item \code{coefficientes}{ the matrix of the coefficients.}
-#' \item \code{beta.est}{ A bivariate functional data object of class \code{bifd} with the estimated parameters of \eqn{\beta(s,t)}{\beta(s,t)}.}
-#' \item \code{fitted.values}{ Estimated response.} 
-#' \item \code{residuals}{ \code{y} minus \code{fitted values}.} 
-#' \item \code{y}{ Functional response.} 
-#' \item \code{x}{ Functional explanatory data.} 
-#' \item \code{lambda.s}{ A roughness penalty with respect to \code{s} .} 
-#' \item \code{lambda.t}{ A roughness penalty with respect to \code{t}.}
-#' \item \code{Lfdobj.s}{ A linear differential operator with respect to \code{s}.}
-#' \item \code{Lfdobj.t}{ A linear differential operator with respect to \code{t}.}
-#' \item \code{weights}{ Weights.} 
+#' \item \code{call:}{ The matched call.} 
+#' \item \code{a.est:}{ Intercept parameter estimated.} 
+#' \item \code{coefficientes:}{ the matrix of the coefficients.}
+#' \item \code{beta.est:}{ A bivariate functional data object of class \code{bifd} with the estimated parameters of \eqn{\beta(s,t)}{\beta(s,t)}.}
+#' \item \code{fitted.values:}{ Estimated response.} 
+#' \item \code{residuals:}{ \code{y} minus \code{fitted values}.} 
+#' \item \code{y:}{ Functional response.} 
+#' \item \code{x:}{ Functional explanatory data.} 
+#' \item \code{lambda.s:}{ A roughness penalty with respect to \code{s} .} 
+#' \item \code{lambda.t:}{ A roughness penalty with respect to \code{t}.}
+#' \item \code{Lfdobj.s:}{ A linear differential operator with respect to \code{s}.}
+#' \item \code{Lfdobj.t:}{ A linear differential operator with respect to \code{t}.}
+#' \item \code{weights:}{ Weights.} 
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{predict.fregre.fr}}.
 #' Alternative method: \code{\link{linmod}}.
 #' @references Ramsay, James O., and Silverman, Bernard W. (2006), \emph{
@@ -222,8 +222,8 @@ Hmat = t(xcoef) %*% Hinprod
 if (is.null(weights)) {
     HHCP = t(Hmat) %*% Hmat
     HGCP = t(Hmat) %*% Gmat
-    H1CP = as.matrix(colSums(Hmat))
-    F1CP = as.matrix(colSums(Fmat))
+    H1CP = data.matrix(colSums(Hmat))
+    F1CP = data.matrix(colSums(Fmat))
 } else {
     HHCP = t(Hmat) %*% (outer(weights,rep(nbasis.s))*Hmat)
     HGCP = t(Hmat) %*% (outer(weights,rep(nbasis.t))*Gmat)

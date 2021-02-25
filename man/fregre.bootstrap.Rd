@@ -85,7 +85,7 @@ procedure is recommended (by default).
 \examples{
 \dontrun{ 
 data(tecator)
-iest<-1:215
+iest<-1:165
 x=tecator$absorp.fdata[iest]
 y=tecator$y$Fat[iest]
 nb<-25  ## Time-consuming
@@ -114,6 +114,6 @@ See Also as: \code{\link{fregre.pc}}, \code{\link{fregre.pls}},
 \code{\link{fregre.basis}}, .
 }
 \author{
-Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}
+Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 }
 \keyword{regression}

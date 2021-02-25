@@ -32,7 +32,7 @@
 #' function.
 #' @param \dots Further arguments passed to or from other methods.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See also \code{\link{semimetric.basis}} and
 #' \code{\link{semimetric.NPFDA}}
 #' @references Febrero-Bande, M., Oviedo de la Fuente, M. (2012).

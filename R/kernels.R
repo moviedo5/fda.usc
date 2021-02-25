@@ -15,7 +15,7 @@
 #' @param a Lower limit of integration.
 #' @return Returns integrate kernel.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{Kernel}} and \link[stats]{integrate}.
 #' @references Ferraty, F. and Vieu, P. (2006). \emph{Nonparametric functional
 #' data analysis.} Springer Series in Statistics, New York.

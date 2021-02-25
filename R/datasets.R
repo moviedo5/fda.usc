@@ -34,7 +34,7 @@
 #' (0.0 mm) is replaced by \code{0.01}.  Then the logarithm is applied.
 #' }
 #' @author Manuel Febrero Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @source The data were obtained from the FTP of AEMET in 2009.
 #' @keywords datasets
 #' @examples
@@ -69,7 +69,7 @@ NULL
 #' "Wavelength (mm)" and \code{ylab} title for \code{y} axis "Absorbances". }
 #' \code{..$y}: the percentages of Fat, Water and Protein.  The three contents
 #' are determined by analytic chemistry.\cr
-#' @author Manuel Febrero-Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@@usc.es}
+#' @author Manuel Febrero-Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #' @keywords datasets
 #' @examples
 #' data(tecator)
@@ -155,7 +155,7 @@ NULL
 #' \code{..$classtest}: testing class numbers (as factor). Factor levels: "sh"
 #' 1, "iy" 2, "dcl" 3, "aa" 4 and "ao" 5.\cr
 #' @author Manuel Febrero-Bande and Manuel Oviedo de la Fuente
-#' <manuel.oviedo@@usc.es>
+#' <manuel.oviedo@@udc.es>
 #' @references Ferraty, F. and Vieu, P. (2006). \emph{NPFDA in practice}. Free
 #' access on line at \url{http://www.lsp.ups-tlse.fr/staph/npfda/}
 #' @source

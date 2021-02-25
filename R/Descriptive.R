@@ -54,7 +54,7 @@
 #' criteria. \cr \tab \code{\link{func.trimvar.RPD}} Returns the marginal
 #' variance from the deepest curves followinng RPD criteria. \cr }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @references Febrero-Bande, M., Oviedo de la Fuente, M. (2012).
 #' \emph{Statistical Computing in Functional Data Analysis: The R Package
 #' fda.usc.} Journal of Statistical Software, 51(4), 1-28.

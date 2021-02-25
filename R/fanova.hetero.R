@@ -33,7 +33,7 @@
 #' @note It only works with categorical variables.
 #' 
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{fanova.RPm}}
 #' @references Brunner, E., Dette, H., Munk, A. \emph{Box-Type Approximations
 #' in Nonparametric Factorial Designs.} Journal of the American Statistical
@@ -83,7 +83,7 @@ if (pr) print("INI fanova.hetero")
   ff=attr(Terms,"factors")
   ffcol=colnames(ff)
   ffrow=rownames(ff)
-  ff=as.matrix(ff[-1,],nrow=nrow(ff[-1,]))
+  ff= as.matrix(ff[-1,],nrow=nrow(ff[-1,]))
   rownames(ff)=ffrow[-1]
   colnames(ff)=ffcol
   nombres=attr(Terms,"term.labels")

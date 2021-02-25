@@ -52,6 +52,6 @@ Mammen, E. (1993). \emph{Bootstrap and wild bootstrap for high dimensional linea
 \code{\link{flm.test}}, \code{\link{flm.Ftest}}, \code{\link{dfv.test}}, \code{\link{fregre.bootstrap}}
 }
 \author{
-Eduardo Garcia-Portugues, Manuel Febrero-Bande and  Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}.
+Eduardo Garcia-Portugues, Manuel Febrero-Bande and  Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}.
 }
 \keyword{distribution}

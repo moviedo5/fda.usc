@@ -59,7 +59,7 @@
 #' (multivariate covariates), the function compute a standard \code{\link{glm}}
 #' procedure.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{fregre.gsam}}.\cr Alternative method:
 #' \code{\link{classif.np}}, \code{\link{classif.glm}} and
 #' \code{\link{classif.gkam}}.

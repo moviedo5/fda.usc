@@ -13,7 +13,7 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Return an object of the \code{fd} class.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \code{\link{fdata}} and \code{\link{Data2fd}}
 #' @references Febrero-Bande, M., Oviedo de la Fuente, M. (2012).
 #' \emph{Statistical Computing in Functional Data Analysis: The R Package

@@ -24,7 +24,7 @@ par.fda.usc$eps <- as.double(.Machine[[1]]*10)
 #' @param eps epsilon parameter.
 #' @param ncores integer. Number of CPU cores on the current host.
 #' @param reset \code{logical}.  If \code{TRUE} creates a new Parallel Socket Cluster (ncores>1) or a sequential parallel backend (ncores=1). It is useful when worker initialization failed or after a crush.
-#' @author Manuel Oviedo de la Fuente (\email{manuel.oviedo@@usc.es}).
+#' @author Manuel Oviedo de la Fuente (\email{manuel.oviedo@@udc.es}).
 #' @examples
 #' \dontrun{
 #' # If worker initialization failed, please execute this code

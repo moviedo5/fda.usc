@@ -53,7 +53,7 @@
 #' @seealso See also  \code{\link{semimetric.basis}} and \code{\link{semimetric.NPFDA}}
 #' 
 #' @author
-#'   Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@@usc.es}
+#'   Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #'   
 #'@keywords cluster 
 
@@ -76,8 +76,8 @@ if (is.fdata(fdata1)){
 	data1=fdata1[["data"]]
 	data2=fdata2[["data"]]
 } else {
-	data1=as.matrix(fdata1)
-	if (is.null(fdata2)) {data2=data1;same=TRUE} else {data2=as.matrix(fdata2)}
+	data1=data.matrix(fdata1)
+	if (is.null(fdata2)) {data2=data1;same=TRUE} else {data2=data.matrix(fdata2)}
 }
 #if (all(data1==data2)) same=TRUE
 D=matrix(0,nrow=nrow(data1),ncol=nrow(data2))
@@ -117,8 +117,8 @@ if (is.fdata(fdata1)){
 	data1=fdata1[["data"]]
 	data2=fdata2[["data"]]
 } else {
-	data1=as.matrix(fdata1)
-	if (is.null(fdata2)) {data2=data1;same=TRUE} else {data2=as.matrix(fdata2)}
+	data1=data.matrix(fdata1)
+	if (is.null(fdata2)) {data2=data1;same=TRUE} else {data2=data.matrix(fdata2)}
 }
 #if (all(data1==data2)) same=TRUE
 D=matrix(0,nrow=nrow(data1),ncol=nrow(data2))
@@ -157,8 +157,8 @@ if (is.fdata(fdata1)){
 	data1=fdata1[["data"]]
 	data2=fdata2[["data"]]
 } else {
-	data1=as.matrix(fdata1)
-	if (is.null(fdata2)) {data2=data1;same=TRUE} else {data2=as.matrix(fdata2)}
+	data1=data.matrix(fdata1)
+	if (is.null(fdata2)) {data2=data1;same=TRUE} else {data2=data.matrix(fdata2)}
 }
 #if (all(data1==data2)) same=TRUE
 D=matrix(0,nrow=nrow(data1),ncol=nrow(data2))

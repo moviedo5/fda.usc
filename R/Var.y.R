@@ -11,7 +11,7 @@
 #' @return Var.y: returns the sampling variance of the functional data. Var.e:
 #' returns the sampling error variance of the functional data.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \code{\link{Var.e}}
 #' @references Ramsay, James O., and Silverman, Bernard W. (2006), \emph{
 #' Functional Data Analysis}, 2nd ed., Springer, New York.

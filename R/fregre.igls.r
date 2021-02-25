@@ -333,7 +333,7 @@ fregre.igls<-function (formula, data, basis.x = NULL, basis.b = NULL, correlatio
   par.fregre$formula = pf
   par.fregre$data = XX
   y <- XX[, 1]
-  scores <- as.matrix(XX[, -(1:2)])
+  scores <- data.matrix(XX[, -(1:2)])
   W <- diag(weights)
   error <- FALSE
  

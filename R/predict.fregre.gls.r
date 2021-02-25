@@ -29,7 +29,7 @@
 #' @return a vector with the predicted values.
 #' 
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso \code{\link{fregre.gls}}
 #' @references Oviedo de la Fuente, M., Febrero-Bande, M., Pilar Munoz, and
 #' Dominguez, A. Predicting seasonal influenza transmission using Functional
@@ -142,7 +142,7 @@ if (length(vnf)>0) {
 #  print(dim(XX))
   spm<-matrix(object$coefficients[names(XX)],ncol=1)
 #  print(spm )
- yp<-as.matrix(XX)%*%spm
+ yp<-data.matrix(XX)%*%spm
  }
 else yp<-object$coefficients[1]*rep(1,len=nrow(newx[[vfunc[1]]])) # yp es el intercept
 #print(yp)
@@ -510,7 +510,7 @@ sig21<-sig1[1:n1,(n1+1):n]
 sig11<-sig1[(n1+1):n,(n1+1):n]
  #print(sigmasq)
  # print(rango)
-#mu1_2<-   t(sig21)%*%solve(sig22)%*%as.matrix(coo)#valta incluir la parte(X2-mu2)
+#mu1_2<-   t(sig21)%*%solve(sig22)%*%data.matrix(coo)#valta incluir la parte(X2-mu2)
 # print("muuuuuuuuuuuuuuuu000000000")
 #  print(dim(sig12))
 #  print(dim(sig22))
@@ -522,18 +522,18 @@ W0<-sig22
       warning("Inverse of sigma computed by SVD")
       }
 # print(dim(W))
-#ype<- drop(t(sig21)%*%W%*%as.matrix(object$residuals-mean(object$residuals)))
+#ype<- drop(t(sig21)%*%W%*%data.matrix(object$residuals-mean(object$residuals)))
 # print("ok1")
-bb<-as.matrix(object$residuals[ii])
+bb<-data.matrix(object$residuals[ii])
 # print(dim(bb))
-aaa<-drop(t(sig21)%*%W%*%as.matrix(object$residuals[ii]))
+aaa<-drop(t(sig21)%*%W%*%data.matrix(object$residuals[ii]))
 # print("ok2")
 # print(aaa)
 # print(sum(ii))
 # print(sum(ii2))
-ype[ii2]<- drop(t(sig21)%*%W%*%as.matrix(object$residuals[ii]))
+ype[ii2]<- drop(t(sig21)%*%W%*%data.matrix(object$residuals[ii]))
 }
-#ype<- drop(t(sig21)%*%solve(sig22)%*%as.matrix(object$residuals))
+#ype<- drop(t(sig21)%*%solve(sig22)%*%data.matrix(object$residuals))
 #print("muuuuuuuuuuuuuuuu12")
 #sig1_2<-diag(sig11-sig12%*%solve(sig22)%*%sig21)
 #print("sigmaaaaaaaaaaaaaaa12")
@@ -562,7 +562,7 @@ pred.var = res.var/weights
 # print("7")
 
 if (se.fit || interval != "none") {    
-  XX2<-as.matrix(XX[,colnames(object$Vp),drop=FALSE])
+  XX2<-data.matrix(XX[,colnames(object$Vp),drop=FALSE])
     #print("peeeetaaa1")    
   #   #print((XX2))
   # #print(object$Vp)  
@@ -662,8 +662,8 @@ if (se.fit || interval != "none") {
     yp<-yp+b1  
    }
   } 
-  #XX2<-as.matrix(cbind(rep(1,len=nn),XX) )
-                        XX2<-as.matrix(XX) #ojo si viene sin intercept hay que descomentar la linea anterior
+  #XX2<-data.matrix(cbind(rep(1,len=nn),XX) )
+                        XX2<-data.matrix(XX) #ojo si viene sin intercept hay que descomentar la linea anterior
 #   if (se.fit and pc) {
 #     se.fit<-sqrt(rowSums((XX2 %*%object$Vp*XX2)))
 #     return(list("fit"=yp,"se.fit"=se.fit))
@@ -671,7 +671,7 @@ if (se.fit || interval != "none") {
   predictor<-drop(yp)
   res.var<-object$sr2 
   if (se.fit || interval != "none") {    
-XX2<-as.matrix(XX)
+XX2<-data.matrix(XX)
 # print("peeeetaaa")    
 # print((XX2))
 # print(object$Vp)

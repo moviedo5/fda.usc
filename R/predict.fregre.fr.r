@@ -9,7 +9,7 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Return the predicted functional data.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{fregre.basis.fr}}
 #' @keywords regression
 #' @examples 

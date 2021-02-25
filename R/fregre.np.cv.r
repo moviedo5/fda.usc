@@ -61,7 +61,7 @@
 #' \item \code{cv}{ List with the fitted values and residuals estimated by CV, without the same curve.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{fregre.np}},
 #' \code{\link{summary.fregre.fd}} and \code{\link{predict.fregre.fd}} .\cr
 #' Alternative method: \code{\link{fregre.basis.cv}} and
@@ -148,7 +148,7 @@ rtt<-fdataobj[["rangeval"]]
    C<-match.call()
    mf <- match.call(expand.dots = FALSE)
    m<-match(c("x", "y","h","Ker","metric","type.CV","type.S","par.CV","par.S"),names(mf),0L)
-#   if (is.vector(x))         x <- t(as.matrix(x))
+#   if (is.vector(x))         x <- t(data.matrix(x))
    n = nrow(x)
    np <- ncol(x)
    if (!isfdata) {

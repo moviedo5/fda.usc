@@ -73,6 +73,6 @@ See Also as \link[base]{svd} and \link[stats]{varimax}.
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{multivariate}

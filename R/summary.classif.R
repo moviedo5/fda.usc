@@ -28,7 +28,7 @@
 #  \item {object}{ Estimated by kernel classification.}
 #'  } 
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{classif.knn}},
 #' \code{\link{classif.kernel}} \cr and \code{\link{summary.classif}}
 #' @keywords print

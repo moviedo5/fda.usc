@@ -60,7 +60,7 @@
 #' (multivariate covariates), the function compute a standard \code{\link{glm}}
 #' procedure.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{predict.fregre.glm}} and
 #' \code{\link{summary.glm}}.\cr Alternative method if
 #' \code{family}=\emph{gaussian}: \code{\link{fregre.lm}}.
@@ -568,8 +568,8 @@ if (!is.data.frame(XX)) XX=data.frame(XX)
     par.fregre$formula=pf
     par.fregre$data=XX
     y<-XX[,1]    
-    scores<-as.matrix(XX[,-(1:2)])     
-#    scores<-as.matrix(XX)     
+    scores<-data.matrix(XX[,-(1:2)])     
+#    scores<-data.matrix(XX)     
     W<-diag(weights)  
     if (!rn0 & !lambda0) {
       if (lenvfunc==0 & length(vnf)==0)      {

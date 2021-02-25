@@ -47,7 +47,7 @@
 #' }
 #' 
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' 
 #' @seealso See Also generic \link[stats]{kmeans} function.
 #' 
@@ -79,8 +79,8 @@ kmeans.fd=function(fdataobj,ncl=2,metric=metric.lp
                    ,dfunc=func.trim.FM,max.iter=100
                    ,par.metric=NULL,par.dfunc=list(trim=0.05)
                    ,method="sample", cluster.size=5,draw=TRUE,...) {
-#if (is.data.frame(z)) z=as.matrix(z)
-#else if (is.vector(z))     z <- as.matrix(t(z))
+#if (is.data.frame(z)) z=data.matrix(z)
+#else if (is.vector(z))     z <- data.matrix(t(z))
 if (!is.fdata(fdataobj)) fdataobj=fdata(fdataobj)
  # nas1<-is.na.fdata(fdataobj)
 nas1<-is.na(fdataobj)

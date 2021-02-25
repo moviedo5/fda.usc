@@ -39,23 +39,23 @@
 #' @param inverse ="svd" (by default) or ="solve" method.
 #' @param \dots Further arguments passed to or from other methods.
 #' @return \itemize{
-#' \item \code{result}{ List of non-parametric estimation by covariate.}
-#' \item \code{fitted.values}{ Estimated scalar response.} 
-#' \item \code{residuals}{ \code{y} minus \code{fitted values}.} 
-#' \item \code{effects}{ The residual degrees of freedom.} 
-#' \item \code{alpha}{ Hat matrix.} 
-#' \item \code{family}{ Coefficient of determination.} 
-#' \item \code{linear.predictors}{ Residual variance.}
-#' \item \code{deviance}{ Scalar response.} 
-#' \item \code{aic}{ Functional explanatory data.}
-#' \item \code{null.deviance}{ Non functional explanatory data.} 
-#' \item \code{iter}{ Distance matrix between curves.} 
-#' \item \code{w}{ beta coefficient estimated}
-#' \item \code{eqrank}{ List that containing the variables in the model.}
-#' \item \code{prior.weights}{ Asymmetric kernel used.} 
-#' \item \code{y}{ Scalar response.}
-#' \item \code{H}{ Hat matrix, see Opsomer and Ruppert(1997) for more details.}
-#' \item \code{converged}{ conv.}
+#' \item \code{result:}{ List of non-parametric estimation by covariate.}
+#' \item \code{fitted.values:}{ Estimated scalar response.} 
+#' \item \code{residuals:}{ \code{y} minus \code{fitted values}.} 
+#' \item \code{effects:}{ The residual degrees of freedom.} 
+#' \item \code{alpha:}{ Hat matrix.} 
+#' \item \code{family:}{ Coefficient of determination.} 
+#' \item \code{linear.predictors:}{ Residual variance.}
+#' \item \code{deviance:}{ Scalar response.} 
+#' \item \code{aic:}{ Functional explanatory data.}
+#' \item \code{null.deviance:}{ Non functional explanatory data.} 
+#' \item \code{iter}:{ Distance matrix between curves.} 
+#' \item \code{w:}{ beta coefficient estimated}
+#' \item \code{eqrank:}{ List that containing the variables in the model.}
+#' \item \code{prior.weights:}{ Asymmetric kernel used.} 
+#' \item \code{y:}{ Scalar response.}
+#' \item \code{H:}{ Hat matrix, see Opsomer and Ruppert(1997) for more details.}
+#' \item \code{converged:}{ conv.}
 #' }
 #' @author Febrero-Bande, M. and Oviedo de la Fuente, M.
 #' @seealso See Also as: \code{\link{fregre.gsam}}, \code{\link{fregre.glm}}
@@ -184,35 +184,39 @@ if (family$family=="binomial") {
     colnames(X) = c(namesx, "Intercept")
     eqrank = c(rep(0, nvars), 1)
 #    result = vector("list", nvars)
-    metric<-metric2<-result<-list()
+    metric<-metric2<-result<-vector("list",nvars)
+    names(metric)<-names(metric2)<-names(result)<-namesx
+    if (is.null(par.np)) {par.np=vector("list",nvars);names(par.np)=namesx}
 #    metric2 = metric = vector("list", nvars)
-    par.np2=par.np
+#    par.np2=par.np
 #    names(eqrank)=names(metric2) = names(metric) = namesx
     names(eqrank)<- c(namesx,"Intercept")
     X[, nvars + intercept] = rep(linkfun(mean(y)), nobs)
     if (control$trace)   cat("----Computing the distance matrix ----\n")
     for (i in 1:nvars) {
 #        metric2[[namesx[i]]] = metric.lp(xlist[[namesx[i]]], xlist[[namesx[i]]])
-        if (is.null(par.metric)) {
+        if (is.null(par.metric[[namesx[i]]])) {
             metric[[namesx[i]]] = metric.lp(xlist[[namesx[i]]], xlist[[namesx[i]]])
+            par.metric[[namesx[i]]]=attr(metric[[namesx[i]]],"par.metric")
         }
         else {
            par.metric[[namesx[i]]]$fdata1 <- xlist[[namesx[i]]]
-            metric[[namesx[i]]] = do.call(par.metric[[namesx[i]]]$metric,
-                par.metric[[namesx[i]]][-1])
+           metric[[namesx[i]]] = do.call(par.metric[[namesx[i]]]$metric,par.metric[[namesx[i]]][-1])
+           par.metric[[namesx[i]]]=attr(metric[[namesx[i]]],"par.metric")
         }
-       if (is.null(par.np)) {
-          par.np2[[namesx[i]]] =list(Ker=AKer.norm,type.S="S.NW",par.S=list(w=weights))
-        }
-#       if (is.null(par.np[[namesx[i]]]$par.S)) par.np[[namesx[i]]]$par.S=list(w=weights)
-       if (is.null(par.np[[namesx[i]]]$Ker)) par.np2[[namesx[i]]]$Ker=AKer.norm
-       if (is.null(par.np[[namesx[i]]]$type.S)) par.np2[[namesx[i]]]$type.S="S.NW"
+
+       if (is.null(par.np[[namesx[i]]]$Ker))   par.np[[namesx[i]]]$Ker="AKer.norm"
+       if (is.null(par.np[[namesx[i]]]$type.S)) par.np[[namesx[i]]]$type.S="S.NW"
+       if (is.null(par.np[[namesx[i]]]$par.S))  par.np[[namesx[i]]]$par.S=list(w=weights)
        if (is.null(par.np[[namesx[i]]]$h)) {
-              par.np2[[namesx[i]]]$h = h.default(xlist[[namesx[i]]], len = 51,
-              prob = c(0.01,0.66),metric =  metric[[namesx[i]]])
-              }
+#           print(par.np[[namesx[i]]]$Ker)
+        if (is.character(par.np[[namesx[i]]]$Ker)) { 
+            ke=get(paste0("Ker.",unlist(strsplit(par.np[[namesx[i]]]$Ker,"[.]"))[2]))
+            } else {ke=par.np[[namesx[i]]]$Ker}
+#        print(ke)
+        par.np[[namesx[i]]]$h = h.default(xlist[[namesx[i]]], len = 51,prob = c(0.01,0.66),metric =  metric[[namesx[i]]],Ker=ke)
+        }
     }
-#    eta = apply(X, 1, sum)
      eta = rowSums(X)
     mu = linkinv(eta)
     
@@ -251,24 +255,24 @@ if (family$family=="binomial") {
         for (i in 1:nvars) {
             off = apply(X[good, -i, drop = FALSE], 1, sum)
             z = ytilde - off   
-            if (control$trace)                print(summary(ytilde))
+            if (control$trace)    print(summary(ytilde))
             offdf = sum(eqrank[-i])
             xfunc = xlist[[namesx[i]]][good]
             mgood<- metric[[namesx[i]]]
-            h<-par.np2[[namesx[i]]]$h
+            h<-par.np[[namesx[i]]]$h
              if (control$trace)   cat("Range h:", range(h), length(h), "\n")
-           Ker=par.np2[[namesx[i]]]$Ker
-           type.S=par.np2[[namesx[i]]]$type.S
-           parS=par.np2[[namesx[i]]]$par.S
+           Ker=ifelse(is.character(par.np[[namesx[i]]]$Ker),get(par.np[[namesx[i]]]$Ker),par.np[[namesx[i]]]$Ker)
+           type.S=par.np[[namesx[i]]]$type.S
+           parS=par.np[[namesx[i]]]$par.S
            parS$w=w
            if (is.function(type.S)) ty<-deparse(substitute(type.S))
            else ty<-type.S
            res = fregre.np.cv(xfunc, z, h = h, type.CV = "dev.S", Ker=Ker,
-           type.S=ty,par.S=parS,metric = mgood, par.CV = list(obs = y[good],
+           type.S=ty,par.S=parS,metric = mgood, par.metric=par.metric[[namesx[i]]], par.CV = list(obs = y[good],
            family = family, off = off, offdf = offdf,W = diag(w)))
            if (control$trace)
             cat("Var:",namesx[[i]]," h.opt:", res$h.opt," df:",res$df,"\n")           
-           eqrank[namesx[i]] <- res$df
+           eqrank[namesx[i]] <- length(res$residuals)-res$df.residual
            X[good,namesx[i]] <- res$fitted.values
            result[[namesx[i]]] <- res
         }

@@ -124,14 +124,14 @@
 #' \tab \code{\link{semimetric.basis}} \cr }
 #' 
 #' \tabular{ll}{ Package: \tab fda.usc\cr Type: \tab Package\cr Version: \tab
-#' 2.0.2\cr Date: \tab 2020-02-17\cr License: \tab GPL-2 \cr LazyLoad: \tab
+#' 2.0.3\cr Date: \tab 2021-02-22\cr License: \tab GPL-2 \cr LazyLoad: \tab
 #' yes\cr Url: \url{http://eamo.usc.es/pub/gi1914/index.php/es/}, \url{https://github.com/moviedo5/fda.usc/} }
 #' 
 #' @name fda.usc-package
 #' @aliases fda.usc-package fda.usc
 #' @docType package
 #' @author \emph{Authors:} Manuel Febrero Bande \email{manuel.febrero@@usc.es}
-#' and Manuel Oviedo de la Fuente \email{manuel.oviedo@@usc.es}
+#' and Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #' 
 #' \emph{Contributors:} Pedro Galeano, Alicia Nieto-Reyes, Eduardo
 #' Garcia-Portugues \email{eduardo.garcia@@usc.es} and STAPH group
@@ -139,7 +139,7 @@
 #' alicia.nieto@@unican.es STAPH group maintaining the page
 #' http://www.lsp.ups-tlse.fr/staph/
 #' 
-#' \emph{Maintainer:} Manuel Oviedo de la Fuente \email{manuel.oviedo@@usc.es}
+#' \emph{Maintainer:} Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #' @references Febrero-Bande, M., Oviedo de la Fuente, M. (2012).
 #' \emph{Statistical Computing in Functional Data Analysis: The R Package
 #' fda.usc.} Journal of Statistical Software, 51(4), 1-28.

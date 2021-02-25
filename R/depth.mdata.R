@@ -186,7 +186,7 @@ mdepth.HS <-function(x, xx=x,proj=50,scale=FALSE,xeps=1e-15,random=FALSE)
           mm<-proj[1]
           if (d==2 & !random) {
               sq<-seq(0,2*pi,len=mm)
-#              proj<-as.matrix(expand.grid(cos(sq),sin(sq)))             
+#              proj<-data.matrix(expand.grid(cos(sq),sin(sq)))             
                proj2d<-function(angl){matrix(c(cos(angl),sin(angl)),2)}
                proj<-t(sapply(sq,proj2d   ))
              }
@@ -588,7 +588,7 @@ mdepth.MB <-function (x, xx = NULL,trim=0.25, scale=FALSE, draw =FALSE,
                       grayscale = FALSE, band = FALSE, band.limits = NULL, lty = 1, lwd = 2, 
                       col = NULL, cold = NULL, colRef = NULL, ylim = NULL, cex = 1, ...)
 {
-  x <- as.matrix(x)
+  x <- data.matrix(x)
   n <- nrow(x)
   d <- ncol(x)
   depth.ori<-NULL
@@ -710,7 +710,7 @@ mdepth.MB <-function (x, xx = NULL,trim=0.25, scale=FALSE, draw =FALSE,
   }
   else {
     xRef<-xx
-    xRef <- as.matrix(xRef)
+    xRef <- data.matrix(xRef)
     if (ncol(xRef) != d) {
       stop("Dimensions of x and xRef do not match")
     }
@@ -979,7 +979,7 @@ mdepth.SD=function(x,xx=NULL,scale=FALSE){
   if (dim(x)[2]!=2) stop("The dimension of the data points is not a 2-column matrix")
   if (dim(x)[1]<3) stop("The dimension of the data points must be at least 3 rows.")
   if (is.data.frame(x)) {
-    x<-as.matrix(x)
+    x <- data.matrix(x)
   }
   if (is.null(xx)) {
     xx<-x
@@ -987,7 +987,7 @@ mdepth.SD=function(x,xx=NULL,scale=FALSE){
   }
   else {
     al<-FALSE
-    xx<-as.matrix(xx)
+    xx <- data.matrix(xx)
   }
   nam<-colnames(xx)
   if ( is.null(rownames(x)))  rownames(x)<-1:nrow(x)

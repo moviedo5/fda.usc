@@ -59,6 +59,6 @@ See Also as \code{\link{rproc2fdata}}
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{generation}

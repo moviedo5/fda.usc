@@ -50,6 +50,6 @@ with S}. Springer-Verlag.
 See Also as \code{\link{fdata2pc}}, \code{\link{fdata2pls}} and \link[stats]{cor}
 }
 \author{
-Manuel Febrero-Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}
+Manuel Febrero-Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 }
 \keyword{multivariate}

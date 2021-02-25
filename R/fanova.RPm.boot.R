@@ -1,6 +1,6 @@
 fanova.RPm.boot=function(object,formula,data.fac,RP=min(30,ncol(object)),
 alpha=0.95,zproj=NULL,par.zproj=list(norm=TRUE),nboot=500,hetero=FALSE,contrast=NULL,pr=FALSE,...){
-  if (is.data.frame(object)) object=as.matrix(object)
+  if (is.data.frame(object)) object=data.matrix(object)
   else if (is.fdata(object)) object=object[["data"]]
   min.data.fac <- min(table(data.fac))
   if (min.data.fac==0)  warning("Contingency table of factor levels (data.fac argument) contains 0 counts  values")
@@ -90,7 +90,7 @@ alpha=0.95,zproj=NULL,par.zproj=list(norm=TRUE),nboot=500,hetero=FALSE,contrast=
     if (hetero){
         if (pr) print("hetero")
         term=intersect(attr(terms(formula),"term.labels"),names(data.fac))
-        datafac2=as.matrix(data.fac[,term])
+        datafac2=data.matrix(data.fac[,term])
         uu=unique(datafac2)
         l=NULL
         for (j in 1:nrow(uu)){

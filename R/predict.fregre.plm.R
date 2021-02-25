@@ -45,10 +45,10 @@ predict.fregre.plm<-function(object, newx = NULL,...){
   x.fd<-fdataobj[["data"]]
 #  if (class(data[[vfunc[1]]])[1]=="fd")   	 x.fd=t(data[[vfunc[1]]]$coefs)
 #  else    	 x.fd=data[[vfunc[1]]]
-#  if (is.data.frame(x.fd)) x.fd=as.matrix(x.fd)
+#  if (is.data.frame(x.fd)) x.fd=data.matrix(x.fd)
 #  cat(" ",class(data[[vfunc[1]]])[1]," object: ",vfunc[1],"\n")
   I=diag(1,ncol=nrow(x.fd),nrow=nrow(x.fd))
-  XX=as.matrix(data[["df"]][,vnf])
+  XX=data.matrix(data[["df"]][,vnf])
   colnames(XX)=vnf2
    xd=object$fdataobj
    x=object$XX

@@ -33,7 +33,7 @@
 #' \item {xy.dist}{ Distance matrix between cuves of \code{fdataobj} and \code{fdata0} objects.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{cond.mode}} and
 #' \code{\link{cond.quantile}}.
 #' @references Ferraty, F. and Vieu, P. (2006). \emph{Nonparametric functional

@@ -90,7 +90,7 @@
 #' \item \code{formula}{ formula.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{predict.fregre.plm}} and
 #' \code{\link{summary.fregre.fd}}\cr Alternative methods:
 #' \code{\link{fregre.lm}}, \code{\link{fregre.np}} and

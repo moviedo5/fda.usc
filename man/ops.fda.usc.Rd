@@ -47,5 +47,5 @@ Set or query graphical and prompt output parameters. Allow the user to set and e
 
 }
 \author{
-Manuel Oviedo de la Fuente (\email{manuel.oviedo@usc.es}).
+Manuel Oviedo de la Fuente (\email{manuel.oviedo@udc.es}).
 }

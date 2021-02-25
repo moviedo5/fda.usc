@@ -58,6 +58,6 @@ See Also as: \code{\link{Kernel}} and \link[stats]{integrate}.
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{kernel}

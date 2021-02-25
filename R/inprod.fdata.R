@@ -18,7 +18,7 @@
 #' 1
 #' @param \dots Further arguments passed to or from other methods.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See also \link[fda]{inprod} and \code{\link{norm.fdata}}
 #' @keywords cluster
 #' @examples
@@ -88,7 +88,7 @@ inprod.fdata=function (fdata1,fdata2=NULL, w = 1, ...)   {
                       }         
                      aux
   }
- #mdist<-as.matrix(mdist,numgr,numgr2)
+ #mdist<-data.matrix(mdist,numgr,numgr2)
  dim(mdist)<-c(numgr,numgr2)
  rownames(mdist)=rownames(DATA1)
  colnames(mdist)=rownames(DATA2)

@@ -85,6 +85,6 @@ Opsomer, J. D., and Ruppert, D. (1997). Fitting a bivariate additive model by lo
 See Also as \code{\link{S.basis}}
 }
 \author{
-Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}
+Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 }
 \keyword{smooth}

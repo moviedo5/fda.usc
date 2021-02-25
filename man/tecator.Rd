@@ -37,6 +37,6 @@ dim(tecator$y)
 
 }
 \author{
-Manuel Febrero-Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}
+Manuel Febrero-Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 }
 \keyword{datasets}

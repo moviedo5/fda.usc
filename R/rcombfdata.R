@@ -21,7 +21,7 @@
 #' transformation for \code{sdarg} is performed.
 #' @return Return the functional trajectories as a \code{fdata} class object.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \code{\link{rproc2fdata}}
 #' @keywords generation
 #' @examples
@@ -65,7 +65,7 @@ gridfdata=function(coef,fdataobj,mu){
   tt <- argvals(fdataobj)
   if (missing(mu)) 
     mu=fdata(rep(0,ncol(fdataobj)),argvals=tt)  
-  coef=as.matrix(coef)
+  coef=data.matrix(coef)
   if (ncol(coef)!=nr) stop("Argument coef must be a matrix with ncol(coef)==nrow(fdataobj)")
   res=coef%*%fdataobj[["data"]]
   res=fdata(sweep(res,2,mu[["data"]],"+"),argvals=tt)

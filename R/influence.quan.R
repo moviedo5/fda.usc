@@ -32,7 +32,7 @@
 #' \item \code{beta.boot}{ Functional beta estimated by bootstrap method.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{influence.fregre.fd}},
 #' \code{\link{fregre.basis}}, \code{\link{fregre.pc}}.
 #' @references Febrero-Bande, M., Galeano, P. and Gonzalez-Manteiga, W. (2010).
@@ -112,7 +112,7 @@ for (i in 1:mue.boot){
    setTxtProgressBar(pb,i-0.5)
    muee <- sample(1:n,n,replace=TRUE)
    mueX <- sample(1:n,n,replace=TRUE)
-   residuals.mue <- as.matrix(residuals[muee]) + rnorm(n,0,sqrt(smo * sr2))
+   residuals.mue <- data.matrix(residuals[muee]) + rnorm(n,0,sqrt(smo * sr2))
 #   fdata.mue <-dat[mueX,] + mvrnorm(n,rep(0,J),smoX * var(dat))
    fdata.mue <-fdataobj[mueX,] + fdata(mvrnorm(n,rep(0,J),smoX * var(dat)),tt,rtt)
    if (pc)   {

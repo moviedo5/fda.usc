@@ -83,6 +83,6 @@ time series classification. \emph{Pattern Recognition}, 44(9), 2231-2240
 See also  \code{\link{semimetric.basis}} and \code{\link{semimetric.NPFDA}}
 }
 \author{
-Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}
+Manuel Febrero-Bande, Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 }
 \keyword{cluster}

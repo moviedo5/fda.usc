@@ -43,7 +43,7 @@ Return:
 \item \code{residuals}{ \code{y}-\code{fitted values}.} 
 \item \code{fitted.values}{ Estimated scalar response.} 
 \item \code{beta.est}{ beta coefficient estimated of class \code{fdata}}
-\item \code{df}{ The residual degrees of freedom. In ridge regression, \code{df(rn)} is the effective degrees of freedom.} 
+\item \code{df.residual}{ The residual degrees of freedom. In ridge regression, \code{df(rn)} is the effective degrees of freedom.} 
 \item \code{r2}{ Coefficient of determination.}
 \item \code{sr2}{ Residual variance.} 
 \item \code{Vp}{ Estimated covariance matrix for the parameters.} 
@@ -134,6 +134,6 @@ Alternative method: \code{\link{fregre.basis}} and \code{\link{fregre.np}}.
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{regression}

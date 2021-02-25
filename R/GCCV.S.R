@@ -33,7 +33,7 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return  Returns GCCV score calculated for input parameters.  
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \code{\link{optim.np}}. \cr Alternative method
 #' (independent case): \code{\link{GCV.S}}
 #' @references Carmack, P. S., Spence, J. S., and Schucany, W. R. (2012).

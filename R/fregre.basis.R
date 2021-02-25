@@ -58,29 +58,29 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Return:
 #' \itemize{
-#' \item {call}{ The matched call.} 
-#' \item {coefficients}{ A named vector of coefficients}
-#' \item {residuals}{ \code{y} minus \code{fitted values}.} 
-#' \item {fitted.values}{ Estimated scalar response.} 
-#' \item {beta.est}{ beta parameter estimated of class \code{fd}} 
-#' \item {weights}{(only for' weighted fits) the specified weights.} 
-#' \item {df}{ The residual degrees of' freedom.} 
-#' \item {r2}{ Coefficient of determination.} 
-#' \item {sr2}{ Residual' variance.} 
-#' \item {Vp}{ Estimated covariance matrix for the parameters.}
-#' \item {H}{ Hat matrix.} 
-#' \item {y}{ Response.}
-#' \item {fdataobj}{ Functional explanatory data of class \code{fdata}.}
-#' \item {a.est}{ Intercept parameter estimated} 
-#' \item {x.fd}{ Centered functional explanatory data of class \code{fd}.} 
-#' \item {basis.b}{ Basis used' for beta parameter estimation.} 
-#' \item {lambda.opt}{ A roughness penalty.}
-#' \item {Lfdobj}{ Order of a derivative or a linear differential operator.}
-#' \item {P}{ Penalty matrix.} 
-#' \item {lm}{ Return \code{lm} object }
+#' \item {call:}{ The matched call.} 
+#' \item {coefficients:}{ A named vector of coefficients}
+#' \item {residuals:}{ \code{y} minus \code{fitted values}.} 
+#' \item {fitted.values:}{ Estimated scalar response.} 
+#' \item {beta.est:}{ beta parameter estimated of class \code{fd}} 
+#' \item {weights:}{(only for' weighted fits) the specified weights.} 
+#' \item {df.residual:}{ The residual degrees of' freedom.} 
+#' \item {r2:}{ Coefficient of determination.} 
+#' \item {sr2:}{ Residual' variance.} 
+#' \item {Vp:}{ Estimated covariance matrix for the parameters.}
+#' \item {H:}{ Hat matrix.} 
+#' \item {y:}{ Response.}
+#' \item {fdataobj:}{ Functional explanatory data of class \code{fdata}.}
+#' \item {a.est:}{ Intercept parameter estimated} 
+#' \item {x.fd:}{ Centered functional explanatory data of class \code{fd}.} 
+#' \item {basis.b:}{ Basis used' for beta parameter estimation.} 
+#' \item {lambda.opt:}{ A roughness penalty.}
+#' \item {Lfdobj:}{ Order of a derivative or a linear differential operator.}
+#' \item {P:}{ Penalty matrix.} 
+#' \item {lm:}{ Return \code{lm} object }
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{fregre.basis.cv}},
 #' \code{\link{summary.fregre.fd}} and \code{\link{predict.fregre.fd}}.\cr
 #' Alternative method: \code{\link{fregre.pc}} and \code{\link{fregre.np}}.
@@ -289,7 +289,7 @@ else {
 
 #hat<-diag(hat(Z, intercept = TRUE),ncol=n)
 out<-list("call"=call,coefficients=coefficients,"residuals"=e,"fitted.values"=yp
-,"beta.est"=beta.est,weights= weights,"df"=df,"r2"=r2,"sr2"=sr2,"Vp"=Vp,"H"=S,"y"=y,"fdataobj"=fdataobj,
+,"beta.est"=beta.est,weights= weights,"df.residual"=n-df,"r2"=r2,"sr2"=sr2,"Vp"=Vp,"H"=S,"y"=y,"fdataobj"=fdataobj,
   x.fd=x.fd,"basis.x.opt"=basis.x,"basis.b.opt"=basis.b,"J"=J,"lambda.opt"=lambda,P=R, Lfdobj=Lfdobj,
   lm=object.lm,"mean"=xmean, "b.est"=b.est,"a.est"=a.est,XX=XX)
 class(out) <- "fregre.fd"

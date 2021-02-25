@@ -110,7 +110,7 @@ No. 6, pp. 2769-2794.
 \code{\link{metric.lp}} amd \code{\link{metric.dist}}.
 }
 \author{
-Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es} and Manuel
+Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es} and Manuel
 Febrero Bande
 }
 \keyword{htest}

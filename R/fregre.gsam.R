@@ -62,7 +62,7 @@
 #' (multivariate covariates), the function compute a standard \code{\link{glm}}
 #' procedure.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{predict.fregre.gsam}} and
 #' \code{\link{summary.gam}}.\cr Alternative methods: \code{\link{fregre.glm}}
 #' and \code{\link{fregre.gkam}}.
