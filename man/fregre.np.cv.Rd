@@ -52,7 +52,7 @@ Return:
 \item \code{call}{ The matched call.} 
 \item \code{residuals}{ \code{y} minus \code{fitted values}.} 
 \item \code{fitted.values}{ Estimated scalar response.} 
-\item \code{df}{ The residual degrees of freedom.} 
+\item \code{df.residual}{ The residual degrees of freedom.} 
 \item \code{r2}{ Coefficient of determination.} 
 \item \code{sr2}{ Residual variance.} 
 \item \code{H}{ Hat matrix.} 

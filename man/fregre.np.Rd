@@ -45,7 +45,7 @@ Return:
 \item {fitted.values}{ Estimated scalar response.} 
 \item {H}{ Hat matrix.} 
 \item {residuals}{ \code{y} minus \code{fitted values}.} 
-\item {df}{ The residual degrees of freedom.} 
+\item {df.residual}{ The residual degrees of freedom.} 
 \item {r2}{ Coefficient of determination.} 
 \item {sr2}{ Residual variance.} 
 \item {y}{ Response.} 

@@ -3,22 +3,23 @@
     "path": "C:/Users/moviedo/github/fda.usc/README.md",
     "project_path": "README.md",
     "type": "markdown",
-    "hash": "130298930",
+    "hash": "4278580135",
     "contents": "",
-    "dirty": false,
+    "dirty": true,
     "created": 1602021217201.0,
     "source_on_save": false,
     "relative_order": 1,
     "properties": {
-        "cursorPosition": "87,2",
-        "scrollLine": "75"
+        "cursorPosition": "92,42",
+        "scrollLine": "75",
+        "Source": "Source"
     },
     "folds": "",
-    "lastKnownWriteTime": 1587202585,
+    "lastKnownWriteTime": 1614031983,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1587202585,
+    "last_content_update": 1614336247752,
     "read_only": false,
     "read_only_alternatives": []
 }

@@ -47,7 +47,7 @@
 #' \item \code{call}{ The matched call.} 
 #' \item \code{residuals}{ \code{y} minus \code{fitted values}.} 
 #' \item \code{fitted.values}{ Estimated scalar response.} 
-#' \item \code{df}{ The residual degrees of freedom.} 
+#' \item \code{df.residual}{ The residual degrees of freedom.} 
 #' \item \code{r2}{ Coefficient of determination.} 
 #' \item \code{sr2}{ Residual variance.} 
 #' \item \code{H}{ Hat matrix.} 
@@ -270,7 +270,7 @@ if (all(is.infinite(gcv)) & ops.fda.usc()$warning
 #	  r2=1-sum(e^2)/sum(ycen^2)
 	  r2=1-sum(norm.e)/sum(ycen^2)
     yp2<-Hcv%*%y.mat^2-(Hcv%*%y.mat)^2
-    out<-list("call"=C,"fitted.values"=yp,"H"=H,"residuals"=e,"df"=df,"r2"=r2,
+    out<-list("call"=C,"fitted.values"=yp,"H"=H,"residuals"=e,"df.residual"=df,"r2"=r2,
 "sr2"=sr2,"var.y"=yp2,"y"=y,"fdataobj"=fdataobj,"mdist"=mdist,"Ker"=Ker,
 "metric"=metric,"type.S"=type.S,"par.S"=par.S,"gcv"=gcv,"h.opt"=h.opt,"h"=h,"m"=m,
 "fit.CV"=list("fitted.values"=ypcv,"residuals"=ecv))
@@ -284,7 +284,7 @@ else {
     ycen=y-mean(y)
 	  r2=1-sum(e^2)/sum(ycen^2)      	  
     yp2<-Hcv%*%y.mat[,1]^2-(Hcv%*%y.mat[,1])^2
-	  out<-list("call"=C,"fitted.values"=yp,"H"=H,"residuals"=e,"df"=df,"r2"=r2,
+	  out<-list("call"=C,"fitted.values"=yp,"H"=H,"residuals"=e,"df.residual"=df,"r2"=r2,
 "sr2"=sr2,"var.y"=yp2,"y"=y,"fdataobj"=fdataobj,"mdist"=mdist,"Ker"=Ker,
 "metric"=metric,"type.S"=type.S,"par.S"=par.S,"gcv"=gcv,"h.opt"=h.opt,"h"=h,"m"=m,
 "fit.CV"=list("fitted.values"=ypcv,"residuals"=ecv))

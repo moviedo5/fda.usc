@@ -71,7 +71,7 @@
 #' \item \code{call}{ The matched call.} 
 #' \item \code{fitted.values}{ Estimated scalar response.} 
 #' \item \code{residuals}{ \code{y} minus \code{fitted values}.}
-#' \item \code{df}{ The residual degrees of freedom.} 
+#' \item \code{df.residual}{ The residual degrees of freedom.} 
 #' \item \code{H}{ Hat matrix.}
 #' \item \code{r2}{ Coefficient of determination.} 
 #' \item \code{sr2}{ Residual variance.}
@@ -171,7 +171,7 @@ type.CV = GCV.S,type.S=S.NW,par.CV=list(trim=0,draw=FALSE),par.S=list(w=1),...){
   mdist=metric(fdataobj,fdataobj,...)
   if (is.null(h))  h<-h.default(data[[vfunc[1]]],type.S=ty,metric=mdist,Ker=ke)
   lenh <- length(h)
-  df=gcv<- array(NA, dim = c(lenh))
+  df <- gcv<- array(NA, dim = c(lenh))
   yph <- array(NA, dim = c(nrow(y),lenh))
   H <- array(NA, dim = c(nrow(yph),nrow(y),lenh))
   I=diag(1,ncol=nrow(x.fd),nrow=nrow(x.fd))
@@ -226,12 +226,15 @@ p.value= 2 * pt(abs(t.value),df, lower.tail = FALSE)
 result<-cbind(betah,std.error,t.value,p.value)
 colnames(result) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)")
 if (lenh>1) {
-  if (h.opt==min(h))  cat(" Warning: h.opt is the minimum value of bandwidths
+  if (h.opt == min(h))  cat(" Warning: h.opt is the minimum value of bandwidths
    provided, range(h)=",range(h),"\n")
   else if (h.opt==max(h)) cat(" Warning: h.opt is the maximum value of bandwidths
    provided, range(h)=",range(h),"\n")}
-z=list(coefficients=result,vcov=vcov2,r2=r2,residuals=e,sr2=sr2,
-formula=formula,h.opt=h.opt,h=h,fdataobj=fdataobj,XX=XX,xh=xh,yh=yh,wh=wh,mdist=mdist,y=y,betah=betah,H=HH,data=data,call=C,fitted.values=yph,gcv=gcv,df=df,m=m,metric=metric,Ker=Ker,type.S=type.S)
+z <- list(coefficients=result, vcov=vcov2, r2=r2, residuals=e, sr2=sr2,
+       formula=formula, h.opt=h.opt, h=h, fdataobj=fdataobj, XX=XX,
+       xh=xh, yh=yh, wh=wh, mdist=mdist, y=y, betah=betah, H=HH, data=data,
+       call=C, fitted.values=yph, gcv=gcv, df.residual=df, m=m, metric=metric,
+       Ker=Ker, type.S=type.S)
 class(z)="fregre.plm"
 }
 else {

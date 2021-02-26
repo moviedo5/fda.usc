@@ -294,7 +294,7 @@ fregre.basis.cv <- function(fdataobj,y,basis.x=NULL,basis.b=NULL,
       object.lm$fitted.values<-yp
       object.lm$y<-y
       object.lm$x<-Z.opt
-      object.lm$rank<-df
+      object.lm$rank <- df
       object.lm$df.residual<-n-df
       vfunc=call[[2]]
       colnames(Z.opt)<-1:ncol(Z.opt)

@@ -51,7 +51,7 @@ of the trimming\cr and \code{draw=TRUE}.}
 \item \code{call}{ The matched call.} 
 \item \code{fitted.values}{ Estimated scalar response.} 
 \item \code{residuals}{ \code{y} minus \code{fitted values}.}
-\item \code{df}{ The residual degrees of freedom.} 
+\item \code{df.residual}{ The residual degrees of freedom.} 
 \item \code{H}{ Hat matrix.}
 \item \code{r2}{ Coefficient of determination.} 
 \item \code{sr2}{ Residual variance.}

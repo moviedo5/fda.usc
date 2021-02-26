@@ -147,9 +147,9 @@ if (is.null(control$epsilon))  control$epsilon= 0.001
 if (is.null(control$trace))  control$trace = FALSE
 if (is.null(control$inverse))  control$inverse = "solve"
 ############################################################
-    xlist<-data[-1] #datos funcionales menos el df!
-    y0<-y<-data[["df"]][,response]
-if (family$family=="binomial") {
+    xlist <- data[-1] # datos funcionales menos el df
+    y0 <- y <- data[["df"]][,response]
+if (family$family == "binomial") {
    y<-as.numeric(factor(y,labels=c(0,1)))-1
 }
 ####################    eps <- 0.001
@@ -271,8 +271,10 @@ if (family$family=="binomial") {
            type.S=ty,par.S=parS,metric = mgood, par.metric=par.metric[[namesx[i]]], par.CV = list(obs = y[good],
            family = family, off = off, offdf = offdf,W = diag(w)))
            if (control$trace)
-            cat("Var:",namesx[[i]]," h.opt:", res$h.opt," df:",res$df,"\n")           
-           eqrank[namesx[i]] <- length(res$residuals)-res$df.residual
+            cat("Var:",namesx[[i]]," h.opt:", res$h.opt," df:",res$df.residual,"\n")           
+print(length(res$residuals))           
+print(res$df.residual)
+           eqrank[namesx[i]] <- length(res$residuals) - res$df.residual
            X[good,namesx[i]] <- res$fitted.values
            result[[namesx[i]]] <- res
         }

@@ -39,7 +39,7 @@
 #' \item {fitted.values}{ Estimated scalar response.} 
 #' \item {H}{ Hat matrix.} 
 #' \item {residuals}{ \code{y} minus \code{fitted values}.} 
-#' \item {df}{ The residual degrees of freedom.} 
+#' \item {df.residual}{ The residual degrees of freedom.} 
 #' \item {r2}{ Coefficient of determination.} 
 #' \item {sr2}{ Residual variance.} 
 #' \item {y}{ Response.} 
@@ -187,7 +187,7 @@ if (is.null(h)) h=h.default(fdataobj,prob=0.05,len=1,metric = mdist, type.S = ty
     sr2=sum(norm.e)/(n-df)
     ycen=fdata.cen(y)$Xcen
  	  r2=1-sum(norm.e)/sum(ycen^2)
-      out<-list("call"=C,"fitted.values"=yp,"H"=H,"residuals"=e,"df"=df,"r2"=r2,
+      out<-list("call"=C,"fitted.values"=yp,"H"=H,"residuals"=e,"df.residual"=df,"r2"=r2,
 "sr2"=sr2,"y"=y,"fdataobj"=fdataobj,"mdist"=mdist,"Ker"=Ker,
 "metric"=metric,"type.S"=type.S,"par.S"=par.S,"h.opt"=h,"m"=m)
       }
@@ -199,7 +199,7 @@ else {
     sr2=sum(e^2)/(n-df)
     ycen=y-mean(y)
 	  r2=1-sum(e^2)/sum(ycen^2)
-	  out<-list("call"=C,"fitted.values"=yp,"H"=H,"residuals"=e,"df"=df,"r2"=r2,
+	  out<-list("call"=C,"fitted.values"=yp,"H"=H,"residuals"=e,"df.residual"=df,"r2"=r2,
 "sr2"=sr2,"y"=drop(y),"fdataobj"=fdataobj,"mdist"=mdist,"Ker"=Ker,
 "metric"=metric,"type.S"=type.S,"par.S"=par.S,"h.opt"=h,"m"=m,var.y=yp2)
   }

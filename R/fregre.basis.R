@@ -288,9 +288,10 @@ else {
     #  GCV <- sum(e^2)/(n - df)^2      #GCV"=GCV,
 
 #hat<-diag(hat(Z, intercept = TRUE),ncol=n)
-out<-list("call"=call,coefficients=coefficients,"residuals"=e,"fitted.values"=yp
-,"beta.est"=beta.est,weights= weights,"df.residual"=n-df,"r2"=r2,"sr2"=sr2,"Vp"=Vp,"H"=S,"y"=y,"fdataobj"=fdataobj,
-  x.fd=x.fd,"basis.x.opt"=basis.x,"basis.b.opt"=basis.b,"J"=J,"lambda.opt"=lambda,P=R, Lfdobj=Lfdobj,
+out<-list("call"=call, coefficients=coefficients, "residuals"=e, "fitted.values"=yp
+,"beta.est"=beta.est,weights= weights,"df.residual"=n-df,"r2"=r2,"sr2"=sr2,
+"Vp"=Vp,"H"=S,"y"=y,"fdataobj"=fdataobj, x.fd=x.fd,"basis.x.opt"=basis.x,
+"basis.b.opt"=basis.b,"J"=J,"lambda.opt"=lambda,P=R, Lfdobj=Lfdobj,
   lm=object.lm,"mean"=xmean, "b.est"=b.est,"a.est"=a.est,XX=XX)
 class(out) <- "fregre.fd"
 return(out)

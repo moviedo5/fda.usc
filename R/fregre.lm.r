@@ -384,7 +384,7 @@ class(z) <- c(class(z),"fregre.lm")
       H<-scores%*%Cinv
       if  (!hay.pls) df<-fdata.trace(H)  
       z$mean.list<-mean.list
-      z$df.residual<-n-df
+      z$df.residual <- n-df
       z$H<-H
       z$r2 <- 1 - sum(z$residuals^2)/sum(ycen^2)       
       if  (class(basis.x[[vfunc[1]]])=="basisfd") {
