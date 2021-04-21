@@ -169,7 +169,7 @@ create.pc.basis<-function(fdataobj,l=1:5,norm=TRUE,basis=NULL,
    pc.fdata<-fdata(pc.fdata,tt,rtt,fdataobj$names)
    out <- list(fdataobj.pc=pc.fdata,basis = basis.pc, x = pc$x, mean = pc$mean,
    fdataobj.cen = pc$fdataobj.cen,fdataobj = fdataobj,l = l,norm=norm,
-   lambda=lambda,P=P,type = "pc")
+   lambda=lambda,P=P,type = "pc",call="fdata2pc")
    class(out) <- "fdata.comp"
    }
  else {
@@ -196,7 +196,7 @@ if (lambda>0) pls<-fdata2pls(fdataobj,y,norm=norm,ncomp=max(l),lambda=lambda,P=P
      rownames(basis$data)<-paste("PLS",l,sep="")
 out<-list("basis"=basis,"x"=pls$x,"mean"=pls$mean,"df"=pls$df,
 "fdataobj.cen"=pls$fdataobj.cen,"fdataobj"=fdataobj,norm=norm,
-"l"=l,"type"="pls","y"=y)
+"l"=l,"type"="pls","y"=y,call="fdata2pls")
 class(out) <- "fdata.comp"
 return(out)
 } 
