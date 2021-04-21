@@ -203,9 +203,9 @@ return(out)
 
 #' @rdname create.fdata.basis
 #' @export
-create.raw.fdata=function (fdataobj, l = 1:ncol(fdataobj))
+create.raw.fdata=function (fdataobj, l = 1:nrow(fdataobj))
 {
-    return(list(basis =fdataobj[,l] , type = "raw"))
+    return(list(basis =fdataobj[l,] , type = "raw"))
 }
 
 #########################
