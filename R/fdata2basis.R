@@ -75,8 +75,6 @@ fdata2basis <- function(fdataobj, basis, method=c("grid","inprod")){
   class(out) <- "basis.fdata"
   return(out)
 }
-bb <- fdata2basis(y1,base.pc)
-lines(bb$basis)
 
 
 #wrapper of gridfdata

@@ -33,12 +33,13 @@ S <- 51
 tj <- round(seq(0,1,len=T),3)
 si <- round(seq(0,1,len=S),3)
 beta1 <- outer(si,tj,function(si,tj){exp(-5*abs((tj-si)/5))})
-nbasis.s =31
-nbasis.t=51
+nbasis.s =7
+nbasis.t=11
 base.s <- create.fourier.basis(c(0,1),nbasis=nbasis.s)
 base.t <- create.fourier.basis(c(0,1),nbasis=nbasis.t)
 y1 <- fdata(rbind(log(1+tj),1-5*(tj-0.5)^2),argvals=tj,rangeval=c(0,1))
 aa <- fdata2basis(y1,base.t,method="inprod")
+summary(aa)
 plot(gridfdata(aa$coefs,aa$basis))
 lines(y1,lwd=2,col=c(3,4),lty=2)
 base.pc <- create.pc.basis(y1,1:2,norm=F)
