@@ -3,7 +3,6 @@
 #' @description Compute fucntional coefficients from functional data (\code{\link{fdata}} class object) 
 #' represented in a basis (fixed of data-driven basis).
 #' 
-#' @aliases fdata2basis
 #' @param fdataobj \code{\link{fdata}} class object.
 #' @param basis  	a functional basis object defining the basis
 #' @param method character string, if it is "grid" the fdata object is evaluated in the grid (\code{argvals} of fdata),
@@ -47,6 +46,7 @@
 fdata2basis <- function(fdataobj, basis, method=c("grid","inprod")){
   xmean <- NULL
   if (is.basis(basis)){
+   # print(1)
       bb=fdata(t(eval.basis(fdataobj$argvals,basis)),
                argvals=fdataobj$argvals,rangeval=fdataobj$rangeval)
   } else if (class(basis) %in% c("fdata")){
@@ -55,16 +55,20 @@ fdata2basis <- function(fdataobj, basis, method=c("grid","inprod")){
   } else {
     bb=  basis$basis   
     xmean <- basis$mean
-    }
+  }
+  #print(2)
   if (method[1]=="grid"){
+    #print(3)
   	A=t(fdataobj$data)
 	  B=t(bb$data)
   	coefs=t(Minverse(t(B)%*%B)%*%t(B)%*%A)
   } else {
+   # print(4)
   	A=t(inprod.fdata(fdataobj,bb))
   	B=inprod.fdata(bb)
   	coefs=t(solve(B)%*%A)
   }
+  #print(5)
   if (!is.null(basis$type)) type <- basis$type
   #if (!is.null(bb$names$main)) type <- bb$names$main
   out <- list(coefs=coefs,basis=bb, 
