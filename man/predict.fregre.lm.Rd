@@ -109,33 +109,27 @@ argument.
 \examples{
 \dontrun{
 data(tecator)
-ind<-1:129
-x=tecator$absorp.fdata
-x.d2<-fdata.deriv(x,nderiv=2)
-tt<-x[["argvals"]]
-dataf=as.data.frame(tecator$y)
-nbasis.x=11;nbasis.b=7
-basis1=create.bspline.basis(rangeval=range(tt),nbasis=nbasis.x)
-basis2=create.bspline.basis(rangeval=range(tt),nbasis=nbasis.b)
-basis.x=list("x.d2"=basis1)
-basis.b=list("x.d2"=basis2)
-ldata=list("df"=dataf[ind,],"x.d2"=x.d2[ind])
-
-res=fregre.gsam(Fat~s(Water,k=3)+s(x.d2,k=3),data=ldata,
-family=gaussian(),basis.x=basis.x,basis.b=basis.b)
-newldata=list("df"=dataf[-ind,],"x.d2"=x.d2[-ind])
-pred<-predict(res,newldata)
+ind <- 1:129
+x <- tecator$absorp.fdata
+x.d2 <- fdata.deriv(x,nderiv=2)
+tt <- x[["argvals"]]
+dataf <- as.data.frame(tecator$y)
+ldat <- ldata("df"=dataf[ind,],"x.d2"=x.d2[ind])
+basis.x <- list("x.d2"=create.pc.basis(ldat$x.d2))
+res <- fregre.gsam(Fat~s(Water,k=3)+s(x.d2,k=3),data=ldat,
+                   family=gaussian(),basis.x=basis.x)
+newldat <- list("df"=dataf[-ind,],"x.d2"=x.d2[-ind])
+pred <- predict(res,newldat)
 plot(pred,tecator$y$Fat[-ind])
-
-res.glm=fregre.glm(Fat~Water+x.d2,data=ldata,family=gaussian(),
-basis.x=basis.x,basis.b=basis.b)
-pred.glm<-predict(res.glm,newldata)
-newy<-tecator$y$Fat[-ind]
+res.glm <- fregre.glm(Fat  ~ Water+x.d2, data=ldat,
+                  family=gaussian(),basis.x=basis.x)
+pred.glm <- predict(res.glm,newldat)
+newy <- tecator$y$Fat[-ind]
 points(pred.glm,tecator$y$Fat[-ind],col=2)
 
 # Time-consuming 
-res.gkam=fregre.gkam(Fat~x.d2,data=ldata)
-pred.gkam=predict(res.gkam,newldata)
+res.gkam <- fregre.gkam(Fat ~ x.d2, data=ldat)
+pred.gkam <- predict(res.gkam,newldata)
 points(pred.gkam,tecator$y$Fat[-ind],col=4)
 
 ((1/length(newy))*sum((drop(newy)-pred)^2))/var(newy)
@@ -147,7 +141,7 @@ points(pred.gkam,tecator$y$Fat[-ind],col=4)
 Febrero-Bande, M., Oviedo de la Fuente, M. (2012).
 \emph{Statistical Computing in Functional Data Analysis: The R Package
 fda.usc.} Journal of Statistical Software, 51(4), 1-28.
-\url{http://www.jstatsoft.org/v51/i04/}
+\url{https://www.jstatsoft.org/v51/i04/}
 }
 \seealso{
 See Also as: \code{\link{fregre.lm}}, \code{\link{fregre.plm}},
@@ -156,6 +150,6 @@ See Also as: \code{\link{fregre.lm}}, \code{\link{fregre.plm}},
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@udc.es}
+\email{manuel.oviedo@usc.es}
 }
 \keyword{regression}

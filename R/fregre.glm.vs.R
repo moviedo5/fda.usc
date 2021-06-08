@@ -1,21 +1,19 @@
-#' @title Variable Selection using Functional Additive Models      
+#' @title Variable Selection using Functional Linear Models      
 #' 
-#' @description  Computes functional GAM model between functional covariates
+#' @description  Computes functional GLM model between functional covariates
 #'  \eqn{(X^1(t_1),\cdots,X^{q}(t_q))}{(X(t_1),...,X(t_q))} and non functional covariates
 #'   \eqn{(Z^1,...,Z^p)}{(Z1,...,Zp)} with a scalar response \eqn{Y}.
 #' @details This function is an extension of the functional generalized spectral additive 
-#' regression models: \code{\link{fregre.gsam}} where the \eqn{E[Y|X,Z]} is related to the 
-#' linear prediction \eqn{\eta} via a link function \eqn{g(\cdot)}{g(.)} with integrated 
-#' smoothness estimation by the smooth functions \eqn{f(\cdot)}{f(.)}. 
-#' \deqn{E[Y|X,Z])=\eta=g^{-1}(\alpha+\sum_{i=1}^{p}f_{i}(Z^{i})+\sum_{k=1}^{q}\sum_{j=1}^{k_q}{f_{j}^{k}(\xi_j^k)})}{E[Y|X,Z]=\eta=g^{-1}(\alpha+\sum_i  f_i(Z_{i})+\sum_k^q\sum_{j=1}^{k_q}{f_j^k(\xi_j^k)})}
-#' where \eqn{\xi_j^k}{\xi_j^k} is the coefficient of the basis  function expansion of 
-#' \eqn{X^k}, (in PCA analysis \eqn{\xi_j^k}{\xi_j^k} is the score of the \eqn{j}-functional
-#' PC of \eqn{X^k}.
-#'  
-#' The smooth functions \eqn{f(\cdot)}{f(.)} can be added to the right hand side of the formula
-#' to specify that the linear predictor depends on smooth functions of predictors using smooth 
-#' terms \code{\link{s}} and \code{\link{te}} as in  \code{\link{gam}} (or linear functionals of 
-#' these as \eqn{Z\beta} and \eqn{\big<X(t),\beta\big>}{< X(t),\beta(t) >} in \code{\link{fregre.glm}}). 
+#' regression models: \code{\link{fregre.glm}} where the \eqn{E[Y|X,Z]} is related to the 
+#' linear prediction \eqn{\eta} via a link function \eqn{g(\cdot)}{g(.)}. 
+
+#' \deqn{E[Y|X,Z]=\eta=g^{-1}(\alpha+\sum_{j=1}^{p}\beta_{j}Z^{j}+\sum_{k=1}^{q}\frac{1}{\sqrt{T_k}}\int_{T_k}{X^{k}(t)\beta_{k}(t)dt})}{E[Y|X,Z]=
+#' \eta = g^{-1}(\alpha + \sum \beta_j Z_j+\sum < X_k(t) , \beta_k(t) >)}
+#' 
+#' where \eqn{Z=\left[ Z^1,\cdots,Z^p \right]}{ Z = [Z_1 ,..., Z_p]} are the
+#' non functional covariates and \eqn{X(t)=\left[ X^{1}(t_1),\cdots,X^{q}(t_q)
+#' \right]}{X(t) = [ X_1(t_1) ,..., X_q(t_q)]} are the functional ones.
+
 
 #' @param data List that containing the variables in the model. 
 #' "df" element is a data.frame containing the response and scalar covariates 
@@ -55,8 +53,8 @@
 #'  covariate included in the model, the function uses all basis elements. 
 #'  Otherwise, the function selects the significant coefficients.
 #'  
-#' @param kbs The dimension of the basis used to represent the smooth term. The default 
-#' depends on the number of variables that the smooth is a function of.
+# List of basis for functional covariates, see same argument 
+# in \code{\link{fregre.glm}}. 
 #' @param dcor.min Threshold for a variable to be entered into the model. X is discarded 
 #' if the distance correlation \eqn{R(X,e)< dcor.min} (e is the residual of previous steps).
 #' @param par.model Model parameters.
@@ -64,12 +62,9 @@
 #' covariates and the response).
 #' @param trace Interactive Tracing and Debugging of Call.
 # @param CV TRUE, Cross-validation (CV) is done.
-# @param smooth If TRUE, a smooth estimate is made for all covariates included in the model
-#  (less for factors). The model is adjusted with the estimated variable linearly or smoothly. 
-#  If the models are equivalent, the model is adjusted with the linearly estimated variable.
 #' 
 #' @return Return an object corresponding to the estimated additive mdoel using 
-#' the selected variables (ame output as the\code{\link{fregre.gsam}} function) and the following elements:
+#' the selected variables (ame output as the\code{\link{fregre.glm}} function) and the following elements:
 #' \itemize{
 #' \item{\code{gof}}, the goodness of fit for each step of VS algorithm.
 #' \item{\code{i.predictor}}, \code{vector} with 1 if the variable is selected, 0 otherwise.
@@ -78,14 +73,14 @@
 #' }
 #' 
 #' @note If the formula only contains a non functional explanatory variables (multivariate covariates),
-#'  the function compute a standard  \code{\link{gam}} procedure.
+#'  the function compute a standard  \code{\link{glm}} procedure.
 #' 
-#' @author Manuel Feb-Bande, Manuel Oviedo de la Fuente
+#' @author Manuel Febrero-Bande, Manuel Oviedo-de la Fuente
 #' \email{manuel.oviedo@@udc.es}
 #' 
-#' @seealso See Also as:  \code{\link{predict.fregre.gsam}} and \code{\link{summary.gam}}.
-#' Alternative methods: \code{\link{fregre.glm}}, \code{\link{fregre.gsam}}
-#'  and \code{\link{fregre.gkam}}.
+#' @seealso See Also as:  \code{\link{predict.fregre.glm}} and \code{\link{summary.glm}}.
+#' Alternative methods: \code{\link{fregre.glm}}, \code{\link{fregre.glm}}
+#'  and \code{\link{fregre.gsam.vs}}.
 #'  
 #' @references Febrero-Bande, M., Gonz\'alez-Manteiga, W. and Oviedo de la
 #' Fuente, M. Variable selection in functional additive regression models,
@@ -99,7 +94,7 @@
 #' x1 <- fdata.deriv(x)
 #' x2 <- fdata.deriv(x,nderiv=2)
 #' y=tecator$y$Fat
-#' xcat0 <- cut(rnorm(length(y)),4) 
+#' xcat0 <- cut(rnorm(length(y)),4)
 #' xcat1 <- cut(tecator$y$Protein,4)
 #' xcat2 <- cut(tecator$y$Water,4)
 #' ind <- 1:165
@@ -109,79 +104,76 @@
 #' # and 100 scalars (impact poitns of x1) 
 #' 
 #' # Time consuming
-#' res.gam0 <- fregre.gsam.vs(data=ldat,y="Fat"
-#'             ,exclude="x2",numbasis.opt=T) # All the covariates
-#' summary(res.gam0)
-#' res.gam0$ipredictors
+#' res.glm0 <- fregre.glm.vs(data=ldat,y="Fat",exclude="x2",numbasis.opt=T) # All the covariates
+#' summary(res.glm0)
+#' res.glm0$ipredictors
+#' res.glm0$i.predictor
 #' 
-#' res.gam1 <- fregre.gsam.vs(data=ldat,y="Fat") # All the covariates
-#' summary(res.gam1)
-#' res.gam1$ipredictors
-#' 
+#' res.glm1 <- fregre.glm.vs(data=ldat,y="Fat") # All the covariates
+#' summary(res.glm1)
+#' res.glm1$ipredictors
+
 #' covar <- c("xcat0","xcat1","xcat2","x","x1","x2")
-#' res.gam2 <- fregre.gsam.vs(data=ldat, y="Fat", include=covar)
-#' summary(res.gam2)
-#' res.gam2$ipredictors 
-#' res.gam2$i.predictor
+#' res.glm2 <- fregre.glm.vs(data=ldat, y="Fat", include=covar)
+#' summary(res.glm2)
+#' res.glm2$ipredictors 
+#' res.glm2$i.predictor
 #' 
-#' res.gam3 <- fregre.gsam.vs(data=ldat,y="Fat",
-#'             basis.x=c("type.basis"="pc","numbasis"=10))
-#' summary(res.gam3)
-#' res.gam3$ipredictors
+#' res.glm3 <- fregre.glm.vs(data=ldat,y="Fat",
+#'                            basis.x=c("type.basis"="pc","numbasis"=2))
+#' summary(res.glm3)
+#' res.glm3$ipredictors
 #' 
-#' res.gam4 <- fregre.gsam.vs(data=ldat,y="Fat",include=c("x","x1"),
-#' basis.x=c("type.basis"="pc","numbasis"=20),numbasis.opt=T)
-#' summary(res.gam4)
-#' res.gam4$ipredictors
+#' res.glm4 <- fregre.glm.vs(data=ldat,y="Fat",include=covar,
+#' basis.x=c("type.basis"="pc","numbasis"=5),numbasis.opt=T)
+#' summary(res.glm4)
+#' res.glm4$ipredictors
 
 #' lpc <- list("x"=create.pc.basis(ldat$x,1:4)
 #'            ,"x1"=create.pc.basis(ldat$x1,1:3)
-#'            ,"x2"=create.pc.basis(ldat$x2,1:12))
-#' res.gam5 <- fregre.gsam.vs(data=ldat,y="Fat",basis.x=lpc)
-#' summary(res.gam5)
-#' res.gam6 <- fregre.gsam.vs(data=ldat,y="Fat",basis.x=lpc,numbasis.opt=T)
-#' summary(res.gam6)
+#'            ,"x2"=create.pc.basis(ldat$x2,1:4))
+#' res.glm5 <- fregre.glm.vs(data=ldat,y="Fat",basis.x=lpc)
+#' summary(res.glm5)
+#' res.glm5 <- fregre.glm.vs(data=ldat,y="Fat",basis.x=lpc,numbasis.opt=T)
+#' summary(res.glm5)
 
 #' bsp <- create.fourier.basis(ldat$x$rangeval,7)
 #' lbsp <- list("x"=bsp,"x1"=bsp,"x2"=bsp)
-#' res.gam7 <- fregre.gsam.vs(data=ldat,y="Fat",basis.x=lbsp,kbs=4)
-#' summary(res.gam7)
+#' res.glm6 <- fregre.glm.vs(data=ldat,y="Fat",basis.x=lbsp)
+#' summary(res.glm6)
 
-#' # Prediction like fregre.gsam() 
+
+#' # Prediction like fregre.glm() 
 #' newldat <- list("df"=dat[-ind,],"x"=x[-ind,],"x1"=x1[-ind,],
 #'                 "x2"=x2[-ind,])
-#' pred.gam1 <- predict(res.gam1,newldat)
-#' pred.gam2 <- predict(res.gam2,newldat)
-#' pred.gam3 <- predict(res.gam3,newldat)
-#' pred.gam4 <- predict(res.gam4,newldat)
-#' pred.gam5 <- predict(res.gam5,newldat)
-#' pred.gam6 <- predict(res.gam6,newldat)
-#' pred.gam7 <- predict(res.gam7,newldat)
-#' plot(dat[-ind,"Fat"],pred.gam1)
-#' points(dat[-ind,"Fat"],pred.gam2,col=2)
-#' points(dat[-ind,"Fat"],pred.gam3,col=3)
-#' points(dat[-ind,"Fat"],pred.gam4,col=4)
-#' points(dat[-ind,"Fat"],pred.gam5,col=5)
-#' points(dat[-ind,"Fat"],pred.gam6,col=6)
-#' points(dat[-ind,"Fat"],pred.gam7,col=7)
-
-#' pred2meas(newldat$df$Fat,pred.gam1)
-#' pred2meas(newldat$df$Fat,pred.gam2)
-#' pred2meas(newldat$df$Fat,pred.gam3)
-#' pred2meas(newldat$df$Fat,pred.gam4)
-#' pred2meas(newldat$df$Fat,pred.gam5)
-#' pred2meas(newldat$df$Fat,pred.gam6)
-#' pred2meas(newldat$df$Fat,pred.gam7)
+#' pred.glm1 <- predict(res.glm1,newldat)
+#' pred.glm2 <- predict(res.glm2,newldat)
+#' pred.glm3 <- predict(res.glm3,newldat)
+#' pred.glm4 <- predict(res.glm4,newldat)
+#' pred.glm5 <- predict(res.glm5,newldat)
+#' pred.glm6 <- predict(res.glm6,newldat)
+#' plot(dat[-ind,"Fat"],pred.glm1)
+#' points(dat[-ind,"Fat"],pred.glm2,col=2)
+#' points(dat[-ind,"Fat"],pred.glm3,col=3)
+#' points(dat[-ind,"Fat"],pred.glm4,col=4)
+#' points(dat[-ind,"Fat"],pred.glm5,col=5)
+#' points(dat[-ind,"Fat"],pred.glm6,col=6)
+#' pred2meas(newldat$df$Fat,pred.glm1)
+#' pred2meas(newldat$df$Fat,pred.glm2)
+#' pred2meas(newldat$df$Fat,pred.glm3)
+#' pred2meas(newldat$df$Fat,pred.glm4)
+#' pred2meas(newldat$df$Fat,pred.glm5)
+#' pred2meas(newldat$df$Fat,pred.glm6)
 #' }
 
 
 #' @export
-fregre.gsam.vs  <- function(data = list(), y, 
+fregre.glm.vs  <- function(data = list(), y, 
                             include = "all", exclude = "none"
                             ,family = gaussian(), weights = NULL 
                             , basis.x = NULL 
                             , numbasis.opt = FALSE
-                            , kbs , dcor.min = 0.1, alpha = 0.05
+                            , dcor.min = 0.1, alpha = 0.05
                             , par.model, xydist, trace = FALSE
 ){
 #0-   print(0)  
@@ -248,9 +240,6 @@ fregre.gsam.vs  <- function(data = list(), y,
   names(ipredictors) <- setdiff(names(ldata0),resp)
   
   nvar <- npredictors - 1
-  if (missing(kbs)) 
-    kbs <- - 1 #rep(-1,nvar)
-  #names(kbs) <- names(ipredictors)
   basis.list <- FALSE
   if (is.null(basis.x)) {
     # print("base nula")
@@ -289,7 +278,7 @@ fregre.gsam.vs  <- function(data = list(), y,
   ycen <- data$df[,y]-mean(data$df[,y])
   gof <- NULL
   anyfdata <- FALSE
-  res.prev <- gam(as.formula(paste0(form.nl,1)),data=data$df,family=family)
+  res.prev <- glm(as.formula(paste0(form.nl,1)),data=data$df,family=family)
   while (!parar){
       # print("3 Seleccion variable-Regresion")
       # print("bucle")    
@@ -346,18 +335,14 @@ fregre.gsam.vs  <- function(data = list(), y,
           if (type.basis.ipred=="fourier") tbasis <- "basis"
           if (type.basis.ipred=="bspline") tbasis <- "basis"
           
-          
-    
-          
-          nam <- "fregre.gsam.cv"
+          nam <- "fregre.glm.cv"
           par.basis.ipred$y <- resp#entra la etiqueta y no toda la variable como en el basis.cv o pc.cv
           par.basis.ipred$x <- xentra
           par.basis.ipred$data <- data
           if (numbasis.opt)      {
-            res <-  fregre.gsam.cv(data,resp,xentra, alpha = alpha
+            res <-  fregre.glm.cv(data,resp,xentra, alpha = alpha
                                    ,family=family
-                                   #,type.basis=tbasis, kbs = kbs
-                                   ,type.basis=type.basis, kbs = kbs
+                                   ,type.basis=type.basis
                                    ,numbasis = ncomp, numbasis.opt=numbasis.opt)  
             if (tbasis!="basis"){
               res$basis.x[[xentra]]$basis <- res$basis.x[[xentra]]$basis[res$numbasis.opt,]
@@ -365,13 +350,13 @@ fregre.gsam.vs  <- function(data = list(), y,
             res$basis.x[[xentra]]$l <- res$numbasis.opt
             basisx[[xentra]] <- res$basis.x[[xentra]]
             #basisb[[xentra]] <- res$basis.x[[xentra]]
-            if (trace)   print("results of internal function fregre.gsam.cv")
+            if (trace)   print("results of internal function fregre.glm.cv")
             if (trace)   print(summary(res))
             # parar=TRUE
           }        else{
             # print("no numbasis.opt")
             if (!basis.list){
-             # print("NO entra gsam.CV")
+             # print("NO entra glm.CV")
             switch(tbasis,
                    "pc"={
                      best.pc <- 1:ncomp#[xentra]
@@ -405,10 +390,9 @@ fregre.gsam.vs  <- function(data = list(), y,
             fpredictors.nl <- xentra  
           }
           else         {   
-            fpredictors.nl <- paste("s(",xentra,",k=",kbs,",","fx=",fx,")",
-                                    sep="",collapse="+")
+            fpredictors.nl <- paste(xentra,sep="",collapse="+")
           }
-          nam.model <- "fregre.gsam"          
+          nam.model <- "fregre.glm"          
           form.nl <- (paste(form.nl,"+",fpredictors.nl,sep=""))  
           par.model$formula <- as.formula(form.nl)
           par.model$data <- data
@@ -440,9 +424,11 @@ fregre.gsam.vs  <- function(data = list(), y,
             #2- caclulo correlacion  de cada la distancia de la respuesta vs distancia del resto de objetos
             if (it==(npredictors-1)) {
               parar=TRUE
+              #print(gof)
               #gof <- rbindgof,c(suma$logLik,suma$BIC,suma$AIC,edf,r2))
-              gof <- rbind(gof,c(AIC(res.nl),deviance(res.nl),res.nl$df.residual,suma$r.sq,suma$dev.expl,res.nl$gcv.ubre))
-            }        else{
+              gof <- rbind(gof,c(AIC(res.nl),deviance(res.nl),
+                                 res.nl$df.residual,suma$r.sq,suma$dev.expl))
+             }        else{
               it <- it+1
               # print("3 calculando correlaciones")
               dist_resp <- dcor.y(ldist0,resp)
@@ -454,9 +440,9 @@ fregre.gsam.vs  <- function(data = list(), y,
             if (!parar){ 
               #            gof <- rbind(gof,drop(c(suma$logLik,suma$BIC,suma$AIC,edf,r2)))
               gof <- rbind(gof,c(AIC(res.nl),deviance(res.nl),
-                                 res.nl$df.residual,suma$r.sq,
-                                 suma$dev.expl,res.nl$gcv.ubre))
-            }
+                                 res.nl$df.residual#,suma$r.sq,suma$dev.expl)
+                                 ))
+              }
             else { 
               cat("The variable ",xentra,"does not improve the fit of the model\n")
             }
@@ -474,14 +460,16 @@ fregre.gsam.vs  <- function(data = list(), y,
   gof <- data.frame(xentran,(gof))
   if (is.null(xentran)) {
     warning("No variable selected, a null model is estimated")    
-    res.nl <- fregre.gsam(as.formula(paste(resp,"~1",sep="")),data=data,family=family)
+    res.nl <- fregre.glm(as.formula(paste(resp,"~1",sep="")),data=data,family=family)
     suma <- summary(res.nl)
     gof <- data.frame(rbind(c(1,AIC(res.nl),deviance(res.nl),
-                              res.nl$df.residual,suma$r.sq,
-                              suma$dev.expl,res.nl$gcv.ubre)))      
+                              res.nl$df.residual
+                              #,suma$r.sq,suma$dev.expl,res.nl$gcv.ubre)
+                              )) )     
   }  
-  if (length(gof)==1) gof <- numeric(7)
-  names(gof) <- c("xentra","AIC","deviance","df.residual","r.sq","dev.expl","GCV.ubre")
+  if (length(gof)==1) gof <- numeric(4)
+ # names(gof) <- c("xentra","AIC","deviance","df.residual","r.sq","dev.expl","GCV.ubre")
+  names(gof) <- c("xentra","AIC","deviance","df.residual")
   res.nl$gof <- gof
   res.nl$i.predictor = ipredictors
   res.nl$i.predictor[xentran] <- 1
@@ -490,4 +478,3 @@ fregre.gsam.vs  <- function(data = list(), y,
   res.nl$dcor = dcor[1:(it-1),]
   return(res.nl)
 }
-

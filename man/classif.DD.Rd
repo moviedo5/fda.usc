@@ -219,7 +219,7 @@ summary(out21)
 \references{
 Cuesta-Albertos, J.A., Febrero-Bande, M. and Oviedo de la Fuente, M.
 \emph{The DDG-classifier in the functional setting}, (2017). Test, 26(1),
-119-142. DOI: \url{https://doi.org/10.1007/s11749-016-0502-6}.
+119-142. DOI: \doi{10.1007/s11749-016-0502-6}.
 }
 \seealso{
 See Also as \code{\link{predict.classif.DD}}

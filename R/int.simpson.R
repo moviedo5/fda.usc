@@ -36,27 +36,30 @@
 #' }
 #' @export
 int.simpson=function(fdataobj,method=NULL){
- par.fda.usc <-      eval(parse(text="fda.usc:::par.fda.usc"), envir=.GlobalEnv)
- method <- par.fda.usc$int.method
+  if (is.null(method)) 
+    {
+    par.fda.usc <-      eval(parse(text="fda.usc:::par.fda.usc"), envir=.GlobalEnv)
+    method <- par.fda.usc$int.method
+    }
  if (!inherits(fdataobj, "fdata"))  {
-   fdataobj = fdata(fdataobj)
-   equi = TRUE
-   tt = fdataobj$argvals
+   fdataobj <- fdata(fdataobj)
+   equi <- TRUE
+   tt <- fdataobj$argvals
  } else {
-   tt = fdataobj$argvals
-   equi = argvals.equi(tt)
+   tt <- fdataobj$argvals
+   equi <- argvals.equi(tt)
  }
- n = NROW(fdataobj)
- out = rep(NA,n)
+ n <- NROW(fdataobj)
+ out <- rep(NA,n)
  for (i in 1:n) {
-   out[i] <- int.simpson2(tt,fdataobj$data[i,],equi=equi,method=method)
+   out[i] <- int.simpson2(tt, fdataobj$data[i,], equi=equi,method=method)
  }
-	return(out)
+return(out)
 }
 
 #' @rdname int.simpson
 #' @export int.simpson2
-int.simpson2=function(x,y,equi=TRUE,
+int.simpson2=function(x, y, equi = TRUE,
                       method=NULL){
   n=length(x);ny=length(y)
   if (is.null(method)) {

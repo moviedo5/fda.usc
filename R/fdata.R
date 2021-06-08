@@ -38,7 +38,7 @@
 #' @references Febrero-Bande, M., Oviedo de la Fuente, M. (2012).
 #' \emph{Statistical Computing in Functional Data Analysis: The R Package
 #' fda.usc.} Journal of Statistical Software, 51(4), 1-28.
-#' \url{http://www.jstatsoft.org/v51/i04/}
+#' \url{https://www.jstatsoft.org/v51/i04/}
 #' 
 #' @keywords manip
 #' @examples 
@@ -149,7 +149,6 @@ else {
     }  }
   }
 else stop("The argument argvals must be a list")
-#print("peta name")
   if (is.null(names(argvals))) names(argvals)<-paste(drop(nam),1:len.argvals,sep="")
   out[["argvals"]]<-argvals
 }
@@ -199,7 +198,7 @@ matrix={
         out[["data"]]=mdata
         out},
 data.frame={
-            out[["data"]]=data.matrix(mdata)
+            out[["data"]]=as.matrix(mdata)
             out},
 ftable={
   mdata<-matrix(mdata,nrow=dm[1])
@@ -289,7 +288,10 @@ out[["rangeval"]]<-rangeval
 if ((np!=lentt) && (nc==lentt)) {
          out[["data"]]=matrix(out[["data"]],ncol=nc)
          nc<-1
-         warning("The transposed data is returned")       }
+         #print("Warning: The transposed data is returned")      
+         warning("The transposed data is returned")      
+         }
+
 else    out[["data"]]=out[["data"]]
 if (is.null(dimnames(mdata))) {
 #rownames(out[["data"]])<-1:nc

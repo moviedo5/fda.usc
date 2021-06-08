@@ -127,7 +127,7 @@ localMaxima <- function(x) {
 #' Rodriguez-Perez, J. R. (2018). Determining optimum wavelengths for leaf
 #' water content estimation from reflectance: A distance correlation approach.
 #' \emph{Chemometrics and Intelligent Laboratory Systems}. 173,41-50
-#' \url{https://doi.org/10.1016/j.chemolab.2017.12.001}.
+#' \doi{10.1016/j.chemolab.2017.12.001}.
 #' @keywords regression
 #' @examples
 #' \dontrun{
@@ -364,7 +364,7 @@ LMDC.regre <- function(y,covar,data,newdata,pvalue=.05,
   if ( method =="lars") {
     if (is.null(par.method)) 
       par.method= list(type="lasso",normalize=FALSE,intercept = TRUE,use.Gram=FALSE)    
-    x0<-data.matrix(data[,covar])
+    x0<-as.matrix(data[,covar])
     par.method$x <- x0
     par.method$y <- data[,"y"]
     model0 <- do.call(method, par.method)
@@ -377,12 +377,12 @@ LMDC.regre <- function(y,covar,data,newdata,pvalue=.05,
     #               intercept = TRUE,normalize=FALSE, type="lasso",use.Gram=F)
     minl<-lambda[which.min(cv)]
     pred0 <- do.call("predict.lars",
-        list("object" = model0, "newx" = data.matrix(newdata[,covar]), 
+        list("object" = model0, "newx" = as.matrix(newdata[,covar]), 
              "s" = minl,"type"= "fit", "mode"= "lambda"))$fit
-    #pred0 <- predict.lars( model0 ,newx=data.matrix(newdata[,covar]), s=minl,type="fit",mode="lambda")$fit
+    #pred0 <- predict.lars( model0 ,newx=as.matrix(newdata[,covar]), s=minl,type="fit",mode="lambda")$fit
     cv <- do.call("lars::cv.lars",list("x" = x0, "y" = data[,"y"],"K" = 10))
     #cv <- lars::cv.lars(x0, data[,"y"],K=10)
-#    pred0 <- predict.lars( cv  ,newx=data.matrix(newdata[,covar]), s=minl,type="fit",mode="lambda")$fit
+#    pred0 <- predict.lars( cv  ,newx=as.matrix(newdata[,covar]), s=minl,type="fit",mode="lambda")$fit
     ideal_l1_ratio <- cv$index[which.max(cv$cv - cv$cv.error <= min(cv$cv))]
     #obj <- lars::lars(x0, data[,"y"])
     obj <- do.call("lars::lars",list("x"=x0, "y"=data[,"y"]))
@@ -390,16 +390,16 @@ LMDC.regre <- function(y,covar,data,newdata,pvalue=.05,
     l1 <- apply(X = scaled_coefs, MARGIN = 1, FUN = function(x) sum(abs(x)))
     coef(obj)[which.max(l1 / do.call("tail",list("x"=l1, "n"=1)) > ideal_l1_ratio),]
     pred0 <- do.call("predict.lars",list("object"= model0,
-          "newx"=data.matrix(newdata[,covar]), 
+          "newx"=as.matrix(newdata[,covar]), 
           "s"=minl,"type"="fit","mode"="lambda"))$fit
-    #pred0 <- predict.lars( model0 ,newx=data.matrix(newdata[,covar]), s=minl,type="fit",mode="lambda")$fit
+    #pred0 <- predict.lars( model0 ,newx=as.matrix(newdata[,covar]), s=minl,type="fit",mode="lambda")$fit
     nvar <- sum( coef(obj)[which.max(l1 / do.call("tail",list("x"=l1, "n"=1)) > ideal_l1_ratio),]>0)
     }
   
   if ( method =="glmnet") {
     #x should be a matrix with 2 or more columns 
-    x0 <- data.matrix(data[,covar,drop=F])
-    newx0 <- data.matrix(newdata[,covar,drop=F])
+    x0 <- as.matrix(data[,covar,drop=F])
+    newx0 <- as.matrix(newdata[,covar,drop=F])
     if (ncol(x0)==1){
       x0<-cbind(x0,1:nrow(x0))
       newx0<-cbind(newx0,1:nrow(newx0))
@@ -471,8 +471,8 @@ LMDC.regre <- function(y,covar,data,newdata,pvalue=.05,
   }
   if ( method =="cosso") {
     #x should be a matrix with 2 or more columns 
-    x0 <- data.matrix(data[,covar,drop=F])
-    newx0 <- data.matrix(newdata[,covar,drop=F])
+    x0 <- as.matrix(data[,covar,drop=F])
+    newx0 <- as.matrix(newdata[,covar,drop=F])
     if (ncol(x0)==1){
       x0<-cbind(x0,1:nrow(x0))
       newx0<-cbind(newx0,1:nrow(newx0))

@@ -40,7 +40,7 @@ station and the average for the period 1980-2009 of daily temperature, daily
 precipitation and daily wind speed.
 }
 \details{
-Meteorological State Agency of Spain (AEMET), \url{http://www.aemet.es/}. Government of Spain.\cr
+Meteorological State Agency of Spain (AEMET), \url{https://www.aemet.es/es/portada}. Government of Spain.\cr
 It marks 36 UTF-8 string of names of stations and 3 UTF-8 string names of provinces through the function \code{\link{iconv}}.\cr
 }
 \examples{

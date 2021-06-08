@@ -25,7 +25,7 @@
 #' @param \dots Further arguments passed to methods. 
 #' 
 #' @seealso  See  \link[base]{Summary} and \link[base]{Complex}.
-#' @author   Manuel Febrero Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
+#' @author   Manuel Febrero Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@@usc.es}
 #' @return
 #' \itemize{ 
 #' \item split.fdata: The value returned from \code{split} is a list of fdata objects 
@@ -137,7 +137,7 @@ split.fdata<-function(x,f,drop=FALSE,...){
 }
 
 
-#' @rdname fdata.methods
+#' @rdname fdata.methods 
 #' @export
 order.fdata<-function(y, fdataobj, na.last = TRUE, 
                       decreasing = FALSE){
@@ -152,14 +152,33 @@ order.fdata<-function(y, fdataobj, na.last = TRUE,
 #' @export is.fdata
 is.fdata<-function(fdataobj){
   if (!inherits(fdataobj, "fdata"))     return(FALSE)
-  else {
-    type<-switch(is(fdataobj,)[1],
-                 matrix={if (ncol(fdataobj[["data"]])!=length(fdataobj[["argvals"]])) return(FALSE)},
-                 data.frame={if (ncol(fdataobj[["data"]])!=length(fdataobj[["argvals"]])) return(FALSE)},
-                 numeric={if (length(fdataobj[["data"]])!=length(fdataobj[["argvals"]])) return(FALSE)},
-                 integer={if (length(fdataobj[["data"]])!=length(fdataobj[["argvals"]])) return(FALSE)})
-  }
-  return(TRUE)
+  else     return(check.fdata(fdataobj))
 }
 
+check.fdata <- function(fdataobj){
+  if (!is.list(fdataobj)) return(FALSE)
+  
+  if (sum(names(fdataobj) %in% c("data","argvals","rangeval","names"))!=4) {
+    message("Inappropriate object names")
+    return(FALSE)
+  }
+  if ( NCOL(fdataobj$data) != length(fdataobj$argvals))  {
+    warning("Inappropriate argvals")
+    return(FALSE)
+  }
+  if (min(fdataobj$argvals) < min(fdataobj$rangeval))   {
+    message("Inappropriate rangeval minimum")
+    return(FALSE)
+  }
+  if (max(fdataobj$argvals) > max(fdataobj$rangeval))   {
+    message("Inappropriate  rangeval maximum")
+    return(FALSE)
+  }
+#  type<-switch(is(fdataobj[["data"]],)[1],
+#               matrix={if (ncol(fdataobj[["data"]])!=length(fdataobj[["argvals"]])) return(FALSE)},
+#               data.frame={if (ncol(fdataobj[["data"]])!=length(fdataobj[["argvals"]])) return(FALSE)},
+#               numeric={if (length(fdataobj[["data"]])!=length(fdataobj[["argvals"]])) return(FALSE)},
+#               integer={if (length(fdataobj[["data"]])!=length(fdataobj[["argvals"]])) return(FALSE)})
+  return(TRUE)
+}
 

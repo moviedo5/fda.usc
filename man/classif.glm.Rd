@@ -89,7 +89,6 @@ procedure.
 }
 \examples{
 \dontrun{
-require(fda.usc.devel)
 data(phoneme)
 mlearn<-phoneme[["learn"]]
 glearn<-phoneme[["classlearn"]]

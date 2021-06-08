@@ -4,7 +4,7 @@
 #' period 1980-2009.  The dataset contains geographic information of each
 #' station and the average for the period 1980-2009 of daily temperature, daily
 #' precipitation and daily wind speed.
-#' @details  Meteorological State Agency of Spain (AEMET), \url{http://www.aemet.es/}. Government of Spain.\cr
+#' @details  Meteorological State Agency of Spain (AEMET), \url{https://www.aemet.es/es/portada}. Government of Spain.\cr
 #' It marks 36 UTF-8 string of names of stations and 3 UTF-8 string names of provinces through the function \code{\link{iconv}}.\cr 
 #' 
 #' @name aemet
@@ -111,7 +111,7 @@ NULL
 #' @references Febrero-Bande, M., Galeano, P., and Gonzalez-Manteiga, W.
 #' (2008).  \emph{Outlier detection in functional data by depth measures with
 #' application to identify abnormal NOx levels}. Environmetrics 19, 4, 331-345.
-#' @source \url{http://mediambient.gencat.cat}
+#' @source \url{http://mediambient.gencat.cat/ca/inici}
 #' @keywords datasets
 #' @examples
 #' 
@@ -157,7 +157,7 @@ NULL
 #' @author Manuel Febrero-Bande and Manuel Oviedo de la Fuente
 #' <manuel.oviedo@@udc.es>
 #' @references Ferraty, F. and Vieu, P. (2006). \emph{NPFDA in practice}. Free
-#' access on line at \url{http://www.lsp.ups-tlse.fr/staph/npfda/}
+#' access on line at \url{http://www.math.univ-toulouse.fr/staph/npfda/}
 #' @source
 #' \url{http://www.math.univ-toulouse.fr/staph/npfda/npfda-datasets.html}
 #' @keywords datasets

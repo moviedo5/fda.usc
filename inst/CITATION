@@ -9,12 +9,12 @@ citEntry(entry = "Article",
   volume       = "51",
   number       = "4",
   pages        = "1--28",
-  url          = "http://www.jstatsoft.org/v51/i04/",
+  url          = "https://www.jstatsoft.org/v51/i04/",
 
   textVersion  =
   paste("Manuel Febrero-Bande, Manuel Oviedo de la Fuente (2012).",
         "Statistical Computing in Functional Data Analysis: The R Package fda.usc.",
         "Journal of Statistical Software, 51(4), 1-28.",
-        "URL http://www.jstatsoft.org/v51/i04/.")
+        "URL https://www.jstatsoft.org/v51/i04/.")
 )
 

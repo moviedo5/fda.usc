@@ -1,6 +1,6 @@
-#' Functional Regression with scalar response using basis representation.
+#' @title Functional Regression with scalar response using basis representation.
 #' 
-#' Computes functional regression between functional explanatory variable
+#' @description Computes functional regression between functional explanatory variable
 #' \eqn{X(t)} and scalar response \eqn{Y} using basis representation.
 #' 
 #' @details
@@ -89,7 +89,7 @@
 #' 
 #' Febrero-Bande, M., Oviedo de la Fuente, M. (2012).  \emph{Statistical
 #' Computing in Functional Data Analysis: The R Package fda.usc.} Journal of
-#' Statistical Software, 51(4), 1-28. \url{http://www.jstatsoft.org/v51/i04/}
+#' Statistical Software, 51(4), 1-28. \url{https://www.jstatsoft.org/v51/i04/}
 #' @keywords regression
 #' @examples 
 #' \dontrun{

@@ -53,10 +53,9 @@ maximum<-function(u,w=rep(1,length(u))) {
 # }
 ##################################
 dist.list <- function (ldata,...) {
-     lenldata <- length(ldata)
+    lenldata <- length(ldata)
     ldist <- list()
       #ldist <- foreach(i=  1:lenldata,.combine="c") %dopar% {
-        
         for (i in 1:lenldata) {
           if (is.factor(ldata[[i]])) 
             ldata[[i]] <- model.matrix(~ldata[[i]])
@@ -69,6 +68,49 @@ dist.list <- function (ldata,...) {
     ldist
 }
 ################################# 
+# Devulve una lista con las distancias para cada variable del "df"
+# y el resto de objetos fdata
+dist.ldata<-function(ldata, metric=NULL, par.metric=NULL,...){
+  if (!is.ldata(ldata)) stop("No ldata object")
+  lenldata <- length(ldata)
+  ldist <- list()
+  nam.ldata <- names(ldata)
+  # nometrica <- is.null(metric)
+  if ("df" %in% nam.ldata){
+    idf <- which(nam.ldata=="df")
+    if (is.data.frame(ldata$df)) nam.df <- names(ldata$df)
+    else nam.df <- colnames(ldata$df)
+    for (i in 1:(NCOL(ldata$df))) {
+      if (is.factor(ldata$df[,i])) 
+        aux <- model.matrix(~ldata$df[,i]) #transforma el factor en dummyies
+      else 
+        aux <- ldata$df[,i]
+      if (is.null(metric[[nam.df[i]]]))
+        ldist[[nam.df[i]]] <- as.matrix(dist(aux), diag =TRUE, upper = TRUE, ...)
+      else {
+        par.metric0 <- par.metric[[nam.df[i]]]
+        par.metric0$x <- aux
+        ldist[[nam.df[i]]] <- do.call(metric[[nam.df[i]]],par.metric0)
+      }
+    }
+    nam.ldata <- setdiff(nam.ldata,"df")
+  }
+  for (i in 1:length(nam.ldata)) {
+      # if (nometrica) 
+    if (is.null(metric[[nam.ldata[i]]]))
+      ldist[[nam.ldata[i]]] <- metric.lp(ldata[[nam.ldata[i]]],...)
+      else {
+        par.metric0 <- par.metric[[nam.ldata[i]]]
+        print( par.metric[[nam.ldata[i]]])
+        par.metric0$fdata1 <- ldata[[nam.ldata[i]]]
+        ldist[[nam.ldata[i]]] <- do.call(metric[[nam.ldata[i]]],par.metric0)
+      }
+  }
+  # names(ldist)<-names(ldata)
+  ldist
+}
+
+
 # metric.ldata2=function(x,y=x
 #                       ,metric
 #                       ,par.metric=list()

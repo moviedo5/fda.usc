@@ -76,12 +76,12 @@
 #' 
 #' Febrero-Bande, M., Oviedo de la Fuente, M. (2012).  \emph{Statistical
 #' Computing in Functional Data Analysis: The R Package fda.usc.} Journal of
-#' Statistical Software, 51(4), 1-28. \url{http://www.jstatsoft.org/v51/i04/}
+#' Statistical Software, 51(4), 1-28. \url{https://www.jstatsoft.org/v51/i04/}
 #' 
 #' N. Kraemer, A.-L. Boulsteix, and G. Tutz (2008). \emph{Penalized Partial
 #' Least Squares with Applications to B-Spline Transformations and Functional
 #' Data}. Chemometrics and Intelligent Laboratory Systems, 94, 60 - 69.
-#' \url{http://dx.doi.org/10.1016/j.chemolab.2008.06.009}
+#' \doi{10.1016/j.chemolab.2008.06.009}
 #' @keywords regression
 #' @examples
 #' \dontrun{
@@ -112,7 +112,7 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
     if (is.null(l))    {
       l<-pc$l
     }
-    else if (length(l)>nrow(pc$rotation)) stop("Incorrect value for  argument l")
+    else if (length(l)>nrow(pc$basis)) stop("Incorrect value for  argument l")
     x <- fdataobj[["data"]]
     tt <- fdataobj[["argvals"]]                                                    
   }
@@ -134,9 +134,9 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
   if (n != (length(y)))   stop("ERROR IN THE DATA DIMENSIONS")
   C <- match.call()
   ycen = y - mean(y)
-  vs<-t(pc$rotation$data[l,,drop=F])
-  scores<-Z<-(pc$x[,l,drop=F])
-  cnames<-colnames(pc$x)[l]
+  vs<-t(pc$basis$data[l,,drop=F])
+  scores<-Z<-(pc$coefs[,l,drop=F])
+  cnames<-colnames(pc$coefs)[l]
   df<-lenl+1
   J<-min(np,lenl)
   ymean<-mean(y)
@@ -152,7 +152,7 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
     D<-diag(d)
     diagJ<-diag(J)
     #    lenrn<-length(rn)
-    scores<-cbind(rep(1,n),pc$x[,l])
+    scores<-cbind(rep(1,n),pc$coefs[,l])
     order.deriv<-0     
     if (!is.matrix(P)){
       if (is.vector(P)) {
@@ -176,7 +176,7 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
     df<-fdata.trace(H)
     coefs<-drop(coefs)
     names(coefs)<-c("Intercept",cnames)
-    beta.est<-coefs[-1]*pc$rotation[l]
+    beta.est<-coefs[-1]*pc$basis[l]
     beta.est$data<-colSums(beta.est$data)
     beta.est$names$main<-"beta.est"
     beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
@@ -207,7 +207,7 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
     out <- list(call = C, beta.est = beta.est,coefficients=coefs,
                 fitted.values =yp,residuals = e,H=H,df.residual = rdf,r2=r2,#GCV=GCV,
                 sr2 = sr2,Vp=Vp,l = l,lambda=lambda,fdata.comp=pc,lm=object.lm,
-                coefs=coefficients,fdataobj = fdataobj,y = y)
+                scoefs=coefficients,fdataobj = fdataobj,y = y)
     ##################################
   }
   else {
@@ -218,7 +218,7 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
     pf <- paste(response, "~", sep = "")
     for (i in 1:length(cnames)) pf <- paste(pf,"+",cnames[i],sep="")
     object.lm = lm(formula = pf,data=data.frame(dataf),weights=weights,x=TRUE, y=TRUE)
-    beta.est<-object.lm$coefficients[2:(lenl+1)]*pc$rotation[l]
+    beta.est<-object.lm$coefficients[2:(lenl+1)]*pc$basis[l]
     beta.est$data<-colSums(beta.est$data)
     beta.est$names$main<-"beta.est"
     beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
@@ -309,7 +309,7 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
 #' N. Kraemer, A.-L. Boulsteix, and G. Tutz (2008). \emph{Penalized Partial
 #' Least Squares with Applications to B-Spline Transformations and Functional
 #' Data}. Chemometrics and Intelligent Laboratory Systems, 94, 60 - 69.
-#' \url{http://dx.doi.org/10.1016/j.chemolab.2008.06.009}
+#' \doi{10.1016/j.chemolab.2008.06.009}
 #' 
 #' Martens, H., Naes, T. (1989) \emph{Multivariate calibration.} Chichester:
 #' Wiley.
@@ -320,7 +320,7 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
 #' 
 #' Febrero-Bande, M., Oviedo de la Fuente, M. (2012).  \emph{Statistical
 #' Computing in Functional Data Analysis: The R Package fda.usc.} Journal of
-#' Statistical Software, 51(4), 1-28. \url{http://www.jstatsoft.org/v51/i04/}
+#' Statistical Software, 51(4), 1-28. \url{https://www.jstatsoft.org/v51/i04/}
 #' @keywords regression
 #' @examples
 #' \dontrun{
@@ -333,10 +333,10 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
 #' @export fregre.pls
 fregre.pls=function(fdataobj, y=NULL, l = NULL,lambda=0,P=c(0,0,1),...){
   if (is(fdataobj,"fdata.comp")) {
-    pc<-fdataobj
-    fdataobj<-pc$fdataobj
-    if  (is.null(l)) l<-1:nrow(pc$rotation)
-    if  (is.null(y)) y<-pc$y
+    pc <- fdataobj
+    fdataobj <- pc$fdataobj
+    if  (is.null(l)) l<-1:nrow(pc$basis)
+    if  (is.null(y)) y <- pc$y
     else if (all(y!=pc$y)) warning("y is different from that calculated on the pls basis")
   }
   else {
@@ -357,17 +357,17 @@ fregre.pls=function(fdataobj, y=NULL, l = NULL,lambda=0,P=c(0,0,1),...){
   C <- match.call()
   if (is.null(rownames(x)))        rownames(x) <- 1:n
   ycen = y - mean(y)
-  vs <- pc$rotation$data[,,drop=FALSE]
-  Z<-pc$x[,l,drop=F]
+  vs <- pc$basis$data[,,drop=FALSE]
+  Z<-pc$coefs[,l,drop=F]
   xcen<-pc$fdataobj.cen
-  cnames<-colnames(pc$x)[l]
+  cnames<-colnames(pc$coefs)[l]
   response = "y"
   df<-data.frame(y,Z)
   colnames(df)<-c("y",cnames)
   pf <- paste(response, "~", sep = "")
   for (i in 1:length(cnames)) pf <- paste(pf,"+",cnames[i],sep="")
   object.lm = lm(formula = pf, data =df , x = TRUE,y = TRUE)
-  beta.est<-object.lm$coefficients[2:(lenl+1)]*pc$rotation[l]
+  beta.est<-object.lm$coefficients[2:(lenl+1)]*pc$basis[l]
   beta.est$data<-apply(beta.est$data,2,sum)
   beta.est$names$main<-"beta.est"
   beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
@@ -414,7 +414,7 @@ fregre.pls=function(fdataobj, y=NULL, l = NULL,lambda=0,P=c(0,0,1),...){
   colnames(coefficients) <- c("Estimate", "Std. Error","t value", "Pr(>|t|)")
   
   out <- list(call = C,coefficients=object.lm$coefficients, residuals = object.lm$residuals,
-              fitted.values =object.lm$fitted.values, beta.est = beta.est,coefs=coefficients,
+              fitted.values =object.lm$fitted.values, beta.est = beta.est, scoefs=coefficients,
               H=H,df.residual = rdf,r2=r2, sr2 = sr2, Vp=Vp,l = l,lambda=lambda,P=P, fdata.comp=pc,
               lm=object.lm,fdataobj = fdataobj,y = y)
   class(out) = "fregre.fd"
@@ -489,7 +489,7 @@ fregre.pls=function(fdataobj, y=NULL, l = NULL,lambda=0,P=c(0,0,1),...){
 #' 
 #' Febrero-Bande, M., Oviedo de la Fuente, M. (2012).  \emph{Statistical
 #' Computing in Functional Data Analysis: The R Package fda.usc.} Journal of
-#' Statistical Software, 51(4), 1-28. \url{http://www.jstatsoft.org/v51/i04/}
+#' Statistical Software, 51(4), 1-28. \url{https://www.jstatsoft.org/v51/i04/}
 #' @keywords regression
 #' @examples
 #' \dontrun{
@@ -549,7 +549,7 @@ fregre.pls.cv=function (fdataobj, y, kmax=8,lambda=0,P=c(0,0,1),
         pls<-fdata2pls(fdataobj,y,ncomp=kmax,lambda=lambda[r],P=P,...)
         for (j in 1:kmax) {
           pls2<-pls
-          pls2$rotation<-pls$rotation[1:j]
+          pls2$basis<-pls$basis[1:j]
           out = fregre.pls(pls2,y,lambda=lambda[r],P=P,...)
           ck<-n-out$df.residual
           s2 <- sum(out$residuals^2)/n  #(n-ck)
@@ -598,13 +598,12 @@ fregre.pls.cv=function (fdataobj, y, kmax=8,lambda=0,P=c(0,0,1),
     }   }
   colnames(cv.AIC) = paste("PLS",1:kmax , sep = "")
   rownames(cv.AIC) = paste("lambda=",signif(lambda,4) , sep = "")
-  #    pc2$basis<-pc$rotation[1:pc.opt]
+  #    pc2$basis<-pc$basis[1:pc.opt]
   fregre=fregre.pls(fdataobj,y,l=1:pc.opt,lambda=lambda[rn.opt],P=P,...) #B.B bug detected
   MSC.min = cv.AIC[rn.opt,pc.opt]
   return(list("fregre.pls"=fregre,pls.opt = 1:pc.opt,lambda.opt=lambda[rn.opt],
               MSC.min = MSC.min,MSC = cv.AIC))
 }
-
 
 #' Functional penalized PC regression with scalar response using selection of
 #' number of PC components
@@ -693,7 +692,7 @@ fregre.pls.cv=function (fdataobj, y, kmax=8,lambda=0,P=c(0,0,1),
 #' @references Febrero-Bande, M., Oviedo de la Fuente, M. (2012).
 #' \emph{Statistical Computing in Functional Data Analysis: The R Package
 #' fda.usc.} Journal of Statistical Software, 51(4), 1-28.
-#' \url{http://www.jstatsoft.org/v51/i04/}
+#' \url{https://www.jstatsoft.org/v51/i04/}
 #' @keywords regression
 #' @examples
 #' \dontrun{
@@ -787,7 +786,7 @@ fregre.pc.cv = function (fdataobj, y, kmax=8,lambda=0,P=c(0,0,1),criteria = "SIC
             c1<-matrix(pc$l[1:k],ncol=1)
           }
           for (j in 1:max.c) {
-            pc2$rotation <- pc$rotation#[c1[, j]]
+            pc2$basis <- pc$basis#[c1[, j]]
             pc2$l <- pc$l[c1[, j]]
             out = fregre.pc(pc2, y,l=c1[, j],lambda=lambda[r],P=P,weights=weights,...)
             ck<-n-out$df.residual
@@ -857,7 +856,7 @@ fregre.pc.cv = function (fdataobj, y, kmax=8,lambda=0,P=c(0,0,1),criteria = "SIC
             maxk<-max(c1[, j])
             for (i in 1:n){
               pc2<-pcl[[i]]
-              pc2$rotation<-pcl[[i]]$rotation#[c1[,j]]
+              pc2$basis<-pcl[[i]]$basis#[c1[,j]]
               pc2$l<-pcl[[i]]$l[c1[,j]]
               out = fregre.pc(pc2,y[-i],l=c1[,j],weights=weights[-i],...) #####
               ck<-n-out$df.residual

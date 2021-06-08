@@ -63,7 +63,7 @@
 #' 
 #' Febrero-Bande, M., Oviedo de la Fuente, M. (2012).  \emph{Statistical
 #' Computing in Functional Data Analysis: The R Package fda.usc.} Journal of
-#' Statistical Software, 51(4), 1-28. \url{http://www.jstatsoft.org/v51/i04/}
+#' Statistical Software, 51(4), 1-28. \url{https://www.jstatsoft.org/v51/i04/}
 #' 
 #' @keywords utilities
 #' 
@@ -98,16 +98,16 @@ dev.S=function (y, S, obs,family = gaussian(),off,offdf,criteria="GCV",
     res = fdata.trace(t(e[l]) %*% W[l,l] %*% e[l])
     ndf <- sum(diag(S)[l],na.rm=TRUE)+offdf
     if (is.na(type.i)) {
-        if (ndf>0.8*n)  vv = Inf
+        if (ndf>0.5*n)  vv = Inf
         else vv = 1/(1 - 2 * ndf/n)
     }
     else {
         vv<-switch(type.i,
-                   "1"=if (ndf>0.8*n){vv=Inf} else {vv = (1 - ndf/n)^(-2)},
-                   "2"=if (ndf>0.8*n){vv=Inf} else {vv = exp(2 * ndf/n)},
-                   "3"=if (ndf>0.8*n){vv=Inf} else {vv = (1 + ndf/n)/(1 - ndf/n)},
-                   "4"=if (ndf>0.8*n){vv=Inf} else {vv = (1 + ndf/n)/(1 - ndf/n)},
-                   "5"=if (ndf>0.8*n){vv=Inf} else { vv = 1/(1 - 2 * ndf/n)})
+                   "1"=if (ndf>0.5*n){vv=Inf} else {vv = (1 - ndf/n)^(-2)},
+                   "2"=if (ndf>0.5*n){vv=Inf} else {vv = exp(2 * ndf/n)},
+                   "3"=if (ndf>0.5*n){vv=Inf} else {vv = (1 + ndf/n)/(1 - ndf/n)},
+                   "4"=if (ndf>0.5*n){vv=Inf} else {vv = (1 + ndf/n)/(1 - ndf/n)},
+                   "5"=if (ndf>0.5*n){vv=Inf} else { vv = 1/(1 - 2 * ndf/n)})
          }
     return(res * vv/n)
 }

@@ -28,11 +28,11 @@
 #' 
 #' @references
 #' Escanciano, J. C. (2006). A consistent diagnostic test for regression models using projections. 
-#' Econometric  Theory, 22, 1030-1051. \url{http://dx.doi.org/10.1017/S0266466606060506}
+#' Econometric  Theory, 22, 1030-1051. \doi{10.1017/S0266466606060506}
 #'  
 #' Garcia-Portugues, E., Gonzalez-Manteiga, W. and Febrero-Bande, M. (2014). A goodness--of--fit
 #' test for the functional linear model with scalar response. Journal of Computational and 
-#' Graphical Statistics, 23(3), 761-778. \url{http://dx.doi.org/10.1080/10618600.2013.812519}
+#' Graphical Statistics, 23(3), 761-778. \doi{10.1080/10618600.2013.812519}
 #'  
 #' @note No NA's are allowed in the functional covariate.
 #'  

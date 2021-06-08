@@ -45,7 +45,7 @@
 #' data analysis.} Springer Series in Statistics, New York.
 #' 
 #' Ferraty, F. and Vieu, P. (2006). \emph{NPFDA in practice}. Free access on
-#' line at \url{http://www.lsp.ups-tlse.fr/staph/npfda/}
+#' line at \url{http://www.math.univ-toulouse.fr/staph/npfda/}
 #' @keywords classif
 #' @examples
 #' \dontrun{
@@ -165,7 +165,7 @@ classif.np <- function  (group, fdataobj, h = NULL, Ker = AKer.norm, metric,
     par.S$Ker <- Ker
   if (is.null(par.S$w)) 
     par.S$w <- weights
-  par.fda.usc <- eval(parse(text = "fda.usc.devel:::par.fda.usc"), 
+  par.fda.usc <- eval(parse(text = "fda.usc:::par.fda.usc"), 
                       envir = .GlobalEnv)
   warn <- par.fda.usc$warning
   for (i in 1:lenh) {

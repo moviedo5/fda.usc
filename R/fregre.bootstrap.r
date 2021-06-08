@@ -56,7 +56,7 @@
 #' 
 #' Febrero-Bande, M., Oviedo de la Fuente, M. (2012).  \emph{Statistical
 #' Computing in Functional Data Analysis: The R Package fda.usc.} Journal of
-#' Statistical Software, 51(4), 1-28. \url{http://www.jstatsoft.org/v51/i04/}
+#' Statistical Software, 51(4), 1-28. \url{https://www.jstatsoft.org/v51/i04/}
 #' @keywords regression
 #' @examples
 #' \dontrun{ 
@@ -148,7 +148,7 @@ knn.fix=list()
 #  if (kmax.fix) coefs.boot <- array(NA,dim=c(nb,ncoefs))
 #  else coefs.boot<-list()   
 
-par.fda.usc <- eval(parse(text="fda.usc.devel:::par.fda.usc"), envir=.GlobalEnv)
+par.fda.usc <- eval(parse(text="fda.usc:::par.fda.usc"), envir=.GlobalEnv)
 ncores <- par.fda.usc$ncores
 inumgr <- icount(nb)
 

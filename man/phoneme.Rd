@@ -46,7 +46,7 @@ table(phoneme$classlearn)
 }
 \references{
 Ferraty, F. and Vieu, P. (2006). \emph{NPFDA in practice}. Free
-access on line at \url{http://www.lsp.ups-tlse.fr/staph/npfda/}
+access on line at \url{http://www.math.univ-toulouse.fr/staph/npfda/}
 }
 \author{
 Manuel Febrero-Bande and Manuel Oviedo de la Fuente

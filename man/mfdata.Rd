@@ -17,48 +17,20 @@
 \alias{Ops.mfdata}
 \alias{Math.mfdata}
 \alias{Summary.mfdata}
-\alias{c.mdata}
 \title{mfdata class definition and utilities}
 \usage{
 mfdata(...)
 
-\method{c}{mdata}(x, f, drop = FALSE, ...)
-
 \method{names}{mfdata}(x)
 
-is.mfdata(x)
-
-\method{[}{mfdata}(x, i, row = FALSE)
-
 \method{subset}{mfdata}(x, subset, ...)
-
-\method{plot}{mfdata}(x, ask = FALSE, color, ...)
-
-\method{mean}{mfdata}(x, ...)
-
-mfdata.cen(x, meanX = mean.mfdata(x))
 }
 \arguments{
 \item{\dots}{Further arguments passed to methods.}
 
 \item{x}{object of class \code{mfdata}}
 
-\item{f}{index of observations}
-
-\item{drop}{passed on to respective function}
-
-\item{i}{index}
-
-\item{row}{logical If \code{FALSE}  (by default), \code{i} index selects 
-the variables. If \code{TRUE},  \code{i} index selects the observations.}
-
 \item{subset}{subset}
-
-\item{ask}{logilcal    If TRUE (and the R session is interactive) the user is asked for input, before a new figure is drawn.}
-
-\item{color}{colors to interpolate; must be a valid argument to  \code{colorRampPalette}.}
-
-\item{meanX}{functional mean}
 }
 \description{
 mfdata is a list with fdata type of object:

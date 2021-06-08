@@ -123,7 +123,7 @@ res
 \references{
 Febrero-Bande M. and Gonzalez-Manteiga W. (2012).
 \emph{Generalized Additive Models for Functional Data}. TEST.
-Springer-Velag.  \url{http://dx.doi.org/10.1007/s11749-012-0308-0}
+Springer-Velag.  \doi{10.1007/s11749-012-0308-0}
 
 Opsomer J.D. and Ruppert D.(1997). \emph{Fitting a bivariate additive model
 by local polynomial regression}.Annals of Statistics, \code{25}, 186-211.

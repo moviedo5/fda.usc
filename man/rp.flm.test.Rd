@@ -236,7 +236,7 @@ arXiv:1701.08363. \url{https://arxiv.org/abs/1701.08363}
 Garcia-Portugues, E., Gonzalez-Manteiga, W. and Febrero-Bande, M. (2014). A
 goodness-of-fit test for the functional linear model with scalar response.
 Journal of Computational and Graphical Statistics, 23(3), 761--778.
-\url{http://dx.doi.org/10.1080/10618600.2013.812519}
+\doi{10.1080/10618600.2013.812519}
 }
 \author{
 Eduardo Garcia-Portugues (\email{edgarcia@est-econ.uc3m.es}) and

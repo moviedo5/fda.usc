@@ -35,9 +35,9 @@ globalVariables('icnt')
                               fields=c("Title","Version","Date")))
     foo <- suppressWarnings(foreach::"%dopar%"(foreach::foreach(i=1), {}))
      packageStartupMessage(
-      paste("----------------------------------------------------------------------------------\n",pkg.info["Title"]),"\n",
+      #paste("----------------------------------------------------------------------------------\n",pkg.info["Title"]),"\n",
       #	 "Functional Data Analysis in R \n",
-      paste(" fda.usc version ", pkg.info["Version"]," (built on ", pkg.info["Date"], ") is now loaded\n", sep=""),
+      #paste(" fda.usc version ", pkg.info["Version"]," (built on ", pkg.info["Date"], ") is now loaded\n", sep=""),
       paste(" fda.usc is running sequentially usign foreach package\n"),
       paste(" Please, execute ops.fda.usc() once to run in local parallel mode\n"),
       paste(" Deprecated functions: min.basis, min.np, anova.hetero, anova.onefactor, anova.RPm\n"),

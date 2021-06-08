@@ -73,7 +73,7 @@
 #' data analysis.} Springer Series in Statistics, New York.
 #' 
 #' Ferraty, F. and Vieu, P. (2006). \emph{NPFDA in practice}.  Free access on
-#' line at \url{http://www.lsp.ups-tlse.fr/staph/npfda/}
+#' line at \url{http://www.math.univ-toulouse.fr/staph/npfda/}
 #' @source \url{http://www.math.univ-toulouse.fr/staph/npfda/}
 #' @keywords cluster
 #' @examples
@@ -132,8 +132,8 @@ floor((ncol(DATA1) - nderiv - 4)/2), floor(ncol(DATA1)/3)),...)
   range.t<-rtt
  }
 else {      
-     	if(is.vector(fdata1)) fdata1 <- data.matrix(t(fdata1))
-    	if(is.vector(fdata2)) fdata2 <- data.matrix(t(fdata2)) 
+     	if(is.vector(fdata1)) fdata1 <- as.matrix(t(fdata1))
+    	if(is.vector(fdata2)) fdata2 <- as.matrix(t(fdata2)) 
       DATA1<-fdata1
       DATA2<-fdata2
       range.t<-c(1,ncol(DATA1))
@@ -232,8 +232,8 @@ floor((ncol(DATA1) - nderiv - 4)/2), floor(ncol(DATA1)/3)), period=NULL,...)
   range.t<-rtt
  }
 else {      
-     	if(is.vector(fdata1)) fdata1 <- data.matrix(t(fdata1))
-    	if(is.vector(fdata2)) fdata2 <- data.matrix(t(fdata2)) 
+     	if(is.vector(fdata1)) fdata1 <- as.matrix(t(fdata1))
+    	if(is.vector(fdata2)) fdata2 <- as.matrix(t(fdata2)) 
       DATA1<-fdata1
       DATA2<-fdata2
       range.t<-c(1,ncol(DATA1))
@@ -329,8 +329,8 @@ semimetric.hshift <- function(fdata1,fdata2=fdata1, t=1:ncol(DATA1),...)
   DATA2<-fdata2[["data"]]
  }
 else {      
-     	if(is.vector(fdata1)) fdata1 <- data.matrix(t(fdata1))
-    	if(is.vector(fdata2)) fdata2 <- data.matrix(t(fdata2)) 
+     	if(is.vector(fdata1)) fdata1 <- as.matrix(t(fdata1))
+    	if(is.vector(fdata2)) fdata2 <- as.matrix(t(fdata2)) 
       DATA1<-fdata1
       DATA2<-fdata2
       }
@@ -390,8 +390,8 @@ semimetric.mplsr <- function(fdata1,fdata2=fdata1, q=2, class1,...)
   range.t<-rtt
  }
 else {      
-     	if(is.vector(fdata1)) fdata1 <- data.matrix(t(fdata1))
-    	if(is.vector(fdata2)) fdata2 <- data.matrix(t(fdata2)) 
+     	if(is.vector(fdata1)) fdata1 <- as.matrix(t(fdata1))
+    	if(is.vector(fdata2)) fdata2 <- as.matrix(t(fdata2)) 
       DATA1<-fdata1
       DATA2<-fdata2
       range.t<-c(1,ncol(DATA1))
@@ -465,8 +465,8 @@ semimetric.pca <- function(fdata1, fdata2=fdata1, q=1,...)
   range.t<-rtt
  }
 else {      
-     	if(is.vector(fdata1)) fdata1 <- data.matrix(t(fdata1))
-    	if(is.vector(fdata2)) fdata2 <- data.matrix(t(fdata2)) 
+     	if(is.vector(fdata1)) fdata1 <- as.matrix(t(fdata1))
+    	if(is.vector(fdata2)) fdata2 <- as.matrix(t(fdata2)) 
       DATA1<-fdata1
       DATA2<-fdata2
       range.t<-c(1,ncol(DATA1))
@@ -494,85 +494,6 @@ else {
 }
 
 
-mplsr <- function(X, Y, ncomp = 2,lambda=0,P=c(0,0,1),...)
-{
-  #
-  # Orthogonal Scores Algorithm for PLS (Martens and Naes, pp. 121--123)
-  #
-  # X: predictors (matrix)
-  #
-  # Y: multivariate response (matrix)
-  #
-  # K: The number of PLS factors in the model which must be less than or
-  #    equal to the  rank of X.
-  #
-  # Returned Value is the vector of PLS regression coefficients
-  #
-  dx <- dim(X)
-  J<-dx[2]
-  if (is.fdata(X)) {
-    X<-X$data
-    arg<-X$argvals
-  }
-  else arg<-1:J
-  K<-ncomp
-  tol <- 1e-10
-  X <- data.matrix(X)
-  Y <- data.matrix(Y)
-  nbclass <- ncol(Y)
-  #	xbar <- apply(X, 2, sum)/dx[1]
-  #	ybar <- apply(Y, 2, sum)/dx[1]
-  xbar <- colSums(X)/dx[1]
-  ybar <- colSums(Y)/dx[1]
-  X0 <- X - outer(rep(1, dx[1]), xbar)
-  Y0 <- Y - outer(rep(1, dx[1]), ybar)
-  Xtotvar <- sum(X0 * X0)
-  PP<-W <- matrix(0, dx[2], K)
-  Q <- matrix(0, nbclass, K)
-  #	sumofsquaresY <- apply(Y0^2, 2, sum)
-  sumofsquaresY <-colSums(Y0^2)
-  u <- Y0[, order(sumofsquaresY)[nbclass]]
-  
-  tee <- 0
-  cee<-numeric(K)
-  M<-NULL
-  if (lambda>0) { 
-    if (is.vector(P))  {     P<-P.penalty(arg,P)          }
-    M <- solve( diag(J) + lambda*P)
-  }                              	
-  for(i in 1:K) {
-    test <- 1 + tol
-    while(test > tol) {
-      w <- crossprod(X0, u)
-      if (!is.null(M)) { w <- M %*% w}		
-      w <- w/sqrt(crossprod(w)[1])
-      W[, i] <- w
-      teenew <- X0 %*% w
-      test <- sum((tee- teenew)^2)       #norm.fdata(tee,teenew)
-      tee<- teenew			
-      cee[i] <- crossprod(tee)[1]
-      p <- crossprod(X0, (tee/cee[i]))
-      PP[, i] <- p
-      q <- crossprod(Y0, tee)[, 1]/cee[i]
-      u <- Y0 %*% q
-      u <- u/crossprod(q)[1]
-    }
-    Q[, i] <- q
-    X0 <- X0 - tee %*% t(p)
-    Y0 <- Y0 - tee %*% t(q)
-  }
-  tQ=solve(crossprod(PP, W)) %*% t(Q)	
-  COEF <- W %*% tQ
-  b0 <- ybar - t(COEF) %*% xbar   
-  
-  #	fitted <- drop(tee) *drop(tQ) + rep(ybar, each = dx[1])
-  residuals <- Y0     
-  fitted <- drop(Y-Y0)
-  #Yscores = u,Yloadings=t(q),  
-  list(b0 = b0, COEF = COEF,scores=tee,loadings=p,loading.weights = W,
-       projection=W,Xmeans=xbar,Ymeans=ybar,fitted.values = fitted,
-       residuals = residuals,cee=cee,Xvar=colSums(PP*PP)*cee,Xtotvar=Xtotvar)
-}
 
 hshift <- function(x,y, t=1:ncol(x),...)
 {

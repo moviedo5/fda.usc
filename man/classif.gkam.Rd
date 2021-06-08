@@ -102,7 +102,7 @@ table(gtest,p1)
 \references{
 Febrero-Bande M. and Gonzalez-Manteiga W. (2012).
 \emph{Generalized Additive Models for Functional Data}. TEST.
-Springer-Velag.  \url{http://dx.doi.org/10.1007/s11749-012-0308-0}
+Springer-Velag.  \doi{10.1007/s11749-012-0308-0}
 
 McCullagh and Nelder (1989), \emph{Generalized Linear Models} 2nd ed.
 Chapman and Hall.

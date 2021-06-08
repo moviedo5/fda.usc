@@ -38,7 +38,7 @@ P.penalty((1:10)/10,P=c(0,0,1))
 N. Kraemer, A.-L. Boulsteix, and G. Tutz (2008). \emph{Penalized
 Partial Least Squares with Applications to B-Spline Transformations and
 Functional Data}. Chemometrics and Intelligent Laboratory Systems, 94, 60 -
-69. \url{http://dx.doi.org/10.1016/j.chemolab.2008.06.009}
+69. \doi{10.1016/j.chemolab.2008.06.009}
 }
 \seealso{
 \code{\link{fdata2pls}}

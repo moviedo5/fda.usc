@@ -112,9 +112,9 @@ dfv.test(X,Y1,B=100)
 }
 \references{
 Delsol, L., Ferraty, F. and Vieu, P. (2011). Structural test in regression on functional variables. 
-Journal of Multivariate Analysis, 102, 422-447. \url{http://dx.doi.org/10.1016/j.jmva.2010.10.003}
+Journal of Multivariate Analysis, 102, 422-447. \doi{10.1016/j.jmva.2010.10.003}
 
-Delsol, L. (2013). No effect tests in regression on functional variable and some applications to spectrometric studies. Computational Statistics, 28(4), 1775-1811. \url{http://dx.doi.org/10.1007/s00180-012-0378-1}
+Delsol, L. (2013). No effect tests in regression on functional variable and some applications to spectrometric studies. Computational Statistics, 28(4), 1775-1811. \doi{10.1007/s00180-012-0378-1}
 }
 \seealso{
 \code{\link{rwild}}, \code{\link{flm.test}}, \code{\link{flm.Ftest}}, \code{\link{fregre.np}}

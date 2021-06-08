@@ -74,9 +74,10 @@ card](https://zenodo.org/record/3386752/files/RefCard_fda.usc_v1.pdf?download=1)
 Febrero-Bande, M. and Oviedo de la Fuente, M. (2012). Statistical
 Computing in Functional Data Analysis: The R Package fda.usc. *Journal
 of Statistical Software*, 51(4):1-28.
-<http://www.jstatsoft.org/v51/i04/>
+<http://dx.doi.org/10.18637/jss.v051.i04>
 
-<!--
+<!-- 
+<https://www.jstatsoft.org/v51/i04/>
 library(roxygen2)
 setwd("C:/Users/moviedo/github/fda.usc/")
 getwd()
@@ -85,9 +86,8 @@ roxygenize()
 devtools::document()
 
 library(devtools)
-# devtools::install_github("moviedo5/fda.usc.devel",auth_user="moviedo5")
+# devtools::install_github("moviedo5/fda.usc",auth_user="moviedo5")
 
-R CMD build fda.usc_2.0.3
 R CMD build fda.usc
 R CMD check fda.usc_2.0.3.tar.gz --as-cran
 R CMD INSTALL fda.usc_2.0.3.tar.gz --build

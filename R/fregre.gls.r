@@ -67,7 +67,7 @@
 #' @references Oviedo de la Fuente, M., Febrero-Bande, M., Pilar Munoz, and
 #' Dominguez, A.  (2018). Predicting seasonal influenza transmission using 
 #' functional regression models with temporal dependence. PloS one, 13(4), e0194250.
-#' \url{https://doi.org/10.1371/journal.pone.0194250}
+#' \doi{10.1371/journal.pone.0194250}
 
 #' @keywords regression models
 #' @examples
@@ -320,9 +320,9 @@ if (length(vfunc)>0) {
     par.fregre$data=XX
     y<-XX[,1]    
     ycen = y - mean(y)
-    scores<-data.matrix(XX[,-c(1)])     
+    scores<-as.matrix(XX[,-c(1)])     
     
-#    scores<-data.matrix(XX)     
+#    scores<-as.matrix(XX)     
 #    W<-diag(weights)  
     W<-diag(n)
     if (!rn0 & !lambda0) {

@@ -129,7 +129,7 @@ summary(res.gls)
 Oviedo de la Fuente, M., Febrero-Bande, M., Pilar Munoz, and
 Dominguez, A.  (2018). Predicting seasonal influenza transmission using 
 functional regression models with temporal dependence. PloS one, 13(4), e0194250.
-\url{https://doi.org/10.1371/journal.pone.0194250}
+\doi{10.1371/journal.pone.0194250}
 }
 \keyword{models}
 \keyword{regression}

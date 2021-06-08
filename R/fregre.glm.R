@@ -181,7 +181,7 @@ else {
         l<-basis.x[[vfunc[i]]]$l
         lenl<-length(l)
         vs <- t(basis.x[[vfunc[i]]]$basis$data)
-        Z<-basis.x[[vfunc[i]]]$x[,l,drop=FALSE]     
+        Z<-basis.x[[vfunc[i]]]$coefs[,l,drop=FALSE]     
         response = "y"
         colnames(Z) = name.coef[[vfunc[i]]]=paste(vfunc[i], ".",colnames(Z),sep ="")      
 #       colnames(Z) = name.coef[[vfunc[i]]]=paste(vfunc[i],".",rownames(basis.x[[vfunc[i]]]$basis$data),sep ="")
@@ -475,8 +475,8 @@ if (lenvfunc>0) {
         basis<-basis.x[[vfunc[i]]]
         l<-basis$l
         vs <- t(basis$basis$data)           
-        basis$x<-basis$x[,l,drop=FALSE]
-        Z<-basis$x
+        basis$coefs <- basis$coefs[,l,drop=FALSE]
+        Z<-basis$coefs
         response = "y"
         colnames(Z) = name.coef[[vfunc[i]]]=paste(vfunc[i], ".",rownames(basis$basis$data),sep ="")
         XX =data.frame(XX,Z)
@@ -560,7 +560,7 @@ if (lenvfunc>0) {
 if    (basis.x[[vfunc[i]]]$type=="pls") {
    hay.pls<-TRUE
    rn0<-TRUE # SI ES Pls ASI TIENE EN CUENTA LOS DOF QUE EN EL LM() NO LO TENDRIA
-   lenl<-ncol(basis.x[[vfunc[i]]]$x)
+   lenl<-ncol(basis.x[[vfunc[i]]]$coefs)
    df<-df+basis.x[[vfunc[i]]]$df[lenl]
    }
 }       
@@ -568,8 +568,8 @@ if (!is.data.frame(XX)) XX=data.frame(XX)
     par.fregre$formula=pf
     par.fregre$data=XX
     y<-XX[,1]    
-    scores<-data.matrix(XX[,-(1:2)])     
-#    scores<-data.matrix(XX)     
+    scores<-as.matrix(XX[,-(1:2)])     
+#    scores<-as.matrix(XX)     
     W<-diag(weights)  
     if (!rn0 & !lambda0) {
       if (lenvfunc==0 & length(vnf)==0)      {

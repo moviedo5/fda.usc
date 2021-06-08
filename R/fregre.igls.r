@@ -59,7 +59,7 @@
 #' @references Oviedo de la Fuente, M., Febrero-Bande, M., Pilar Munoz, and
 #' Dominguez, A.  (2018). Predicting seasonal influenza transmission using 
 #' functional regression models with temporal dependence. PloS one, 13(4), e0194250.
-#' \url{https://doi.org/10.1371/journal.pone.0194250}
+#' \doi{10.1371/journal.pone.0194250}
 #' @examples
 #' \dontrun{ 
 #' data(tecator)
@@ -221,8 +221,8 @@ fregre.igls<-function (formula, data, basis.x = NULL, basis.b = NULL, correlatio
           basis <- basis.x[[vfunc[i]]]
           l <- basis$l
           vs <- t(basis$basis$data)
-          basis$x <- basis$x[, l, drop = FALSE]
-          Z <- basis$x
+          basis$coefs <- basis$coefs[, l, drop = FALSE]
+          Z <- basis$coefs
           response = "y"
           colnames(Z) = name.coef[[vfunc[i]]] = paste(vfunc[i], 
                                                       ".", rownames(basis$basis$data), sep = "")
@@ -333,7 +333,7 @@ fregre.igls<-function (formula, data, basis.x = NULL, basis.b = NULL, correlatio
   par.fregre$formula = pf
   par.fregre$data = XX
   y <- XX[, 1]
-  scores <- data.matrix(XX[, -(1:2)])
+  scores <- as.matrix(XX[, -(1:2)])
   W <- diag(weights)
   error <- FALSE
  

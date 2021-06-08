@@ -44,20 +44,6 @@ dcor.y<-function(ldist,response,n,bcdcor=TRUE){
   dst
 }
 ################################################################################
-#se calculan todas las distancias respecto si mismas
-dist.list<-function(ldata,...){
-  lenldata<-length(ldata)
-  ldist<-list()
-  for (i in 1:(lenldata)) {
-    if (is.factor(ldata[[i]])) ldata[[i]]<-model.matrix(~ldata[[i]]) #transforma el factor en dummyies
-    
-    if (is.fdata(ldata[[i]]))      ldist[[i]]<-metric.lp(ldata[[i]],...)
-    else   ldist[[i]]<-as.matrix(dist(ldata[[i]]), diag =TRUE, upper = TRUE,     p = 2)
-  }
-  names(ldist)<-names(ldata)
-  ldist
-}
-################################################################################
 
 ####################
 #best.pc.dcor<- function(data,"x","y"){

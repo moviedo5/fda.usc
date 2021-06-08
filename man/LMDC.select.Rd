@@ -181,7 +181,7 @@ Ordonez, C., Oviedo de la Fuente, M., Roca-Pardinas, J.,
 Rodriguez-Perez, J. R. (2018). Determining optimum wavelengths for leaf
 water content estimation from reflectance: A distance correlation approach.
 \emph{Chemometrics and Intelligent Laboratory Systems}. 173,41-50
-\url{https://doi.org/10.1016/j.chemolab.2017.12.001}.
+\doi{10.1016/j.chemolab.2017.12.001}.
 }
 \seealso{
 See Also as: \code{\link{lm}}, \code{\link{gam}},

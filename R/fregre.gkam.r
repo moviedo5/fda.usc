@@ -62,7 +62,7 @@
 #' and \code{\link{fregre.np.cv}}\cr
 #' @references Febrero-Bande M. and Gonzalez-Manteiga W. (2012).
 #' \emph{Generalized Additive Models for Functional Data}. TEST.
-#' Springer-Velag.  \url{http://dx.doi.org/10.1007/s11749-012-0308-0}
+#' Springer-Velag.  \doi{10.1007/s11749-012-0308-0}
 #' 
 #' Opsomer J.D. and Ruppert D.(1997). \emph{Fitting a bivariate additive model
 #' by local polynomial regression}.Annals of Statistics, \code{25}, 186-211.
@@ -270,11 +270,9 @@ if (family$family == "binomial") {
            res = fregre.np.cv(xfunc, z, h = h, type.CV = "dev.S", Ker=Ker,
            type.S=ty,par.S=parS,metric = mgood, par.metric=par.metric[[namesx[i]]], par.CV = list(obs = y[good],
            family = family, off = off, offdf = offdf,W = diag(w)))
-           if (control$trace)
-            cat("Var:",namesx[[i]]," h.opt:", res$h.opt," df:",res$df.residual,"\n")           
-print(length(res$residuals))           
-print(res$df.residual)
-           eqrank[namesx[i]] <- length(res$residuals) - res$df.residual
+           #if (control$trace)
+            cat("Var:",namesx[[i]]," h.opt:", res$h.opt," df:",res$df,"\n")           
+           eqrank[namesx[i]] <- res$df#length(res$residuals) - res$df.residual
            X[good,namesx[i]] <- res$fitted.values
            result[[namesx[i]]] <- res
         }
@@ -309,7 +307,7 @@ print(res$df.residual)
         if (control$trace) {
             cat("Shift Iter:", iter, "EqRank:", sum(eqrank),
                 ngoodobs, "/", nobs, "\n")
-             print(cambio)
+            # print(cambio)
              }
         if (any(cambio[1:nvars] > control$epsilon)) {conv <- FALSE}
         else{conv <- TRUE;break  }
@@ -386,5 +384,4 @@ print(res$df.residual)
     class(res) <- "fregre.gkam"
     res
 }
-
 

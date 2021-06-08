@@ -5,8 +5,6 @@
 #' is.na.fdata anyNA.fdata count.na.fdata colnames.fdata rownames.fdata argvals
 #' rangeval trace.matrix fdata.trace argvals.equi unlist_fdata
 
-# \alias{is.ldata} \alias{is.lfdata}
-
 #' @title  fda.usc internal functions
 
 #' @description Internal undocumentation functions for fda.usc package.
@@ -37,7 +35,7 @@
 
 #' @references Febrero-Bande,  M., Oviedo de la Fuente, M. (2012).  \emph{Statistical Computing
 #'  in Functional Data Analysis: The R Package fda.usc.}  Journal of Statistical Software, 
-#'  51(4), 1-28. \url{http://www.jstatsoft.org/v51/i04/}
+#'  51(4), 1-28. \doi{10.18637/jss.v051.i04}
 #' @keywords math
 
 

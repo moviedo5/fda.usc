@@ -125,7 +125,7 @@
 #' 
 #' Febrero-Bande, M, Oviedo de la Fuente, M. (2012).  Statistical Computing in
 #' Functional Data Analysis: The R Package fda.usc. \emph{Journal of
-#' Statistical Software}, 51(4), 1-28. \url{http://www.jstatsoft.org/v51/i04/}
+#' Statistical Software}, 51(4), 1-28. \url{https://www.jstatsoft.org/v51/i04/}
 #' 
 #' Sguera C, Galeano P, Lillo R (2014). Spatial depth based classification for
 #' functional data. \emph{TEST} 23(4):725--750.
@@ -903,7 +903,7 @@ depth.MB<-function (fdataobj, fdataori = NULL,trim=0.25, scale=FALSE,
   x<-fdataobj$data
   n <- nrow(x)
   d <- ncol(x)
-  x <- data.matrix(x)
+  x <- as.matrix(x)
   tt<-fdataobj$argvals
   rtt<-diff(fdataobj$rangeval)
   dtt<-diff(tt/rtt)
@@ -1030,7 +1030,7 @@ depth.MB<-function (fdataobj, fdataori = NULL,trim=0.25, scale=FALSE,
   else {
     if (!is.fdata(fdataori)) fdataori=fdata(fdataori)
     xRef<-fdataori$data
-    xRef <- data.matrix(xRef)
+    xRef <- as.matrix(xRef)
     if (ncol(xRef) != d) {
       stop("Dimensions of x and xRef do not match")
     }

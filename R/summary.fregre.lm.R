@@ -18,7 +18,7 @@ if (object$lambda)  {
   else  print(object$coefs)
   cat("\n-R squared: ",object$r2)
   cat("\n-Residual variance: ",
-      object$sr2,"on ",round(n-object$df,residual)," degrees of freedom\n")
+      object$sr2,"on ",round(n-object$df)," degrees of freedom\n")
   cat("-Penalization parameter (lambda): \n")
   print(unlist(object$lambda.opt))
   

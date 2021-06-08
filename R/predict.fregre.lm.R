@@ -64,7 +64,7 @@
 #' \item {df}{ degrees of freedom for residual.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@udc.es}
+#' \email{manuel.oviedo@@usc.es}
 #' 
 #' @seealso See Also as: \code{\link{fregre.lm}}, \code{\link{fregre.plm}},
 #' \code{\link{fregre.glm}}, \code{\link{fregre.gsam}} and
@@ -73,39 +73,33 @@
 #' @references Febrero-Bande, M., Oviedo de la Fuente, M. (2012).
 #' \emph{Statistical Computing in Functional Data Analysis: The R Package
 #' fda.usc.} Journal of Statistical Software, 51(4), 1-28.
-#' \url{http://www.jstatsoft.org/v51/i04/}
+#' \url{https://www.jstatsoft.org/v51/i04/}
 #' 
 #' @keywords regression
 #' @examples
 #' \dontrun{
 #' data(tecator)
-#' ind<-1:129
-#' x=tecator$absorp.fdata
-#' x.d2<-fdata.deriv(x,nderiv=2)
-#' tt<-x[["argvals"]]
-#' dataf=as.data.frame(tecator$y)
-#' nbasis.x=11;nbasis.b=7
-#' basis1=create.bspline.basis(rangeval=range(tt),nbasis=nbasis.x)
-#' basis2=create.bspline.basis(rangeval=range(tt),nbasis=nbasis.b)
-#' basis.x=list("x.d2"=basis1)
-#' basis.b=list("x.d2"=basis2)
-#' ldata=list("df"=dataf[ind,],"x.d2"=x.d2[ind])
-#' 
-#' res=fregre.gsam(Fat~s(Water,k=3)+s(x.d2,k=3),data=ldata,
-#' family=gaussian(),basis.x=basis.x,basis.b=basis.b)
-#' newldata=list("df"=dataf[-ind,],"x.d2"=x.d2[-ind])
-#' pred<-predict(res,newldata)
+#' ind <- 1:129
+#' x <- tecator$absorp.fdata
+#' x.d2 <- fdata.deriv(x,nderiv=2)
+#' tt <- x[["argvals"]]
+#' dataf <- as.data.frame(tecator$y)
+#' ldat <- ldata("df"=dataf[ind,],"x.d2"=x.d2[ind])
+#' basis.x <- list("x.d2"=create.pc.basis(ldat$x.d2))
+#' res <- fregre.gsam(Fat~s(Water,k=3)+s(x.d2,k=3),data=ldat,
+#'                    family=gaussian(),basis.x=basis.x)
+#' newldat <- list("df"=dataf[-ind,],"x.d2"=x.d2[-ind])
+#' pred <- predict(res,newldat)
 #' plot(pred,tecator$y$Fat[-ind])
-#' 
-#' res.glm=fregre.glm(Fat~Water+x.d2,data=ldata,family=gaussian(),
-#' basis.x=basis.x,basis.b=basis.b)
-#' pred.glm<-predict(res.glm,newldata)
-#' newy<-tecator$y$Fat[-ind]
+#' res.glm <- fregre.glm(Fat  ~ Water+x.d2, data=ldat,
+#'                   family=gaussian(),basis.x=basis.x)
+#' pred.glm <- predict(res.glm,newldat)
+#' newy <- tecator$y$Fat[-ind]
 #' points(pred.glm,tecator$y$Fat[-ind],col=2)
 #' 
 #' # Time-consuming 
-#' res.gkam=fregre.gkam(Fat~x.d2,data=ldata)
-#' pred.gkam=predict(res.gkam,newldata)
+#' res.gkam <- fregre.gkam(Fat ~ x.d2, data=ldat)
+#' pred.gkam <- predict(res.gkam,newldata)
 #' points(pred.gkam,tecator$y$Fat[-ind],col=4)
 #' 
 #' ((1/length(newy))*sum((drop(newy)-pred)^2))/var(newy)
@@ -134,6 +128,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
     return(yp)
   }
   else {
+    name.coef <- NULL
     data = newx
     basis.x = object$basis.x
     basis.b = object$basis.b
@@ -182,57 +177,41 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
     }
     if (length(vnf) > 0) {
       spm <- matrix(object$coefficients[names(XX)], ncol = 1)
-      yp <- data.matrix(XX) %*% spm
+      yp <- as.matrix(XX) %*% spm
     }
     else yp <- object$coefficients[1] * rep(1, len = nrow(newx[[vfunc[1]]]))
-    if (length(vfunc) > 0) {
-      for (i in 1:length(vfunc)) {
-       if (class(data[[vfunc[i]]])[1] == "fdata") {
-          fdataobj <- data[[vfunc[i]]]
-          x.fd <- fdataobj[["data"]]
-          tt <- fdataobj[["argvals"]]
-          rtt <- fdataobj[["rangeval"]]
-          if (!object$basis.x[[vfunc[i]]]$type == "pc" & 
-              !object$basis.x[[vfunc[i]]]$type == "pls") {
-           x.fd = Data2fd(argvals = tt, y = t(fdata.cen(fdataobj, 
-                          object$mean[[vfunc[i]]])[[1]]$data),
-                          basisobj = basis.x[[vfunc[i]]], 
-                           fdnames = rownames(x.fd))
-             r = x.fd[[2]][[3]]
-            J <- object$JJ[[vfunc[i]]]
-            Z = t(x.fd$coefs) %*% J
-            colnames(Z) = colnames(J)
+    lenfunc <- length(vfunc)
+    if (lenfunc > 0) {
+      for (i in 1:lenfunc) {
+#        if (lenfunc>0) {
+#          k=1
+#          mean.list=vs.list=JJ=list()
+#          for (i in 1:lenfunc) {
+            if(class(newx[[vfunc[i]]])[1]=="fdata"){
+              tt<-data[[vfunc[i]]][["argvals"]]
+              rtt<-data[[vfunc[i]]][["rangeval"]]
+              fdataobj<-data[[vfunc[i]]]
+              fdat<-data[[vfunc[i]]];      dat<-fdataobj$data
+              if (nrow(dat)==1) rwn<-NULL         else rwn<-rownames(dat)
+              #  if (basis.x[[vfunc[i]]]$type=="pc" 
+              #      | basis.x[[vfunc[i]]]$type=="pls")
+              #    bsp1=FALSE      else bsp1 <- TRUE
+              xaux <- fdata2basis(data[[vfunc[i]]],basis.x[[vfunc[i]]])
+              name.coef[[vfunc[i]]] <- colnames(xaux$coefs) <- paste(vfunc[i],".",colnames(xaux$coefs),sep="")
+              Z <- xaux$coefs
+              if (first) {
+                XX=Z
+                first=FALSE
+              }   else {
+                XX = cbind(XX,Z)} 
           }
-          else {
-            name.coef <- paste(vfunc[i], ".", rownames(object$basis.x[[vfunc[i]]]$basis$data), 
-                               sep = "")
-            newXcen <- fdata.cen(fdataobj, object$mean[[vfunc[i]]])[[1]]
-            
-            
-            if (object$basis.x[[vfunc[i]]]$type == "pls") {
-              if (object$basis.x[[vfunc[i]]]$norm) {
-                sd.X <- sqrt(apply(object$basis.x[[vfunc[i]]]$fdataobj$data, 
-                                   2, var))
-                newXcen$data <- newXcen$data/(rep(1, 
-                                                  nrow(newXcen)) %*% t(sd.X))
-              }
-            }
-            Z <- inprod.fdata(newXcen, object$vs.list[[vfunc[i]]])
-            colnames(Z) <- name.coef
-          }
-          if (first) {
-            XX = Z
-            first = FALSE
-          }
-          else XX = cbind(XX, Z)
-        }
         else {
           if (class(data[[vfunc[i]]])[1] == "fd") {
             if (class(object$basis.x[[vfunc[i]]]) != 
                 "pca.fd") {
               x.fd <- fdataobj <- data[[vfunc[i]]]
               r = x.fd[[2]][[3]]
-              J <- object$JJ[[vfunc[i]]]
+              J <- object$basis.list[[vfunc[i]]]
               x.fd$coefs <- x.fd$coefs - object$mean[[vfunc[i]]]$coefs[, 
                                                                        1]
               Z = t(x.fd$coefs) %*% J
@@ -259,11 +238,12 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
         }
       }
     }
+
     nn <- nrow(XX)
     if (!is.data.frame(XX)) 
       XX = data.frame(XX)
-    if (!object$rn) {
-      
+    if (!object$lambda) {
+      res.var <- object$sr2
       if (type == "effects"){
         fake  = predict.lm(object, newdata = XX, type = "terms", se.fit = se.fit, 
                            interval = interval, level = level, weights = weights, 
@@ -278,7 +258,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
     }
     else {
       if (type!="response") warning("Only response type implemented for penalization")
-      for (i in 1:length(vfunc)) {
+      for (i in 1:lenfunc) {
         if (object$call[[1]] == "fregre.pls") 
           return(predict.lm(object = object, newdata = XX, 
                             type = type, se.fit = se.fit, ...))
@@ -294,14 +274,14 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
           x.fd = Data2fd(argvals = xcen$argvals, y = t(xcen$data), 
                          basisobj = object$basis.x[[vfunc[i]]])
           C = t(x.fd$coefs)
-          cnames <- colnames(object$JJ[[vfunc[i]]])
+          cnames <- colnames(object$basis.list[[vfunc[i]]])
           b.est <- matrix(object$coefficients[cnames], 
                           ncol = 1)
-          b1 <- C %*% object$JJ[[vfunc[i]]] %*% b.est
+          b1 <- C %*% object$basis.list[[vfunc[i]]] %*% b.est
           yp <- yp + b1
         }
       }
-      XX2 <- data.matrix(cbind(rep(1, len = nn), XX))
+      XX2 <- as.matrix(cbind(rep(1, len = nn), XX))
       predictor <- drop(yp)
       if (se.fit || interval != "none") {
         ip <- rowSums((XX2 %*% object$Vp * XX2))
@@ -331,7 +311,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
 effect.fake <- function(object,terms){
   #fake<-predict(object,type = "terms")
   fake <- terms
-  vfunc <- names(object$JJ)
+  vfunc <- names(object$basis.list)
   nfunc <- length(vfunc)
   tr <- attr(object$terms,"term.labels")
   #effects.df <- intersect(tr,colnames(object$data$df))
@@ -339,7 +319,7 @@ effect.fake <- function(object,terms){
   effects<-NULL
   vf <- NULL
   for (i in 1:nfunc){
-    ifunc<-colnames(object$JJ[[i]])
+    ifunc<-colnames(object$basis.list[[i]])
     dfnames <- intersect(tr,ifunc)
     vf <- c(vf,dfnames)
     effects<-cbind(effects,rowSums(fake[,dfnames,drop=F]))
@@ -350,3 +330,8 @@ effect.fake <- function(object,terms){
   effects  
 }
 #################################
+# Modification (2021/03/22)
+# Z <- inprod.fdata(newXcen, object$vs.list[[vfunc[i]]])
+# #Z <- inprod.fdata(newXcen, object$JJ[[vfunc[i]]])
+# if (!object$lambda)
+# # if (!object$rn)

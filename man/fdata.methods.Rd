@@ -88,7 +88,7 @@ dim(a1[[1]]);dim(a1[[2]])
 See  \link[base]{Summary} and \link[base]{Complex}.
 }
 \author{
-Manuel Febrero Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
+Manuel Febrero Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@usc.es}
 }
 \keyword{descriptive}
 \keyword{math}

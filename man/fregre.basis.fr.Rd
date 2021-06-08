@@ -49,19 +49,19 @@ in the estimation of \eqn{\beta(s,t)}.  By default, no penalty
 \value{
 Return:
 \itemize{
-\item \code{call:}{ The matched call.} 
-\item \code{a.est:}{ Intercept parameter estimated.} 
-\item \code{coefficientes:}{ the matrix of the coefficients.}
-\item \code{beta.est:}{ A bivariate functional data object of class \code{bifd} with the estimated parameters of \eqn{\beta(s,t)}{\beta(s,t)}.}
-\item \code{fitted.values:}{ Estimated response.} 
-\item \code{residuals:}{ \code{y} minus \code{fitted values}.} 
-\item \code{y:}{ Functional response.} 
-\item \code{x:}{ Functional explanatory data.} 
-\item \code{lambda.s:}{ A roughness penalty with respect to \code{s} .} 
-\item \code{lambda.t:}{ A roughness penalty with respect to \code{t}.}
-\item \code{Lfdobj.s:}{ A linear differential operator with respect to \code{s}.}
-\item \code{Lfdobj.t:}{ A linear differential operator with respect to \code{t}.}
-\item \code{weights:}{ Weights.} 
+\item \code{call}{ The matched call.} 
+\item \code{a.est}{ Intercept parameter estimated.} 
+\item \code{coefficientes}{ the matrix of the coefficients.}
+\item \code{beta.est}{ A bivariate functional data object of class \code{bifd} with the estimated parameters of \eqn{\beta(s,t)}{\beta(s,t)}.}
+\item \code{fitted.values}{ Estimated response.} 
+\item \code{residuals}{ \code{y} minus \code{fitted values}.} 
+\item \code{y}{ Functional response.} 
+\item \code{x}{ Functional explanatory data.} 
+\item \code{lambda.s}{ A roughness penalty with respect to \code{s} .} 
+\item \code{lambda.t}{ A roughness penalty with respect to \code{t}.}
+\item \code{Lfdobj.s}{ A linear differential operator with respect to \code{s}.}
+\item \code{Lfdobj.t}{ A linear differential operator with respect to \code{t}.}
+\item \code{weights}{ Weights.} 
 }
 }
 \description{
@@ -160,6 +160,6 @@ Alternative method: \code{\link{linmod}}.
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@udc.es}
+\email{manuel.oviedo@usc.es}
 }
 \keyword{regression}

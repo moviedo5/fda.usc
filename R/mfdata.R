@@ -1,32 +1,29 @@
 #' @rdname mfdata
 #' @name mfdata
-#' @title mfdata class definition and utilities 
+#' @title mfdata class definition and utilities  
 #' 
 #' @description mfdata is a list with fdata type of object:
 #' \itemize{
 #' \item \code{...}  fdata objects of class \code{fdata} with n rows.
 #' }
 #' 
-#' 
 #' @aliases mfdata c.mfdata  is.mfdata names.mfdata [.mfdata plot.mfdata subset.mfdata
 #' mfdata.cen  mean.mfdata  NCOL.mfdata NROW.mfdata ncol.mfdata nrow.mfdata
 #' Ops.mfdata Math.mfdata Summary.mfdata
+# @param ldata x object of class \code{ldata}
+# @param f index of observations
+# @param drop passed on to respcetive function
+# @param i index
 #' @param x object of class \code{mfdata}
-#' @param f index of observations
-#' @param drop passed on to respective function
-#' @param i index
 #' @param subset subset
-#' @param row logical If \code{FALSE}  (by default), \code{i} index selects 
-#' the variables. If \code{TRUE},  \code{i} index selects the observations.
-#' @param ask logilcal    If TRUE (and the R session is interactive) the user is asked for input, before a new figure is drawn. 
-#' @param color colors to interpolate; must be a valid argument to  \code{colorRampPalette}.
-#' @param meanX functional mean
+#' @param \dots Further arguments passed to methods.
+# @param ask logilcal    If TRUE (and the R session is interactive) the user is asked for input, before a new figure is drawn. 
+# @param color colors to interpolate; must be a valid argument to  \code{colorRampPalette}.
 # @param var.name name of continuous univariate variable used in \code{color} argument
 # @param df data frame 
 # @param mfdata list of fdata objects
-
-
-#' @param \dots Further arguments passed to methods.
+# @param row logical If \code{FALSE}  (by default), \code{i} index selects 
+# the variables. If \code{TRUE},  \code{i} index selects the observations.
 #' 
 #' @examples 
 #' data(tecator)
@@ -51,7 +48,7 @@ mfdata <-function(...){
   # mf <- match.call(expand.dots = FALSE)
   # m <- match("df", names(mf), 0L)
   nam <- as.character(C[2:lenC])
-  print(nam)
+  # print(nam)
   mdat <- list(...)
   clases <- sapply(mdat,class)
   names(mdat) <- nam
@@ -65,7 +62,6 @@ mfdata <-function(...){
 }
 ################################
 
-#' @rdname mfdata
 #' @export 
 c.mdata<-function (x, f, drop = FALSE, ...) 
 {
@@ -110,7 +106,6 @@ names.mfdata<-function(x){
 #   return(name)
 # }
 
-#' @rdname mfdata
 #' @export
 is.mfdata=function(x){
   nc=length(x)
@@ -124,7 +119,7 @@ is.mfdata=function(x){
   else return(FALSE)
 }
 
-#' @rdname mfdata
+
 #' @export 
 "[.mfdata" = function(x, i, row=FALSE){
   if (missing(i)) return(x)
@@ -185,7 +180,6 @@ subset.mfdata<-function(x, subset,...){
 # sapply(ldat2,dim)
 # sapply(mdat3,dim)
 
-#' @rdname mfdata
 #' @export
 plot.mfdata <- function(x, ask=FALSE, color, ...){
   if (!is.mfdata(x)) stop("No mfdata class object")
@@ -227,7 +221,6 @@ plot.mfdata <- function(x, ask=FALSE, color, ...){
 #plot.mfdata(mdat)
 
 ##################################################################
-#' @rdname mfdata
 #' @export
 mean.mfdata <- function (x,...){
   if (!is.mfdata(x) | !is.list(x))
@@ -238,9 +231,10 @@ mean.mfdata <- function (x,...){
 }
 # mm <- mean.mfdata(mdat)
 
+
+
 ##################################################################
 
-#' @rdname mfdata
 #' @export
 mfdata.cen<- function (x, meanX = mean.mfdata(x)) 
 {

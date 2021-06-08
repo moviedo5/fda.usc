@@ -90,14 +90,26 @@
 #' @export 
 dcor.xy<-function (x, y,test=TRUE,metric.x,metric.y,par.metric.x,par.metric.y,n)
 {
+  # print("entra dcor.xy")
   dname <- paste(deparse(substitute(x)), "and", deparse(substitute(y)))
-  if (is.numeric(x)) x<-matrix(x,ncol=1)
-  if (is.numeric(y)) y<-matrix(y,ncol=1)
+  if (is.vector(x)) x<-matrix(x,ncol=1)
+  if (is.vector(y)) y<-matrix(y,ncol=1)
   if (is.factor(y)) y<-model.matrix(~y-1)
   if (is.factor(x)) x<-model.matrix(~x-1)
-  if (is.factor(y[,1])) y<-model.matrix(~y[,1]-1)
-  if (is.factor(x[,1])) x<-model.matrix(~x[,1]-1)
-  
+
+  #   if (anyNA(x)) {
+  #   nas <- !apply(x,1,is.na)
+  #   x<-x[nas,,drop=F]
+  #   y<-y[nas,,drop=F]
+  #   warning("NA's in x data")
+  # }
+  # if (anyNA(y)) {
+  #   nas <- !apply(y,1,is.na)
+  #   x<-x[nas,,drop=F]
+  #   y<-y[nas,,drop=F]
+  #   warning("NA's in y data")
+  # }
+
   if (missing(n)) n <- nrow(x)
   isfdata1<-is.fdata(x)
   true.dist<-FALSE
@@ -109,7 +121,7 @@ dcor.xy<-function (x, y,test=TRUE,metric.x,metric.y,par.metric.x,par.metric.y,n)
   if (missing(n)) n <- nrow(x)
   isfdata2<-is.fdata(y)
   if (isfdata1)         par.metric.x$fdata1<-x
-  else                  par.metric.x$x <- data.matrix(x)
+  else                  par.metric.x$x<-as.matrix(x)
   D1=do.call(metric.x,par.metric.x)
   if (missing(metric.y)){
           if (isfdata2) metric.y="metric.lp"
@@ -117,10 +129,10 @@ dcor.xy<-function (x, y,test=TRUE,metric.x,metric.y,par.metric.x,par.metric.y,n)
   }
   if (missing(par.metric.y)) par.metric.y<-list()
   if (isfdata2)        par.metric.y$fdata1<-y
-  else                 par.metric.y$x <- data.matrix(y)
+  else                 par.metric.y$x<-as.matrix(y)
   D2=do.call(metric.y,par.metric.y)
-  D1 <- data.matrix(D1)
-  D2 <- data.matrix(D2)
+  D1<-as.matrix(D1)
+  D2<-as.matrix(D2)
   if (test) {
    rval<-dcor.test(D1, D2,n)
    rval$D1<-D1
@@ -132,6 +144,8 @@ dcor.xy<-function (x, y,test=TRUE,metric.x,metric.y,par.metric.x,par.metric.y,n)
    }
   return(rval)
 } 
+
+
 
 #' @rdname dcor.xy
 #' @export 
@@ -170,16 +184,15 @@ bcdcor.dist=function(D1,D2,n){
   # D2: distances of 2nd sample 
   # n:  sample dimension, by default nrow(D1)
   # Returns the bias corrected dcor statistic
-  
-  m1row=rowMeans(D1)
-  m1col=colMeans(D2)
-  if (missing(n)) n<-nrow(D1)
+  # print("entra bcdcor.dist")
+  if (missing(n)) n <- nrow(D1)
   AA <- Astar2(D1,n)
   BB <- Astar2(D2,n)
   res <- sum(AA * BB) - (n/(n - 2)) * sum(diag(AA * BB))
   res1<- sum(AA * AA) - (n/(n - 2)) * sum(diag(AA * AA))
   res2<- sum(BB * BB) - (n/(n - 2)) * sum(diag(BB * BB))
   out<-res/sqrt(res1*res2)          
+  #print("sale bcdcor.dist")
   return(out)
 }
 
@@ -206,7 +219,7 @@ dcor.test <- function (D1, D2,n)
 
 
 Astar2<-function(d,n){
-  #  d <- data.matrix(d)
+  #  d <- as.matrix(d)
   m <- rowMeans(d)
   M <- mean(d)
   a <- sweep(d, 1, m)

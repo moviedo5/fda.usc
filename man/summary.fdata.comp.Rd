@@ -34,7 +34,7 @@ fbeta <- fdata(beta,tt)
 y <- inprod.fdata(x,fbeta) + rnorm(n,sd=0.1)
 pc1 <- fdata2pc(x,3)
 summary(pc1)
-pls1 <- fdata2pls(x,y)
+pls1 <- fdata2pls(x,y,8)
 summary(pls1)
 }
 

@@ -119,6 +119,7 @@
 fregre.gsam <- function (formula, family = gaussian(), data = list(), weights = NULL, 
           basis.x = NULL, basis.b = NULL, CV = FALSE, ...) 
 {
+#print("fregre.gsam")
   tf <- terms.formula(formula, specials = c("s", "te", "t2"))
   terms <- attr(tf, "term.labels")
   special <- attr(tf, "specials")
@@ -277,7 +278,7 @@ fregre.gsam <- function (formula, family = gaussian(), data = list(), weights = 
   lenfunc <- length(vfunc) > 0
   if (lenfunc) {
     k = 1
-    mean.list = vs.list = JJ = list()
+    mean.list = vs.list =  list() #JJ =
     bsp1 <- bsp2 <- TRUE
     for (i in 1:length(vfunc)) {
       if (is(data[[vfunc[i]]], "fdata")) {
@@ -336,13 +337,14 @@ fregre.gsam <- function (formula, family = gaussian(), data = list(), weights = 
                              sep = "")
             kterms <- kterms + 1
           }
-          JJ[[vfunc[i]]] <- J
+          #JJ[[vfunc[i]]] <- J
+          vs.list[[vfunc[i]]] <- J
         }
         else {
           l <- basis.x[[vfunc[i]]]$l
           lenl <- length(l)
           vs <- t(basis.x[[vfunc[i]]]$basis$data)
-          Z <- basis.x[[vfunc[i]]]$x[, l, drop = FALSE]
+          Z <- basis.x[[vfunc[i]]]$coefs[, l, drop = FALSE]
           response = "y"
           colnames(Z) = name.coef[[vfunc[i]]] = paste(vfunc[i], 
                                                       ".", rownames(basis.x[[vfunc[i]]]$basis$data), 
@@ -415,7 +417,8 @@ fregre.gsam <- function (formula, family = gaussian(), data = list(), weights = 
                                sep = "")
               kterms <- kterms + 1
             }
-            JJ[[vfunc[i]]] <- J
+            ## JJ[[vfunc[i]]] <- J
+            vs.list[[vfunc[i]]] <- J
           }
           else {
             l <- ncol(basis.x[[vfunc[i]]]$scores)
@@ -447,6 +450,7 @@ fregre.gsam <- function (formula, family = gaussian(), data = list(), weights = 
       }
     }
   }
+  #print("fregre.gsam 3")
   if (!is.data.frame(XX)) 
     XX = data.frame(XX)
   par.fregre$data = XX
@@ -472,7 +476,7 @@ fregre.gsam <- function (formula, family = gaussian(), data = list(), weights = 
     z$mean = mean.list
     z$basis.x = basis.x
     z$basis.b = basis.b
-    z$JJ <- JJ
+    #z$JJ <- JJ
     z$vs.list = vs.list
     z$vfunc <- vfunc
   }

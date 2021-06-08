@@ -106,9 +106,9 @@
 #' }
 #'  
 #' @references 
-#' Escanciano, J. C. (2006). A consistent diagnostic test for regression models using projections. Econometric Theory, 22, 1030-1051. \url{http://dx.doi.org/10.1017/S0266466606060506}
+#' Escanciano, J. C. (2006). A consistent diagnostic test for regression models using projections. Econometric Theory, 22, 1030-1051. \doi{10.1017/S0266466606060506}
 #' 
-#' Garcia-Portugues, E., Gonzalez-Manteiga, W. and Febrero-Bande, M. (2014). A goodness--of--fit test for the functional linear model with scalar response. Journal of Computational and Graphical Statistics, 23(3), 761-778. \url{http://dx.doi.org/10.1080/10618600.2013.812519}
+#' Garcia-Portugues, E., Gonzalez-Manteiga, W. and Febrero-Bande, M. (2014). A goodness--of--fit test for the functional linear model with scalar response. Journal of Computational and Graphical Statistics, 23(3), 761-778. \doi{10.1080/10618600.2013.812519}
 #' 
 #' @note No NA's are allowed neither in the functional covariate nor in the scalar response.
 #' 
@@ -256,11 +256,11 @@ flm.test=function(X.fdata,Y,beta0.fdata=NULL,B=5000,est.method="pls",
 				pc.comp$l=mod.pc$pc.opt
 				
 				# Express X.fdata and beta.est in the PC basis
-				basis.pc=mod.pc$fregre.pc$fdata.comp$rotation
+				basis.pc=mod.pc$fregre.pc$fdata.comp$basis
 				if(length(pc.comp$l)!=1){
-					X.est=fdata(mdata=mod.pc$fregre.pc$fdata.comp$x[,mod.pc$fregre.pc$l]%*%mod.pc$fregre.pc$fdata.comp$rotation$data[mod.pc$fregre.pc$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval) # X.est=fdata(mdata=mod.pc$fregre.pc$pc$x[,mod.pc$fregre.pc$l]%*%mod.pc$fregre.pc$pc$rotation$data[mod.pc$fregre.pc$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
+					X.est=fdata(mdata=mod.pc$fregre.pc$fdata.comp$coefs[,mod.pc$fregre.pc$l]%*%mod.pc$fregre.pc$fdata.comp$basis$data[mod.pc$fregre.pc$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval) # X.est=fdata(mdata=mod.pc$fregre.pc$pc$coefs[,mod.pc$fregre.pc$l]%*%mod.pc$fregre.pc$pc$basis$data[mod.pc$fregre.pc$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
 				}else{
-					X.est=fdata(mdata=mod.pc$fregre.pc$fdata.comp$x[,mod.pc$fregre.pc$l]%*%t(mod.pc$fregre.pc$fdata.comp$rotation$data[mod.pc$fregre.pc$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval) # X.est=fdata(mdata=mod.pc$fregre.pc$pc$x[,mod.pc$fregre.pc$l]%*%t(mod.pc$fregre.pc$pc$rotation$data[mod.pc$fregre.pc$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
+					X.est=fdata(mdata=mod.pc$fregre.pc$fdata.comp$coefs[,mod.pc$fregre.pc$l]%*%t(mod.pc$fregre.pc$fdata.comp$basis$data[mod.pc$fregre.pc$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval) # X.est=fdata(mdata=mod.pc$fregre.pc$pc$coefs[,mod.pc$fregre.pc$l]%*%t(mod.pc$fregre.pc$pc$basis$data[mod.pc$fregre.pc$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
 				}
 				beta.est=mod.pc$fregre.pc$beta.est
 				norm.beta.est=norm.fdata(beta.est)
@@ -284,9 +284,9 @@ flm.test=function(X.fdata,Y,beta0.fdata=NULL,B=5000,est.method="pls",
 				
 				# Express X.fdata and beta.est in the basis
 				if(p!=1){
-					X.est=fdata(mdata=mod.pc$fdata.comp$x[,mod.pc$l]%*%mod.pc$fdata.comp$rotation$data[mod.pc$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
+					X.est=fdata(mdata=mod.pc$fdata.comp$coefs[,mod.pc$l]%*%mod.pc$fdata.comp$basis$data[mod.pc$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
 				}else{
-					X.est=fdata(mdata=mod.pc$fdata.comp$x[,mod.pc$l]%*%t(mod.pc$fdata.comp$rotation$data[mod.pc$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
+					X.est=fdata(mdata=mod.pc$fdata.comp$coefs[,mod.pc$l]%*%t(mod.pc$fdata.comp$basis$data[mod.pc$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
 				}
 				beta.est=mod.pc$beta.est
 				norm.beta.est=norm.fdata(beta.est)
@@ -299,12 +299,13 @@ flm.test=function(X.fdata,Y,beta0.fdata=NULL,B=5000,est.method="pls",
 		}else if(est.method=="pls"){
 			
 			if(is.null(p)){
-
+print("PLS1")
 				# Method
 				meth="PCvM test for the functional linear model using optimal PLS basis representation"
 			
 				# Choose the number of the basis: SICc is probably the best criteria
 				mod.pls=fregre.pls.cv(fdataobj=X.fdata,y=Y,kmax=10,criteria="SICc") 
+print("PLS2")				
 				p.opt=length(mod.pls$pls.opt)
 				ord.opt=mod.pls$pls.opt
 				
@@ -313,11 +314,11 @@ flm.test=function(X.fdata,Y,beta0.fdata=NULL,B=5000,est.method="pls",
 				pls.comp$l=mod.pls$pls.opt
 						
 				# Express X.fdata and beta.est in the PLS basis
-				basis.pls=mod.pls$fregre.pls$fdata.comp$rotation
+				basis.pls=mod.pls$fregre.pls$fdata.comp$basis
 				if(length(pls.comp$l)!=1){
-					X.est=fdata(mdata=mod.pls$fregre.pls$fdata.comp$x[,mod.pls$fregre.pls$l]%*%mod.pls$fregre.pls$fdata.comp$rotation$data[mod.pls$fregre.pls$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
+					X.est=fdata(mdata=mod.pls$fregre.pls$fdata.comp$coefs[,mod.pls$fregre.pls$l]%*%mod.pls$fregre.pls$fdata.comp$basis$data[mod.pls$fregre.pls$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
 				}else{
-					X.est=fdata(mdata=mod.pls$fregre.pls$fdata.comp$x[,mod.pls$fregre.pls$l]%*%t(mod.pls$fregre.pls$fdata.comp$rotation$data[mod.pls$fregre.pls$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
+					X.est=fdata(mdata=mod.pls$fregre.pls$fdata.comp$coefs[,mod.pls$fregre.pls$l]%*%t(mod.pls$fregre.pls$fdata.comp$basis$data[mod.pls$fregre.pls$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
 				}
 				beta.est=mod.pls$fregre.pls$beta.est
 				norm.beta.est=norm.fdata(beta.est)
@@ -341,9 +342,9 @@ flm.test=function(X.fdata,Y,beta0.fdata=NULL,B=5000,est.method="pls",
 				
 				# Express X.fdata and beta.est in the basis
 				if(p!=1){
-					X.est=fdata(mdata=mod.pls$fdata.comp$x[,mod.pls$l]%*%mod.pls$fdata.comp$rotation$data[mod.pls$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
+					X.est=fdata(mdata=mod.pls$fdata.comp$coefs[,mod.pls$l]%*%mod.pls$fdata.comp$basis$data[mod.pls$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
 				}else{
-					X.est=fdata(mdata=mod.pls$fdata.comp$x[,mod.pls$l]%*%t(mod.pls$fdata.comp$rotation$data[mod.pls$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
+					X.est=fdata(mdata=mod.pls$fdata.comp$coefs[,mod.pls$l]%*%t(mod.pls$fdata.comp$basis$data[mod.pls$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
 				}
 				beta.est=mod.pls$beta.est
 				norm.beta.est=norm.fdata(beta.est)
@@ -451,9 +452,9 @@ flm.test=function(X.fdata,Y,beta0.fdata=NULL,B=5000,est.method="pls",
 			# Express X.fdata in a PC basis
 			fd2pc=fdata2pc(X.fdata,ncomp=p)
 			if(length(fd2pc$l)!=1){
-				X.est=fdata(mdata=fd2pc$x[,fd2pc$l]%*%fd2pc$rotation$data[fd2pc$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
+				X.est=fdata(mdata=fd2pc$coefs[,fd2pc$l]%*%fd2pc$basis$data[fd2pc$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
 			}else{
-				X.est=fdata(mdata=fd2pc$x[,fd2pc$l]%*%t(fd2pc$rotation$data[fd2pc$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
+				X.est=fdata(mdata=fd2pc$coefs[,fd2pc$l]%*%t(fd2pc$basis$data[fd2pc$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
 			}
 			beta.est=beta0.fdata
 			p.opt=p
@@ -472,9 +473,9 @@ flm.test=function(X.fdata,Y,beta0.fdata=NULL,B=5000,est.method="pls",
 			# Express X.fdata in a PLS basis
 			fd2pls=fdata2pls(X.fdata,Y,ncomp=p)
 			if(length(fd2pls$l)!=1){
-				X.est=fdata(mdata=fd2pls$x[,fd2pls$l]%*%fd2pls$rotation$data[fd2pls$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
+				X.est=fdata(mdata=fd2pls$coefs[,fd2pls$l]%*%fd2pls$basis$data[fd2pls$l,],argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
 			}else{
-				X.est=fdata(mdata=fd2pls$x[,fd2pls$l]%*%t(fd2pls$rotation$data[fd2pls$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
+				X.est=fdata(mdata=fd2pls$coefs[,fd2pls$l]%*%t(fd2pls$basis$data[fd2pls$l,]),argvals=X.fdata$argvals,rangeval=X.fdata$rangeval)
 			}		
 			beta.est=beta0.fdata
 			p.opt=p
@@ -620,7 +621,7 @@ flm.test=function(X.fdata,Y,beta0.fdata=NULL,B=5000,est.method="pls",
 		}
 		
 		# Plot
-		#dev.new()
+		dev.new()
 		plot(u,mean.proc,ylim=c(min(mean.proc,mean.boot.proc),max(mean.proc,mean.boot.proc))*1.05,type="l",xlab=expression(paste(symbol("\341"),list(X, gamma),symbol("\361"))),ylab=expression(R[n](u)),main="")
 		for(i in 1:B.plot) lines(u,mean.boot.proc[i,],lty=2,col=gray(0.8))
 		lines(u,mean.proc)
@@ -628,8 +629,6 @@ flm.test=function(X.fdata,Y,beta0.fdata=NULL,B=5000,est.method="pls",
 		
 	}
 	if(verbose) cat("Done.\n")
-
-	
 	# Result: class htest
 	names(pcvm)="PCvM statistic"
 	result=structure(list(statistic=pcvm,boot.statistics=pcvm.star,p.value=pvalue,method=meth,B=B,type.basis=type.basis,beta.est=beta.est,p=p.opt,ord=ord.opt,data.name="Y=<X,b>+e"))
@@ -639,4 +638,4 @@ flm.test=function(X.fdata,Y,beta0.fdata=NULL,B=5000,est.method="pls",
 
 }
 
-
+               

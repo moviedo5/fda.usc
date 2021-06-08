@@ -36,7 +36,7 @@ create.pls.basis(
   ...
 )
 
-create.raw.fdata(fdataobj, l = 1:ncol(fdataobj))
+create.raw.fdata(fdataobj, l = 1:nrow(fdataobj))
 }
 \arguments{
 \item{fdataobj}{\code{\link{fdata}} class object.}
@@ -70,7 +70,7 @@ acceleration.  If P is a matrix: the penalty matrix object.}
 \value{
 \itemize{
 \item \code{basis}{ basis} 
-\item \code{x}{ if \code{TRUE} the value of the rotated data (the centred data multiplied by the rotation matrix) is returned}
+\item \code{x}{ if \code{TRUE} the value of the rotated data (the centred data multiplied by the basis matrix) is returned}
 \item \code{mean}{ functional mean of \code{fdataobj}} 
 \item \code{df}{ degree of freedom} 
 \item \code{type}{ type of basis}
@@ -84,8 +84,11 @@ Compute basis for functional data.
 data(tecator)
 basis.pc<-create.pc.basis(tecator$absorp.fdata,c(1,4,5))
 plot(basis.pc$basis,col=1)
+summary(basis.pc)
 basis.pls<-create.pls.basis(tecator$absorp.fdata,y=tecator$y[,1],c(1,4,5))
-lines(basis.pls$basis,col=2)
+summary(basis.pls)
+plot(basis.pls$basis,col=2)
+summary(basis.pls)
 
 basis.fd<-create.fdata.basis(tecator$absorp.fdata,c(1,4,5),
 type.basis="fourier")
@@ -103,7 +106,7 @@ Ramsay, James O. and Silverman, Bernard W. (2006),
 N. Kraemer, A.-L. Boulsteix, and G. Tutz (2008). Penalized Partial Least
 Squares with Applications to B-Spline Transformations and Functional Data.
 Chemometrics and Intelligent Laboratory Systems, 94, 60 - 69.
-\url{http://dx.doi.org/10.1016/j.chemolab.2008.06.009}
+\doi{10.1016/j.chemolab.2008.06.009}
 }
 \seealso{
 See Also as \link[fda]{create.basis} and \code{\link{fdata2pc}}.
