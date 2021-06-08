@@ -13,11 +13,6 @@
 \item{biplot}{=TRUE draw the biplot and PC (or PLS) components.}
 
 \item{\dots}{Further arguments passed to or from other methods.}
-
-\item{draw}{=TRUE original curves  and their basis representation are plotted}
-
-\item{index}{NULL, by default the first n curves are plotted, where n = min(4, length(fdataobj)). 
-Otherwise, the curves indicated in the \code{index} vector are plotted.}
 }
 \value{
 If \code{corplot}=TRUE, are displaying the biplot between the PC (or PLS) components.\cr
@@ -41,8 +36,6 @@ summary(pc1)
 y <- inprod.fdata(x,fbeta) #+ rnorm(n,sd=0.1)
 pls1 <- fdata2pls(x,y,2)
 summary(pls1)
-res <- fdata2basis(x0,pc1)
-summary(res)
 }
 
 }

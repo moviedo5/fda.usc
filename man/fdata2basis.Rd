@@ -14,12 +14,22 @@ fdata2basis(fdataobj, basis, method = c("grid", "inprod"))
 \item{method}{character string, if it is "grid" the fdata object is evaluated in the grid (\code{argvals} of fdata),
 if it is "inprod" the basis representation of functional data is computed by inner product 
 (\code{\link{inprod.fdata}(fdataobj,basis)}).}
+
+\item{draw}{logical, original curves  and their basis representation are plotted}
+
+\item{index}{vector, by default (if NULL) the first n curves are plotted, where n = min(4, length(fdataobj)). 
+Otherwise, index vector indicates taht curvesare plotted.#'}
 }
 \value{
-\code{fdata2bais} function return: 
+fdata2basis \code{fdata2bais} function return: 
 \itemize{
 \item {coef}{a matrix or two-dimensional array of coefficients.}
 \item {basis}{basis of \code{\link{fdata}} class evaluated in the same grid of \code{fdataobj}. } 
+}
+
+summary function return: 
+\itemize{
+\item {R}{a matrix with a measure similar to R-sq for each curve aproximation (by row) and number of basis elements (by column).}
 }
 }
 \description{
