@@ -34,13 +34,6 @@
 #' summary(aa)
 #' plot(gridfdata(aa$coefs,aa$basis))
 #' lines(y1,lwd=2,col=c(3,4),lty=2)
-
-#' base.pc <- create.pc.basis(y1,1:2,norm=F)
-#' bb <- fdata2basis(y1,base.pc,method="inprod")
-#' bb <- fdata2basis(y1,base.pc)
-#' lines(gridfdata(bb$coefs,bb$basis))
-#' lines(base.pc[[1]])
-#' 
 #' }
 #' @export
 fdata2basis <- function(fdataobj, basis, method=c("grid","inprod")){
@@ -97,66 +90,6 @@ basis2fdata<-function (coef, fdataobj, mu)
 # incluye al principio (solo la llamada de la función) no sé 
 # si sería mejor poner un texto con el object$type, la longitud 
 # y alguna info sobre los argvals y el rangeval.  
-
-summary.basis.fdata=function(object, draw=TRUE, index=NULL) {
-   #object <- bb
-   cat("\n     - SUMMARY -\n")
-   le <- length(object$basis)
-   R <- numeric(le)
-   #print(R)
-   n <- nrow(object$fdataobj)
-   R2 <- matrix(NA,n,le)
-   colnames(R2)<-paste0(substr(object$type,1,3),"(1:",1:le,")")
-   rownames(R2)<-rownames(object$fdataobj)
-   Xcen <- fdata.cen(object$fdataobj)$Xcen
-   type=FALSE
-   cat("Type of basis:",object$type,"\nNum. of basis:",le,"\nRangeval:",object$basis$rangeval,"\n")
-   for (l in 1:le){
-   if (object$type =="pc" | object$type == "pls"){
-        type=TRUE
-        #xmean <- func.mean(object$fdataobj)
-        xmean <- object$mean
-        fdata.est <- basis2fdata(object$coefs[,1:l,drop=F],
-                                 object$basis[1:l])
-   } else{ fdata.est <- basis2fdata(object$coefs[,1:l,drop=F],
-                                      object$basis[1:l])
-    #R2[l] <- 1 - sum(norm.fdata(fdata.est-object$fdataobj)^2)/
-     #   sum(norm.fdata(fdata.cen(object$fdataobj)$Xcen)^2)
-    }
-    R[l] <- 1-sum(norm.fdata(fdata.est-object$fdataob)^2)/sum(norm.fdata(Xcen)^2)   
-    R2[,l] <- 1 - norm.fdata(fdata.est-object$fdataobj)^2/norm.fdata(Xcen)^2    
-   }
-   if (is.null(index)) {
-     ymin <- min(4,n);     index<- 1:ymin
-   }
-   txt <- paste(length(index),"curves (in grey) and their basis representation (in red) are plotted")
-   if (draw) {
-     # yl <- c(min(object$fdataobj,fdata.est),max(object$fdataobj,fdata.est))
-     yl <- c(min(object$fdataobj[index],fdata.est[index]),max(object$fdataobj[index],fdata.est[index]))
-     # mn <- expression( 1 - frac(paste( "||X - ",hat(X),"||"),paste( "||X - ",bar(X),"||")))
-     mn <-  expression( paste("X(t) vs ",hat(X),"(t)"))
-     plot(object$fdataobj[index],main=mn,col="grey",ylim=yl)
-     lines(fdata.est[index],lty=2,col=2)
-   }
-#  En el texto pon 1- Sum(||---||^2)/Sum(||---||^2)
-   
-#  message(paste( "||X - ",expression(bar(X)),"||"))
- cat("\nMeasure of fit: 1 - Sum||X - hat(X)||^2  / Sum||X - bar(X)||^2:\n")
- names(R) <- paste0("basis(1:",1:le,")",sep="")
- if (!type)    R <- R[le]
- #print(expression( 1 - paste( "||X - ",hat(X),"|| / ||X - ",bar(X),"||")))
- print(R)
- if (draw) cat("\n",txt)
- 
- return(invisible(R2))
-}
-
-
-#' base.pc <- create.pc.basis(y1,1:2,norm=F)
-#' bb <- fdata2basis(y1,base.pc,method="inprod")
-#' bb <- fdata2basis(y1,base.pc)
-#' lines(base.pc[[1]])
-
 
 
 # no ayuda por el momento

@@ -42,12 +42,6 @@ aa <- fdata2basis(y1,base.t,method="inprod")
 summary(aa)
 plot(gridfdata(aa$coefs,aa$basis))
 lines(y1,lwd=2,col=c(3,4),lty=2)
-base.pc <- create.pc.basis(y1,1:2,norm=F)
-bb <- fdata2basis(y1,base.pc,method="inprod")
-bb <- fdata2basis(y1,base.pc)
-lines(gridfdata(bb$coefs,bb$basis))
-lines(base.pc[[1]])
-
 }
 }
 \seealso{

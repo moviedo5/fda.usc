@@ -5,6 +5,9 @@
 #' @param object fdata.comp class object calculated by: \code{fdata2pc},
 #' \code{fdata2pls}, \code{fregre.pc} or \code{fregre.pls}.
 #' @param biplot =TRUE draw the biplot and PC (or PLS) components.
+#' @param draw =TRUE original curves  and their basis representation are plotted
+#' @param index NULL, by default the first n curves are plotted, where n = min(4, length(fdataobj)). 
+#' Otherwise, the curves indicated in the \code{index} vector are plotted.
 #' @param \dots Further arguments passed to or from other methods.
 #' @return If \code{corplot}=TRUE, are displaying the biplot between the PC (or PLS) components.\cr
 #'  If \code{ask}=TRUE, draw each graph in a window, waiting to confirm the change
@@ -26,11 +29,13 @@
 #' x <- x0*3+x1
 #' beta <- tt*sin(2*pi*tt)^2
 #' fbeta <- fdata(beta,tt)
-#' y <- inprod.fdata(x,fbeta) + rnorm(n,sd=0.1)
 #' pc1 <- fdata2pc(x,3)
 #' summary(pc1)
-#' pls1 <- fdata2pls(x,y,8)
+#' y <- inprod.fdata(x,fbeta) #+ rnorm(n,sd=0.1)
+#' pls1 <- fdata2pls(x,y,2)
 #' summary(pls1)
+#' res <- fdata2basis(x0,pc1)
+#' summary(res)
 
 #' }
 #' 
@@ -145,4 +150,58 @@ summary.fdata.comp=function(object,biplot=TRUE,...) {
      }  }    }  }
   #return(invisible(pr.com))
   return(invisible(object))
+}
+
+#' @export
+summary.basis.fdata=function(object, draw=TRUE, index=NULL) {
+  #object <- bb
+  cat("\n     - SUMMARY -\n")
+  le <- length(object$basis)
+  R <- numeric(le)
+  #print(R)
+  n <- nrow(object$fdataobj)
+  R2 <- matrix(NA,n,le)
+  colnames(R2)<-paste0(substr(object$type,1,3),"(1:",1:le,")")
+  rownames(R2)<-rownames(object$fdataobj)
+  Xcen <- fdata.cen(object$fdataobj)$Xcen
+  type=FALSE
+  cat("Type of basis:",object$type,"\nNum. of basis:",le,"\nRangeval:",object$basis$rangeval,"\n")
+  for (l in 1:le){
+    if (object$type =="pc" | object$type == "pls"){
+      type=TRUE
+      #xmean <- func.mean(object$fdataobj)
+      xmean <- object$mean
+      fdata.est <- basis2fdata(object$coefs[,1:l,drop=F],
+                               object$basis[1:l])
+    } else{ fdata.est <- basis2fdata(object$coefs[,1:l,drop=F],
+                                     object$basis[1:l])
+    #R2[l] <- 1 - sum(norm.fdata(fdata.est-object$fdataobj)^2)/
+    #   sum(norm.fdata(fdata.cen(object$fdataobj)$Xcen)^2)
+    }
+    R[l] <- 1-sum(norm.fdata(fdata.est-object$fdataob)^2)/sum(norm.fdata(Xcen)^2)   
+    R2[,l] <- 1 - norm.fdata(fdata.est-object$fdataobj)^2/norm.fdata(Xcen)^2    
+  }
+  if (is.null(index)) {
+    ymin <- min(4,n);     index<- 1:ymin
+  }
+  txt <- paste(length(index),"curves (in grey) and their basis representation (in red) are plotted")
+  if (draw) {
+    # yl <- c(min(object$fdataobj,fdata.est),max(object$fdataobj,fdata.est))
+    yl <- c(min(object$fdataobj[index],fdata.est[index]),max(object$fdataobj[index],fdata.est[index]))
+    # mn <- expression( 1 - frac(paste( "||X - ",hat(X),"||"),paste( "||X - ",bar(X),"||")))
+    mn <-  expression( paste("X(t) vs ",hat(X),"(t)"))
+    plot(object$fdataobj[index],main=mn,col="grey",ylim=yl)
+    lines(fdata.est[index],lty=2,col=2)
+  }
+  #  En el texto pon 1- Sum(||---||^2)/Sum(||---||^2)
+  
+  #  message(paste( "||X - ",expression(bar(X)),"||"))
+  cat("\nMeasure of fit: 1 - Sum||X - hat(X)||^2  / Sum||X - bar(X)||^2:\n")
+  names(R) <- paste0("basis(1:",1:le,")",sep="")
+  if (!type)    R <- R[le]
+  #print(expression( 1 - paste( "||X - ",hat(X),"|| / ||X - ",bar(X),"||")))
+  print(R)
+  if (draw) cat("\n",txt)
+  
+  return(invisible(R2))
 }
