@@ -2,9 +2,12 @@
 % Please edit documentation in R/fdata2basis.R
 \name{fdata2basis}
 \alias{fdata2basis}
+\alias{summary.basis.fdata}
 \title{Compute fucntional coefficients from functional data represented in a base of functions}
 \usage{
 fdata2basis(fdataobj, basis, method = c("grid", "inprod"))
+
+\method{summary}{basis.fdata}(object, draw = TRUE, index = NULL, ...)
 }
 \arguments{
 \item{fdataobj}{\code{\link{fdata}} class object.}
@@ -15,10 +18,14 @@ fdata2basis(fdataobj, basis, method = c("grid", "inprod"))
 if it is "inprod" the basis representation of functional data is computed by inner product 
 (\code{\link{inprod.fdata}(fdataobj,basis)}).}
 
+\item{object}{\code{basis.fdata} class object calculated by: \code{\link{fdata2basis}}}
+
 \item{draw}{logical, original curves  and their basis representation are plotted}
 
 \item{index}{vector, by default (if NULL) the first n curves are plotted, where n = min(4, length(fdataobj)). 
-Otherwise, index vector indicates taht curvesare plotted.#'}
+Otherwise, index vector indicates taht curvesare plotted.}
+
+\item{\dots}{Further arguments passed to or from other methods.}
 }
 \value{
 fdata2basis \code{fdata2bais} function return: 

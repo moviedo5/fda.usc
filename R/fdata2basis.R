@@ -1,5 +1,6 @@
 #' @title Compute fucntional coefficients from functional data represented in a base of functions
 #' 
+#' @aliases fdata2basis summary.basis.fdata
 #' @description Compute fucntional coefficients from functional data (\code{\link{fdata}} class object) 
 #' represented in a basis (fixed of data-driven basis).
 #' 
@@ -8,9 +9,11 @@
 #' @param method character string, if it is "grid" the fdata object is evaluated in the grid (\code{argvals} of fdata),
 #'  if it is "inprod" the basis representation of functional data is computed by inner product 
 #'  (\code{\link{inprod.fdata}(fdataobj,basis)}).
+#' @param object \code{basis.fdata} class object calculated by: \code{\link{fdata2basis}}
 #' @param draw logical, original curves  and their basis representation are plotted
 #' @param index vector, by default (if NULL) the first n curves are plotted, where n = min(4, length(fdataobj)). 
-#' Otherwise, index vector indicates taht curvesare plotted.#' 
+#' Otherwise, index vector indicates taht curvesare plotted.
+#' @param \dots Further arguments passed to or from other methods.
 #' @return fdata2basis \code{fdata2bais} function return: 
 #' \itemize{
 #' \item {coef}{a matrix or two-dimensional array of coefficients.}
@@ -81,8 +84,9 @@ fdata2basis <- function(fdataobj, basis, method=c("grid","inprod")){
   return(out)
 }
 
+#' @rdname fdata2basis
 #' @export
-summary.basis.fdata=function(object, draw=TRUE, index=NULL) {
+summary.basis.fdata=function(object, draw=TRUE, index=NULL,...) {
   #object <- bb
   cat("\n     - SUMMARY -\n")
   le <- length(object$basis)
