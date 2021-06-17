@@ -84,6 +84,6 @@ Used in:
 Alternative method: \code{\link{fdata2pc}}.
 }
 \author{
-Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@usc.es}
+Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@udc.es}
 }
 \keyword{multivariate}

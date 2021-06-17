@@ -24,6 +24,7 @@ Summary of functional principal components
 }
 \examples{
 \dontrun{
+library(fda.usc)
 n <- 200
 tt <- seq(0,1,len=101)
 x0 <- rproc2fdata(n,tt,sigma="wiener")
@@ -32,7 +33,7 @@ x <- x0*3+x1
 beta <- tt*sin(2*pi*tt)^2
 fbeta <- fdata(beta,tt)
 pc1 <- fdata2pc(x,3)
-summary(pc1)
+summary.fdata.comp(pc1)
 y <- inprod.fdata(x,fbeta) #+ rnorm(n,sd=0.1)
 pls1 <- fdata2pls(x,y,2)
 summary(pls1)

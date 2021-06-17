@@ -58,7 +58,7 @@
 #' \item \code{formula}{ formula.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{predict.fregre.lm}} and
 #' \code{\link{summary.lm}}.\cr Alternative method: \code{\link{fregre.glm}}.
 #' @references Ramsay, James O., and Silverman, Bernard W. (2006), \emph{

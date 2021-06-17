@@ -19,6 +19,7 @@
 #' @keywords multivariate
 #' @examples
 #' \dontrun{
+#' library(fda.usc)
 #' n <- 200
 #' tt <- seq(0,1,len=101)
 #' x0 <- rproc2fdata(n,tt,sigma="wiener")
@@ -27,7 +28,7 @@
 #' beta <- tt*sin(2*pi*tt)^2
 #' fbeta <- fdata(beta,tt)
 #' pc1 <- fdata2pc(x,3)
-#' summary(pc1)
+#' summary.fdata.comp(pc1)
 #' y <- inprod.fdata(x,fbeta) #+ rnorm(n,sd=0.1)
 #' pls1 <- fdata2pls(x,y,2)
 #' summary(pls1)
@@ -41,11 +42,10 @@ summary.fdata.comp=function(object,biplot=TRUE,...) {
      pr.com<-object
      #if (is.null(object$y)) {
         if (object$call[[1]]=="fdata2pls" | object$call[[1]]=="create.pls.basis"
-            | object$call[[1]]=="fdata2ppls" |  object$call[[1]]=="fdata2ppls")
+            | object$call[[1]]=="fdata2ppls" |  object$call[[1]]=="fdata2ppls"){
          y<-object$y                  
         pc <- FALSE
-     
-     #}
+     }
   } else if (inherits(object, "fregre.fd"))     {
      a1=FALSE
      pr.com<-object$fdata.comp
@@ -56,9 +56,12 @@ summary.fdata.comp=function(object,biplot=TRUE,...) {
  le <- length(l)
  rotation=aperm(pr.com$basis$data)
  p <- pr.com$coefs
+ print(pc)
  if (!pc) {
-  var.1<-apply(p, 2, cor,y)
-  pr.x2 <- object$Xvar / object$Xtotvar
+   # Coeficiente de determinacion (elacion del X con el y)
+   pr.x2 <- apply(p, 2, cor,y)^2 
+   names(pr.x2)<-colnames(p)
+  # pr.x2 <- object$Xvar / object$Xtotvar
   
 
  } else {
@@ -82,6 +85,13 @@ summary.fdata.comp=function(object,biplot=TRUE,...) {
  ,2),"%\n of the variability of explicative variables.\n \n-Variability for each component (%):\n")
   # print(round(pr.x[l] * 100, 2))
   print(round(pr.x2[l] * 100, 2))
+ } else{
+   cat("\n  - SUMMARY:  ",object$call[[1]]," object   -")
+   cat("\n-",le,"PLS component")
+   cat("\n- R^2 by component (%)\n")
+   print(round(pr.x2[l]*100,2))
+   cat("- Cumulative R^2 (%)\n")
+   print(round(cumsum(pr.x2[l])*100,2))
  }
  if (biplot){
   j=1
@@ -145,4 +155,3 @@ summary.fdata.comp=function(object,biplot=TRUE,...) {
   #return(invisible(pr.com))
   return(invisible(object))
 }
-

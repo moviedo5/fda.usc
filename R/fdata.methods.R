@@ -25,7 +25,7 @@
 #' @param \dots Further arguments passed to methods. 
 #' 
 #' @seealso  See  \link[base]{Summary} and \link[base]{Complex}.
-#' @author   Manuel Febrero Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@@usc.es}
+#' @author   Manuel Febrero Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #' @return
 #' \itemize{ 
 #' \item split.fdata: The value returned from \code{split} is a list of fdata objects 

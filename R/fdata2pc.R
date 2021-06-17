@@ -33,7 +33,7 @@
 #' \item {lambda}{ Amount of penalization.} 
 #' \item {P}{ Penalty matrix.}
 #' }
-#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@@usc.es}
+#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@@udc.es}
 #' @seealso  Used in:
 #' \code{\link{fregre.pls}}, \code{\link{fregre.pls.cv}}.
 #' Alternative method: \code{\link{fdata2pc}}.
@@ -364,7 +364,7 @@ mplsr <- function(X, Y, ncomp = 2, lambda=0, P=c(0,0,1),...)
 #' \item {P}{ Penalty matrix.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \link[base]{svd} and \link[stats]{varimax}.
 #' @references Venables, W. N. and B. D. Ripley (2002). \emph{Modern Applied
 #' Statistics with S}. Springer-Verlag.

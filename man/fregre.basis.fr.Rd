@@ -160,6 +160,6 @@ Alternative method: \code{\link{linmod}}.
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@usc.es}
+\email{manuel.oviedo@udc.es}
 }
 \keyword{regression}

@@ -78,7 +78,7 @@
 #' \item \code{weights}{ Weights.} 
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@usc.es}
+#' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{predict.fregre.fr}}.
 #' Alternative method: \code{\link{linmod}}.
 #' @references Ramsay, James O., and Silverman, Bernard W. (2006), \emph{
