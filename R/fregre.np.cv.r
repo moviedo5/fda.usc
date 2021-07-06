@@ -172,12 +172,15 @@ types=FALSE
 if (is.matrix(metric)) mdist<-metric
 else mdist=metric(fdataobj,fdataobj,...)
 
-ke<-deparse(substitute(Ker))
+# if (is.function(Ker)) ke<-deparse(substitute(Ker))
+# else ke<-Ker
+ # print(ke)
+# ke<-deparse(substitute(Ker))
 #ty<-deparse(substitute(type.S))
 #tcv<-deparse(substitute(type.CV))
 attr(par.S, "call") <- ty
 
-if (is.null(h)) h=h.default(fdataobj,probs=c(0.025,0.25),len=25,metric = mdist,Ker =ke,
+if (is.null(h)) h=h.default(fdataobj,probs=c(0.025,0.25),len=25,metric = mdist,Ker =Ker,
  type.S =ty,...)
 else {if   (any(h<=0)) stop("Error: Invalid range for h")}
 lenh <- length(h)
