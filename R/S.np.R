@@ -1,4 +1,4 @@
-#' @name S.np 
+ #' @name S.np 
 #' @title Smoothing matrix by nonparametric methods
 #' 
 #' @description Provides the smoothing matrix \code{S} for the discretization points \code{tt}
@@ -62,10 +62,11 @@ S.LLR<-function (tt, h, Ker = Ker.norm,w=NULL,cv=FALSE)
     if (ncol(tt)!=nrow(tt)) {
       if (ncol(tt)==1) {
          tt=as.vector(tt)
-         tt=abs(outer(tt,tt, "-"))}
+         tt=abs(outer(tt,tt, "-"))
+         }
 #      else stop("Error: incorrect arguments passed")
     }}
- else if (is.vector(tt))    tt=abs(outer(tt,tt, "-"))
+ else if (is.vector(tt))    tt=outer(tt,tt, "-") #tt=abs(outer(tt,tt, "-"))
  else stop("Error: incorrect arguments passed")
  if (cv)  diag(tt)=Inf
  k=Ker(tt/h)
@@ -90,12 +91,12 @@ S.LPR <- function (tt, h, p=1, Ker = Ker.norm, w = NULL, cv = FALSE)
     if (ncol(tt) != nrow(tt)) {
       if (ncol(tt) == 1) {
         tt = as.vector(tt)
-        tt = abs(outer(tt, tt, "-"))
+        tt=abs(outer(tt,tt, "-")) 
       }
     }
   }
   else if (is.vector(tt)) 
-    tt = abs(outer(tt, tt, "-"))
+    tt = outer(tt, tt, "-") #tt = abs(outer(tt, tt, "-"))
   else stop("Error: incorrect arguments passed")
   if (is.null(w)) 
     w <- rep(1, nrow(tt))
@@ -126,37 +127,6 @@ S.LCR<-function(tt, h, Ker=Ker.norm, w=NULL, cv=FALSE){
   return(res)
 }
 
-#' @rdname S.np
-#' @export 
-S.NW<-function (tt, h=NULL, Ker = Ker.norm,w=NULL,cv=FALSE) {
-if (is.matrix(tt)) {
-  if (ncol(tt)!=nrow(tt)) {
-    if (ncol(tt)==1) {
-      tt=as.vector(tt)
-      tt=abs(outer(tt,tt, "-"))}
-    #else stop("Error: incorrect arguments passed")
-  }}
-else if (is.vector(tt))    tt=abs(outer(tt,tt, "-"))
-else stop("Error: incorrect arguments passed")
-if (is.null(h)) {
-  h=quantile(tt,probs=0.15,na.rm=TRUE)
-  while(h==0) {
-    h=quantile(tt,probs=pp,na.rm=TRUE)
-    pp<-pp+.05
-  }
-}
-if (cv)  diag(tt)=Inf
-tt2<-data.matrix(sweep(tt,1,h,FUN="/"))
-k<-Ker(tt2)
-#print(any(is.na(tt2)))  
-if (is.null(w)) w<-rep(1,len=ncol(tt))
-k1<-sweep(k,2,w,FUN="*")
-#  S =k1/apply(k1,1,sum)
-rw<-rowSums(k1,na.rm = TRUE)
-rw[rw==0]<-1e-28
-S =k1/rw
-return(S)
-}
 
 #' @rdname S.np
 #' @export 
@@ -168,7 +138,7 @@ S.KNN<-function(tt,h=NULL,Ker=Ker.unif,w=NULL,cv=FALSE){
         tt=abs(outer(tt,tt, "-"))}
       #      else stop("Error: incorrect arguments passed")
     }}
-  else if (is.vector(tt))    tt=abs(outer(tt,tt, "-"))
+  else if (is.vector(tt))    tt=outer(tt,tt, "-")
   else stop("Error: incorrect arguments passed")
   numgr=ncol(tt)
   if (is.null(h)) h=floor(quantile(1:numgr,probs=0.05,na.rm=TRUE,type=4))
@@ -187,3 +157,6 @@ S.KNN<-function(tt,h=NULL,Ker=Ker.unif,w=NULL,cv=FALSE){
   rr=rr/rowSums(rr,na.rm=TRUE)
   return(rr)
 }
+
+
+

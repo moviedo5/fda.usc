@@ -1,12 +1,12 @@
 {
     "sortOrder": [
         {
-            "columnIndex": 2,
-            "ascending": true
-        },
-        {
             "columnIndex": 4,
             "ascending": false
+        },
+        {
+            "columnIndex": 2,
+            "ascending": true
         }
     ],
     "path": "C:/Users/moviedo/github/fda.usc/R"

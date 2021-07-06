@@ -15,8 +15,6 @@ S.LPR(tt, h, p = 1, Ker = Ker.norm, w = NULL, cv = FALSE)
 
 S.LCR(tt, h, Ker = Ker.norm, w = NULL, cv = FALSE)
 
-S.NW(tt, h = NULL, Ker = Ker.norm, w = NULL, cv = FALSE)
-
 S.KNN(tt, h = NULL, Ker = Ker.unif, w = NULL, cv = FALSE)
 }
 \arguments{
