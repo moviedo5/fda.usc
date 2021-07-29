@@ -14,17 +14,17 @@
 #' @param index vector, by default (if NULL) the first n curves are plotted, where n = min(4, length(fdataobj)). 
 #' Otherwise, index vector indicates taht curvesare plotted.
 #' @param \dots Further arguments passed to or from other methods.
-#' @return \code{fdata2bais} function return: 
+#' @return fdata2basis \code{fdata2bais} function return: 
 #' \itemize{
-#' \item {coef}{ a matrix or two-dimensional array of coefficients.}
-#' \item {basis}{ basis object (\code{\link{fdata}} class) evaluated in the same grid of \code{fdataobj}. } 
+#' \item {coef}{a matrix or two-dimensional array of coefficients.}
+#' \item {basis}{basis of \code{\link{fdata}} class evaluated in the same grid of \code{fdataobj}. } 
 #' }
 #' 
 #' summary function return: 
 #' \itemize{
-#' \item {R}{ a matrix with a measure similar to R-sq for each curve aproximation (by row) and number of basis elements (by column).}
+#' \item {R}{a matrix with a measure similar to R-sq for each curve aproximation (by row) and number of basis elements (by column).}
 #' }
-#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@@udc.es}
+#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@@usc.es}
 #' @seealso  Inverse function: \code{\link{gridfdata}}.
 #' Alternative method: \code{\link{fdata2pc}}, \code{\link{fdata2pls}}.
 # @references
@@ -49,16 +49,24 @@
 #' @export
 fdata2basis <- function(fdataobj, basis, method=c("grid","inprod")){
   xmean <- NULL
+  
+  
   if (is.basis(basis)){
    # print(1)
       bb=fdata(t(eval.basis(fdataobj$argvals,basis)),
                argvals=fdataobj$argvals,rangeval=fdataobj$rangeval)
-  } else if (class(basis) %in% c("fdata")){
+  } else{
+    if (class(basis) %in% c("fdata")){
       bb=basis
-      xmean <- func.mean(fdataobj)
+      xcen <- fdata.cen(fdataobj)
+      fdataobj <- Xcen$Xcen
+      xmean <- Xcen$meanX
+      #xmean <- func.mean(fdataobj)
   } else {
     bb=  basis$basis   
     xmean <- basis$mean
+    fdataobj$data <- sweep(fdataobj$data,2,xmean$data,"-")
+  }
   }
   #print(2)
   if (method[1]=="grid"){
