@@ -148,11 +148,15 @@ np <- ncol(x)
 
 if (is.matrix(metric)) mdist<-metric
 else mdist=metric(fdataobj,fdataobj,...)
-ke<-deparse(substitute(Ker))
+#ke<-deparse(substitute(Ker))
+if (!is.function(Ker)) Ker<-get(Ker)
 ty<-deparse(substitute(type.S))
 attr(par.S, "call") <- ty
 #print(h)
-if (is.null(h)) h=h.default(fdataobj,prob=0.05,len=1,metric = mdist, type.S = ty,...)
+if (is.null(h)) {
+      nker=get(paste0("Ker.",unlist(strsplit(deparse(substitute(Ker)),"[.]"))[2]))
+      h=h.default(fdataobj,prob=0.05,len=1,metric = mdist, type.S = ty, Ker=nker,...)
+}
 #     H =type.S(mdist,h,Ker,cv=FALSE)
 #     par.S$w<-y
 #S.NW2<-function (tt, h, Ker = Ker.norm,cv=FALSE,weights=rep(1,len=length(tt)))

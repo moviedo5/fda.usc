@@ -151,6 +151,7 @@ type.CV = GCV.S,type.S=S.NW,par.CV=list(trim=0,draw=FALSE),par.S=list(w=1),...){
  z=list()
  lenvnf=length(vnf)
  ty<-deparse(substitute(type.S))
+ if (!is.function(Ker)) Ker<-get(Ker)
 # ke<-deparse(substitute(Ker))
  if (lenvnf>0) {
 # cat(" Non functional variables: ",vnf,"\n")

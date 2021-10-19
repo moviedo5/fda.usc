@@ -178,10 +178,14 @@ else mdist=metric(fdataobj,fdataobj,...)
 # ke<-deparse(substitute(Ker))
 #ty<-deparse(substitute(type.S))
 #tcv<-deparse(substitute(type.CV))
+if (!is.function(Ker)) Ker<-get(Ker)
 attr(par.S, "call") <- ty
 
-if (is.null(h)) h=h.default(fdataobj,probs=c(0.025,0.25),len=25,metric = mdist,Ker =Ker,
- type.S =ty,...)
+if (is.null(h)) {
+nker=get(paste0("Ker.",unlist(strsplit(deparse(substitute(Ker)),"[.]"))[2]))
+h = do.call(h.default,c(list(fdataobj=fdataobj,metric=mdist,prob=c(0.025,0.25),type.S=ty,Ker=nker),...))
+}
+#h=h.default(fdataobj,prob=c(0.025,0.25),len=25,metric = mdist,Ker =Ker,type.S =ty,...)}
 else {if   (any(h<=0)) stop("Error: Invalid range for h")}
 lenh <- length(h)
 cv=gcv1=gcv=cv.error <- array(NA, dim = c(lenh))
