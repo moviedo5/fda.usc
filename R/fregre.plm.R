@@ -151,7 +151,7 @@ type.CV = GCV.S,type.S=S.NW,par.CV=list(trim=0,draw=FALSE),par.S=list(w=1),...){
  z=list()
  lenvnf=length(vnf)
  ty<-deparse(substitute(type.S))
- ke<-deparse(substitute(Ker))
+# ke<-deparse(substitute(Ker))
  if (lenvnf>0) {
 # cat(" Non functional variables: ",vnf,"\n")
  for ( i in 1:length(vnf)){
@@ -169,7 +169,10 @@ type.CV = GCV.S,type.S=S.NW,par.CV=list(trim=0,draw=FALSE),par.S=list(w=1),...){
   tt<-fdataobj[["argvals"]]
   rtt<-fdataobj[["rangeval"]]
   mdist=metric(fdataobj,fdataobj,...)
-  if (is.null(h))  h<-h.default(data[[vfunc[1]]],type.S=ty,metric=mdist,Ker=ke)
+  if (is.null(h))  {
+    nker=get(paste0("Ker.",unlist(strsplit(deparse(substitute(Ker)),"[.]"))[2]))
+    h<-do.call(h.default,c(list(fdataobj=data[[vfunc[1]]],type.S=ty,metric=mdist,Ker=nker),...))
+  }
   lenh <- length(h)
   df <- gcv<- array(NA, dim = c(lenh))
   yph <- array(NA, dim = c(nrow(y),lenh))
