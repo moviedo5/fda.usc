@@ -138,7 +138,7 @@ S.KNN<-function(tt,h=NULL,Ker=Ker.unif,w=NULL,cv=FALSE){
         tt=abs(outer(tt,tt, "-"))}
       #      else stop("Error: incorrect arguments passed")
     }}
-  else if (is.vector(tt))    tt=outer(tt,tt, "-")
+  else if (is.vector(tt))    tt=abs(outer(tt,tt, "-"))
   else stop("Error: incorrect arguments passed")
   numgr=ncol(tt)
   if (is.null(h)) h=floor(quantile(1:numgr,probs=0.05,na.rm=TRUE,type=4))
