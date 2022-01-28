@@ -172,12 +172,15 @@ types=FALSE
 if (is.matrix(metric)) mdist<-metric
 else mdist=metric(fdataobj,fdataobj,...)
 
+<<<<<<< Updated upstream
 # if (is.function(Ker)) ke<-deparse(substitute(Ker))
 # else ke<-Ker
  # print(ke)
 # ke<-deparse(substitute(Ker))
 #ty<-deparse(substitute(type.S))
 #tcv<-deparse(substitute(type.CV))
+=======
+>>>>>>> Stashed changes
 if (!is.function(Ker)) Ker<-get(Ker)
 attr(par.S, "call") <- ty
 
