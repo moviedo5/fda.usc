@@ -49,7 +49,6 @@ Return:
 \item {y:}{ Response.}
 \item {fdataobj:}{ Functional explanatory data of class \code{fdata}.}
 \item {a.est:}{ Intercept parameter estimated} 
-\item {x.fd:}{ Centered functional explanatory data of class \code{fd}.} 
 \item {basis.b:}{ Basis used' for beta parameter estimation.} 
 \item {lambda.opt:}{ A roughness penalty.}
 \item {Lfdobj:}{ Order of a derivative or a linear differential operator.}

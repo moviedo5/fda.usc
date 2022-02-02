@@ -58,7 +58,7 @@
 #' \item \code{formula}{ formula.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@udc.es}
+#' \email{manuel.oviedo@@usc.es}
 #' @seealso See Also as: \code{\link{predict.fregre.lm}} and
 #' \code{\link{summary.lm}}.\cr Alternative method: \code{\link{fregre.glm}}.
 #' @references Ramsay, James O., and Silverman, Bernard W. (2006), \emph{
@@ -77,23 +77,25 @@
 #' dataf <- as.data.frame(tecator$y)
 #' 
 #' nbasis.x <- 11
-#' nbasis.b <- 7
+#' nbasis.b <- 5
 #' basis1 <- create.bspline.basis(rangeval=range(tt),nbasis=nbasis.x)
 #' basis2 <- create.bspline.basis(rangeval=range(tt),nbasis=nbasis.b)
 #' basis.x <- list("x"=basis1)
 #' basis.b <- list("x"=basis2)
 #' f <- Fat ~ Protein + x
 #' ldat <- ldata("df"=dataf,"x"=x)
-#' res <- fregre.lm(f,ldat, basis.x=basis.x, basis.b=basis.b)
+#' res <- fregre.lm(f,ldat,  basis.b=basis.b)
 #' summary(res)
-#' f2 <- Fat ~ Protein + xd
-#' xd <- fdata.deriv(x,nderiv=2,class.out='fdata', nbasis=nbasis.x)
-#' ldat2 <- list("df"=dataf,"xd"=xd)
-#' basis.x2 <- list("xd"=basis1)
-#' basis.b2 <- list("xd"=basis2)
-#' res2 <- fregre.lm(f2, ldat2, basis.x=basis.x2, basis.b=basis.b2)
+#' f2 <- Fat ~ Protein + xd +xd2
+#' xd <- fdata.deriv(x,nderiv=1,class.out='fdata', nbasis=nbasis.x)
+#' xd2 <- fdata.deriv(x,nderiv=2,class.out='fdata', nbasis=nbasis.x)
+#' ldat2 <- list("df"=dataf,"xd"=xd,"x"=x,"xd2"=xd2)
+#' basis.x2 <- NULL#list("xd"=basis1)
+#' basis.b2 <- NULL#list("xd"=basis2)
+#' basis.b2 <- list("xd"=basis2,"xd2"=basis2,"x"=basis2)
+
+#' res2 <- fregre.lm(f2, ldat2,basis.b=basis.b2)
 #' summary(res2)
-#' 
 #' par(mfrow=c(2,1))
 #' plot(res$beta.l$x,main="functional beta estimation")
 #' plot(res2$beta.l$xd,col=2)
@@ -195,7 +197,11 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
   else {
     # print("lm.penaltyyyy")
     # z <- lm.penalty(Z, W, scores, XX, basis.x, lambda0, rn0)
-    z<- lm.penalty(  XX,W, vfunc, basis.x, out$lpenalty,out$ipenalty)
+    # print(out$lpenalty)
+    # print("out$lpenalty")
+    # print(out$ipenalty)
+    z<- lm.penalty( XX,W, vfunc, basis.x, out$lpenalty,out$ipenalty)
+    z$lambda <- TRUE
     #  z$fitted.values
     # out$ipenalty
     #  z$mat
@@ -204,9 +210,7 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
   #    z$call<-z$call[1:2]
   
   for (i in 1:length(vfunc)) {
-    # print(vfunc[i])
-    # print(name.coef)
-    if (bsp1) beta.l[[vfunc[i]]]=fd(z$coefficients[name.coef[[vfunc[i]]]],basis.b[[vfunc[i]]])
+     if (bsp1) beta.l[[vfunc[i]]]=fd(z$coefficients[name.coef[[vfunc[i]]]],basis.b[[vfunc[i]]])
     else{
       if(class(data[[vfunc[i]]])[1]=="fdata"){
         #     beta.est<-z$coefficients[name.coef[[vfunc[i]]]]*vs.list[[vfunc[i]]]
@@ -233,13 +237,14 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
     }
   }
   
-  #  z$H <- design2hat(Z,W)  # usarla en fdata2model
+  # z$H <- design2hat(Z,W)  # usarla en fdata2model
   # print("design2hat")
+  # print(names(z))
   # z$yp <- z$H %*% y
-  # print("pasa 2")
   #    z$coefficients <- design2coefs(Z,W,y)  # usarla en fdata2model
   # print("design2coefs"); print(z$coefficients)
   # print(name.coef)
+  e <- z$residuals
   z$sr2 <- sum(e^2)/z$df.residual
   ###################### z$Vp <- z$sr2*S
   z$Vp <- z$sr2 * z$H  # 20210321
@@ -323,16 +328,24 @@ lm.penalty <- function(  XX,W,vfunc
   pp <- ncol(x)
   #        mat <- rep(0,len=pp-2)
   mat <- diag(0,nrow=pp)
+  # print(pp);  print(dim(x));  print(ipenalty)
   for (ifun in 1:lenvfunc){
     imat0 <- ipenalty[[vfunc[ifun]]]
     mat[imat0,imat0] <- lpenalty[[vfunc[ifun]]]
   }
-  mat
-  
   ###################### pc
+  
+ # mat <- t(x)%*%P%*%P%*%x #R
+ #  X<- res1$XX[,3:9]
+#  dim(X);dim(P)
+ # P <- P.penalty(1:7,c(0,1))
+  #P
+  #mat <- X%*%P%*%t(X)
   Sb<- t(x)%*%W%*%x + mat
+  
   # S<-solve(Sb)       
-  #    S=solve(t(Z)%*%W%*%Z)    
+  #    S=solve(t(Z)%*%W%*%Z)
+  #S=solve(t(Z)%*%W%*%Z + lambda*mat)    
   S<-Minverse(Sb) 
   Cinv<-S%*%t(x)%*%W         
   coefs<-Cinv%*%y
@@ -369,8 +382,8 @@ lm.penalty <- function(  XX,W,vfunc
   z$y <- y
   z$rank <- df
   z$df.residual <-  rdf
-  Z=cbind(rep(1,len=n),Z)
-  colnames(Z)[1] = "(Intercept)"
+  # Z=cbind(rep(1,len=n),Z)
+  # colnames(Z)[1] = "(Intercept)"
   std.error = sqrt(diag(S) *sr2)
   t.value = coefs/std.error
   p.value = 2 * pt(abs(t.value), n - df, lower.tail = FALSE)
@@ -382,7 +395,7 @@ lm.penalty <- function(  XX,W,vfunc
   # z$lambda.opt <- lambda
   # z$lambda <- lambda
   z$mat <- mat
+  # print(mat)
   class(z) <- "lm"
   return(z)
 }
-

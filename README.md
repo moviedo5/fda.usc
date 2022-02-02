@@ -86,7 +86,8 @@ roxygenize()
 devtools::document()
 
 library(devtools)
-devtools::install_github("moviedo5/fda.usc",auth_user="moviedo5")
+
+# devtools::install_github("moviedo5/fda.usc",auth_user="moviedo5")
 
 R CMD build fda.usc
 R CMD check fda.usc_2.0.3.tar.gz --as-cran

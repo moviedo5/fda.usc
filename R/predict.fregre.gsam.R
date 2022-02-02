@@ -3,8 +3,7 @@
 predict.fregre.gsam <- function(object, newx = NULL, type = "response",...){
  if (is.null(object)) stop("No fregre.gsam object entered")
   
-
-  if (is.null(newx)) {
+   if (is.null(newx)) {
     if (type == "effects"){
       fake  = predict.gam(object, type = "terms", ...) 
       yp <- effect.gam(object,fake)
@@ -14,10 +13,11 @@ predict.fregre.gsam <- function(object, newx = NULL, type = "response",...){
     return(yp)
   }
  else {
- data=newx
- basis.x=object$basis.x
- basis.b=object$basis.b
- formula=object$formula.ini
+ data<-newx
+ basis.x<-object$basis.x
+ basis.b<-object$basis.b
+ formula<-object$formula.ini
+ if (is.null(formula)) formula<-object$formula
  tf <- terms.formula(formula, specials = c("s", "te", "t2"))
  terms <- attr(tf, "term.labels")
  if (length(terms)==0) return(rep(object$coefficient,length=nrow(newx[[1]])) ) 

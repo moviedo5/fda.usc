@@ -150,6 +150,6 @@ See Also as: \code{\link{fregre.lm}}, \code{\link{fregre.plm}},
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@udc.es}
+\email{manuel.oviedo@usc.es}
 }
 \keyword{regression}

@@ -156,7 +156,7 @@ attr(par.S, "call") <- ty
 if (is.null(h)) {
       nker=get(paste0("Ker.",unlist(strsplit(deparse(substitute(Ker)),"[.]"))[2]))
       h=h.default(fdataobj,prob=0.05,len=1,metric = mdist, type.S = ty, Ker=nker,...)
-}
+      }
 #     H =type.S(mdist,h,Ker,cv=FALSE)
 #     par.S$w<-y
 #S.NW2<-function (tt, h, Ker = Ker.norm,cv=FALSE,weights=rep(1,len=length(tt)))

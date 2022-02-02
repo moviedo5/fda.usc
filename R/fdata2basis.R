@@ -49,8 +49,6 @@
 #' @export
 fdata2basis <- function(fdataobj, basis, method=c("grid","inprod")){
   xmean <- NULL
-  
-  
   if (is.basis(basis)){
    # print(1)
       bb=fdata(t(eval.basis(fdataobj$argvals,basis)),
@@ -58,7 +56,7 @@ fdata2basis <- function(fdataobj, basis, method=c("grid","inprod")){
   } else{
     if (class(basis) %in% c("fdata")){
       bb=basis
-      xcen <- fdata.cen(fdataobj)
+      Xcen <- fdata.cen(fdataobj)
       fdataobj <- Xcen$Xcen
       xmean <- Xcen$meanX
       #xmean <- func.mean(fdataobj)

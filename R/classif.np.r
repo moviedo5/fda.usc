@@ -165,7 +165,7 @@ classif.np <- function  (group, fdataobj, h = NULL, Ker = AKer.norm, metric,
     par.S$Ker <- Ker
   if (is.null(par.S$w)) 
     par.S$w <- weights
-  par.fda.usc <- eval(parse(text = "fda.usc:::par.fda.usc"), 
+  par.fda.usc <- eval(parse(text = "fda.usc.devel:::par.fda.usc"), 
                       envir = .GlobalEnv)
   warn <- par.fda.usc$warning
   for (i in 1:lenh) {

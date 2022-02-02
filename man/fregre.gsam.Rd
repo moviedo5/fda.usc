@@ -11,7 +11,6 @@ fregre.gsam(
   weights = NULL,
   basis.x = NULL,
   basis.b = NULL,
-  CV = FALSE,
   ...
 )
 }
@@ -32,8 +31,6 @@ function, a family function or the result of a call to a family function.
 \item{basis.x}{List of basis for functional explanatory data estimation.}
 
 \item{basis.b}{List of basis for functional beta parameter estimation.}
-
-\item{CV}{=TRUE, Cross-validation (CV) is done.}
 
 \item{\dots}{Further arguments passed to or from other methods.}
 }

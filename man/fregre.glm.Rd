@@ -10,7 +10,6 @@ fregre.glm(
   data,
   basis.x = NULL,
   basis.b = NULL,
-  CV = FALSE,
   subset = NULL,
   ...
 )
@@ -31,8 +30,6 @@ function, a family function or the result of a call to a family function.
 
 \item{basis.b}{List of basis for \eqn{\beta(t)} parameter estimation.}
 
-\item{CV}{=TRUE, Cross-validation (CV) is done .}
-
 \item{subset}{an optional vector specifying a subset of observations to be
 used in the fitting process.}
 
@@ -46,7 +43,6 @@ Return \code{glm} object plus:
 \item \code{beta.l}{ List of estimated beta parameter of functional covariates.} 
 \item \code{data}{ List that containing the variables in the model.} 
 \item \code{formula}{ formula.} 
-\item \code{CV}{ predicted response by cross-validation.}
 }
 }
 \description{

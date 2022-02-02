@@ -12,6 +12,7 @@
 \alias{classif.lda}
 \alias{classif.qda}
 \alias{classif.multinom}
+\alias{classif.gbm}
 \title{Functional classification using ML algotithms}
 \usage{
 classif.nnet(formula, data, basis.x = NULL, weights = "equal", size, ...)
@@ -64,6 +65,10 @@ classif.qda(
 )
 
 classif.naiveBayes(formula, data, basis.x = NULL, laplace = 0, ...)
+
+classif.cv.glmnet(formula, data, basis.x = NULL, weights = "equal", ...)
+
+classif.gbm(formula, data, basis.x = NULL, weights = "equal", ...)
 }
 \arguments{
 \item{formula}{an object of class \code{formula} (or one that can be coerced
@@ -136,6 +141,7 @@ Wrapper versions for multivariate and functional classification:
 \item \code{classif.ksvm}: uses \code{weighted.ksvm } function and requires \code{personalized} package.
 \item \code{classif.randomForest}: uses \code{randomForest} function and requires \code{randomForest} package.
 \item \code{classif.cv.glmnet}: uses \code{cv.glmnet} function and requires \code{glmnet} package.
+\item \code{classif.gbm}: uses \code{gbm} function and requires \code{gbm} package.
 }
 }
 \examples{
@@ -148,12 +154,18 @@ gtest<-phoneme[["classtest"]]
 dataf<-data.frame(glearn)
 dat=ldata("df"=dataf,"x"=mlearn)
 a1<-classif.rpart(glearn~x,data=dat)
-a1<-classif.nnet(glearn~x,data=dat)
-summary(a1)
+a2<-classif.nnet(glearn~x,data=dat,trace=F)
+a3<-classif.gbm(glearn~x,data=dat)
+a4<-classif.randomForest(glearn~x,data=dat)
+a5<-classif.cv.glmnet(glearn~x,data=dat)
 newdat<-list("x"=mtest)
 p1<-predict(a1,newdat,type="class")
-table(gtest,p1)
-sum(p1==gtest)/250
+p2<-predict(a2,newdat,type="class")
+p3<-predict.classif(a3,newdat,type="class")
+p4<-predict.classif(a4,newdat,type="class")
+p5<-predict.classif(a5,newdat,type="class")
+mean(p1==gtest);mean(p2==gtest);mean(p3==gtest)
+mean(p4==gtest);mean(p5==gtest)
 }
 
 }

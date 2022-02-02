@@ -53,26 +53,12 @@ Default is \code{FALSE}.}
 \value{
 Return:\cr 
 \itemize{
-\item {call:}{ The matched call.} 
-\item {coefficients:}{ A named vector of coefficients} 
-\item {residuals:}{ \code{y} minus \code{fitted values}.} 
-\item {fitted.values:}{ Estimated scalar response.} 
-\item {beta.est:}{ beta parameter estimated of class \code{fd}} 
-\item {weights:}{(only for weighted fits) the specified weights.}
-\item {df.residual:}{ The residual degrees of freedom.} 
-\item {r2:}{ Coefficient of determination.} 
-\item {sr2:}{ Residual variance.} 
-\item {H:}{ Hat matrix.} 
-\item {y:}{ Scalar response.}
-\item {fdataobj:}{ Functional explanatory data of class \code{fdata}.}
-\item {x.fd:}{ Centered functional explanatory data of class \code{fd}.}
-\item {lambda.opt:}{ \code{lambda} value that minimizes CV or GCV method.}
-\item {gcv.opt:}{ Minimum value of CV or GCV method.} 
+\item {\code{fregre.basis}}{ Fitted regression object by the best parameters (basis elements for data and beta and lambda penalty).} 
 \item {basis.x.opt:}{ Basis used for functional explanatory data estimation \code{fdata}.}
 \item {basis.b.opt:}{ Basis used for for functional \code{beta} parameter
 estimation.} 
-\item {a.est}{ Intercept parameter estimated} 
-\item {lm}{ Return \code{lm} object.}
+\item {lambda.opt:}{ \code{lambda} value that minimizes CV or GCV method.}
+\item {gcv.opt:}{ Minimum value of CV or GCV method.} 
 }
 }
 \description{

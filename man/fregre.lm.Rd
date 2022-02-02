@@ -94,23 +94,24 @@ tt <- x[["argvals"]]
 dataf <- as.data.frame(tecator$y)
 
 nbasis.x <- 11
-nbasis.b <- 7
+nbasis.b <- 5
 basis1 <- create.bspline.basis(rangeval=range(tt),nbasis=nbasis.x)
 basis2 <- create.bspline.basis(rangeval=range(tt),nbasis=nbasis.b)
 basis.x <- list("x"=basis1)
 basis.b <- list("x"=basis2)
 f <- Fat ~ Protein + x
 ldat <- ldata("df"=dataf,"x"=x)
-res <- fregre.lm(f,ldat, basis.x=basis.x, basis.b=basis.b)
+res <- fregre.lm(f,ldat,  basis.b=basis.b)
 summary(res)
-f2 <- Fat ~ Protein + xd
-xd <- fdata.deriv(x,nderiv=2,class.out='fdata', nbasis=nbasis.x)
-ldat2 <- list("df"=dataf,"xd"=xd)
-basis.x2 <- list("xd"=basis1)
-basis.b2 <- list("xd"=basis2)
-res2 <- fregre.lm(f2, ldat2, basis.x=basis.x2, basis.b=basis.b2)
+f2 <- Fat ~ Protein + xd +xd2
+xd <- fdata.deriv(x,nderiv=1,class.out='fdata', nbasis=nbasis.x)
+xd2 <- fdata.deriv(x,nderiv=2,class.out='fdata', nbasis=nbasis.x)
+ldat2 <- list("df"=dataf,"xd"=xd,"x"=x,"xd2"=xd2)
+basis.x2 <- NULL#list("xd"=basis1)
+basis.b2 <- NULL#list("xd"=basis2)
+basis.b2 <- list("xd"=basis2,"xd2"=basis2,"x"=basis2)
+res2 <- fregre.lm(f2, ldat2,basis.b=basis.b2)
 summary(res2)
-
 par(mfrow=c(2,1))
 plot(res$beta.l$x,main="functional beta estimation")
 plot(res2$beta.l$xd,col=2)
@@ -130,6 +131,6 @@ See Also as: \code{\link{predict.fregre.lm}} and
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-\email{manuel.oviedo@udc.es}
+\email{manuel.oviedo@usc.es}
 }
 \keyword{regression}

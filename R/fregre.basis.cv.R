@@ -44,26 +44,12 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Return:\cr 
 #' \itemize{
-#' \item {call:}{ The matched call.} 
-#' \item {coefficients:}{ A named vector of coefficients} 
-#' \item {residuals:}{ \code{y} minus \code{fitted values}.} 
-#' \item {fitted.values:}{ Estimated scalar response.} 
-#' \item {beta.est:}{ beta parameter estimated of class \code{fd}} 
-#' \item {weights:}{(only for weighted fits) the specified weights.}
-#' \item {df.residual:}{ The residual degrees of freedom.} 
-#' \item {r2:}{ Coefficient of determination.} 
-#' \item {sr2:}{ Residual variance.} 
-#' \item {H:}{ Hat matrix.} 
-#' \item {y:}{ Scalar response.}
-#' \item {fdataobj:}{ Functional explanatory data of class \code{fdata}.}
-#' \item {x.fd:}{ Centered functional explanatory data of class \code{fd}.}
-#' \item {lambda.opt:}{ \code{lambda} value that minimizes CV or GCV method.}
-#' \item {gcv.opt:}{ Minimum value of CV or GCV method.} 
+#' \item {\code{fregre.basis}}{ Fitted regression object by the best parameters (basis elements for data and beta and lambda penalty).} 
 #' \item {basis.x.opt:}{ Basis used for functional explanatory data estimation \code{fdata}.}
 #' \item {basis.b.opt:}{ Basis used for for functional \code{beta} parameter
 #' estimation.} 
-#' \item {a.est}{ Intercept parameter estimated} 
-#' \item {lm}{ Return \code{lm} object.}
+#' \item {lambda.opt:}{ \code{lambda} value that minimizes CV or GCV method.}
+#' \item {gcv.opt:}{ Minimum value of CV or GCV method.} 
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}
@@ -207,10 +193,17 @@ fregre.basis.cv <- function(fdataobj,y,basis.x=NULL,basis.b=NULL,
      nbasis22<-rep(NA,lenbasis.y)
      x.fdfou<-Cfou<-Cmfou<- list()
      for (nb.x in 1:lenbasis.x) {
-           x.fd=x.fdfou[[nb.x]] =Data2fd(argvals=tt,y=t(xcen$data),basisobj=basis.x[[nb.x]])         
-           Cfou[[nb.x]]=t(x.fdfou[[nb.x]]$coefs)
-           Cmfou[[nb.x]]=matrix(t(mean.fd(x.fdfou[[nb.x]])$coefs))
-           nbasis12[nb.x]<-basis.x[[nb.x]]$type
+           xaux <- fdata2basis(fdataobj,basis.x[[nb.x]])
+           # poner eso en fdata2basis!!!!!!!!!!!!!!!!!
+           colnames(xaux$coefs) <- paste(fdataobj$names$main,".",colnames(xaux$coefs),sep="")
+           # x.fd <- x.fdfou[[nb.x]] <- Data2fd(argvals=tt,y=t(xcen$data),basisobj=basis.x[[nb.x]])         
+           Cfou[[nb.x]] <- xaux$coefs
+           # Cmfou[[nb.x]] <- matrix(t(mean.fd(x.fdfou[[nb.x]])$coefs))
+           nbasis12[nb.x] <- basis.x[[nb.x]]$type
+           # x.fd <- x.fdfou[[nb.x]] <- Data2fd(argvals=tt,y=t(xcen$data),basisobj=basis.x[[nb.x]])         
+           # Cfou[[nb.x]]=t(x.fdfou[[nb.x]]$coefs)
+           # Cmfou[[nb.x]]=matrix(t(mean.fd(x.fdfou[[nb.x]])$coefs))
+           # nbasis12[nb.x]<-basis.x[[nb.x]]$type
            }
     }
     else {
@@ -218,9 +211,12 @@ fregre.basis.cv <- function(fdataobj,y,basis.x=NULL,basis.b=NULL,
      nbasis22<-rep(NA,lenbasis.y)
      x.fdfou<-Cfou<-Cmfou<- list()
      for (nb.x in 1:lenbasis.x) {
-           x.fd=x.fdfou[[nb.x]] =Data2fd(argvals=tt,y=t(xcen$data),basisobj=basis.x[[nb.x]])         
-           Cfou[[nb.x]]=t(x.fdfou[[nb.x]]$coefs)
-           Cmfou[[nb.x]]=matrix(t(mean.fd(x.fdfou[[nb.x]])$coefs))
+           # x.fd=x.fdfou[[nb.x]] =Data2fd(argvals=tt,y=t(xcen$data),basisobj=basis.x[[nb.x]])         
+            xaux <- fdata2basis(fdataobj,basis.x[[nb.x]])
+            colnames(xaux$coefs) <- paste(fdataobj$names$main,".",colnames(xaux$coefs),sep="")
+            Cfou[[nb.x]] <- xaux$coefs
+           # Cfou[[nb.x]]=t(x.fdfou[[nb.x]]$coefs)
+           # Cmfou[[nb.x]]=matrix(t(mean.fd(x.fdfou[[nb.x]])$coefs))
            nbasis12[nb.x]<-basis.x[[nb.x]]$type
            }
     }
@@ -231,40 +227,38 @@ fregre.basis.cv <- function(fdataobj,y,basis.x=NULL,basis.b=NULL,
      for (nb.y in ifou:iifou) {
        nbasis22[nb.y]<-basis.b[[nb.y]]$type
        C<-Cfou[[nb.x]]
-       Cm<-Cmfou[[nb.x]]
+       # Cm<-Cmfou[[nb.x]] # viejo
        J<-inprod(basis.x[[nb.x]],basis.b[[nb.y]])        
   	   Z=C%*%J
-       Z=cbind(rep(1,len=n),Z)
+       # Z=cbind(rep(1,len=n),Z)
   	   if (any(lambda!=0)) {
-         R=diag(0,ncol= basis.b[[nb.y]]$nbasis+1,nrow=basis.b[[nb.y]]$nbasis+1)
-         R[-1,-1]<-eval.penalty(basis.b[[nb.y]],Lfdobj)
+         # R=diag(0,ncol= basis.b[[nb.y]]$nbasis+1,nrow=basis.b[[nb.y]]$nbasis+1)
+         # R[-1,-1]<-eval.penalty(basis.b[[nb.y]],Lfdobj)
+  	     R=diag(0,ncol= basis.b[[nb.y]]$nbasis,nrow=basis.b[[nb.y]]$nbasis)
          }
        else R=0
        for (k in 1:lenlambda) {
-         
+      
 # norm(R)/norm(t(Z)%*%W%*%Z
-# R
-         
-        Sb=t(Z)%*%W%*%Z+lambda[k]*R
+         Sb=t(Z)%*%W%*%Z+lambda[k]*R
         #Cinv<-solve(Sb)
         Cinv<-Minverse(Sb)
          Sb2=Cinv%*%t(Z)%*%W
          par.CV$S <-Z%*%Sb2
          par.CV$y<-y
          gcv[nb.x,nb.y,k]<- do.call(type.CV,par.CV)
-         if ((gcv[nb.x,nb.y,k]+tol)<pr) {
+         if ((gcv[nb.x,nb.y,k]+tol) < pr) {
             pr=gcv[nb.x,nb.y,k]
             lambda.opt=lambda[k]
             basis.b.opt=basis.b[[nb.y]]
             basis.x.opt=basis.x[[nb.x]]
             Sb.opt=Sb2
             Z.opt=Z
-            Cm.opt=Cm
+           # Cm.opt=Cm
             J.opt=J
             Cinv.opt=Cinv
             R.opt=R
           } 
-  
          }
       }  }
   if (all(is.na(gcv))) stop("System is computationally singular. Try to reduce the number of basis elements")
@@ -279,8 +273,11 @@ fregre.basis.cv <- function(fdataobj,y,basis.x=NULL,basis.b=NULL,
       bet<-Cinv.opt%*%DD
       rownames(b.est)<-1:nrow(b.est)
       rownames(b.est)[1]<- "(Intercept)"
+       # codigo viejo
       #beta.est2=fd(b.est2[-1,1]*diff(rtt),basis.b)
-      beta.est=fd(b.est[-1,1],basis.b.opt)
+      beta.est=fd(b.est[,1],basis.b.opt) # nuevo
+      
+      beta.est=fd(b.est[,1],basis.b.opt)
       a.est=b.est[1,1]
       e=drop(y)-drop(yp)
       names(e)<-rownames(x)
@@ -297,9 +294,8 @@ fregre.basis.cv <- function(fdataobj,y,basis.x=NULL,basis.b=NULL,
       object.lm$rank <- df
       object.lm$df.residual<-n-df
       vfunc=call[[2]]
-      colnames(Z.opt)<-1:ncol(Z.opt)
-      colnames(Z.opt)[2:ncol(Z.opt)]= paste(vfunc,".",basis.b.opt$names, sep = "")
-      colnames(Z.opt)[1]="(Intercept)"
+      colnames(Z.opt) <-  paste(vfunc,".",basis.b.opt$names, sep = "")
+      #colnames(Z.opt)[1]="(Intercept)"
       vcov2=sr2*Cinv.opt
       std.error=sqrt(diag(vcov2))
       t.value=b.est/std.error
@@ -323,18 +319,7 @@ fregre.basis.cv <- function(fdataobj,y,basis.x=NULL,basis.b=NULL,
   nbasis22<-paste(nbasis22,nbasis2,sep="")
   dimnames(gcv)<-list(nbasis12,nbasis22,lambda2)
   }
-  x.fd=Data2fd(argvals=tt,y=t(xcen$data),basisobj=basis.x.opt)          
-  # model2<-list("call"=call,"coefficients"=coefficients,"residuals"=e,
-  #           "fitted.values"=yp,"beta.est"=beta.est,weights= weights,
-  #           "df"=df,"r2"=r2,"sr2"=sr2,"Vp"=Vp,"H"=S,"y"=y,
-  #           "fdataobj"=fdataobj,x.fd=x.fd,
-  #           "basis.x.opt"=basis.x.opt,"basis.b.opt"=basis.b.opt,
-  #           "J"=J.opt,"lambda.opt"=lambda.opt,
-  #           P=R.opt, Lfdobj=Lfdobj,
-  #           lm=object.lm,"mean"=xmean,
-  #           "b.est"=b.est,"a.est"=a.est,
-  #           "lm"=object.lm,"mean"=xmean,
-  #           XX=Z[,-1])
+  # x.fd=Data2fd(argvals=tt,y=t(xcen$data),basisobj=basis.x.opt)          
   model<-fregre.basis(fdataobj = fdataobj, y =y, basis.x=basis.x.opt,
                     basis.b= basis.b.opt, lambda=lambda.opt, 
                     Lfdobj= Lfdobj, weights=weights,...)
@@ -347,4 +332,3 @@ fregre.basis.cv <- function(fdataobj,y,basis.x=NULL,basis.b=NULL,
            "gcv.opt"=gcv.opt,"gcv"=gcv)
   return(invisible(out))
 }
-

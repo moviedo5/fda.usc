@@ -72,7 +72,7 @@
 #' \item {y:}{ Response.}
 #' \item {fdataobj:}{ Functional explanatory data of class \code{fdata}.}
 #' \item {a.est:}{ Intercept parameter estimated} 
-#' \item {x.fd:}{ Centered functional explanatory data of class \code{fd}.} 
+# \item {x.fd:}{ Centered functional explanatory data of class \code{fd}.} 
 #' \item {basis.b:}{ Basis used' for beta parameter estimation.} 
 #' \item {lambda.opt:}{ A roughness penalty.}
 #' \item {Lfdobj:}{ Order of a derivative or a linear differential operator.}
@@ -156,7 +156,7 @@ rtt<-fdataobj[["rangeval"]]
 	if (is.null(basis.b))  {
 	   if (basis.x$type=="fourier") basis.b<-basis.x
 	   else {
-     nbasis.b=max(floor(np/10),5)
+     nbasis.b=min(basis.x$nbasis,max(floor(np/10),5))
      basis.b=create.bspline.basis(rangeval=rtt,nbasis=nbasis.b)
      }
   }
@@ -181,16 +181,28 @@ rtt<-fdataobj[["rangeval"]]
       of nbasis=",basis.b$nbasis," of basis.b; will be decreased by ",basis.x$nbasis-basis.b$nbasis,sep="","\n")
      basis.x<-basis.b
     }
-    }
-  x.fd=Data2fd(argvals=tt,y=t(xcen$data),basisobj=basis.x)
-  C=t(x.fd$coefs)
+  }
   J=inprod(basis.x,basis.b)
+  ###################  codigo viejo
+  # x.fd=Data2fd(argvals=tt,y=t(xcen$data),basisobj=basis.x)
+  # C=t(x.fd$coefs)
+  # Z<-C%*%J
+  ################### codigo nuevo 
+   xaux <- fdata2basis(fdataobj,basis.x)
+   name.coef <- colnames(xaux$coefs) <- paste(gsub( " ", "", fdataobj$names$main),".",colnames(xaux$coefs),sep="")
+   Z <- xaux$coefs
+   if (!is.null(basis.b)){
+     #mean.list[[vfunc[i]]] <- mean.fd(x.fd);          x.fd <- center.fd(x.fd)
+     colnam <- colnames(Z)
+     Z <- Z %*% J
+     name.coef <- colnames(Z) <- colnam[1:NCOL(Z)]
+   }  
+   ###################
   vfunc=call[[2]]
-  Z<-C%*%J
-  XX<-Z
-  Z=cbind(rep(1,len=n),Z)
-  colnames(Z)<-1:ncol(Z)
-  colnames(Z)[2:ncol(Z)]= paste(vfunc,".",basis.b$names, sep = "")
+  #  XX<-Z
+  #Z=cbind(rep(1,len=n),Z)
+  #colnames(Z)<-1:ncol(Z)
+  #colnames(Z)[2:ncol(Z)]= paste(vfunc,".",basis.b$names, sep = "")
   W<-diag(weights)
 if (lambda==0) {
 #       S=Z%*%solve(t(Z)%*%Z)%*%t(Z)
@@ -203,6 +215,7 @@ if (lambda==0) {
        response="y"
        pf <- paste(response, "~", sep = "")
        for ( i in 1:length(colnames(Z))) pf <- paste(pf, "+", colnames(Z)[i], sep = "")
+       # print(pf)
        object.lm=lm(formula=pf,data=data.frame(y,Z,weights),x=TRUE,y=TRUE,weights=weights,...)
        yp=object.lm$fitted.values
        e<-object.lm$residuals
@@ -219,47 +232,28 @@ if (lambda==0) {
 	     coefficients<-object.lm$coefficients
 }
 else {
-       R=diag(0,ncol= basis.b$nbasis+1,nrow=basis.b$nbasis+1)
-#       R[-1,-1]<-getbasispenalty(basis.b,Lfdobj) ############
-       R[-1,-1]<-eval.penalty(basis.b,Lfdobj)
- ################################################################################
-################################################################################
-    Sb=t(Z)%*%W%*%Z+lambda*R
+    R=diag(0,ncol= basis.b$nbasis+1,nrow=basis.b$nbasis+1)
+    #       R[-1,-1]<-getbasispenalty(basis.b,Lfdobj) ############
+    R[-1,-1]<-eval.penalty(basis.b,Lfdobj)
+    Z=cbind(rep(1,len=n),Z)
+    Sb= t(Z)%*%W%*%Z + lambda*R
 #    fda:::eigchk(Sb)    
-    Lmat    <- chol(Sb)          
+    Lmat <- chol(Sb)          
     Lmatinv <- solve(Lmat)
-    Cinv<- Lmatinv %*% t(Lmatinv)   
+    Cinv <- Lmatinv %*% t(Lmatinv)   
 #       Cinv<-solve(Sb)
-       Sb2=Cinv%*%t(Z)
-       DD<-t(Z)%*%W%*%y
-       S=Z%*%Sb2%*%W
-       yp=S%*%y
-       e<-y-yp                   
+       Sb2 <- Cinv%*%t(Z)
+       DD <- t(Z)%*%W%*%y
+       S <- Z%*%Sb2%*%W
+       yp <- S%*%y
+       e <- y - yp                   
        b.est=Sb2%*%y
        beta.est=fd(b.est[-1,1],basis.b)
-################################################################################
-################################################################################
-################################################################################
-################################################################################
-#    Sb=t(Z)%*%W%*%Z+lambda*R
-#    eigchk(Sb)    
-#    Lmat    <- chol(Sb)          
-#    Lmatinv <- solve(Lmat)
-#    Cinv<- Lmatinv %*% t(Lmatinv)   
-#       Sb2=Cinv%*%t(Z)
-#       DD<-t(Z)%*%W%*%y
-#       S=Z%*%Sb2%*%W
-#       yp=S%*%y
-#       e<-y-yp                   
-#       b.est=Sb2%*%y
-#       beta.est=fd(b.est[-1,1],basis.b)
-################################################################################
-################################################################################
        df=basis.b$nbasis+1     
-       rdf<-n-df
+       rdf <- n-df
        sr2 <- sum(e^2)/ rdf
        r2 <- 1 - sum(e^2)/sum(ycen^2)
-       Vp<-sr2*Cinv       
+       Vp <- sr2*Cinv       
 #       bet<-Cinv%*%DD
        a.est=b.est[1,1]
        #beta.est2=fd(b.est2[-1,1]*diff(rtt),basis.b)
@@ -290,9 +284,9 @@ else {
 #hat<-diag(hat(Z, intercept = TRUE),ncol=n)
 out<-list("call"=call, coefficients=coefficients, "residuals"=e, "fitted.values"=yp
 ,"beta.est"=beta.est,weights= weights,"df.residual"=n-df,"r2"=r2,"sr2"=sr2,
-"Vp"=Vp,"H"=S,"y"=y,"fdataobj"=fdataobj, x.fd=x.fd,"basis.x.opt"=basis.x,
+"Vp"=Vp,"H"=S,"y"=y,"fdataobj"=fdataobj, "basis.x.opt"=basis.x, #x.fd=x.fd,
 "basis.b.opt"=basis.b,"J"=J,"lambda.opt"=lambda,P=R, Lfdobj=Lfdobj,
-  lm=object.lm,"mean"=xmean, "b.est"=b.est,"a.est"=a.est,XX=XX)
+  lm=object.lm,"mean"=xmean, "b.est"=b.est,"a.est"=a.est,XX=Z)
 class(out) <- "fregre.fd"
 return(out)
 }

@@ -28,15 +28,15 @@ Otherwise, index vector indicates taht curvesare plotted.}
 \item{\dots}{Further arguments passed to or from other methods.}
 }
 \value{
-\code{fdata2bais} function return: 
+fdata2basis \code{fdata2bais} function return: 
 \itemize{
-\item {coef}{ a matrix or two-dimensional array of coefficients.}
-\item {basis}{ basis object (\code{\link{fdata}} class) evaluated in the same grid of \code{fdataobj}. } 
+\item {coef}{a matrix or two-dimensional array of coefficients.}
+\item {basis}{basis of \code{\link{fdata}} class evaluated in the same grid of \code{fdataobj}. } 
 }
 
 summary function return: 
 \itemize{
-\item {R}{ a matrix with a measure similar to R-sq for each curve aproximation (by row) and number of basis elements (by column).}
+\item {R}{a matrix with a measure similar to R-sq for each curve aproximation (by row) and number of basis elements (by column).}
 }
 }
 \description{
@@ -66,6 +66,6 @@ Inverse function: \code{\link{gridfdata}}.
 Alternative method: \code{\link{fdata2pc}}, \code{\link{fdata2pls}}.
 }
 \author{
-Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@udc.es}
+Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@usc.es}
 }
 \keyword{multivariate}

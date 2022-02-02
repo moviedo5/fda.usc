@@ -172,23 +172,14 @@ types=FALSE
 if (is.matrix(metric)) mdist<-metric
 else mdist=metric(fdataobj,fdataobj,...)
 
-<<<<<<< Updated upstream
-# if (is.function(Ker)) ke<-deparse(substitute(Ker))
-# else ke<-Ker
- # print(ke)
-# ke<-deparse(substitute(Ker))
-#ty<-deparse(substitute(type.S))
-#tcv<-deparse(substitute(type.CV))
-=======
->>>>>>> Stashed changes
 if (!is.function(Ker)) Ker<-get(Ker)
 attr(par.S, "call") <- ty
 
 if (is.null(h)) {
 nker=get(paste0("Ker.",unlist(strsplit(deparse(substitute(Ker)),"[.]"))[2]))
 h = do.call(h.default,c(list(fdataobj=fdataobj,metric=mdist,prob=c(0.025,0.25),type.S=ty,Ker=nker),...))
+#h=h.default(fdataobj,prob=c(0.025,0.25),len=25,metric = mdist,Ker =nker, type.S =ty,...)
 }
-#h=h.default(fdataobj,prob=c(0.025,0.25),len=25,metric = mdist,Ker =Ker,type.S =ty,...)}
 else {if   (any(h<=0)) stop("Error: Invalid range for h")}
 lenh <- length(h)
 cv=gcv1=gcv=cv.error <- array(NA, dim = c(lenh))

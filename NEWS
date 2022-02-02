@@ -1,12 +1,16 @@
 Version 2.0.3:
 1) summary.fdata.comp(), Several changes on summary.fdata.comp
 2) Now, we uses data.matrix (instead of as.matrix) to convert data.table in a matrix class object, option recommended when data.frame contains characters.
-3) classif.cv.glmnet(), functional basis classsification usng cv.glmnet() (require glmnet package).
+3) classif.cv.glmnet() and classif.gbm(), functional basis classsification using cv.glmnet(), require glmnet package, and gbm(), require gbm package.
 4) h.default(),  new argument 'Ker'
 5) mfdata(), new class object for multivariate functional data
 6) fregre.basis.cv(), fregre.basis.cv() and fregre.pc() return df.residual object
 7) Bug corrected in S.LPR() and S.LLR()
-
+8) classif.gsam.vs, new function for variable selection in additive classifier
+9) fdata2basis() is used in fregre.lm() and predict.fregre.lm()
+10) summary for fdata2basis()
+11) classif.gbm new function for variable selection in additive classifier
+ 
 Version 2.0.2:
 fdata.bootstrap and fregre.bootstrap functions addapted to parallel backend.
 Corrected bug in kmeans.fd() function.

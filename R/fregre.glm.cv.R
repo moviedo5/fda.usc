@@ -214,8 +214,8 @@ fregre.glm.cv<-function(data, y, x, family = gaussian()
  return(z)
 }
 ###################################################
-# is.na.fdata <- fda.usc:::is.na.fdata
-# pvalue.anova <- fda.usc:::pvalue.anova
+# is.na.fdata <- fda.usc.devel:::is.na.fdata
+# pvalue.anova <- fda.usc.devel:::pvalue.anova
 # res2=fregre.glm.cv(data=ldata,x="x",y="Fat")
 # summary(res2)
 # res2=fregre.glm.cv(data=ldata,x="x",y="Fat",numbasis=28)

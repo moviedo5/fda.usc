@@ -13,6 +13,7 @@
 #' \item \code{classif.ksvm}: uses \code{weighted.ksvm } function and requires \code{personalized} package.
 #' \item \code{classif.randomForest}: uses \code{randomForest} function and requires \code{randomForest} package.
 #' \item \code{classif.cv.glmnet}: uses \code{cv.glmnet} function and requires \code{glmnet} package.
+#' \item \code{classif.gbm}: uses \code{gbm} function and requires \code{gbm} package.
 #' }
 #' 
 #' @details 
@@ -86,12 +87,18 @@
 #' dataf<-data.frame(glearn)
 #' dat=ldata("df"=dataf,"x"=mlearn)
 #' a1<-classif.rpart(glearn~x,data=dat)
-#' a1<-classif.nnet(glearn~x,data=dat)
-#' summary(a1)
+#' a2<-classif.nnet(glearn~x,data=dat,trace=F)
+#' a3<-classif.gbm(glearn~x,data=dat)
+#' a4<-classif.randomForest(glearn~x,data=dat)
+#' a5<-classif.cv.glmnet(glearn~x,data=dat)
 #' newdat<-list("x"=mtest)
 #' p1<-predict(a1,newdat,type="class")
-#' table(gtest,p1)
-#' sum(p1==gtest)/250
+#' p2<-predict(a2,newdat,type="class")
+#' p3<-predict.classif(a3,newdat,type="class")
+#' p4<-predict.classif(a4,newdat,type="class")
+#' p5<-predict.classif(a5,newdat,type="class")
+#' mean(p1==gtest);mean(p2==gtest);mean(p3==gtest)
+#' mean(p4==gtest);mean(p5==gtest)
 #' }
 #' 
 #' @rdname classif.ML
@@ -203,7 +210,7 @@ classif.nnet=function(formula, data, basis.x=NULL
   #  if (method=="rpart")
   #    out$group.est <- predict(object = z, type = "class")
   #  if (method=="nnet"){
-  out$group.est <- predict(object = z,type = "class")
+  out$group.est <- suppressWarnings(predict(object = z,type = "class"))
   out$group.est <- factor(out$group.est ,levels=levels(group))
   #  }
   out$max.prob <- mean(group==out$group.est) 
@@ -705,7 +712,7 @@ classif.ksvm=function(formula, data, basis.x=NULL ,weights = "equal",...){
     #out2glm <- classif2groups(a,y,prob,lev)
     par.method<-c(list(y=y,x=XX[,-1],weights=weights),par.method)
     z=do.call("weighted.ksvm",par.method)
-    pr <- predict(z, newx = data.matrix(XX[,-1]))
+    pr <- predict(z, newx = as.matrix(XX[,-1]))
     out$group.est = factor(pr,labels=lev)
     out$fit <- list(z)
   }   else {
@@ -729,7 +736,7 @@ classif.ksvm=function(formula, data, basis.x=NULL ,weights = "equal",...){
       par.method$x=XX[i2a2,-1]
       par.method$weights=weights[i2a2]
       a[[ivot]]<-do.call("weighted.ksvm",par.method)
-      a[[ivot]]$group.est <- predict(a[[ivot]], newx = data.matrix(XX[i2a2,-1]))
+      a[[ivot]]$group.est <- predict(a[[ivot]], newx = as.matrix(XX[i2a2,-1]))
       #  suppressWarnings(fregre.glm(formula,data=newdata,family=family, weights =  weights
       #                                       ,basis.x=basis.x,basis.b=basis.b,CV=CV,subset = i2a2,...))
       
@@ -1347,7 +1354,7 @@ classif.naiveBayes=function(formula, data, basis.x=NULL, laplace = 0,...)
 
 # library(glmnet)
 # NFOLDS = 4;
-# res.glmnet = cv.glmnet( x= data.matrix(train[,-101]), y = as.factor(train[,101]),
+# res.glmnet = cv.glmnet( x= as.matrix(train[,-101]), y = as.factor(train[,101]),
 #                         family = 'multinomial',
 #                         alpha = 1,
 #                         #                        grouped = TRUE,
@@ -1355,6 +1362,8 @@ classif.naiveBayes=function(formula, data, basis.x=NULL, laplace = 0,...)
 #                         nfolds = NFOLDS,
 #                         thresh = 1e-3,
 #                         maxit = 1e3)   
+
+#' @rdname classif.ML
 #' @export classif.cv.glmnet
 classif.cv.glmnet=function(formula, data, basis.x=NULL 
                       ,weights = "equal"
@@ -1441,8 +1450,8 @@ classif.cv.glmnet=function(formula, data, basis.x=NULL
   par.method <- as.list(substitute(list(...)))[-1L]
 
   #par.method<-c(list(x=XX, y=y, family = "multinomial",weights=weights),par.method)
-  par.method<-c(list(x=data.matrix(XX[,-1]), y = y, family = "multinomial",weights=weights),par.method)
-  z=do.call("cv.glmnet",par.method)
+  par.method<-c(list(x=as.matrix(XX[,-1]), y = y, family = "multinomial",weights=weights),par.method)
+  z= suppressWarnings(do.call("cv.glmnet",par.method))
   out<-list()
   out$formula.ini=formula
   out$data=data
@@ -1475,3 +1484,111 @@ classif.cv.glmnet=function(formula, data, basis.x=NULL
   class(out) <- "classif"
   return(out)
 }
+
+
+#' @rdname classif.ML
+#' @export classif.gbm
+classif.gbm=function(formula, data, basis.x=NULL 
+                      ,weights = "equal",...) 
+{
+  rqr <- "gbm"
+  if (!(rqr %in% rownames(installed.packages()))) {
+    stop("Please install package 'gbm'") }
+  
+  #require(eval(rqr)[1], quietly = TRUE, warn.conflicts = FALSE)
+  suppressWarnings(rqr2<-require(eval(rqr), 
+                                 character.only = TRUE,quietly = TRUE, 
+                                 warn.conflicts = FALSE))
+  if (!rqr2) 
+    stop("Please, load the namespace of the package for  method")
+  
+  prob=0.5
+  C <- match.call()  
+  mf <- match.call(expand.dots = FALSE)
+  m <- match(c("formula","data","basis.x","weights"), names(mf), 0L)
+  mf <- mf[c(1L, m)]
+  mf$drop.unused.levels <- TRUE
+  #mf[[1L]] <- quote(stats::model.frame)
+  #mf <- eval(mf, parent.frame())
+  #if (method == "model.frame")     return(mf)
+  tf <- terms.formula(formula)
+  terms <- attr(tf, "term.labels")
+  nt <- length(terms)
+  if (attr(tf, "response") > 0) {
+    response <- as.character(attr(tf, "variables")[2])
+    pf <- rf <- paste(response, "~", sep = "")
+  } else pf <- rf <- "~"
+  vtab<-rownames(attr(tf,"factors"))
+  vnf=intersect(terms,names(data$df))
+  # vnf2=intersect(vtab[-1],names(data$df)[-1])
+  vfunc2=setdiff(terms,vnf)
+  vint=setdiff(terms,vtab)
+  vfunc=setdiff(vfunc2,vint)
+  off<-attr(tf,"offset")
+  name.coef=nam=beta.l=list()
+  group <- y <- data$df[[response]]
+  
+  # 2019/04/24
+  out.func <- fdata2model(vfunc,vnf,response, data, basis.x = basis.x ,pf = pf ,tf = tf)  
+  pf <- out.func$pf          
+  basis.x <- out.func$basis.x
+  XX <- out.func$XX
+  vs.list <- out.func$vs.list
+  mean.list=out.func$mean.list
+  rm(out.func)
+  n<- ndatos <-NROW(XX)
+  
+  # if (!is.numeric(weights))      stop("'weights' must be a numeric vector")
+  if (is.character(weights)) {
+    weights<-weights4class(y,type=weights)
+  } else {
+    if (length(weights)!=n) 
+      stop("length weights != length response")
+  }
+  if (any(weights < 0)) 
+    stop("negative weights not allowed")
+  
+  par.method <- as.list(substitute(list(...)))[-1L]
+  par.method<-c(list(formula=pf, data=XX,weights=weights,
+                     distribution = "multinomial"),par.method)
+  z= suppressWarnings(do.call(rqr,par.method))
+  lev <- levels(group)  
+  out<-list()
+  out$formula.ini=formula
+  out$data=data
+  out$XX=XX
+  out$C <- C[1:2]
+  out$prob <- prob
+  out$group <- group
+
+  out$group.est <- suppressWarnings(predict(z, newdata = XX,type="response"))
+  out$group.est <- apply(out$group.est,1,which.max)
+  out$group.est <- factor(out$group.est ,levels=lev)
+  
+  out$max.prob <- mean(group==out$group.est) 
+  out$fit <- z
+  out$basis.x=basis.x
+  out$mean=mean.list
+  out$formula=pf
+  out$vs.list=vs.list
+  #out$method <- method
+  #out$par.method <- par.method
+  tab <- table(out$group.est,group)
+  ny <- levels(y)
+  prob2<-prob1 <- ngroup <- nlevels(y)
+  prob.group <- array(NA, dim = c(ndatos, ngroup))
+  prob.group <- prob.group/apply(prob.group, 1, sum)
+  for (i in 1:ngroup) {
+    prob1[i] = tab[i, i]/sum(tab[, i])
+  }
+  names(prob1) <- z$levels
+  colnames(prob.group) <- z$levels
+  out$prob.classification <- prob1
+  out$type="majority"
+  #class(out)<-c("classif",class(z))
+  class(out) <- "classif"
+  out
+}
+# Hacer gbm usando majority voting
+
+

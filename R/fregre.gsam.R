@@ -48,7 +48,7 @@
 #' @param weights weights
 #' @param basis.x List of basis for functional explanatory data estimation.
 #' @param basis.b List of basis for functional beta parameter estimation.
-#' @param CV =TRUE, Cross-validation (CV) is done.
+# @param CV =TRUE, Cross-validation (CV) is done.
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Return \code{gam} object plus:
 #' \itemize{
@@ -116,10 +116,16 @@
 #' res.bin=fregre.gsam(Fat~Protein+s(x),ldata,family=binomial())
 #' }
 #' @export
-fregre.gsam <- function (formula, family = gaussian(), data = list(), weights = NULL, 
-          basis.x = NULL, basis.b = NULL, CV = FALSE, ...) 
+fregre.gsam <- function (formula
+                               , family = gaussian()
+                               , data = list(), weights = NULL
+                               , basis.x = NULL, basis.b = NULL, ...) 
 {
-#print("fregre.gsam")
+  
+  nam.data <- names(data)
+  nam.df <- names(data$df)
+  nam.func <- setdiff(nam.data,"df")
+  
   tf <- terms.formula(formula, specials = c("s", "te", "t2"))
   terms <- attr(tf, "term.labels")
   special <- attr(tf, "specials")
@@ -131,11 +137,13 @@ fregre.gsam <- function (formula, family = gaussian(), data = list(), weights = 
     specials[special$te - 1] <- "te"
   if (!is.null(special$t2)) 
     specials[special$t2 - 1] <- "t2"
+  
   if (attr(tf, "response") > 0) {
     response <- as.character(attr(tf, "variables")[2])
     pf <- rf <- paste(response, "~", sep = "")
   }
   else pf <-rf <- "~"
+  
   vtab <- rownames(attr(tf, "fac"))
   gp <- interpret.gam(formula)
   len.smo <- length(gp$smooth.spec)
@@ -145,61 +153,68 @@ fregre.gsam <- function (formula, family = gaussian(), data = list(), weights = 
   func <- nf <- sm <- rep(0, nterms)
   names(func) <- names(nf) <- names(sm) <- terms
   ndata <- length(data) - 1
-  if (ndata > 0) {
-    names.vfunc <- rep("", ndata)
-    for (i in 1:ndata) names.vfunc[i] <- names(data)[i + 1]
-  }
-  else names.vfunc <- NULL
   
-#  print(gp)
-  ############ nuevo
+  nam.func <- setdiff(nam.data,response)
+  
   covar <- gp$fake.names
- #print(covar)  
- #print(length(covar))
- #print(class(data$df[,covar[1]]))
   if (length(covar)==0) {
     z = gam(formula = gp$pf, data = data$df, family = family)
     z$data <- data
     z$formula.ini <-gp$pf
     z$formula <- gp$pf
-    #z$nnf <- nnf
     class(z) <- c(class(z), "fregre.gsam")
     return(z)
   }
-  nam.esc<-names(data$df)
-  nam.func<-setdiff(names(data),"df")
-#  print(nam.esc)    
-#  print(nam.func)  
+  
   vnf<-vfunc<-NULL
   for (i in 1:length(covar)){
-    if (covar[i] %in% nam.esc) vnf<-c(vnf,covar[i])
+    if (covar[i] %in% nam.df) vnf<-c(vnf,covar[i])
     if (covar[i] %in% nam.func) vfunc<-c(vfunc,covar[i])
   }
   nnf<-length(vnf)
   nfunc<-length(vfunc)
+  bsp1 <-  TRUE
+  bspy <-  TRUE
+  raw <- FALSE 
+  
+  # cat("response ");print(response)
+  # cat("scalar ");print(vnf)
+  # cat("funcional ");print(vfunc)
+  
+  ######## manejando la respuesta  
+  # incluir la respuesta  
   ########################################
+  # print("len.smo")
+  # print(len.smo)
+  # print(specials)
+  #cat("names.vfunc");print(names.vfunc)
   if (len.smo == 0) {
     specials <- rep(NA, nterms)
     speci <- rep("0", nterms)
     gp$smooth.spec[1:nterms] <- NULL
     gp$smooth.spec[1:nterms]$term <- NULL
-#    vnf <- terms
+    fnf2<-rep(0,nterms)
+    #    vnf <- terms
     fnf1 <- fnf <- nterms
-  }
-  else {
+  }  else {
     for (i in 1:nterms) if (!is.na(specials[i])) 
       speci <- c(speci, specials[i])
     for (i in 1:nterms) {
-      if (any(terms[i] == names(data$df))) {
-#        vnf <- c(vnf, terms[i])
+      #  cat("terms[i]")        ;      print(terms[i])        
+      
+      if (any(terms[i] == nam.df)) {
+        #print(1)
+        #        vnf <- c(vnf, terms[i])
+        
         sm[i] <- nf[i] <- 1
         fnf1 <- c(fnf1, 0)
         bs.dim1 <- c(bs.dim1, 0)
         specials1 <- c(specials1, "0")
-      }
-      else {
-        if (any(terms[i] == names.vfunc)) {
-#          vfunc <- c(vfunc, terms[i])
+      }      else {
+        #print(2)
+        if (any(terms[i] == nam.func)) {
+          # print(3)
+          #          vfunc <- c(vfunc, terms[i])
           func[i] <- 1
           fnf2 <- c(fnf2, 0)
           bs.dim2 <- c(bs.dim2, 0)
@@ -208,53 +223,60 @@ fregre.gsam <- function (formula, family = gaussian(), data = list(), weights = 
       }
     }
     for (i in 1:len.smo) {
+      # cat("i");print(i)
+      # print(speci[i])      
       if (speci[i] != "s") {
-        if (any(gp$smooth.spec[[i]]$term == names(data$df))) {
-#          vnf <- c(vnf, gp$smooth.spec[[i]]$margin[[1]]$term)
+        # print(4)
+        if (any(gp$smooth.spec[[i]]$term == nam.df)) {
+          #   print(5)
+          #          vnf <- c(vnf, gp$smooth.spec[[i]]$margin[[1]]$term)
           bs.dim1 <- c(bs.dim1, gp$smooth.spec[[i]]$margin[[1]]$bs.dim)
           fnf <- c(fnf, 1)
           fnf1 <- c(fnf1, 1)
+          fnf2 <- c(fnf2, 0)
           specials1 <- c(specials1, speci[i])
         }
         else {
-          if (any(gp$smooth.spec[[i]]$term == names.vfunc)) {
-           # vfunc <- c(vfunc, gp$smooth.spec[[i]]$margin[[1]]$term)
+          # print(6)
+          if (any(gp$smooth.spec[[i]]$term == nam.func)) {
+            # print(7)
+            # vfunc <- c(vfunc, gp$smooth.spec[[i]]$margin[[1]]$term)
             bs.dim2 <- c(bs.dim2, gp$smooth.spec[[i]]$margin[[1]]$bs.dim)
             fnf <- c(fnf, 2)
             fnf2 <- c(fnf2, 1)
+            #fnf2[i] <- 1
             specials2 <- c(specials2, speci[i])
-          }
+          } else  fnf2 <- c(fnf2, 0)
         }
-      }
-      else {
-        if (any(gp$smooth.spec[[i]]$term == names(data$df))) {
-       #   vnf <- c(vnf, gp$smooth.spec[[i]]$term)
+      }      else {
+        # print(8)
+        if (any(gp$smooth.spec[[i]]$term == nam.df)) {
+          #           print(9)
+          #   vnf <- c(vnf, gp$smooth.spec[[i]]$term)
           bs.dim1 <- c(bs.dim1, gp$smooth.spec[[i]]$bs.dim)
           fnf <- c(fnf, 1)
           fnf1 <- c(fnf1, 1)
+          fnf2 <- c(fnf2, 1)
           specials1 <- c(specials1, speci[i])
-        }
-        else {
-          if (any(gp$smooth.spec[[i]]$term == names.vfunc)) {
-        #    vfunc <- c(vfunc, gp$smooth.spec[[i]]$term)
+        }        else {
+          # print(10)
+          if (any(gp$smooth.spec[[i]]$term == nam.func)) {
+            #    vfunc <- c(vfunc, gp$smooth.spec[[i]]$term)
             bs.dim2 <- c(bs.dim2, gp$smooth.spec[[i]]$bs.dim)
             fnf <- c(fnf, 2)
             fnf2 <- c(fnf2, 1)
             specials2 <- c(specials2, speci[i])
-          }
+          } else  fnf2 <- c(fnf2, 0)
         }
       }
     }
   }
   #nfunc <- sum(func)
-  if (is.null(fnf2)) fnf2<-rep(0,length(vfunc))
-  
-# print(vfunc);print(nnf)
-
+  # print("aaaaaaaaaaaaaaaaaaa1")  
   name.coef = nam = par.fregre = beta.l = list()
   kterms = 1
   if (nnf > 0) {
-    XX = data[["df"]]
+    XX = data[["df"]][,c(response,vnf),drop=F]
     if (attr(tf, "intercept") == 0) {
       pf <- paste(pf, -1, sep = "")
     }
@@ -274,217 +296,101 @@ fregre.gsam <- function (formula, family = gaussian(), data = list(), weights = 
     XX = data.frame(data[["df"]][, response])
     names(XX) = response
   }
-  bsp1 <- bsp2 <- TRUE
-  lenfunc <- length(vfunc) > 0
-  if (lenfunc) {
+  # print("aaaaaaaaaaaaaaaaaaa2")  
+  lenfunc <- length(vfunc) 
+  ifunc <- lenfunc > 0
+  mean.list = basis.list = list()
+  if (ifunc) {
     k = 1
-    mean.list = vs.list =  list() #JJ =
-    bsp1 <- bsp2 <- TRUE
-    for (i in 1:length(vfunc)) {
+    
+    for (i in 1:lenfunc ) {
+      # print("aaaaaaaaaaaaaaaaaaa3")        
       if (is(data[[vfunc[i]]], "fdata")) {
         tt <- data[[vfunc[i]]][["argvals"]]
         rtt <- data[[vfunc[i]]][["rangeval"]]
         fdat <- data[[vfunc[i]]]
-        dat <- data[[vfunc[i]]]$data
-        if (is.null(basis.x[[vfunc[i]]])) 
-          basis.x[[vfunc[i]]] <- create.fdata.basis(fdat, 
-                                                    l = 1:7)
-        else if (basis.x[[vfunc[i]]]$type == "pc" | basis.x[[vfunc[i]]]$type == 
-                 "pls") 
-          bsp1 = FALSE
-        if (is.null(basis.b[[vfunc[i]]]) & bsp1) 
-          basis.b[[vfunc[i]]] <- create.fdata.basis(fdat)
-        else if (class(basis.x[[vfunc[i]]]) == "fdata.comp" | 
-                 basis.x[[vfunc[i]]]$type == "pls") 
-          bsp2 = FALSE
-        if (bsp1 & bsp2) {
-          if (is.null(rownames(dat))) 
-            rownames(fdat$data) <- 1:nrow(dat)
-          fdnames = list(time = tt, reps = rownames(fdat[["data"]]), 
-                         values = "values")
+        nms <- data[[vfunc[i]]]$names
+        #dat <- data[[vfunc[i]]]$data
+        if (is.null(basis.x[[vfunc[i]]])) {
+          if (is.null(basis.b[[vfunc[i]]])) { basis.b[[vfunc[i]]] <- basis.x[[vfunc[i]]] <- 
+            create.fdata.basis(fdat, l = 1:7)
+          } else  {basis.x[[vfunc[i]]] <-  basis.b[[vfunc[i]]] }
+        } else
+            if (basis.x[[vfunc[i]]]$type == "pc" | basis.x[[vfunc[i]]]$type == "pls") 
+              bsp1 = FALSE
+        
+        xaux <- fdata2basis(data[[vfunc[i]]],basis.x[[vfunc[i]]])
+        name.coef[[vfunc[i]]] <- colnames(xaux$coefs) <- paste(vfunc[i],".",colnames(xaux$coefs),sep="")
+        Z <- xaux$coefs
+        lencoef <- length(colnames(Z))
+        ################################### usar basis.b
+        if ( bsp1){
+          colnames(Z) -> cnames
+          J = inprod(basis.x[[vfunc[i]]], basis.b[[vfunc[i]]])
+          Z = Z %*% J
+          colnames(Z)<-cnames
+        }
+        ################################### usar basis.b
+        XX = cbind(XX, Z)
+        if (fnf2[i] == 1)    
+          sm2 <- TRUE    else sm2 <- FALSE
+        for (j in 1:lencoef) {
+          if (sm2) {
+            pf <- paste(pf, "+", specials2[i], "(", 
+                        name.coef[[vfunc[i]]][j], ",k=", bs.dim2[i],")", sep = "")
+          }     else pf <- paste(pf, "+", name.coef[[vfunc[i]]][j], sep = "")
+          kterms <- kterms + 1
+        }       
+        basis.list[[vfunc[i]]] <- xaux$basis
+        # J=inprod(basis.x[[vfunc[i]]],basis.b[[vfunc[i]]])
+        #   vs.list[[vfunc[i]]] = basis.x[[vfunc[i]]]$basis
+        if (bspy!=0) 
+          mean.list[[vfunc[i]]] = basis.x[[vfunc[i]]]$mean
+        else {
           xcc <- fdata.cen(data[[vfunc[i]]])
           mean.list[[vfunc[i]]] = xcc[[2]]
-          if (!is.null(basis.x[[vfunc[i]]]$dropind)) {
-            int <- setdiff(1:basis.x[[vfunc[i]]]$nbasis, 
-                           basis.x[[vfunc[i]]]$dropind)
-            basis.x[[vfunc[i]]]$nbasis <- length(int)
-            basis.x[[vfunc[i]]]$dropind <- NULL
-            basis.x[[vfunc[i]]]$names <- basis.x[[vfunc[i]]]$names[int]
-          }
-          if (!is.null(basis.b[[vfunc[i]]]$dropind)) {
-            int <- setdiff(1:basis.b[[vfunc[i]]]$nbasis, 
-                           basis.b[[vfunc[i]]]$dropind)
-            basis.b[[vfunc[i]]]$nbasis <- length(int)
-            basis.b[[vfunc[i]]]$dropind <- NULL
-            basis.b[[vfunc[i]]]$names <- basis.b[[vfunc[i]]]$names[int]
-          }
-          x.fd = Data2fd(argvals = tt, y = t(xcc[[1]]$data), 
-                         basisobj = basis.x[[vfunc[i]]], fdnames = fdnames)
-          r = x.fd[[2]][[3]]
-          J = inprod(basis.x[[vfunc[i]]], basis.b[[vfunc[i]]])
-          Z = t(x.fd$coefs) %*% J
-          colnames(J) = colnames(Z) = name.coef[[vfunc[i]]] = paste(vfunc[i], ".", basis.b[[vfunc[i]]]$names, sep = "")
-          XX = cbind(XX, Z)
-          if (fnf2[i] == 1)             sm2 <- TRUE
-          else sm2 <- FALSE
-          for (j in 1:length(colnames(Z))) {
-            if (sm2) {
-              pf <- paste(pf, "+", specials2[i], "(", 
-                          name.coef[[vfunc[i]]][j], ",k=", bs.dim2[i], 
-                          ")", sep = "")
-            }
-            else pf <- paste(pf, "+", name.coef[[vfunc[i]]][j], 
-                             sep = "")
-            kterms <- kterms + 1
-          }
-          #JJ[[vfunc[i]]] <- J
-          vs.list[[vfunc[i]]] <- J
         }
-        else {
-          l <- basis.x[[vfunc[i]]]$l
-          lenl <- length(l)
-          vs <- t(basis.x[[vfunc[i]]]$basis$data)
-          Z <- basis.x[[vfunc[i]]]$coefs[, l, drop = FALSE]
-          response = "y"
-          colnames(Z) = name.coef[[vfunc[i]]] = paste(vfunc[i], 
-                                                      ".", rownames(basis.x[[vfunc[i]]]$basis$data), 
-                                                      sep = "")
-          XX = cbind(XX, Z)
-          vs.list[[vfunc[i]]] = basis.x[[vfunc[i]]]$basis
-          mean.list[[vfunc[i]]] = basis.x[[vfunc[i]]]$mean
-          if (fnf2[i] == 1) 
-            sm2 <- TRUE
-          else sm2 <- FALSE
-          for (j in 1:length(colnames(Z))) {
-            if (sm2) {
-              pf <- paste(pf, "+", specials2[i], "(", 
-                          name.coef[[vfunc[i]]][j], ",k=", bs.dim2[i], 
-                          ")", sep = "")
-            }
-            else pf <- paste(pf, "+", name.coef[[vfunc[i]]][j], 
-                             sep = "")
-            kterms <- kterms + 1
-          }
-        }
-      }
-      else {
-        if (class(data[[vfunc[i]]])[1] == "fd") {
-          fdat <- data[[vfunc[i]]]
-          if (is.null(basis.x[[vfunc[i]]])) 
-            basis.x[[vfunc[i]]] <- fdat$basis
-          else if (class(basis.x[[vfunc[i]]]) == "pca.fd") 
-            bsp1 = FALSE
-          if (is.null(basis.b[[vfunc[i]]]) & bsp1) 
-            basis.b[[vfunc[i]]] <- create.fdata.basis(fdat, 
-                                                      l = 1:max(5, floor(basis.x[[vfunc[i]]]$nbasis/5)), 
-                                                      type.basis = basis.x[[vfunc[i]]]$type, 
-                                                      rangeval = fdat$basis$rangeval)
-          else if (is(basis.x[[vfunc[i]]],"pca.fd")) 
-            bsp2 = FALSE
-          if (bsp1 & bsp2) {
-            r = fdat[[2]][[3]]
-            if (!is.null(basis.x[[vfunc[i]]]$dropind)) {
-              int <- setdiff(1:basis.x[[vfunc[i]]]$nbasis, 
-                             basis.x[[vfunc[i]]]$dropind)
-              basis.x[[vfunc[i]]]$nbasis <- length(int)
-              basis.x[[vfunc[i]]]$dropind <- NULL
-              basis.x[[vfunc[i]]]$names <- basis.x[[vfunc[i]]]$names[int]
-            }
-            if (!is.null(basis.b[[vfunc[i]]]$dropind)) {
-              int <- setdiff(1:basis.b[[vfunc[i]]]$nbasis, 
-                             basis.b[[vfunc[i]]]$dropind)
-              basis.b[[vfunc[i]]]$nbasis <- length(int)
-              basis.b[[vfunc[i]]]$dropind <- NULL
-              basis.b[[vfunc[i]]]$names <- basis.b[[vfunc[i]]]$names[int]
-            }
-            J = inprod(basis.x[[vfunc[i]]], basis.b[[vfunc[i]]])
-            mean.list[[vfunc[i]]] <- mean.fd(x.fd)
-            x.fd <- center.fd(x.fd)
-            Z = t(x.fd$coefs) %*% J
-            colnames(J) = colnames(Z) = name.coef[[vfunc[i]]] = paste(vfunc[i], 
-                                                                      ".", basis.b[[vfunc[i]]]$names, sep = "")
-            XX = cbind(XX, Z)
-            if (fnf2[i] == 1) 
-              sm2 <- TRUE
-            else sm2 <- FALSE
-            for (j in 1:length(colnames(Z))) {
-              if (sm2) {
-                pf <- paste(pf, "+", specials2[i], "(", 
-                            name.coef[[vfunc[i]]][j], ",k=", bs.dim2[i], 
-                            ")", sep = "")
-              }
-              else pf <- paste(pf, "+", name.coef[[vfunc[i]]][j], 
-                               sep = "")
-              kterms <- kterms + 1
-            }
-            ## JJ[[vfunc[i]]] <- J
-            vs.list[[vfunc[i]]] <- J
-          }
-          else {
-            l <- ncol(basis.x[[vfunc[i]]]$scores)
-            vs <- basis.x[[vfunc[i]]]$harmonics$coefs
-            Z <- basis.x[[vfunc[i]]]$scores
-            response = "y"
-            colnames(Z) = name.coef[[vfunc[i]]] = paste(vfunc[i], 
-                                                        ".", colnames(basis.x[[vfunc[i]]]$harmonics$coefs), 
-                                                        sep = "")
-            XX = cbind(XX, Z)
-            vs.list[[vfunc[i]]] = vs
-            mean.list[[vfunc[i]]] = basis.x[[vfunc[i]]]$meanfd
-            if (fnf2[i] == 1) 
-              sm2 <- TRUE
-            else sm2 <- FALSE
-            for (j in 1:length(colnames(Z))) {
-              if (sm2) {
-                pf <- paste(pf, "+", specials2[i], "(", 
-                            name.coef[[vfunc[i]]][j], ",k=", bs.dim2[i], 
-                            ")", sep = "")
-              }
-              else pf <- paste(pf, "+", name.coef[[vfunc[i]]][j], 
-                               sep = "")
-              kterms <- kterms + 1
-            }
-          }
-        }
-        else stop("Please, enter functional covariate")
+      }      else {
+        stop("Please, enter functional covariate of fdata class object")
       }
     }
   }
-  #print("fregre.gsam 3")
-  if (!is.data.frame(XX)) 
-    XX = data.frame(XX)
-  par.fregre$data = XX
-  ndatos <- nrow(XX)
-  yp <- rep(NA, ndatos)
-  if (length(vfunc) == 0 & length(vnf) == 0) {
-    pf <- as.formula(paste(pf, 1, sep = ""))
-# print("gam gam gam ")    
-    z = gam(formula = pf, data = XX, family = family, 
-            weights = weights,...)
-# print("gam gam gam NOOO")        
-    z$XX = XX
-    z$data <- data
-    z$formula.ini <- pf
-    z$formula <- pf
-    class(z) <- c(class(z), "fregre.gsam")
-    return(z)
-  }
-  else par.fregre$formula = as.formula(pf)
-  z = gam(formula = par.fregre$formula, data = XX, family = family, 
-          weights = weights, ...)
-  if (lenfunc) {
-    z$mean = mean.list
-    z$basis.x = basis.x
-    z$basis.b = basis.b
-    #z$JJ <- JJ
-    z$vs.list = vs.list
-    z$vfunc <- vfunc
-  }
-  z$formula = as.formula(pf)
-  z$formula.ini = formula
-  z$data = z$data
-  z$XX = XX
-  z$nnf <- nnf
+  #par.fregre$formula=as.formula(pf)
+  #par.fregre$data=XX
+  #formula=as.formula(pf)
+  names(par.fregre)
+  nx <- ncol(XX)
+  #Ymat<-y
+  #Xmat<-data.frame(y)
+  # if (length(vnf)>0) {
+  #   Xmat<-data.frame(Xmat,data$df[,vnf])
+  #   names(Xmat)<-c(response,vnf)         
+  # }  else       names(Xmat) <- response                   
+  # # for (i in 2:length(XX)){
+  #    XX1<-data.frame(XX1,XX[[i]])
+  #  }
+  #Xmat <- (cbind(Xmat,XX))
+  # print(colnames(XX))
+  #for (i in 1:npy){
+  #Xmat[,response] <- Ymat[,i]
+  #        z=gam(formula=as.formula(par.fregre$formula),data=XX1,family=family,offset=rep(1,len=nrow(XX[[1]])))
+  #if (missing(offset))   
+  z=gam(formula=as.formula(pf),data=XX,family=family)  
+  # else   { descomentar ***** y missing(offset)
+  #   off<-offset
+  #   z=gam(formula=formula,data=Xmat,family=family,offset=off)
+  # }
+  # }
+  #  print(bsp1)
+  z$mean <- mean.list
+  z$formula <- as.formula(pf)
+  zformula.ini <- formula
+  z$basis.x=basis.x
+  z$data=data
+  z$XX <- XX
+  #z$basis <- aux$basis
+  z$bsp <- bsp1
+  z$vfunc <- vfunc;   z$nnf <- nnf;   z$vnf <- vnf
   class(z) <- c("fregre.gsam",class(z))
   z
 }

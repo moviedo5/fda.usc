@@ -100,6 +100,9 @@ predict.classif <- function (object, new.fdataobj = NULL,
                    classif.nnet={
                      object$JJ <- object$vs.list
                      pred2ML(object, new.fdataobj = new.fdataobj, ...)},
+                   classif.gbm={
+                     object$JJ <- object$vs.list
+                     pred2ML(object, new.fdataobj = new.fdataobj, ...)},
                    classif.multinom={
                      object$JJ <- object$vs.list
                      pred2ML(object, new.fdataobj = new.fdataobj, ...)},
@@ -118,26 +121,42 @@ predict.classif <- function (object, new.fdataobj = NULL,
                    classif.qda={
                      object$JJ <- object$vs.list
                      pred2ML(object, new.fdataobj = new.fdataobj, ...)},   
+                   
+                   classif.cv.glmnet={# 20201214 
+                     object$JJ <- object$vs.list
+                     pred2ML(object, new.fdataobj = new.fdataobj, ...)}, 
+                   
                    classif.np={
                      pred2np(object, new.fdataobj = new.fdataobj,...)},
-                   #  classif.adaboost={
-                   #   pr<-predict.classif.adaboost(object, newdata = new.fdataobj, type = "probs", ...)
-                   #   pr
-                   #   },
+                    #classif.adaboost={
+                     #pr<-predict.classif.adaboost(object, newdata = new.fdataobj, type = "probs", ...)
+                     #pr
+                     #},
                    # classif.bootstrap={
-                   #   pr<-pred2boot(object,
-                   #                             newdata = new.fdataobj
+                   #  #pr<-predict.classif.bootstrap(object,
+                   # pr<-pred2boot(object,
+                   #                            newdata = new.fdataobj
                    #                             , type = "probs", ...)
-                   #   pr
-                   #   },
+                   # #print("si predice bootstap")
+                   # pr
+                   # },
                    classif.DD={
+                     #print("si predice DD")
                      pr<-predict.classif.DD(object,  new.fdataobj,  type, ...)
+                     #print(length(pr))
                      if (!is.list(pr)) pr <-list("group.pred"=pr)
                      pr
                      }
   )
-  if (type == "class") {    return(output$group.pred)}
+  #print(output)
+  #print("sale predict.classif")
+ # print(names(output))
+
+  #print(type)
+        if (type == "class") {    return(output$group.pred)}
   else return(output) 
+#  if (type == "probs") {    return(output)  }
+#  else stop("Type argument should be one of 'class' or 'probs'")
 }
 
 
@@ -240,7 +259,7 @@ pred2lda <- function(object, new.fdataobj = NULL,  ...) {
   nn <- nrow(new.fdataobj)
   prob.group <- array(NA, dim = c(nn, ngroup))
   colnames(prob.group) <- lev								  
-  #new.fdataobj <- data.matrix(new.fdataobj)
+  #new.fdataobj <- as.matrix(new.fdataobj)
   if (ngroup == 2 | object$type != "majority") {
     #print("2 grupos o 1vsAll")
     #print(class(object$fit[[1]]))
@@ -275,7 +294,7 @@ pred2ksvm <- function(object, new.fdataobj = NULL,  ...) {
   nn <- nrow(new.fdataobj)
   prob.group <- array(NA, dim = c(nn, ngroup))
   colnames(prob.group) <- lev								  
-  new.fdataobj <- data.matrix(new.fdataobj)
+  new.fdataobj <- as.matrix(new.fdataobj)
   if (ngroup == 2) {
     #yest <- predict(object$fit[[1]], newx = new.fdataobj,...)
     #yest <- ifelse(probs > object$prob, lev[2], lev[1])
@@ -386,7 +405,7 @@ pred2np <- function(object, new.fdataobj = NULL, ...) {
     tt <- new.fdataobj[["argvals"]]
     rtt <- new.fdataobj[["rangeval"]]
   }
-  else newx <- data.matrix(new.fdataobj)
+  else newx <- as.matrix(new.fdataobj)
   nn <- nrow(new.fdataobj)
   x = object$fdataobj
   y = object$y
@@ -639,8 +658,9 @@ pred2gsam2boost<- function(object, new.fdataobj = NULL, ...) {
 }
 #############################
 
-pred2pc <- function(object,XX,lev){
-print("pred2pc")
+#pred2pc <- function(object,XX,lev){
+pred2pc <- function(object,XX){
+# print("pred2pc")
   lev <- levels(object$group)
   # if (object$C[[1]]=="classif.svm"){
   #   yest = predict(object = object$fit, newdata = XX,    probability = TRUE)  
@@ -664,7 +684,13 @@ print("pred2pc")
     prob.group = predict(object = object$fit, newdata = XX,    type = "prob") 
     return(list(group.pred =group.pred,prob.group=prob.group ))
   }
-  
+  if (object$C[[1]]=="classif.cv.glmnet"){
+    #print(names(XX))
+    group.pred = predict(object = object$fit, newx = as.matrix(XX),    type = "class")
+    prob.group = predict(object = object$fit, newx = as.matrix(XX), type="response" ) 
+    group.pred <- factor(group.pred, levels = lev)
+    return(list(group.pred =group.pred,prob.group=prob.group ))
+  }
   yest = predict(object = object$fit, XX)
   if (!is.factor(yest)) group.pred <- factor(yest, levels = lev)
   else group.pred <- yest
@@ -748,6 +774,34 @@ pred2randomForest <- function(object, XX = NULL, ...) {
     }
     yest <- apply(prob.group, 1, which.max)
     group.pred <- factor(lev[yest], levels = lev)
+  }
+  return(list("group.pred"=group.pred,"prob.group"=prob.group))
+}
+
+
+##########################################
+pred2gbm <- function(object, XX = NULL, ...) {
+#  print("pred2gbm")  
+  lev <- levels(object$group)
+  prob <- ngroup <- length(lev)
+  ngroup <- length(lev)
+  nn <- NROW(XX)
+  prob.group <- matrix(NA, nn,  ngroup)
+  colnames(prob.group) <- lev								  
+  if (ngroup == 2 | object$type=="majority") {
+   #    print("entra maj")
+    prob.group = predict(object = object$fit, newdata = XX, type="response")  
+    yest <- apply(prob.group,1,which.max)
+    yest <- factor(yest ,levels=lev)                # level o label???
+    return(list(group.pred =yest,prob.group=prob.group))
+  }  else {
+    #print( "nlev >2 and type='1vsAll'")
+    for (i in 1:ngroup) {
+      aux =  suppressWarnings(predict(object = object$fit[[i]], newdata = XX, type="response"))
+      prob.group[,i]<-aux[,1]
+    }
+    yest <- apply(prob.group, 1, which.max)
+    group.pred <- factor(lev[yest], levels = lev) # level o label???
   }
   return(list("group.pred"=group.pred,"prob.group"=prob.group))
 }
@@ -881,6 +935,7 @@ pred2ML <- function(object, new.fdataobj = NULL, ...) {
   else if (object$C[[1]]=="classif.randomForest")    out = pred2randomForest(object = object, XX)
   else if (object$C[[1]]=="classif.rpart")    out = pred2rpart(object = object, XX)
   else if (object$C[[1]]=="classif.lda" | object$C[[1]]=="classif.qda")    out = pred2lda(object = object, XX)
+  else if (object$C[[1]]=="classif.gbm" )    out = pred2gbm(object = object, XX)  
   else  out = pred2pc(object , XX)
   #print("sale ML")#;print(out)  
   return(out)

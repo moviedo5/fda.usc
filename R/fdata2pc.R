@@ -33,7 +33,7 @@
 #' \item {lambda}{ Amount of penalization.} 
 #' \item {P}{ Penalty matrix.}
 #' }
-#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@@udc.es}
+#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@@usc.es}
 #' @seealso  Used in:
 #' \code{\link{fregre.pls}}, \code{\link{fregre.pls.cv}}.
 #' Alternative method: \code{\link{fdata2pc}}.
@@ -364,7 +364,7 @@ mplsr <- function(X, Y, ncomp = 2, lambda=0, P=c(0,0,1),...)
 #' \item {P}{ Penalty matrix.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
-#' \email{manuel.oviedo@@udc.es}
+#' \email{manuel.oviedo@@usc.es}
 #' @seealso See Also as \link[base]{svd} and \link[stats]{varimax}.
 #' @references Venables, W. N. and B. D. Ripley (2002). \emph{Modern Applied
 #' Statistics with S}. Springer-Verlag.
@@ -735,3 +735,118 @@ plsfit <- function (X, Y, ncomp=3, lambda= 0, P=c(0,0,1),norm=TRUE, maxit = 100)
          penaltyMatrix=penaltyMatrix)
 }
 
+
+
+# if (norm) {
+#   dtt <- diff(tt)
+#   drtt <- diff(rtt)
+#   eps <- as.double(.Machine[[1]] * 10)
+#   inf <- dtt - eps
+#   sup <- dtt + eps
+#   if (all(dtt > inf) & all(dtt < sup))
+#     delta <- sqrt(drtt/(J - 1))
+#   else delta <- 1/sqrt(mean(1/dtt))
+#   no <- norm.fdata(vs)
+#   vs <- vs/delta
+#   d <- d * delta
+# }
+
+#########################################
+
+
+# library(fda.usc.devel)
+# library(pls)
+# data(tecator)
+# y=tecator$y[,1]
+# y3<-tecator$y
+# plsr <- mplsr(x$data,y,ncomp=5)
+# sapply(plsr,NCOL)
+# plot(fdata(t(plsr3$COEF)))
+# 
+# 
+# plsr3 <- mplsr(x$data,y3,ncomp=5)
+# (sapply(plsr3,dim))
+# coef <-(fdata(t(plsr3$COEF)))
+# # ###################################################################
+#  
+# # plot(fdata(t(plsr3$loadings)),col=1)
+# # lines(fdata(t(plsr3$loading.weights)),col=2)
+# # 
+# xf<-tecator$absorp.fdata
+# x<-xf$data
+# # y <- tecator$y
+# yf <- fdata.deriv(x)
+# y <- yf$data
+# plsr1 <- oscorespls.fit(x,y,ncomp=5)
+# plsr2 <- mplsr(x,y,ncomp=5)
+# plsr3 <- plsfit(x,y,ncomp=5)
+# plsr3 <- plsfit(xf,yf,ncomp=5)
+# 
+# plsr3 <- plsfit(xf$data,yf$data[,1,drop=F],ncomp=5)
+# plsr4 <- plsfit(xf,yf,ncomp=5)
+# 
+# plsr4 <- plsfit(xf,yf,ncomp=5,lambda=10000,P=1)
+# 
+# pls1 <- fdata2pls.old(xf,yf$data,ncomp=5)
+# pls1 <- fdata2pls(xf,yf$data,ncomp=5)
+# 
+# plsr1 <- fregre.pls(xf,yf$data[,1],5)
+# traceback
+# 
+# args(fdata2pls.old)
+# pls2 <- fdata2pls(xf,yf,ncomp=5)
+# 
+# head(plsr3$scores)
+# head(plsr4$scores)
+# 
+# plsr3$penaltyMatrix
+# plsr4$penaltyMatrix
+# 
+# plot(plsr3$loadings,col=1)
+# plot(plsr4$loadings,col=2)
+# 
+# lines(plsr4$loading.weights,col=4)
+# lines(plsr4$projection,col=3)
+# plot(plsr3$loadings,col=2)
+# lines(plsr4$loadings,col=3)
+# 
+# plot(plsr3$Yloadings,col=2)
+# lines(plsr4$Yloadings,col=3)
+
+
+# sapply(plsr3,dim)
+# dim(plsr3$Yloadings) #
+# dim(plsr3$scores)
+# dim(plsr3$loadings)
+# dim(plsr3$loading.weights)
+# 
+# # pairs(plsr3$TT)
+# plsr4 <- kernelpls.fit(x,y,ncomp=5,center=TRUE,stripped = FALSE)
+# plsr5 <- oscorespls.fit(x,y,ncomp=5)
+# #plsr6 <- simpls.fit(x,y,ncomp=5)
+# plsr6 <- widekernelpls.fit(x,y,ncomp=5)
+# names(plsr4)
+# names(plsr5)
+# 
+# head(plsr4$Yscores)
+# head(plsr5$Yscores)
+# head(plsr6$Yscores)
+# head(plsr4$Yscores-plsr5$Yscores)
+# head(plsr4$Yscores-plsr6$Yscores)
+# head(plsr4$Yscores-plsr3$Yscores)
+# 
+# head(plsr4$loadings)
+# head(plsr4$loading.weights-plsr3$loading.weights)
+# head(plsr5$loading.weights-plsr3$loading.weights)
+# head(plsr6$loading.weights-plsr5$loading.weights)
+# 
+# head(plsr3$loadings)
+# head(plsr4$loadings)
+# head(plsr5$loadings)
+# head(plsr6$loadings)
+# head(abs(plsr4$loadings)-abs(plsr3$loadings))
+# head(abs(plsr4$loadings)-abs(plsr5$loadings))
+################################
+# aa<-fdata2pls(tecator$abosrp.fdata, y, ncomp = 2, norm=FALSE)
+# aa<-fdata2pls(x, y3, ncomp = 2, norm=TRUE)
+# aa<-create.pls.basis(x, y3, 2, norm=TRUE)
