@@ -191,7 +191,7 @@ k=1
               xcen$data<- xcen$data/(rep(1, nn) %*% t(sd.X))
             } 
 }
-        Z<- inprod.fdata(xcen,object$vs.list[[vfunc[i]]])
+        Z<- inprod.fdata(xcen,object$basis.x[[vfunc[i]]$basis])
         response = "y"
         colnames(Z) = name.coef[[vfunc[i]]]=paste(vfunc[i], ".",rownames(basis.x[[vfunc[i]]]$basis$data),sep ="")
 #        XX = cbind(XX,Z)
