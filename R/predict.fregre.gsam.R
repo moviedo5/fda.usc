@@ -245,6 +245,7 @@ k=1
           Z =t(x.fd$coefs) %*% J
           colnames(J)=colnames(Z) = name.coef[[vfunc[i]]]=paste(vfunc[i],".",basis.b[[vfunc[i]]]$names,sep="")
 #          XX = cbind(XX,Z)
+          if (is.null(fnf2)) fnf2=numeric(i)
           if (fnf2[i]==1) sm2<-TRUE
           else sm2<-FALSE
           for ( j in 1:length(colnames(Z))){
