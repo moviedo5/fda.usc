@@ -117,7 +117,7 @@ if (!is.fdata(fdataobj)) fdataobj=fdata(fdataobj)
 isfdata<-is.fdata(y)
 nas<-is.na.fdata(fdataobj)
 nas.g<-is.na(y)
-if (is.null(names(y))) names(y)<-1:length(y)
+if (is.null(names(y))) names(y) <- seq_len(length(y))
 if (any(nas) & !any(nas.g)) {
    bb<-!nas
    if (ops.fda.usc()$warning)
@@ -172,22 +172,24 @@ types=FALSE
 if (is.matrix(metric)) mdist<-metric
 else mdist=metric(fdataobj,fdataobj,...)
 
-
-# if (is.function(Ker)) ke<-deparse(substitute(Ker))
-# else ke<-Ker
- # print(ke)
-# ke<-deparse(substitute(Ker))
-#ty<-deparse(substitute(type.S))
-#tcv<-deparse(substitute(type.CV))
-if (!is.function(Ker)) Ker<-get(Ker)
 attr(par.S, "call") <- ty
+#if (!is.function(Ker)) Ker<-get(Ker)
+
+
+# if (is.character(Ker)){  nker <- function(u,mik=Ker){get(mik)(u)}
+# } else {  nker <- function(u,mik=Ker){mik(u)} }
 
 if (is.null(h)) {
-nker=get(paste0("Ker.",unlist(strsplit(deparse(substitute(Ker)),"[.]"))[2]))
-h = do.call(h.default,c(list(fdataobj=fdataobj,metric=mdist,prob=c(0.025,0.25),type.S=ty,Ker=nker),...))
-#h=h.default(fdataobj,prob=c(0.025,0.25),len=25,metric = mdist,Ker =nker, type.S =ty,...)
+  #aa <- strsplit(deparse(substitute(Ker)),"[.]")
+#  print(aa)
+  #print(deparse(substitute(Ker)))
+#nker=get(paste0("Ker.",unlist(aa)[2]))
+  h = do.call(h.default,c(list(fdataobj=fdataobj,metric=mdist,
+                             prob=c(0.025,0.25),type.S=ty,Ker=Ker),...))
 }
 else {if   (any(h<=0)) stop("Error: Invalid range for h")}
+
+
 lenh <- length(h)
 cv=gcv1=gcv=cv.error <- array(NA, dim = c(lenh))
 par.S2<-par.S
@@ -272,7 +274,7 @@ if (all(is.infinite(gcv)) & ops.fda.usc()$warning
    	rownames(ypcv$data)<-rownames(y$data)
     ecv<-y-ypcv
                                                                   
-    norm.e<-drop(norm.fdata(e,metric=metric,...)[,1]^2)
+    norm.e<-norm.fdata(e,metric=metric,...)^2
     sr2=sum(norm.e)/(n-df)
     ycen=fdata.cen(y)$Xcen
 #	  r2=1-sum(e^2)/sum(ycen^2)

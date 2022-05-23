@@ -127,7 +127,7 @@ if (norm) {
 if (sigma2[1]=="brownian") print("The normalization is not done")
 else{
         no <- norm.fdata(X,...)
-        X$data <- sweep(X$data, 1, drop(no), "/")
+        X$data <- sweep(X$data, 1, no, "/")
         }
 }
 return(X)

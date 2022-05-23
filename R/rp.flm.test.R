@@ -171,7 +171,7 @@ rdir.pc <- function(n, X.fdata, ncomp = 0.95, fdata2pc.obj =
   # Normalize
   if (norm) {
 
-    rprojs$data <- rprojs$data / drop(fda.usc::norm.fdata(rprojs))
+    rprojs$data <- rprojs$data / fda.usc.devel::norm.fdata(rprojs)
 
   }
   
@@ -310,7 +310,7 @@ rp.flm.statistic <- function(proj.X, residuals, proj.X.ord = NULL, F.code = TRUE
     # Statistic
     rp.stat <- .Fortran("rp_stat", proj_X_ord = proj.X.ord, residuals = residuals,
                         n_proj = n.proj, n = n, rp_stat_proj = rp.stat,
-                        PACKAGE = "fda.usc")$rp_stat_proj
+                        PACKAGE = "fda.usc.devel")$rp_stat_proj
     
   } else {
     
@@ -453,7 +453,7 @@ rp.flm.statistic <- function(proj.X, residuals, proj.X.ord = NULL, F.code = TRUE
 #' rp.flm.test(X.fdata = X, Y = Y, est.method = "pc")
 #' rp.flm.test(X.fdata = X, Y = Y, est.method = "pls")
 #' rp.flm.test(X.fdata = X, Y = Y, est.method = "basis", 
-#'             p.criterion = fda.usc::GCV.S)
+#'             p.criterion = fda.usc.devel::GCV.S)
 #' rp.flm.test(X.fdata = X, Y = Y, est.method = "pc", p = 5)
 #' rp.flm.test(X.fdata = X, Y = Y, est.method = "pls", p = 5)
 #' rp.flm.test(X.fdata = X, Y = Y, est.method = "basis", p = 5)
@@ -544,7 +544,7 @@ rp.flm.statistic <- function(proj.X, residuals, proj.X.ord = NULL, F.code = TRUE
 #'          plot.it = FALSE)
 #' rp.flm.test(X.fdata = temp, Y = wind.speed, beta0.fdata = zero)
 #' }
-#' @useDynLib fda.usc, .registration = TRUE
+#' @useDynLib fda.usc.devel, .registration = TRUE
 #' @export 
 rp.flm.test <- function(X.fdata, Y, beta0.fdata = NULL, B = 1000, n.proj = 10, 
                         est.method = "pc", p = NULL, p.criterion = "SICc", 

@@ -284,7 +284,7 @@ colnames(J) = colnames(Z) = name.coef[[vfunc[i]]] = paste(vfunc[i],".",basis.b[[
   
   if (!is.data.frame(XX)) XX=data.frame(XX)
 #  print("sale fdata2model")  
-  return(list(pf=pf,vs.list=vs.list,mean.list=mean.list,XX=XX,
+  return(list(pf=pf,basis.list=vs.list,mean.list=mean.list,XX=XX,
               basis.x=basis.x,name.coef=name.coef,bsp1=bsp1))
 }
 #####################################################
@@ -360,7 +360,10 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
           colnam <- colnames(Z)
           Z <- Z %*% J
           name.coef[[vfunc[i]]] <- colnames(Z) <- colnam[1:NCOL(Z)]
-        }
+          rownames(J)= name.coef[[vfunc[i]]]=paste(vfunc[i],".",basis.x[[vfunc[i]]]$names,sep="")
+          colnames(J)= name.coef[[vfunc[i]]]=paste(vfunc[i],".",basis.b[[vfunc[i]]]$names,sep="")
+        } else J <- basis.x[[vfunc[i]]]$basis
+        
         lencoef <- length(colnames(Z))
         XX = cbind(XX, Z)
         for (j in 1:lencoef) {
@@ -369,7 +372,8 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
         }       
         basis.list[[vfunc[i]]] <- xaux$basis
         # J=inprod(basis.x[[vfunc[i]]],basis.b[[vfunc[i]]])
-        #   vs.list[[vfunc[i]]] = basis.x[[vfunc[i]]]$basis
+        vs.list[[vfunc[i]]] = J
+         
         if (!bsp1) 
           mean.list[[vfunc[i]]] = basis.x[[vfunc[i]]]$mean
         else {
@@ -410,7 +414,9 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
               else pf <- paste(pf, colnames(Z)[j], sep = "")
               kterms <- kterms + 1
             }
+#            colnames(J)=paste(vfunc[i], ".",colnames(basis.x[[vfunc[i]]]$harmonics$coefs),sep ="")
             vs.list[[vfunc[i]]]<- J
+            
           }          else {
             l<-ncol(basis.x[[vfunc[i]]]$scores)
             vs <- basis.x[[vfunc[i]]]$harmonics$coefs
@@ -434,9 +440,8 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
   pf <- as.formula(pf)
   if (!is.data.frame(XX)) XX=data.frame(XX)
   #  print("sale fdata2model")  
-  colnames(XX)[1] <-  response
   # print("sale fdata2model.penalty")
-  return(list(pf=pf, vs.list=vs.list, mean.list=mean.list,
+  return(list(pf=pf, basis.list=vs.list, mean.list=mean.list,
               basis.list = basis.list,XX=XX,
               basis.x=basis.x,basis.b=basis.b, name.coef=name.coef, bsp1=bsp1
               ,lpenalty=lpenalty, ipenalty=ipenalty, penalty=lambda0))
@@ -467,3 +472,4 @@ createMatrixPenalty <- function(tt,lambda,P,vs=NULL){
 
   # incluir escalado para cuando son PC's
   # lpenalty[[vfunc[i]]] <- createMatrixPenalty(tt,lambda[[vfunc[i]]],P[[vfunc[i]]],vs=NULL){
+

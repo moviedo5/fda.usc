@@ -51,8 +51,15 @@ h.default=function (fdataobj, prob=c(0.025,0.25),len=51,
     
     if (!is.fdata(fdataobj))   fdataobj = fdata(fdataobj)
     n=nrow(fdataobj)
-    ck=integrate(function(u){Ker(u)^2},-4,4)$value
-    dk=integrate(function(u){u^2*Ker(u)},-4,4)$value
+    
+    if (is.character(Ker)){
+      nker <- function(u,mik=Ker){get(mik)(u)}
+    } else {
+      nker <- function(u,mik=Ker){mik(u)} 
+    }
+    
+    ck=integrate(function(u){nker(u)^2},-4,4)$value
+    dk=integrate(function(u){u^2*nker(u)},-4,4)$value
     c0=(ck/dk^2)^(1/5)/1.3510   #1.3510 from unif      
       if (type.S %in% c("S.NW","S.LLR","S.LPR","S.LCR")) {
         if (is.matrix(metric)) {mdist=metric}

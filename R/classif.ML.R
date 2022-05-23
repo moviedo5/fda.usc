@@ -77,7 +77,7 @@
 #' with S}, New York: Springer.  %Wood (2001) mgcv:GAMs and Generalized Ridge
 #' Regression for R. R News 1(2):20-25
 #' @keywords classif
-#' @examples
+#' @examples 
 #' \dontrun{
 #' data(phoneme)
 #' mlearn<-phoneme[["learn"]]
@@ -87,7 +87,7 @@
 #' dataf<-data.frame(glearn)
 #' dat=ldata("df"=dataf,"x"=mlearn)
 #' a1<-classif.rpart(glearn~x,data=dat)
-#' a2<-classif.nnet(glearn~x,data=dat,trace=F)
+#' a2<-classif.nnet(glearn~x,data=dat)
 #' a3<-classif.gbm(glearn~x,data=dat)
 #' a4<-classif.randomForest(glearn~x,data=dat)
 #' a5<-classif.cv.glmnet(glearn~x,data=dat)
@@ -150,7 +150,7 @@ classif.nnet=function(formula, data, basis.x=NULL
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  vs.list <- out.func$vs.list
+  basis.list <- out.func$basis.list
   mean.list=out.func$mean.list
   rm(out.func)
   n<- ndatos <-NROW(XX)
@@ -218,7 +218,7 @@ classif.nnet=function(formula, data, basis.x=NULL
   out$basis.x=basis.x
   out$mean=mean.list
   out$formula=pf
-  out$vs.list=vs.list
+  out$basis.list=basis.list
   #out$method <- method
   #out$par.method <- par.method
   tab <- table(out$group.est,group)
@@ -286,7 +286,7 @@ classif.multinom=function(formula, data, basis.x=NULL
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  vs.list <- out.func$vs.list
+  basis.list <- out.func$basis.list
   mean.list=out.func$mean.list
   rm(out.func)
   n <- ndatos <- NROW(XX)
@@ -324,7 +324,7 @@ classif.multinom=function(formula, data, basis.x=NULL
   out$basis.x=basis.x
   out$mean=mean.list
   out$formula=pf
-  out$vs.list=vs.list
+  out$basis.list=basis.list
   #out$method <- method
   #out$par.method <- par.method
   tab <- table(out$group.est,group)
@@ -394,7 +394,7 @@ classif.rpart=function(formula, data, basis.x=NULL ,weights="equal",type="1vsall
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  vs.list <- out.func$vs.list
+  basis.list <- out.func$basis.list
   mean.list=out.func$mean.list
   rm(out.func)
   
@@ -452,7 +452,7 @@ classif.rpart=function(formula, data, basis.x=NULL ,weights="equal",type="1vsall
   out$basis.x=basis.x
   out$mean=mean.list
   out$formula=pf
-  out$vs.list=vs.list
+  out$basis.list=basis.list
   tab <- table(out$group.est,out$group)
   prob.group <- array(NA, dim = c(n, ny))
   prob.group <- prob.group/apply(prob.group, 1, sum)
@@ -474,6 +474,8 @@ classif.rpart=function(formula, data, basis.x=NULL ,weights="equal",type="1vsall
 classif.svm=function(formula, data, basis.x=NULL 
                      , weights="equal",type="1vsall",...)
 {
+  
+  
   rqr <- "e1071"
   if (!(rqr %in% rownames(installed.packages()))) {
     stop("Please install package 'e1071'") }
@@ -515,7 +517,7 @@ classif.svm=function(formula, data, basis.x=NULL
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  vs.list <- out.func$vs.list
+  basis.list <- out.func$basis.list
   mean.list=out.func$mean.list
   rm(out.func)
   n <- ndatos <- NROW(XX)
@@ -555,6 +557,7 @@ classif.svm=function(formula, data, basis.x=NULL
     z=do.call("svm",par.method)
     out$fit<-z
     out$group.est = z$fitted
+    out$prob.group<-    attributes(predict(z,XX,desicion.values=T,  probability=T))$probabilities
     #  out$fit$call<-z$call[1:2]
     #z= svm(formula=pf, data=XX 
     #       , subset, na.action = na.action
@@ -621,7 +624,7 @@ classif.svm=function(formula, data, basis.x=NULL
   out$basis.x=basis.x
   out$mean=mean.list
   out$formula=pf
-  out$vs.list=vs.list
+  out$basis.list=basis.list
   tab <- table(out$group.est,group)
   prob2<-prob1 <- ngroup <- nlevels(y)
   prob.group <- array(NA, dim = c(ndatos, ngroup))
@@ -637,8 +640,11 @@ classif.svm=function(formula, data, basis.x=NULL
   #out$group.pred <- out$group.est
   #class(out)<-c("classif",class(z))
   class(out) <- "classif"
+ # out$prob.group <-  predict(out ,type="response")
+  
   out
 }
+
 
 #' @rdname classif.ML
 #' @export classif.ksvm
@@ -684,7 +690,7 @@ classif.ksvm=function(formula, data, basis.x=NULL ,weights = "equal",...){
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  vs.list <- out.func$vs.list
+  basis.list <- out.func$basis.list
   mean.list=out.func$mean.list
   rm(out.func)
   par.method <- as.list(substitute(list(...)))[-1L]
@@ -769,7 +775,7 @@ classif.ksvm=function(formula, data, basis.x=NULL ,weights = "equal",...){
   out$basis.x=basis.x
   out$mean=mean.list
   out$formula=pf
-  out$vs.list=vs.list
+  out$basis.list=basis.list
   #out$type=type
   tab <- table(out$group.est,group)
   prob2<-prob1 <- ngroup <- nlevels(y)
@@ -833,7 +839,7 @@ classif.randomForest=function(formula, data, basis.x=NULL,
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  vs.list <- out.func$vs.list
+  basis.list <- out.func$basis.list
   mean.list=out.func$mean.list
   rm(out.func)
   n <- NROW(XX)
@@ -901,7 +907,7 @@ classif.randomForest=function(formula, data, basis.x=NULL,
   out$basis.x=basis.x
   out$mean=mean.list
   out$formula=pf
-  out$vs.list=vs.list
+  out$basis.list=basis.list
   #out$method <- method
   #out$par.method <- par.method
   
@@ -970,7 +976,7 @@ classif.lda=function(formula, data, basis.x=NULL
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  vs.list <- out.func$vs.list
+  basis.list <- out.func$basis.list
   mean.list=out.func$mean.list
   rm(out.func)
   n <- ndatos <- NROW(XX)
@@ -1060,7 +1066,7 @@ classif.lda=function(formula, data, basis.x=NULL
   out$basis.x=basis.x
   out$mean=mean.list
   out$formula=pf
-  out$vs.list=vs.list
+  out$basis.list=basis.list
   tab <- table(out$group.est,y)
 
   prob.group <- array(NA, dim = c(n, ny))
@@ -1125,7 +1131,7 @@ classif.qda=function(formula, data, basis.x=NULL
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  vs.list <- out.func$vs.list
+  basis.list <- out.func$basis.list
   mean.list=out.func$mean.list
   rm(out.func)
   n <- ndatos <- NROW(XX)
@@ -1215,7 +1221,7 @@ classif.qda=function(formula, data, basis.x=NULL
   out$basis.x=basis.x
   out$mean=mean.list
   out$formula=pf
-  out$vs.list=vs.list
+  out$basis.list=basis.list
   tab <- table(out$group.est,y)
   
   prob.group <- array(NA, dim = c(n, ny))
@@ -1278,7 +1284,7 @@ classif.naiveBayes=function(formula, data, basis.x=NULL, laplace = 0,...)
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  vs.list <- out.func$vs.list
+  basis.list <- out.func$basis.list
   mean.list=out.func$mean.list
   rm(out.func)
   ndatos <- nrow(XX)
@@ -1327,7 +1333,7 @@ classif.naiveBayes=function(formula, data, basis.x=NULL, laplace = 0,...)
   out$basis.x=basis.x
   out$mean=mean.list
   out$formula=pf
-  out$vs.list=vs.list
+  out$basis.list=basis.list
   #out$method <- method
   #out$par.method <- par.method
   #print(out$group.est)
@@ -1414,7 +1420,7 @@ classif.cv.glmnet=function(formula, data, basis.x=NULL
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  vs.list <- out.func$vs.list
+  basis.list <- out.func$basis.list
   mean.list=out.func$mean.list
   rm(out.func)
   n <- ndatos <-NROW(XX)
@@ -1450,7 +1456,12 @@ classif.cv.glmnet=function(formula, data, basis.x=NULL
   par.method <- as.list(substitute(list(...)))[-1L]
 
   #par.method<-c(list(x=XX, y=y, family = "multinomial",weights=weights),par.method)
-  par.method<-c(list(x=as.matrix(XX[,-1]), y = y, family = "multinomial",weights=weights),par.method)
+  par.method<-c(list(x=as.matrix(XX[,-1,drop=F]), y = y, family = "multinomial",weights=weights),par.method)
+   
+#  X no puede ser de dimensión 1!!
+#  print("ML M;L")
+if (NCOL(par.method$x)==1) par.method$x<-cbind(rep(1,len=n),par.method$x)
+  # print(dim(par.method$x))
   z= suppressWarnings(do.call("cv.glmnet",par.method))
   out<-list()
   out$formula.ini=formula
@@ -1459,32 +1470,35 @@ classif.cv.glmnet=function(formula, data, basis.x=NULL
   out$C <- C[1:2]
   out$prob <- prob
   out$group <- group
-  out$group.est <- predict(object = z, par.method$x,type = "class")
+  out$prob.group <- predict(object = z, par.method$x,type = "response")[,,1]
+  out$group.est <- predict(object = z, par.method$x, type = "class")
   out$group.est <- factor(out$group.est ,levels=levels(group))
   out$max.prob <- mean(group==out$group.est) 
   out$fit <- z
   out$basis.x=basis.x
   out$mean=mean.list
   out$formula=pf
-  out$vs.list=vs.list
+  out$basis.list=basis.list
   out$weights = weights
   tab <- table(out$group.est,group)
   ny <- levels(y)
   prob2<-prob1 <- ngroup <- nlevels(y)
-  prob.group <- array(NA, dim = c(ndatos, ngroup))
-  prob.group <- prob.group/apply(prob.group, 1, sum)
+  #prob.group <- array(NA, dim = c(ndatos, ngroup))
+  # prob.group <- prob.group/apply(prob.group, 1, sum)
+  
+  
+  
   for (i in 1:ngroup) {
     prob1[i] = tab[i, i]/sum(tab[, i])
   }
   names(prob1) <- z$levels
-  colnames(prob.group) <- z$levels
+  colnames(out$prob.group) <- z$levels
   out$prob.classification <- prob1
   out$fit$call<-  out$fit$call[1]
   #class(out)<-c("classif",class(z))
   class(out) <- "classif"
   return(out)
 }
-
 
 #' @rdname classif.ML
 #' @export classif.gbm
@@ -1533,7 +1547,7 @@ classif.gbm=function(formula, data, basis.x=NULL
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  vs.list <- out.func$vs.list
+  basis.list <- out.func$basis.list
   mean.list=out.func$mean.list
   rm(out.func)
   n<- ndatos <-NROW(XX)
@@ -1570,7 +1584,7 @@ classif.gbm=function(formula, data, basis.x=NULL
   out$basis.x=basis.x
   out$mean=mean.list
   out$formula=pf
-  out$vs.list=vs.list
+  out$basis.list=basis.list
   #out$method <- method
   #out$par.method <- par.method
   tab <- table(out$group.est,group)
@@ -1590,5 +1604,7 @@ classif.gbm=function(formula, data, basis.x=NULL
   out
 }
 # Hacer gbm usando majority voting
+
+
 
 

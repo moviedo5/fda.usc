@@ -68,7 +68,7 @@ CV.S=function (y, S, W = NULL, trim = 0, draw = FALSE, metric = metric.lp, ...) 
         y.est <- fdata(y.est, y$argvals, y$rangeval, y$names)
         #e <- (      y - y.est)/(1-diag(S))
         e <- fdata(sweep((y - y.est)$data,2,1-diag(S),"%/%"), y$argvals, y$rangeval, y$names)
-        ee <- drop(norm.fdata(e, metric = metric, ...)[, 1]^2)
+        ee <- norm.fdata(e, metric = metric, ...)^2
         if (trim > 0) {
             e.trunc = quantile(ee, probs = (1 - trim), na.rm = TRUE, type = 4)
             ind <- ee <= e.trunc

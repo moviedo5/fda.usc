@@ -46,6 +46,7 @@
 # @param CV =TRUE, Cross-validation (CV) is done . Este parámetro no está incluido.
 #' @param subset an optional vector specifying a subset of observations to be
 #' used in the fitting process.
+#' @param weights weights
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Return \code{glm} object plus:
 #' \itemize{ 
@@ -95,9 +96,9 @@
 
 #' @export
 fregre.glm=function(formula,family = gaussian(), data, 
-                    basis.x=NULL, basis.b=NULL,# CV=FALSE, weights
+                    basis.x=NULL, basis.b=NULL,# CV=FALSE, 
                     subset = NULL,
-                    #weights=rep(1,n), subset = NULL,
+                    weights= NULL,
                     ...)
   # 
   {
@@ -132,7 +133,9 @@ fregre.glm=function(formula,family = gaussian(), data,
     out <- fdata2model.penalty(vfunc = vfunc, vnf=vnf, response=response
                                , data=data, basis.x = basis.x, basis.b=basis.b, 
                                pf=pf, tf=tf)
-    #print("sale fdata2model")
+    
+    # print("sale fdata2model")
+    
     basis.list <- out$basis.list
     mean.list <- out$mean.list
     name.coef <- out$name.coef
@@ -145,19 +148,29 @@ fregre.glm=function(formula,family = gaussian(), data,
     par.fregre$data=XX
     y <- XX[,1] 
     ycen = y - mean(y)
+    if (missing(weights)) weights=rep(1,len=n) 
+    
+    
     #Z <- as.matrix(XX[,-1])     
-     #if (!penalty) {
     if (lenvfunc==0 & length(vnf)==0)      {
-        z=glm(formula=pf,data=XX,family=family,
-              x=TRUE,y=TRUE,subset=subset,...)
+      XX$weights<-weights
+        z=glm(formula=formula(pf),data=XX,family=family,
+              x=TRUE,y=TRUE,subset=subset
+              ,weights = weights)# ,...)
         class(z)<-c("fregre.glm",class(z))
         return(z)
-      }       else       z=glm(formula=pf,data=XX,
+      }       else      {
+        XX$weights<-weights
+        z=glm(formula=pf,data=XX,
                                family=family,
-                              # weights = weights,
-                               x=TRUE,y=TRUE,
+                               weights = weights,
                                #subset=subset,
-                               ...)
+                               x=TRUE,y=TRUE)
+                                #,...)
+                               
+                               
+       
+      }
       e <- z$residuals
       z$coefs<- summary(z)$coefficients
       z$r2 <- 1 - sum(z$residuals^2)/sum(ycen^2)  
@@ -216,7 +229,7 @@ fregre.glm=function(formula,family = gaussian(), data,
     z$formula.ini <- formula
     z$basis.x <- basis.x
     z$basis.b <- basis.b
-    
+    z$vs.list <- out$vs.list
     z$data <- z$data
     z$XX <- XX
     # print("pasa 3") 
@@ -231,3 +244,4 @@ fregre.glm=function(formula,family = gaussian(), data,
     # class(z$beta.l) <- c("mfdata","list")
     z
   } 
+

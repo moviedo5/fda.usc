@@ -87,8 +87,7 @@ GCCV.S=function(y,S,criteria="GCCV1",W=NULL,trim=0,draw=FALSE,metric=metric.lp,.
          y.est=t(S%*%y2)
          y.est<-fdata(y.est,y$argvals, y$rangeval, y$names)
          e <- y - y.est
-#         e$data<-sqrt(W)%*%(e$data)   
-         ee <- drop(norm.fdata(e,metric=metric,...)[,1]^2)
+		 ee <- norm.fdata(e,metric=metric,...)^2
          if (trim>0) {
             e.trunc=quantile(ee,probs=(1-trim),na.rm=TRUE,type=4)
             ind<-ee<=e.trunc

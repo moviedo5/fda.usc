@@ -2,7 +2,7 @@
 #' @rdname predict.fregre.lm
 #' @export 
 predict.fregre.glm<-function(object, newx = NULL, type = "response",...){
- if (is.null(object)) stop("No fregre.glm object entered")
+  if (is.null(object)) stop("No fregre.glm object entered")
  if (is.null(newx)) {
     if (type == "effects"){
       fake  = predict.glm(object, type = "terms", ...) 
@@ -65,13 +65,15 @@ if (length(vfunc)>0)  {
       tt<-fdataobj[["argvals"]]
       rtt<-fdataobj[["rangeval"]]
       if (!object$basis.x[[vfunc[i]]]$type=="pc"&!object$basis.x[[vfunc[i]]]$type=="pls") {
- 	  	x.fd = Data2fd(argvals = tt, y = t(fdata.cen(fdataobj,object$mean[[vfunc[i]]])[[1]]$data),
-                      basisobj = basis.x[[vfunc[i]]],fdnames=rwn)
-	    	r=x.fd[[2]][[3]]
-        J<-object$JJ[[vfunc[i]]]
-        Z = t(x.fd$coefs) %*% J
-#        colnames(Z) = paste(vfunc[i], ".",colnames(J), sep = "")
-        colnames(Z) = colnames(J)
+         xaux <- fdata2basis(fdataobj,object$basis.x[[vfunc[i]]])
+        Z <- xaux$coefs
+        if (!is.null(object$basis.b)){
+          J = inprod(object$basis.x[[vfunc[i]]], object$basis.b[[vfunc[i]]])
+          #mean.list[[vfunc[i]]] <- mean.fd(x.fd);          x.fd <- center.fd(x.fd)
+          colnam <- colnames(Z)
+          Z <- Z %*% J
+        }
+        colnames(Z) <-    paste(vfunc[i], ".",object$basis.x[[vfunc[i]]]$names,sep ="")
       }
       else {
           name.coef<-paste(vfunc[i], ".",rownames(object$basis.x[[vfunc[i]]]$basis$data),sep ="")
@@ -82,13 +84,15 @@ if (length(vfunc)>0)  {
                          newXcen$data<- newXcen$data/(rep(1, nrow(newXcen)) %*% t(sd.X))
                         }
                       } 
-                    Z<- inprod.fdata(newXcen,object$vs.list[[vfunc[i]]])                   
+                    #Z <- inprod.fdata(newXcen,object$vs.list[[vfunc[i]]])  
+                      
+                      Z <- inprod.fdata(newXcen,object$basis.list[[vfunc[i]]])                   
 #          Z<- inprod.fdata(fdata.cen(fdataobj,object$mean[[vfunc[i]]])[[1]],object$vs.list[[vfunc[i]]])
           colnames(Z)<-name.coef
 #         object$beta.l[[vfunc[i]]]$data <- matrix(object$beta.l[[vfunc[i]]]$data,nrow = 1)
 #         b1 <- inprod.fdata(fdata.cen(fdataobj,object$mean[[vfunc[i]]])[[1]],object$beta.l[[vfunc[i]]])
 #         yp2<-yp2+b1
-      }
+          }
        if (first) {    XX=Z;              first=FALSE         }
        else XX = cbind(XX, Z)
         }
@@ -114,10 +118,8 @@ if (length(vfunc)>0)  {
        else XX = cbind(XX, Z)
            }#          else stop("Please, enter functional covariate")
        }  }
-
-        
-        }
- if (first) return(rep(object$coefficient,length=nrow(newx[[1]])) )        
+    }
+ if (first) return(rep(object$coefficients,length=nrow(newx[[1]])) )        
  if (!is.data.frame(XX)) XX=data.frame(XX)    
  if (type == "effects"){
    fake  = predict.glm(object, newdata = XX, type = "terms",x=TRUE,y=TRUE, ...)

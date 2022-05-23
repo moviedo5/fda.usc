@@ -36,8 +36,8 @@ if (is.null(fdata2)) {
    }
 else {
    a<-inprod.fdata(fdata1,fdata2)
-   b1<-drop(norm.fdata(fdata1))
-   b2<-drop(norm.fdata(fdata2))
+   b1<-norm.fdata(fdata1)
+   b2<-norm.fdata(fdata2)
 #   print(a/(outer(b1[,1],b2[,1])))
 }
    if (as.dis) {

@@ -116,13 +116,18 @@ classif.glm<-function (formula, data, family = binomial(), weights = "equal",
   newdata <- data
   ny <- levels(y)
   prob2<-prob1 <- ngroup <- nlevels(y)
+  w <- weights
+  
   if (ngroup == 2) {
     #newy <- ifelse(y == ny[1], 0, 1)
     newy <- y
     newdata$df$y <- newy
+    
     a[[1]] <- suppressWarnings(fregre.glm(formula, data = newdata, 
-                                          family = family, weights = weights, 
-                                          basis.x = basis.x, basis.b = basis.b,CV = CV, ...))
+                                          family = family, weights = w, 
+                                          basis.x = basis.x, basis.b = basis.b,CV = CV
+                                          #, ...
+                                          ))
     out2glm <- classif2groups(a,y,prob,ny)
   }   else {
     a<-list()
@@ -140,11 +145,18 @@ classif.glm<-function (formula, data, family = binomial(), weights = "equal",
         newy[ind1 ]<- 1
         newy[ind2 ]<- 0
         newdata$df[response] <- newy
-        a[[ivot]]<-suppressWarnings(fregre.glm(formula,data=newdata,family=family, weights =  weights
-                              ,basis.x=basis.x,basis.b=basis.b,CV=CV,subset = i2a2,...))
+        print(formula)
+        print(names(newdata$df))
+        print(names(basis.x))
+        a[[ivot]]<-suppressWarnings(fregre.glm(formula,data=newdata,family=family, weights =  w
+                              ,basis.x=basis.x,basis.b=basis.b,CV=CV,subset = i2a2)
+                              #,...)
+                              )
+        print("SS")
         prob.log <- a[[ivot]]$fitted.values  > prob
         votos[i2a2, cvot[1,ivot]] <- votos[i2a2, cvot[1,ivot]] + as.numeric(prob.log)
         votos[i2a2, cvot[2,ivot]] <- votos[i2a2, cvot[2,ivot]] + as.numeric(!prob.log)
+       
       }
       out2glm<-classifKgroups(y,votos,ny)
     }    else { # One vs Other
@@ -153,13 +165,17 @@ classif.glm<-function (formula, data, family = binomial(), weights = "equal",
       for (i in 1:ngroup) {
         igroup  <- y==ny[i]
         newy<-ifelse(igroup, 1, 0)
-        weights0 <- weights
+        weights0 <- w
         weights0[igroup] <- weights0[igroup]/ sum(weights0[igroup])
         weights0[!igroup] <- weights0[!igroup]/sum(weights0[!igroup])
         newdata$df[response]<-newy
         a[[i]] <-suppressWarnings(fregre.glm(formula,data=newdata,family=family,
-                                             weights =  weights0, basis.x=basis.x,basis.b=basis.b, CV=CV,...))
+                                             weights =  weights0, basis.x=basis.x,
+                                             basis.b=basis.b, CV=CV
+                                             #,...
+                                             ))
         prob.group[,i]<-a[[i]]$fitted.values
+        
       }
       out2glm<-classifKgroups(y,prob.group,ny)
     }
@@ -204,6 +220,5 @@ classif2groups <- function(a,y,prob,ny){
 }
 
 #################################
-
 
 

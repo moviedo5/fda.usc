@@ -50,7 +50,9 @@ if (is.vector(fdataobj$data))    fdataobj$data=matrix(fdataobj$data,nrow=1)
 z0<-matrix(0,ncol=ncol(fdataobj),nrow=1)
 z0<-fdata(z0,fdataobj[["argvals"]],fdataobj[["rangeval"]],fdataobj[["names"]])
 n.lp<-metric(fdataobj,z0,...)
-n.lp
+res<-n.lp[,1]
+names(res)<-rownames(fdataobj$data)
+res
 }
 
 #' @rdname  norm.fdata
@@ -60,6 +62,7 @@ if (is.fd(fdobj)) rng<- fdobj[[2]]$rangeval
 else if (is.basis(fdobj)) rng<- fdobj$rangeval
 else stop("Non fd or basis class")
 sqrt(inprod(fdobj,fdobj))#/diff(rng))
+
 }
 
 

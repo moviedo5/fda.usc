@@ -185,6 +185,9 @@ bcdcor.dist=function(D1,D2,n){
   # n:  sample dimension, by default nrow(D1)
   # Returns the bias corrected dcor statistic
   # print("entra bcdcor.dist")
+  # print(n)
+  # print(dim(D1))
+  # print(dim(D2))
   if (missing(n)) n <- nrow(D1)
   AA <- Astar2(D1,n)
   BB <- Astar2(D2,n)

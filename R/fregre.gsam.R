@@ -121,7 +121,6 @@ fregre.gsam <- function (formula
                                , data = list(), weights = NULL
                                , basis.x = NULL, basis.b = NULL, ...) 
 {
-  
   nam.data <- names(data)
   nam.df <- names(data$df)
   nam.func <- setdiff(nam.data,"df")
@@ -153,7 +152,7 @@ fregre.gsam <- function (formula
   func <- nf <- sm <- rep(0, nterms)
   names(func) <- names(nf) <- names(sm) <- terms
   ndata <- length(data) - 1
-  
+  # print(2)  
   nam.func <- setdiff(nam.data,response)
   
   covar <- gp$fake.names
@@ -177,9 +176,9 @@ fregre.gsam <- function (formula
   bspy <-  TRUE
   raw <- FALSE 
   
-  # cat("response ");print(response)
-  # cat("scalar ");print(vnf)
-  # cat("funcional ");print(vfunc)
+  # cat("response ");# print(response)
+  # cat("scalar ");# print(vnf)
+  # cat("funcional ");# print(vfunc)
   
   ######## manejando la respuesta  
   # incluir la respuesta  
@@ -272,7 +271,7 @@ fregre.gsam <- function (formula
     }
   }
   #nfunc <- sum(func)
-  # print("aaaaaaaaaaaaaaaaaaa1")  
+ #print("aaaaaaaaaaaaaaaaaaa1")  
   name.coef = nam = par.fregre = beta.l = list()
   kterms = 1
   if (nnf > 0) {
@@ -296,7 +295,7 @@ fregre.gsam <- function (formula
     XX = data.frame(data[["df"]][, response])
     names(XX) = response
   }
-  # print("aaaaaaaaaaaaaaaaaaa2")  
+# print("aaaaaaaaaaaaaaaaaaa2")  
   lenfunc <- length(vfunc) 
   ifunc <- lenfunc > 0
   mean.list = basis.list = list()
@@ -304,7 +303,7 @@ fregre.gsam <- function (formula
     k = 1
     
     for (i in 1:lenfunc ) {
-      # print("aaaaaaaaaaaaaaaaaaa3")        
+# print("aaaaaaaaaaaaaaaaaaa3")        
       if (is(data[[vfunc[i]]], "fdata")) {
         tt <- data[[vfunc[i]]][["argvals"]]
         rtt <- data[[vfunc[i]]][["rangeval"]]
@@ -319,19 +318,30 @@ fregre.gsam <- function (formula
             if (basis.x[[vfunc[i]]]$type == "pc" | basis.x[[vfunc[i]]]$type == "pls") 
               bsp1 = FALSE
         
-        xaux <- fdata2basis(data[[vfunc[i]]],basis.x[[vfunc[i]]])
+        xaux <- fdata2basis(data[[vfunc[i]]],basis.x[[vfunc[i]]] ,method = c( "inprod"))
         name.coef[[vfunc[i]]] <- colnames(xaux$coefs) <- paste(vfunc[i],".",colnames(xaux$coefs),sep="")
         Z <- xaux$coefs
-        lencoef <- length(colnames(Z))
+        # print("aaaaaaaaaaaaaaaaaaa4")         
+        
         ################################### usar basis.b
-        if ( bsp1){
+        # print(bsp1)
+        if ( bsp1 ){ #bsb1 $ !smo con fnf2==0
           colnames(Z) -> cnames
           J = inprod(basis.x[[vfunc[i]]], basis.b[[vfunc[i]]])
+          
           Z = Z %*% J
-          colnames(Z)<-cnames
+          colnames(Z)<-cnames[1:NCOL(Z)]
+          name.coef[[vfunc[i]]]<-name.coef[[vfunc[i]]][1:NCOL(Z)]
+          # print(cnames)
+          # print(2222)
+          # print(name.coef[[vfunc[i]]])
         }
+        # print("aaaaaaaaaaaaaaaaaaa444")         
+        lencoef <- length(colnames(Z))
+        
         ################################### usar basis.b
         XX = cbind(XX, Z)
+        # print("aaaaaaaaaaaaaaaaaaa5")         
         if (fnf2[i] == 1)    
           sm2 <- TRUE    else sm2 <- FALSE
         for (j in 1:lencoef) {
@@ -340,6 +350,7 @@ fregre.gsam <- function (formula
                         name.coef[[vfunc[i]]][j], ",k=", bs.dim2[i],")", sep = "")
           }     else pf <- paste(pf, "+", name.coef[[vfunc[i]]][j], sep = "")
           kterms <- kterms + 1
+          # print(pf)
         }       
         basis.list[[vfunc[i]]] <- xaux$basis
         # J=inprod(basis.x[[vfunc[i]]],basis.b[[vfunc[i]]])
@@ -375,7 +386,10 @@ fregre.gsam <- function (formula
   #Xmat[,response] <- Ymat[,i]
   #        z=gam(formula=as.formula(par.fregre$formula),data=XX1,family=family,offset=rep(1,len=nrow(XX[[1]])))
   #if (missing(offset))   
-  z=gam(formula=as.formula(pf),data=XX,family=family)  
+# print(4)  
+# print(pf)
+# print(head(XX))
+  z=gam(formula=as.formula(pf),data=XX,family=family,weights=weights)  
   # else   { descomentar ***** y missing(offset)
   #   off<-offset
   #   z=gam(formula=formula,data=Xmat,family=family,offset=off)
@@ -386,11 +400,25 @@ fregre.gsam <- function (formula
   z$formula <- as.formula(pf)
   zformula.ini <- formula
   z$basis.x=basis.x
+  z$basis.b=basis.b
+  z$basis.list<-basis.list
   z$data=data
   z$XX <- XX
   #z$basis <- aux$basis
   z$bsp <- bsp1
   z$vfunc <- vfunc;   z$nnf <- nnf;   z$vnf <- vnf
+  z$fnf2<-fnf2
   class(z) <- c("fregre.gsam",class(z))
   z
 }
+
+# si tienes s(x.d1) no usar el basis.b y guardar la sublista utilizada
+# res=fregre.gsam(Fat~Water+s(Protein)+x+s(x.d1),ldata,family=gaussian(),
+#                 basis.x=basis.x,basis.b=basis.b)
+# summary(res)
+# pred <-predict(res,ldata)
+# 
+# res=fregre.gsam(Fat~Water+s(Protein)+x+s(x.d1),ldata,family=gaussian())
+# res$basis.x$x$nbasis
+# 
+# # buscar fda.usc.devel::: en fda.usc!!

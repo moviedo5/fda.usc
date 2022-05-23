@@ -112,7 +112,7 @@ for (i in 1:mue.boot){
    setTxtProgressBar(pb,i-0.5)
    muee <- sample(1:n,n,replace=TRUE)
    mueX <- sample(1:n,n,replace=TRUE)
-   residuals.mue <- data.matrix(residuals[muee]) + rnorm(n,0,sqrt(smo * sr2))
+   residuals.mue <- as.matrix(residuals[muee]) + rnorm(n,0,sqrt(smo * sr2))
 #   fdata.mue <-dat[mueX,] + mvrnorm(n,rep(0,J),smoX * var(dat))
    fdata.mue <-fdataobj[mueX,] + fdata(mvrnorm(n,rep(0,J),smoX * var(dat)),tt,rtt)
    if (pc)   {
@@ -163,11 +163,7 @@ for (j in 1:n){
     quan.cook.for[j] <- sum(IDCP<=DCP[j])/(n * mue.boot)
     quan.cook.est[j] <- sum(IDCE<=DCE[j])/(n * mue.boot)
     quan.pena[j] <- sum(IDP<=DP[j])/(n * mue.boot)}
-#if (pc)   {
-#print(betas.boot)
-#              aa<-model$beta.est$data-t(betas.boot)
-#              norm.boot<-norm.fdata(fdata(t(aa),tt,rtt))[,1] }
-#betas.boot<- fdata(betas.boot[order(norm.boot)[1:cb.num],],tt,rtt,nam)
+
 betas.boot<- fdata(betas.boot,tt,rtt,nam)
 betas.boot$names$main<-"beta.est bootstrap"
 return(list("quan.cook.for"=quan.cook.for,"quan.cook.est"=quan.cook.est,
