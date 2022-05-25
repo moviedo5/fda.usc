@@ -20,6 +20,8 @@
 #' \item \code{Gmean}{ \eqn{sqrt(R*TN/(TN+FP))}}
 #' \item \code{kappa}{ the kappa index}
 #' \item \code{cost}{ \eqn{sum(diag(tab)/rowSums(tab)*cost)/sum(cost)}}
+#' \item \code{IOU}{ \eqn{TP/(TP+FN+FP)}} mean of Intersection over Union 
+#' \item \code{IOU4class}{ \eqn{TP/(TP+FN+FP)}} Intersection over Union by level
 #' }
 #\item \code{\link{tab2meas}} function computes the \code{accuracy}, \code{kappa} and \code{cost} measures  for a multiclass vectors-
 #' \item \code{\link{pred2meas}} function computes the following  measures of error, usign the \code{measure} argument, for observed and predicted vectors:
@@ -40,8 +42,8 @@
 #' @rdname accuracy
 #' @export
 cat2meas <- function(yobs,ypred,measure="accuracy",cost=rep(1,nlevels(yobs))){
-  tab=table(yobs,ypred)
-  res=tab2meas(tab,measure=measure,cost=cost)
+  tab<-table(yobs,ypred)
+  res<-tab2meas(tab,measure=measure,cost=cost)
   return(res)
 }
 
@@ -49,18 +51,18 @@ cat2meas <- function(yobs,ypred,measure="accuracy",cost=rep(1,nlevels(yobs))){
 #' @export 
 tab2meas <- function(tab, measure="accuracy", cost=rep(1,nrow(tab))){
   if (nrow(tab)!=ncol(tab)) stop("nrow(tab)!=ncol(tab)")
-  nlev = nrow(tab)
+  nlev <- nrow(tab)
   if (nlev==2) {
-    TP = tab[2,2]
-    FN = tab[2,1] 
-    FP = tab[1,2]
-    TN = tab[1,1]
-    R = TP/(TP+FN)
-    P = TP/(TP+FP) 
-    nmeas = length(measure)
-    meas = numeric(nmeas)
-    for (i in 1:nmeas){
-      meas[i]=switch(measure[i],
+    TP <- tab[2,2]
+    FN <- tab[2,1] 
+    FP <- tab[1,2]
+    TN <- tab[1,1]
+    R <- TP/(TP+FN)
+    P <- TP/(TP+FP) 
+    nmeas <- length(measure)
+    meas <- numeric(nmeas)
+    for (i in seq_len(nmeas)){
+      meas[i]<-switch(measure[i],
                      recall=R,
                      sensitivity=R,
                      TPrate=R,
@@ -76,14 +78,16 @@ tab2meas <- function(tab, measure="accuracy", cost=rep(1,nrow(tab))){
                      Gmean=sqrt(R*TN/(TN+FP)),
                      accuracy=tab2accuracy(tab),
                      kappa=tab2kappa(tab),
-                     cost=sum(diag(tab)/rowSums(tab)*cost)/sum(cost)
+                     cost=sum(diag(tab)/rowSums(tab)*cost)/sum(cost),
+                     IOU=tab2IOU(tab),
+                     IOU4class=tab2IOU4class(tab)
 #                    cost=1-sum(c(FN,FP)*cost)/sum(table(yobs)*cost) 
       )
     }
-    names(meas) = measure
+    names(meas) <- measure
     return(meas)
   } else {
-    TP = diag(tab)
+    TP <- diag(tab)
     Tobs  <- rowSums(tab)
     Tpred <- colSums(tab)
     R <- TP/Tobs
@@ -93,28 +97,30 @@ tab2meas <- function(tab, measure="accuracy", cost=rep(1,nrow(tab))){
     #TN = tab[1,1]
     #R = TP/(TP+FN)
     #P = TP/(TP+FP) 
-    nmeas = length(measure)
-    meas = numeric(nmeas)
+    nmeas <- length(measure)
+    meas <- numeric(nmeas)
     if (nmeas>1) warning("For multiclass problems only the first measure is returned")
     #for (i in 1:nmeas){
-      meas=switch(measure[1],
-                     recall= R,
-                     sensitivity=R,
-                     TPrate=R,
+      meas<-switch(measure[1],
+                     recall = R,
+                     sensitivity = R,
+                     TPrate = R,
                      #specificity=TN/(TN+FP), 
                      #TNrate=TN/(TN+FP),
                      #FPrate=FP/(TN+FP),
                      #FNrate=FN/(TP+FN),
-                     precision= P,
+                     precision = P,
                      #NPvalue=TN/(TN+FN),
-                     Fmeasure=2/(1/R+1/P),
-                     F1=2*P*R/(R+P),
-                     F2=5*P*R/(4*R+P),
+                     Fmeasure = 2/(1/R+1/P),
+                     F1 = 2*P*R/(R+P),
+                     F2 = 5*P*R/(4*R+P),
                      #Gmean=sqrt(R*TN/(TN+FP)),
-                     cost=sum(diag(tab)/rowSums(tab)*cost)/sum(cost),
-                     accuracy=tab2accuracy(tab),
+                     cost = sum(diag(tab)/rowSums(tab)*cost)/sum(cost),
+                     accuracy = tab2accuracy(tab),
                      #waccuracy=tab2waccuracy(tab),
-                     kappa=tab2kappa(tab)
+                     kappa = tab2kappa(tab),
+                     IOU=tab2IOU(tab),
+                     IOU4class=tab2IOU4class(tab)
       )
     }
     #names(meas) = measure
@@ -124,15 +130,15 @@ tab2meas <- function(tab, measure="accuracy", cost=rep(1,nrow(tab))){
 
 cat2alpha <-function(yobs, ypred, weights, coeflearn="Freund"){
   ind <- as.numeric(yobs != ypred) 
-  n<-length(yobs)
+  n <- length(yobs)
   if (missing(weights)) weights <- rep(1,len=n)
   if (sum(weights)!=1)  weights <- weights/sum(weights)
   err <- mean(weights*ind)        
   alpha <- log((1-err)/err)
   if (coeflearn=="Breiman"){	alpha <- (1/2) * alpha	}
   if (coeflearn=="Zhu")    {	alpha <- alpha + log( nlevels(yobs) - 1)	}
-  if (alpha<0) alpha=0
-  if(alpha==Inf) alpha=10
+  if (alpha<0) alpha<-0
+  if(alpha==Inf) alpha<-10
   return(list("error"=err,"alpha"=alpha))
 }
 
@@ -175,15 +181,15 @@ tab2accuracy =  function(tab){
   
 # @export tab2SAE
 tab2SAE = function(tab){
-  n = sum(tab) 
+  n <- sum(tab) 
   #nc = nrow(tab)
   #diag = diag(tab) 
   #rowsums = apply(tab, 1, sum) 
   #colsums = apply(tab, 2, sum) 
-  p = apply(tab, 1, sum)  / n 
-  q = apply(tab, 2, sum)  / n 
-  expAccuracy = sum(p*q)
-  accuracy = sum(diag(tab)) / n 
+  p <- apply(tab, 1, sum)  / n 
+  q <- apply(tab, 2, sum)  / n 
+  expAccuracy <- sum(p*q)
+  accuracy <- sum(diag(tab)) / n 
   res<-(accuracy - expAccuracy) / (1 - expAccuracy)
   res
   }
@@ -192,26 +198,69 @@ tab2SAE = function(tab){
 tab2kappa = function (tab) {
   #function (truth, response) {
   #conf.mat = table(truth, response)
-  conf.mat = tab/sum(tab)
-  p0 = sum(diag(conf.mat))
-  rowsum = rowSums(conf.mat)
-  colsum = colSums(conf.mat)
-  pe = sum(rowsum * colsum)/sum(conf.mat)^2
+  conf.mat <- tab/sum(tab)
+  p0 <- sum(diag(conf.mat))
+  rowsum <- rowSums(conf.mat)
+  colsum <- colSums(conf.mat)
+  pe <- sum(rowsum * colsum)/sum(conf.mat)^2
   1 - (1 - p0)/(1 - pe)
 }
 
 # @export tab2wkappa
 tab2wkappa = function (tab) { 
   lev<- rownames(tab) 
-  conf.mat = tab/sum(tab)
-  rowsum = rowSums(conf.mat)
-  colsum = colSums(conf.mat)
-  expected.mat = rowsum %*% t(colsum)
-  class.values = seq_along(lev) - 1L
-  weights = outer(class.values, class.values, 
+  conf.mat <- tab/sum(tab)
+  rowsum <- rowSums(conf.mat)
+  colsum <- colSums(conf.mat)
+  expected.mat <- rowsum %*% t(colsum)
+  class.values <- seq_along(lev) - 1L
+  weights <- outer(class.values, class.values, 
                   FUN = function(x, y) (x - y)^2)
   1 - sum(weights * conf.mat)/sum(weights * expected.mat)
 }
+
+
+
+# @export cat2IOU
+# @format none
+cat2IOU4class = function(yobs,ypred){
+  tab2IOU4class(table(yobs,ypred))
+}  
+
+# @rdname accuracy
+# @export 
+tab2IOU4class<-function(tab){
+  nclass<-NROW(tab)
+  vf<-c(rep(NA,nclass))
+  for (j in 1:nclass){
+    TP<-diag(tab)[j]
+    FP<-sum(tabl[j,])-TP
+    FN<-sum(tab[,j])-TP
+    iou<-TP/(TP+FP+FN)
+    vf[j]<-iou
+  }
+  return(vf)
+}
+
+# @export cat2IOU
+# @format none
+cat2IOU = function(yobs,ypred){
+  tab2IOU(table(yobs,ypred))
+}  
+
+tab2IOU<-function(tab){
+  nclass<-NROW(tab)
+  vf2<-vf<-c(rep(NA,nclass))
+  TP<-diag(tab)
+  for (j in 1:nclass){
+    FP<-sum(tab[j,])-TP[j]
+    FN<-sum(tab[,j])-TP[j]
+    vf2[j]<-(TP[j]+FP+FN)
+  }
+  return(sum(TP)/sum(vf2))
+}
+
+
 
 
 #' @rdname accuracy
@@ -238,16 +287,17 @@ pred.MAE = function (yobs, ypred) {
 #' @rdname accuracy
 #' @export 
 pred2meas = function(yobs, ypred, measure="RMSE"){
-  nmeas = length(measure)
-  meas = numeric(nmeas)
-  for (i in 1:nmeas){
-      meas[i]=switch(measure[i],
+  nmeas <- length(measure)
+  meas <- numeric(nmeas)
+  for (i in seq_len(nmeas)){
+      meas[i]<-switch(measure[i],
                      RMSE=pred.RMSE(yobs, ypred),
                      MAE=pred.MAE(yobs, ypred),
                      MSE = pred.MSE(yobs, ypred) 
       )
     }
-    names(meas) = measure
+    names(meas) <- measure
   return(meas)
 }
+
 

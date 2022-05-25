@@ -129,8 +129,8 @@
 #' summary(res.gam3)
 #' res.gam3$ipredictors
 #' 
-#' res.gam4 <- fregre.gsam.vs(data=ldat,y="Fat",include=c("x","x1"),
-#' basis.x=c("type.basis"="pc","numbasis"=10),numbasis.opt=T)
+#' res.gam4 <- fregre.gsam.vs(data=ldat,y="Fat",include=c("x","x1","x2"),
+#' basis.x=c("type.basis"="pc","numbasis"=5),numbasis.opt=T)
 #' summary(res.gam4)
 #' res.gam4$ipredictors
 

@@ -94,9 +94,9 @@
 #' newdat<-list("x"=mtest)
 #' p1<-predict(a1,newdat,type="class")
 #' p2<-predict(a2,newdat,type="class")
-#' p3<-predict.classif(a3,newdat,type="class")
-#' p4<-predict.classif(a4,newdat,type="class")
-#' p5<-predict.classif(a5,newdat,type="class")
+#' p3<-predict(a3,newdat,type="class")
+#' p4<-predict(a4,newdat,type="class")
+#' p5<-predict(a5,newdat,type="class")
 #' mean(p1==gtest);mean(p2==gtest);mean(p3==gtest)
 #' mean(p4==gtest);mean(p5==gtest)
 #' }
