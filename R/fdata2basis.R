@@ -260,7 +260,7 @@ intXbeta=function(X,Beta,arg.t=1:ncol(Beta),
 		
 # }
 
-#' Minverse <- fda.usc.devel:::Minverse
+#' Minverse <- fda.usc:::Minverse
 #' T <- 71
 #' S <- 51
 #' tj <- round(seq(0,1,len=T),3)

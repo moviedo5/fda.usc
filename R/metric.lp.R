@@ -134,7 +134,7 @@ metric.lp=function (fdata1, fdata2 = NULL, lp = 2, w = 1, dscale=1,...) {
   # requireNamespace("parallel", quietly = TRUE)
   # requireNamespace("doParallel", quietly = TRUE)
   
-  par.fda.usc <- eval(parse(text="fda.usc.devel:::par.fda.usc"), envir=.GlobalEnv)
+  par.fda.usc <- eval(parse(text="fda.usc:::par.fda.usc"), envir=.GlobalEnv)
   ncores <- par.fda.usc$ncores
   int.method <- par.fda.usc$int.method
   #if (ncores==1) {
