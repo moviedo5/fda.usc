@@ -121,7 +121,7 @@ xcat1 <- cut(tecator$y$Protein,4)
 xcat2 <- cut(tecator$y$Water,4)
 ind <- 1:165
 dat <- data.frame("Fat"=y, x1$data, xcat1, xcat2)
-ldat <- list("df"=dat[ind,],"x"=x[ind,],"x1"=x1[ind,],"x2"=x2[ind,])
+ldat <- ldata("df"=dat[ind,],"x"=x[ind,],"x1"=x1[ind,],"x2"=x2[ind,])
 # 3 functionals (x,x1,x2), 3 factors (xcat0, xcat1, xcat2)
 # and 100 scalars (impact poitns of x1) 
 
@@ -146,8 +146,8 @@ res.gam3 <- fregre.gsam.vs(data=ldat,y="Fat",
 summary(res.gam3)
 res.gam3$ipredictors
 
-res.gam4 <- fregre.gsam.vs(data=ldat,y="Fat",include=c("x","x1"),
-basis.x=c("type.basis"="pc","numbasis"=20),numbasis.opt=T)
+res.gam4 <- fregre.gsam.vs(data=ldat,y="Fat",include=c("x","x1","x2"),
+basis.x=c("type.basis"="pc","numbasis"=5),numbasis.opt=T)
 summary(res.gam4)
 res.gam4$ipredictors
 lpc <- list("x"=create.pc.basis(ldat$x,1:4)
@@ -162,7 +162,7 @@ lbsp <- list("x"=bsp,"x1"=bsp,"x2"=bsp)
 res.gam7 <- fregre.gsam.vs(data=ldat,y="Fat",basis.x=lbsp,kbs=4)
 summary(res.gam7)
 # Prediction like fregre.gsam() 
-newldat <- list("df"=dat[-ind,],"x"=x[-ind,],"x1"=x1[-ind,],
+newldat <- ldata("df"=dat[-ind,],"x"=x[-ind,],"x1"=x1[-ind,],
                 "x2"=x2[-ind,])
 pred.gam1 <- predict(res.gam1,newldat)
 pred.gam2 <- predict(res.gam2,newldat)

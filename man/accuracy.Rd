@@ -53,6 +53,8 @@ pred2meas(yobs, ypred, measure = "RMSE")
 \item \code{Gmean}{ \eqn{sqrt(R*TN/(TN+FP))}}
 \item \code{kappa}{ the kappa index}
 \item \code{cost}{ \eqn{sum(diag(tab)/rowSums(tab)*cost)/sum(cost)}}
+\item \code{IOU}{ \eqn{TP/(TP+FN+FP)}} mean of Intersection over Union 
+\item \code{IOU4class}{ \eqn{TP/(TP+FN+FP)}} Intersection over Union by level
 }
 \item \code{\link{pred2meas}} function computes the following  measures of error, usign the \code{measure} argument, for observed and predicted vectors:
 \itemize{

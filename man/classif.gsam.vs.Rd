@@ -105,12 +105,12 @@ xcat1<-cut(tecator$y$Protein,4)
 xcat2<-cut(tecator$y$Water,4)
 ind <- 1:129
 dat    <- data.frame("Fat"=y, x1$data, xcat1, xcat2)
-ldat <- list("df"=dat[ind,],"x"=x[ind,],"x1"=x1[ind,],"x2"=x2[ind,])
+ldat <- ldata("df"=dat[ind,],"x"=x[ind,],"x1"=x1[ind,],"x2"=x2[ind,])
 # 3 functionals (x,x1,x2), 3 factors (xcat0, xcat1, xcat2)
 # and 100 scalars (impact poitns of x1) 
 
-res.gam<-classif.gsam(Fat~s(x2),data=ldat)
-summary(res.gam1$model)
+res.gam<-classif.gsam(Fat~s(x),data=ldat)
+summary(res.gam1)
 
 # Time consuming
 res.gam.vs<-classif.gsam.vs("Fat",data=ldat)
@@ -122,7 +122,7 @@ res.gam.vs$ipredictor
 newldat <- list("df"=dat[-ind,],"x"=x[-ind,],
                 "x1"=x1[-ind,],"x2"=x2[-ind,])
 pred.gam<-predict(res.gam,newldat)                
-pred.gam.vs<-predict(res.gam1,newldat)
+pred.gam.vs<-predict(res.gam.vs,newldat)
 cat2meas(newldat$df$Fat,pred.gam)
 cat2meas(newldat$df$Fat,pred.gam.vs)
 }

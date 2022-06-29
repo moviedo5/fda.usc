@@ -113,12 +113,12 @@ xcat1 <- cut(tecator$y$Protein,4)
 xcat2 <- cut(tecator$y$Water,4)
 ind <- 1:165
 dat <- data.frame("Fat"=y, x1$data, xcat1, xcat2)
-ldat <- list("df"=dat[ind,],"x"=x[ind,],"x1"=x1[ind,],"x2"=x2[ind,])
+ldat <- ldata("df"=dat[ind,],"x"=x[ind,],"x1"=x1[ind,],"x2"=x2[ind,])
 # 3 functionals (x,x1,x2), 3 factors (xcat0, xcat1, xcat2)
 # and 100 scalars (impact poitns of x1) 
 
 # Time consuming
-res.glm0 <- fregre.glm.vs(data=ldat,y="Fat",exclude="x2",numbasis.opt=T) # All the covariates
+res.glm0 <- fregre.glm.vs(data=ldat,y="Fat",numbasis.opt=T) # All the covariates
 summary(res.glm0)
 res.glm0$ipredictors
 res.glm0$i.predictor
@@ -153,7 +153,7 @@ lbsp <- list("x"=bsp,"x1"=bsp,"x2"=bsp)
 res.glm6 <- fregre.glm.vs(data=ldat,y="Fat",basis.x=lbsp)
 summary(res.glm6)
 # Prediction like fregre.glm() 
-newldat <- list("df"=dat[-ind,],"x"=x[-ind,],"x1"=x1[-ind,],
+newldat <- ldata("df"=dat[-ind,],"x"=x[-ind,],"x1"=x1[-ind,],
                 "x2"=x2[-ind,])
 pred.glm1 <- predict(res.glm1,newldat)
 pred.glm2 <- predict(res.glm2,newldat)

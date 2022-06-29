@@ -11,6 +11,7 @@ fregre.glm(
   basis.x = NULL,
   basis.b = NULL,
   subset = NULL,
+  weights = NULL,
   ...
 )
 }
@@ -32,6 +33,8 @@ function, a family function or the result of a call to a family function.
 
 \item{subset}{an optional vector specifying a subset of observations to be
 used in the fitting process.}
+
+\item{weights}{weights}
 
 \item{\dots}{Further arguments passed to or from other methods.}
 }

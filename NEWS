@@ -9,7 +9,6 @@ Version 2.0.3:
 8) classif.gsam.vs, new function for variable selection in additive classifier
 9) fdata2basis() is used in fregre.lm() and predict.fregre.lm()
 10) summary for fdata2basis()
-11) classif.gbm new function for variable selection in additive classifier
  
 Version 2.0.2:
 fdata.bootstrap and fregre.bootstrap functions addapted to parallel backend.
