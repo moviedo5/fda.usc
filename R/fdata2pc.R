@@ -422,7 +422,7 @@ fdata2pc<-function (fdataobj,  ncomp = 2,norm = TRUE,lambda=0,P=c(0,0,1),...)
   u <- eigenres$u
   d <- eigenres$d
   D <- diag(d)
-  vs <- fdata(t(v), tt, rtt, list(main = "fdata2pc", xlab = "t",
+  vs <- fdata(t(v), tt, rtt, list(main = "fdata PCs", xlab = "t",
                                   ylab = "rotation"))
   scores <- matrix(0, ncol = J, nrow = n)
   if (norm) {
@@ -441,7 +441,7 @@ fdata2pc<-function (fdataobj,  ncomp = 2,norm = TRUE,lambda=0,P=c(0,0,1),...)
   scores[, 1:Jmin] <- inprod.fdata(Xcen.fdata, vs, ...)
   colnames(scores) <- paste("PC", 1:J, sep = "")
   l <- 1:ncomp
-  vs$names$main <-   "pls"
+#  vs$names$main <-   "pls"
   out <- list(call = C,d = d, basis = vs[1:ncomp], rotation = vs[1:ncomp],
               coefs = scores, x = scores,
               lambda = lambda,P=P, fdataobj.cen = Xcen.fdata,norm=norm, type="pc",

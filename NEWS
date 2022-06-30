@@ -1,3 +1,6 @@
+Version 2.0.4
+1) fdata2basis always return centred fdataobj and mean. The mean is computed using the basis.
+
 Version 2.0.3:
 1) summary.fdata.comp(), Several changes on summary.fdata.comp
 2) Now, we uses data.matrix (instead of as.matrix) to convert data.table in a matrix class object, option recommended when data.frame contains characters.
