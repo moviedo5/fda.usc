@@ -136,10 +136,10 @@ fregre.glm=function(formula,family = gaussian(), data,
     
     # print("sale fdata2model")
     
-    basis.list <- out$basis.list
+#    vs.list <- out$vs.list
     mean.list <- out$mean.list
     name.coef <- out$name.coef
-    bsp1<-out$bsp1
+#    bsp1<-out$bsp1
     pf <- out$pf
     XX <- out$XX
     basis.x <- out$basis.x
@@ -196,7 +196,7 @@ fregre.glm=function(formula,family = gaussian(), data,
 #        beta.est <- z$coefficients[ name.coef[[vfunc[i]]]] * basis.list[[vfunc[i]]]
         beta.est <- gridfdata(matrix(z$coefficients[name.coef[[vfunc[i]]]],nrow=1),basis.b[[vfunc[i]]]$basis)
 #        beta.est$data<-colSums(beta.est$data)
-         beta.est$names$main<-expression(paste(hat(beta),"(",vfunc[i],")",sep=""))
+         beta.est$names$main<-bquote(paste(hat(beta),"(",.(vfunc[i]),")",sep=""))
 #        beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
 #        beta.est$names$main<-"beta.est"
 #        beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
@@ -245,7 +245,7 @@ fregre.glm=function(formula,family = gaussian(), data,
     #z$rn <- rn0
     
     #z$JJ <- vs.list   
-    z$basis.list <- basis.list   
+#    z$basis.list <- basis.list   
     class(z) <- c("fregre.glm",class(z))
     #class(z)<-c(class(z),"fregre.glm")
     # class(z$beta.l) <- c("mfdata","list")

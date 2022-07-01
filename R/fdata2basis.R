@@ -131,7 +131,7 @@ summary.basis.fdata=function(object, draw=TRUE, index=NULL,...) {
     # yl <- c(min(object$fdataobj,fdata.est),max(object$fdataobj,fdata.est))
     yl <- c(min(object$fdataobj[index]+object$mean,fdata.est[index]),max(object$fdataobj[index]+object$mean,fdata.est[index]))
     # mn <- expression( 1 - frac(paste( "||X - ",hat(X),"||"),paste( "||X - ",bar(X),"||")))
-    mn <-  expression( paste("X(t) vs ",hat(X),"(t)-(index)"))
+    mn <-  bquote( paste("X(t) vs ",hat(X),"(t)-(",.(min(index)),":",.(max(index)),")"))
     plot(object$fdataobj[index]+object$mean,main=mn,col="grey",ylim=yl)
     lines(fdata.est[index],lty=2,col=2)
   }
