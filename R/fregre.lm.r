@@ -213,7 +213,7 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
      if (inherits(basis.b[[vfunc[i]]],"basisfd")) 
       beta.l[[vfunc[i]]]=fd(z$coefficients[name.coef[[vfunc[i]]]],basis.b[[vfunc[i]]])
     else{
-      if(exists(basis.b[[vfunc[i]]]$basis)) {
+      if(!is.null(basis.b[[vfunc[i]]]$basis)) {
         #     beta.est<-z$coefficients[name.coef[[vfunc[i]]]]*vs.list[[vfunc[i]]]
 #        beta.est <- z$coefficients[ name.coef[[vfunc[i]]]] * basis.list[[vfunc[i]]]
         beta.est <- gridfdata(matrix(z$coefficients[name.coef[[vfunc[i]]]],nrow=1),basis.b[[vfunc[i]]]$basis)
