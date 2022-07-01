@@ -153,7 +153,7 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
   basis.list <- out$basis.list
   mean.list <- out$mean.list
   name.coef <- out$name.coef
-  bsp1<-out$bsp1
+#  bsp1<-out$bsp1 # No tiene sentido que sea común a todas las variables.
   pf <- out$pf
   XX <- out$XX
   basis.x <- out$basis.x
@@ -210,29 +210,35 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
   #    z$call<-z$call[1:2]
   
   for (i in 1:length(vfunc)) {
-     if (bsp1) beta.l[[vfunc[i]]]=fd(z$coefficients[name.coef[[vfunc[i]]]],basis.b[[vfunc[i]]])
+     if (inherits(basis.b[[vfunc[i]]],"basisfd")) 
+      beta.l[[vfunc[i]]]=fd(z$coefficients[name.coef[[vfunc[i]]]],basis.b[[vfunc[i]]])
     else{
-      if(class(data[[vfunc[i]]])[1]=="fdata"){
+      if(exists(basis.b[[vfunc[i]]]$basis)) {
         #     beta.est<-z$coefficients[name.coef[[vfunc[i]]]]*vs.list[[vfunc[i]]]
-        beta.est <- z$coefficients[ name.coef[[vfunc[i]]]] * basis.list[[vfunc[i]]]
-        beta.est$data<-colSums(beta.est$data)
-        beta.est$names$main<-"beta.est"
-        beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
-        beta.est$names$main<-"beta.est"
-        beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
-        if  (basis.x[[vfunc[i]]]$type=="pls") {
-          if (basis.x[[vfunc[i]]]$norm)  {
-            sd.X <- sqrt(apply(data[[vfunc[i]]]$data, 2, var))
-            beta.est$data<-  beta.est$data/sd.X
-          }      
-        }  
+#        beta.est <- z$coefficients[ name.coef[[vfunc[i]]]] * basis.list[[vfunc[i]]]
+        beta.est <- gridfdata(matrix(z$coefficients[name.coef[[vfunc[i]]]],nrow=1),basis.b[[vfunc[i]]]$basis)
+#        beta.est$data<-colSums(beta.est$data)
+         beta.est$names$main<-expression(paste(hat(beta),"(",vfunc[i],")",sep=""))
+#        beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
+#        beta.est$names$main<-"beta.est"
+#        beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
+
+#        if  (basis.b[[vfunc[i]]]$type=="pls") {
+#          if (basis.b[[vfunc[i]]]$norm)  {
+#            sd.X <- sqrt(apply(data[[vfunc[i]]]$data, 2, var))
+#            beta.est$data<-  beta.est$data/sd.X
+#          }      
+#        }  
+
         beta.l[[vfunc[i]]]<-beta.est     
       }
       else {
-        beta.est<-z$coefficients[name.coef[[vfunc[i]]]]*t(basis.list[[vfunc[i]]])
+#        beta.est<-z$coefficients[name.coef[[vfunc[i]]]]*t(basis.list[[vfunc[i]]])
         #     beta.est<-apply(beta.est,2,sum)
-        beta.est<-colSums(beta.est)
-        beta.l[[vfunc[i]]]<-fd(beta.est,basis.x[[vfunc[i]]]$harmonics$basis)
+        beta.est<-fd(z$coefficients[name.coef[[vfunc[i]]]],basis.b[[vfunc[i]]]$harmonics$basis)
+#        beta.est<-colSums(beta.est)
+#        beta.l[[vfunc[i]]]<-fd(beta.est,basis.x[[vfunc[i]]]$harmonics$basis)
+        beta.l[[vfunc[i]]]<-beta.est
       }
     }
   }

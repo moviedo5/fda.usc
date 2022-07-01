@@ -187,18 +187,21 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
 #          k=1
 #          mean.list=vs.list=JJ=list()
 #          for (i in 1:lenfunc) {
-            if(class(newx[[vfunc[i]]])[1]=="fdata"){
-              tt<-data[[vfunc[i]]][["argvals"]]
-              rtt<-data[[vfunc[i]]][["rangeval"]]
+#            if(class(newx[[vfunc[i]]])[1]=="fdata"){
+            if(inherits(newx[[vfunc[i]]],"fdata")){
+#              tt<-data[[vfunc[i]]][["argvals"]]
+#              rtt<-data[[vfunc[i]]][["rangeval"]]
               fdataobj<-data[[vfunc[i]]]
               fdat<-data[[vfunc[i]]];      dat<-fdataobj$data
-              if (nrow(dat)==1) rwn<-NULL         else rwn<-rownames(dat)
+#              if (nrow(dat)==1) rwn<-NULL         else rwn<-rownames(dat)
+              if (nrow(newx[[vfunc[i]]]$data)==1) rwn<-NULL else rwn<-rownames(newx[[vfunc[i]]]$data)
               #  if (basis.x[[vfunc[i]]]$type=="pc" 
               #      | basis.x[[vfunc[i]]]$type=="pls")
               #    bsp1=FALSE      else bsp1 <- TRUE
-              xaux <- fdata2basis(data[[vfunc[i]]],basis.x[[vfunc[i]]])
-              name.coef[[vfunc[i]]] <- colnames(xaux$coefs) <- paste(vfunc[i],".",colnames(xaux$coefs),sep="")
-              Z <- xaux$coefs
+              xaux <- fdata2basis(newx[[vfunc[i]]],basis.x[[vfunc[i]]])
+
+              Z <- xaux$coefs%*%object$vs.list[[vfunc[i]]]
+              name.coef[[vfunc[i]]] <- paste(vfunc[i],".",colnames(Z),sep="")
               if (first) {
                 XX=Z
                 first=FALSE
@@ -207,13 +210,12 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
           }
         else {
           if (class(data[[vfunc[i]]])[1] == "fd") {
-            if (class(object$basis.x[[vfunc[i]]]) != 
-                "pca.fd") {
-              x.fd <- fdataobj <- data[[vfunc[i]]]
-              r = x.fd[[2]][[3]]
+            if (class(object$basis.x[[vfunc[i]]]) != "pca.fd") {
+#              x.fd <- fdataobj <- data[[vfunc[i]]]
+              x.fd <- newx[[vfunc[i]]]
+              r = x.fd[["basis"]][["rangeval"]]
               J <- object$basis.list[[vfunc[i]]]
-              x.fd$coefs <- x.fd$coefs - object$mean[[vfunc[i]]]$coefs[, 
-                                                                       1]
+              x.fd$coefs <- x.fd$coefs - object$mean[[vfunc[i]]]$coefs[,1]
               Z = t(x.fd$coefs) %*% J
               colnames(Z) = colnames(J)
             }

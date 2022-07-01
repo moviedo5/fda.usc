@@ -98,7 +98,7 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
 
         Z <- xaux$coefs
 		if ((basis.x[[vfunc[i]]]$type=="pc" | basis.x[[vfunc[i]]]$type=="pls") & identical(basis.b[[vfunc[i]]],basis.x[[vfunc[i]]])){
-		J=diag(length(basis.x[[vfunc[i]]]));colnames(J)=paste(vfunc[i],".",colnames(xaux$coefs),sep="")} else { 
+		J=diag(ncol(Z));colnames(J)=colnames(xaux$coefs)} else { 
 		J <- inprodbasis(basis.x[[vfunc[i]]],basis.b[[vfunc[i]]])
 		}
 		Z <- Z %*% J
@@ -126,7 +126,7 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
           if (is.null(basis.x[[vfunc[i]]]))  basis.x[[vfunc[i]]] <- fdat$basis
 		  if (is.null(basis.b[[vfunc[i]]]))  basis.b[[vfunc[i]]] <- basis.x[[vfunc[i]]] 
 
-          if (inherits(basis.x[[vfunc(i)]],"basisfd")) {
+          if (inherits(basis.x[[vfunc[i]]],"basisfd")) {
             r=fdat[["basis"]][["rangeval"]]
             if (!is.null( basis.x[[vfunc[i]]]$dropind)) {
               int<-setdiff(1:basis.x[[vfunc[i]]]$nbasis,basis.x[[vfunc[i]]]$dropind)
