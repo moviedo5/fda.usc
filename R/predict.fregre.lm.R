@@ -144,12 +144,13 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
     off <- attr(tf, "offset")
     beta.l = list()
     kterms = 1
-    if (attr(tf, "response") > 0) {
-      response <- as.character(attr(tf, "variables")[2])
-      pf <- rf <- paste(response, "~", sep = "")
-    }
-    else pf <- rf <- "~"
-    if (attr(tf, "intercept") == 0) {
+#    if (attr(tf, "response") > 0) {
+#      response <- as.character(attr(tf, "variables")[2])
+#      pf <- rf <- paste(response, "~", sep = "")
+#    }
+#    else pf <- rf <- "~"
+    pf <- rf <- "~"  # En predicción no hace falta la respuesta en los datos nuevos
+    if (attr(tf, "intercept") == 0) { 
       print("No intecept")
       pf <- paste(pf, -1, sep = "")
     }
@@ -201,6 +202,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
               xaux <- fdata2basis(newx[[vfunc[i]]],basis.x[[vfunc[i]]])
 
               Z <- xaux$coefs%*%object$vs.list[[vfunc[i]]]
+              colnames(Z)=colnames(vs.list[[vfunc[i]]])
               name.coef[[vfunc[i]]] <- paste(vfunc[i],".",colnames(Z),sep="")
               if (first) {
                 XX=Z
