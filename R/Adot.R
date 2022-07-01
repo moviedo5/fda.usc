@@ -37,7 +37,7 @@
 #' @note No NA's are allowed in the functional covariate.
 #'  
 #' @author Eduardo Garcia-Portugues. Please, report bugs and suggestions
-#' to \if{latex}{\cr}\email{egarcia@@math.ku.dk}
+#' to \if{latex}{\cr}\email{eduardo.garcia.portugues@@uc3m.es}
 #'  
 #' @seealso \code{\link{flm.test}}
 #' @examples

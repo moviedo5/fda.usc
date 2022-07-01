@@ -79,7 +79,7 @@ Gonzalez-Manteiga, W., Gonzalez-Rodriguez, G., Martinez-Calvo, A. and Garcia-Por
 \code{\link{rwild}}, \code{\link{flm.test}}, \code{\link{dfv.test}}
 }
 \author{
-Eduardo Garcia-Portugues. Please, report bugs and suggestions to \if{latex}{\cr}\email{egarcia@math.ku.dk}
+Eduardo Garcia-Portugues. Please, report bugs and suggestions to \if{latex}{\cr}\email{eduardo.garcia.portugues@uc3m.es}
 }
 \keyword{htest}
 \keyword{models}

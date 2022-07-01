@@ -51,7 +51,7 @@
 #'  
 #' @note No NA's are allowed neither in the functional covariate nor in the scalar response.
 #' @author Eduardo Garcia-Portugues. Please, report bugs and suggestions
-#'  to \if{latex}{\cr}\email{egarcia@math.ku.dk}
+#'  to \if{latex}{\cr}\email{eduardo.garcia.portugues@uc3m.es}
 #'  
 #' @seealso \code{\link{rwild}}, \code{\link{flm.test}}, \code{\link{flm.Ftest}}, \code{\link{fregre.np}}
 #' @examples

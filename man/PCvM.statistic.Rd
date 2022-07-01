@@ -72,6 +72,6 @@ Graphical Statistics, 23(3), 761-778. \doi{10.1080/10618600.2013.812519}
 }
 \author{
 Eduardo Garcia-Portugues. Please, report bugs and suggestions
-to \if{latex}{\cr}\email{egarcia@math.ku.dk}
+to \if{latex}{\cr}\email{eduardo.garcia.portugues@uc3m.es}
 }
 \keyword{htest}

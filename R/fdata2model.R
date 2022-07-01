@@ -95,14 +95,15 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
 		
 	    nms <- fdat$names
 		xaux<-fdata2basis(fdat,basis.x[[vfunc[i]]])
-        name.coef[[vfunc[i]]] <- colnames(xaux$coefs) <- paste(vfunc[i],".",colnames(xaux$coefs),sep="")
+
         Z <- xaux$coefs
-		if ((basis.x[[vfunc[i]]]$type=="pc" | basis.x[[vfunc[i]]]$type=="pls") & basis.b[[vfunc[i]]]==basis.x[[vfunc[i]]]){
-		J=diag(length(basis.x[[vfunc[i]]]))} else { 
+		if ((basis.x[[vfunc[i]]]$type=="pc" | basis.x[[vfunc[i]]]$type=="pls") & identical(basis.b[[vfunc[i]]],basis.x[[vfunc[i]]])){
+		J=diag(length(basis.x[[vfunc[i]]]));colnames(J)=paste(vfunc[i],".",colnames(xaux$coefs),sep="")} else { 
 		J <- inprodbasis(basis.x[[vfunc[i]]],basis.b[[vfunc[i]]])
 		}
 		Z <- Z %*% J
 		colnames(Z)=paste0(vfunc[i],".",colnames(J))
+    name.coef[[vfunc[i]]] <- paste(vfunc[i],".",colnames(J),sep="")
         lencoef <- length(colnames(Z))
         XX = cbind(XX, Z)
         for (j in 1:lencoef) {

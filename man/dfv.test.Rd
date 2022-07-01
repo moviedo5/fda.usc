@@ -121,7 +121,7 @@ Delsol, L. (2013). No effect tests in regression on functional variable and some
 }
 \author{
 Eduardo Garcia-Portugues. Please, report bugs and suggestions
- to \if{latex}{\cr}\email{egarcia@math.ku.dk}
+ to \if{latex}{\cr}\email{eduardo.garcia.portugues@uc3m.es}
 }
 \keyword{htest}
 \keyword{models}
