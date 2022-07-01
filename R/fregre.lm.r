@@ -150,7 +150,6 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
                              , data=data, basis.x = basis.x, basis.b=basis.b, 
                              pf=pf, tf=tf, lambda=lambda, P=P)
   #print("sale fdata2model")
-  basis.list <- out$basis.list
   mean.list <- out$mean.list
   name.coef <- out$name.coef
 #  bsp1<-out$bsp1 # No tiene sentido que sea común a todas las variables.
@@ -218,7 +217,8 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
 #        beta.est <- z$coefficients[ name.coef[[vfunc[i]]]] * basis.list[[vfunc[i]]]
         beta.est <- gridfdata(matrix(z$coefficients[name.coef[[vfunc[i]]]],nrow=1),basis.b[[vfunc[i]]]$basis)
 #        beta.est$data<-colSums(beta.est$data)
-         beta.est$names$main<-expression(paste(hat(beta),"(",vfunc[i],")",sep=""))
+     
+         beta.est$names$main<-bquote(paste(hat(beta),"(",.(vfunc[i]),")",sep=""))
 #        beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
 #        beta.est$names$main<-"beta.est"
 #        beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
@@ -269,7 +269,7 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
   #z$rn <- rn0
   if (is.list(z$lambda.opt)) z$lambda <- TRUE
   #z$JJ <- vs.list   
-  z$basis.list <- basis.list   
+  z$vs.list <- out$vs.list   
   class(z) <- c("fregre.lm","lm")
   # class(z$beta.l) <- c("mfdata","list")
   z
