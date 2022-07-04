@@ -188,12 +188,14 @@ fregre.glm=function(formula,family = gaussian(), data,
     # W <- diag(weights)  
       
   for (i in 1:length(vfunc)) {
+     z$coefficients[is.na(z$coefficients)]<-0
      if (inherits(basis.b[[vfunc[i]]],"basisfd")) 
       beta.l[[vfunc[i]]]=fd(z$coefficients[name.coef[[vfunc[i]]]],basis.b[[vfunc[i]]])
     else{
       if(!is.null(basis.b[[vfunc[i]]]$basis)) {
         #     beta.est<-z$coefficients[name.coef[[vfunc[i]]]]*vs.list[[vfunc[i]]]
 #        beta.est <- z$coefficients[ name.coef[[vfunc[i]]]] * basis.list[[vfunc[i]]]
+        z$coefficients[name.coef[[vfunc[i]]]]
         beta.est <- gridfdata(matrix(z$coefficients[name.coef[[vfunc[i]]]],nrow=1),basis.b[[vfunc[i]]]$basis)
 #        beta.est$data<-colSums(beta.est$data)
          beta.est$names$main<-bquote(paste(hat(beta),"(",.(vfunc[i]),")",sep=""))

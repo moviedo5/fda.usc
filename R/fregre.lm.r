@@ -209,6 +209,7 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
   #    z$call<-z$call[1:2]
   
   for (i in 1:length(vfunc)) {
+    z$coefficients[is.na(z$coefficients)]<-0
      if (inherits(basis.b[[vfunc[i]]],"basisfd")) 
       beta.l[[vfunc[i]]]=fd(z$coefficients[name.coef[[vfunc[i]]]],basis.b[[vfunc[i]]])
     else{
