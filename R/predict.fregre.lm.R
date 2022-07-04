@@ -202,8 +202,9 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
               xaux <- fdata2basis(newx[[vfunc[i]]],basis.x[[vfunc[i]]])
 
               Z <- xaux$coefs%*%object$vs.list[[vfunc[i]]]
-              colnames(Z)=colnames(object$vs.list[[vfunc[i]]])
-              name.coef[[vfunc[i]]] <- paste(vfunc[i],".",colnames(Z),sep="")
+#              colnames(Z)=colnames(object$vs.list[[vfunc[i]]])
+              name.coef[[vfunc[i]]] <- paste(vfunc[i],".",colnames(object$vs.list[[vfunc[i]]]),sep="")
+              colnames(Z)=name.coef[[vfunc[i]]]
               if (first) {
                 XX=Z
                 first=FALSE
