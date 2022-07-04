@@ -2,7 +2,7 @@
 #' @rdname predict.fregre.lm
 #' @export 
 predict.fregre.glm<-function(object, newx = NULL, type = "response",...){
-  if (is.null(object)) stop("No fregre.glm object entered")
+ if (is.null(object)) stop("No fregre.glm object entered")
  if (is.null(newx)) {
     if (type == "effects"){
       fake  = predict.glm(object, type = "terms", ...) 
@@ -12,24 +12,18 @@ predict.fregre.glm<-function(object, newx = NULL, type = "response",...){
     }
   return(yp)
  } else {
- data=newx
+# data=newx
  basis.x=object$basis.x
  basis.b=object$basis.b
  formula=object$formula.ini
  tf <- terms.formula(formula)
  terms <- attr(tf, "term.labels")
- nt <- length(terms)
- if (attr(tf, "response") > 0) {
-        response <- as.character(attr(tf, "variables")[2])
-        pf <- rf <- paste(response, "~", sep = "")
-    } else pf <- rf <- "~"
-if   (attr(tf,"intercept")==0) {
-     print("No intecept")
-     pf<- paste(pf,-1,sep="")
-     }
+# nt <- length(terms)
+# pf <- rf <- "~"  	 
+	 
 ##########
  vtab<-rownames(attr(tf,"factors"))
- vnf=intersect(terms,names(data$df))
+ vnf=intersect(terms,names(newx$df))
 # vnf2=intersect(vtab[-1],names(data$df)[-1])
  vfunc2=setdiff(terms,vnf)
  vint=setdiff(terms,vtab)
@@ -38,88 +32,58 @@ if   (attr(tf,"intercept")==0) {
  off<-attr(tf,"offset")
  beta.l=list()
  kterms=1
+
 if (length(vnf)>0) {
  first=FALSE
- XX=data.frame(data[["df"]][,c(vnf)])
- names(XX)=vnf
- for ( i in 1:length(vnf)){
-# print(paste("no functional variable",vnf[i]))
-     if (kterms > 1)   pf <- paste(pf, "+", vnf[i], sep = "")
-     else pf <- paste(pf, vnf[i], sep = "")
-     kterms <- kterms + 1
-     }
-if   (attr(tf,"intercept")==0) {
-     print("No intecept")
-     pf<- paste(pf,-1,sep="")
-     }
-}
-else  first=TRUE
+ XX=data.frame(newx[["df"]][,c(vnf)])
+ names(XX)=vnf } else  first=TRUE
+
 if (length(vfunc)>0)  {
 #   yp2<-a1 <- object$coefficients[1] * rep(1, len = nrow(data[[vfunc[1]]]))
    for (i in 1:length(vfunc)) {
-   if(class(data[[vfunc[i]]])[1]=="fdata")  {
-      fdataobj<-data[[vfunc[i]]]
-      x.fd<-fdataobj[["data"]]
-      if (nrow(x.fd)==1) rwn<-NULL
-      else rwn<-rownames(x.fd)
-#      tt<-fdataobj[["argvals"]]
-#      rtt<-fdataobj[["rangeval"]]
-      if (!object$basis.x[[vfunc[i]]]$type=="pc"&!object$basis.x[[vfunc[i]]]$type=="pls") {
-        xaux <- fdata2basis(fdataobj,object$basis.x[[vfunc[i]]])
-        Z <- xaux$coefs
-        if (!is.null(object$basis.b)){
-          J = inprod(object$basis.x[[vfunc[i]]], object$basis.b[[vfunc[i]]])
-          #mean.list[[vfunc[i]]] <- mean.fd(x.fd);          x.fd <- center.fd(x.fd)
-          colnam <- colnames(Z)
-          Z <- Z %*% J
-        }
-        colnames(Z) <-    paste(vfunc[i], ".",colnames(object$vs.list[[vfunc[i]]]),sep ="")
-      }
-      else {
-          name.coef<-paste(vfunc[i], ".",colnames(object$vs.list[[vfunc[i]]]),sep ="")
-#          name.coef<-paste(vfunc[i], ".",rownames(object$basis.x[[vfunc[i]]]$basis$data),sep ="")
-          newXcen<-fdata.cen(fdataobj,object$mean[[vfunc[i]]])[[1]]                  
-          if (object$basis.x[[vfunc[i]]]$type == "pls") {
-                       if (object$basis.x[[vfunc[i]]]$norm)  {
-                         sd.X <- sqrt(apply(object$basis.x[[vfunc[i]]]$fdataobj$data, 2, var))
-                         newXcen$data<- newXcen$data/(rep(1, nrow(newXcen)) %*% t(sd.X))
-                        }
-                      } 
-                    #Z <- inprod.fdata(newXcen,object$vs.list[[vfunc[i]]])  
-                    Z <- inprod.fdata(newXcen,object$basis.x[[vfunc[i]]])                   
-#          Z<- inprod.fdata(fdata.cen(fdataobj,object$mean[[vfunc[i]]])[[1]],object$vs.list[[vfunc[i]]])
-          Z= Z %*% object$vs.list[[vfunc[i]]]
-          colnames(Z)<-name.coef
-#         object$beta.l[[vfunc[i]]]$data <- matrix(object$beta.l[[vfunc[i]]]$data,nrow = 1)
-#         b1 <- inprod.fdata(fdata.cen(fdataobj,object$mean[[vfunc[i]]])[[1]],object$beta.l[[vfunc[i]]])
-#         yp2<-yp2+b1
+   if(inherits(newx[[vfunc[i]]],"fdata"))  {
+      fdataobj<-newx[[vfunc[i]]]
+      if (nrow(newx[[vfunc[i]]])==1) rwn<-NULL
+      else rwn<-rownames(newx[[vfunc[i]]]$data)
+
+	  xaux<-fdata2basis(newx[[vfunc[i]]],basis.x[[vfunc[i]]])
+	  Z <- xaux$coefs%*%object$vs.list[[vfunc[i]]]
+	  colnames(Z)<-paste(vfunc[i],".",colnames(object$vs.list[[vfunc[i]]]),sep="")
+
+	  if (first) {XX=Z; first=FALSE} else {XX=cbind(XX,Z)}
+	  } else {
+	  if (inherits(newx[[vfunc[i]]],"fd")) {
+            if (class(object$basis.x[[vfunc[i]]]) != "pca.fd") {
+              x.fd <- newx[[vfunc[i]]]
+              r = x.fd[["basis"]][["rangeval"]]
+              J <- object$vs.list[[vfunc[i]]]
+              x.fd$coefs <- x.fd$coefs - object$mean[[vfunc[i]]]$coefs[,1]
+              Z = t(x.fd$coefs) %*% J
+              colnames(Z) = colnames(J)
+            }
+            else {
+              name.coef[[vfunc[i]]] = paste(vfunc[i], 
+                                            ".", colnames(object$basis.x[[vfunc[i]]]$harmonics$coefs), 
+                                            sep = "")
+              newx[[vfunc[i]]]$coefs <- sweep(data[[vfunc[i]]]$coefs, 
+                                              1, (object$basis.x[[vfunc[i]]]$meanfd$coefs), 
+                                              FUN = "-")
+              fd.cen <- newx[[vfunc[i]]]
+              Z <- inprod(fd.cen, object$basis.x[[vfunc[i]]]$harmonics)
+              colnames(Z) <- paste(vfunc[i],".",colnames(object$vs.list[[vfunc[i]]]),sep="")
+            }
+            if (first) {
+              XX = Z
+              first = FALSE
+            }
+            else XX = cbind(XX, Z)
           }
-       if (first) {    XX=Z;              first=FALSE         }
-       else XX = cbind(XX, Z)
-        }
-       else {
-          if(class(data[[vfunc[i]]])[1]=="fd")  {
-      if (class(object$basis.x[[vfunc[i]]])!="pca.fd") {
-        x.fd<-fdataobj<-data[[vfunc[i]]]
- 	    	r=x.fd[[2]][[3]]
-        J<-object$JJ[[vfunc[i]]]
-        x.fd$coefs<-x.fd$coefs-object$mean[[vfunc[i]]]$coefs[,1]
-        Z = t(x.fd$coefs) %*% J
-        colnames(Z) = colnames(J)
-      }
-      else {
-          name.coef[[vfunc[i]]]=paste(vfunc[i], ".",colnames(object$basis.x[[vfunc[i]]]$harmonics$coefs),sep ="")
-          data[[vfunc[i]]]$coefs<- sweep(data[[vfunc[i]]]$coefs,1,(object$basis.x[[vfunc[i]]]$meanfd$coefs),FUN="-")
-          fd.cen<-data[[vfunc[i]]]
-#          fd.cen<-data[[vfunc[i]]]-object$basis.x[[vfunc[i]]]$meanfd # de las CP basi
-          Z<- inprod(fd.cen,object$basis.x[[vfunc[i]]]$harmonics)
-          colnames(Z)<-name.coef[[vfunc[i]]]
-      }
-       if (first) {    XX=Z;              first=FALSE         }
-       else XX = cbind(XX, Z)
-           }#          else stop("Please, enter functional covariate")
-       }  }
-    }
+          else stop("Please, enter functional covariate")
+        
+	  }
+	  }
+	  }
+	  
  if (first) return(rep(object$coefficients,length=nrow(newx[[1]])) )        
  if (!is.data.frame(XX)) XX=data.frame(XX)    
  if (type == "effects"){
@@ -128,7 +92,6 @@ if (length(vfunc)>0)  {
  } else{
    yp <- predict.glm(object = object, newdata = XX, type = type, x=TRUE,y=TRUE,...)
  }
- # yp=predict.glm(object=object,newdata=XX,type=type,x=TRUE,y=TRUE,...)
  return(yp)
 }
 }
