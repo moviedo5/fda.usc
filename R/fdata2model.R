@@ -51,6 +51,7 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
   kterms <- 1
   vs.list =name.coef=nam=beta.l=list()
   mean.list = basis.list = list()
+  if (is.null(basis.x)) {basis.x=vector("list",length(vfunc));names(basis.x)=vfunc}
   if (length(vnf) > 0) {
     XX=data[["df"]][,c(response,vnf)] #data.frame el 1er elemento de la lista
     for ( i in 1:length(vnf)){
@@ -96,7 +97,7 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
 	    nms <- fdat$names
 		xaux<-fdata2basis(fdat,basis.x[[vfunc[i]]])
 
-        Z <- xaux$coefs
+    Z <- xaux$coefs
 		if ((basis.x[[vfunc[i]]]$type=="pc" | basis.x[[vfunc[i]]]$type=="pls") & identical(basis.b[[vfunc[i]]],basis.x[[vfunc[i]]])){
 		J=diag(ncol(Z));colnames(J)=colnames(xaux$coefs)} else { 
 		J <- inprodbasis(basis.x[[vfunc[i]]],basis.b[[vfunc[i]]])
@@ -112,7 +113,7 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
         }       
         basis.list[[vfunc[i]]] <- xaux$basis
         vs.list[[vfunc[i]]] = J
-		mean.list[[vfunc[i]]]=xaux$mean
+		    mean.list[[vfunc[i]]]=xaux$mean
 
         if (lambda0) {
         #lpenalty[[vfunc[i]]] <- createMatrixPenalty(tt,lambda[[vfunc[i]]],P[[vfunc[i]]],vs=NULL)
@@ -124,7 +125,7 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
       else {
 	    if (inherits(fdat,"fd")){
           if (is.null(basis.x[[vfunc[i]]]))  basis.x[[vfunc[i]]] <- fdat$basis
-		  if (is.null(basis.b[[vfunc[i]]]))  basis.b[[vfunc[i]]] <- basis.x[[vfunc[i]]] 
+		      if (is.null(basis.b[[vfunc[i]]]))  basis.b[[vfunc[i]]] <- basis.x[[vfunc[i]]] 
 
           if (inherits(basis.x[[vfunc[i]]],"basisfd")) {
             r=fdat[["basis"]][["rangeval"]]
@@ -153,7 +154,7 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
             vs <- diag(l) # Now matrix J is diagonal because basis.b is ignored.
 
             Z<-basis.x[[vfunc[i]]]$scores
-            colnames(Z) = name.coef[[vfunc[i]]]=paste(vfunc[i], ".",colnames(basis.x[[vfunc[i]]]$harmonics$coefs),sep ="")
+            colnames(Z) <- colnames(vs)<-name.coef[[vfunc[i]]]=paste(vfunc[i], ".",colnames(basis.x[[vfunc[i]]]$harmonics$coefs),sep ="")
             XX = cbind(XX,Z)
             vs.list[[vfunc[i]]] = vs
             mean.list[[vfunc[i]]] = basis.x[[vfunc[i]]]$meanfd
