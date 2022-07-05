@@ -129,7 +129,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
   }
   else {
     name.coef <- NULL
-    data = newx
+#    data = newx
     basis.x = object$basis.x
     basis.b = object$basis.b
     formula = object$formula.ini
@@ -137,7 +137,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
     terms <- attr(tf, "term.labels")
     nt <- length(terms)
     vtab <- rownames(attr(tf, "factors"))
-    vnf = intersect(terms, names(data$df))
+    vnf = intersect(terms, names(newx$df))
     vfunc2 = setdiff(terms, vnf)
     vint = setdiff(terms, vtab)
     vfunc = setdiff(vfunc2, vint)
@@ -165,7 +165,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
       if (attr(tf, "intercept") == 0) {
         pf <- paste(pf, -1, sep = "")
       }
-      mf <- as.data.frame(model.matrix(formula(pf), data$df))
+      mf <- as.data.frame(model.matrix(formula(pf), newx$df))
       vnf2 <- names(mf)[-1]
       for (i in 1:length(vnf2)) pf <- paste(pf, "+", vnf2[i], 
                                             sep = "")
@@ -173,14 +173,17 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
     }
     else {
       pf2 <- paste(pf, "1", sep = "")
-      XX <- data.frame(model.matrix(formula(pf2), data$df))
+      XX <- data.frame(model.matrix(formula(pf2), newx$df))
       first = TRUE
+    }
+    if (!is.null(newx$df)) nnew=nrow(newx$df) else  {
+      if (inherits(newx[[vfunc[1]]],"fdata")) nnew=nrow(newx[[vfunc[1]]]) else nnew=ncol(newx[[vfunc[1]]]$coefs)
     }
     if (length(vnf) > 0) {
       spm <- matrix(object$coefficients[names(XX)], ncol = 1)
       yp <- as.matrix(XX) %*% spm
     }
-    else yp <- object$coefficients[1] * rep(1, len = nrow(newx[[vfunc[1]]]))
+    else yp <- object$coefficients[1] * rep(1, len = nnew)
     lenfunc <- length(vfunc)
     if (lenfunc > 0) {
       for (i in 1:lenfunc) {
@@ -192,8 +195,8 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
             if(inherits(newx[[vfunc[i]]],"fdata")){
 #              tt<-data[[vfunc[i]]][["argvals"]]
 #              rtt<-data[[vfunc[i]]][["rangeval"]]
-              fdataobj<-data[[vfunc[i]]]
-              fdat<-data[[vfunc[i]]];      dat<-fdataobj$data
+              fdataobj<-newx[[vfunc[i]]]
+              fdat<-newx[[vfunc[i]]];      dat<-fdataobj$data
 #              if (nrow(dat)==1) rwn<-NULL         else rwn<-rownames(dat)
               if (nrow(newx[[vfunc[i]]]$data)==1) rwn<-NULL else rwn<-rownames(newx[[vfunc[i]]]$data)
               #  if (basis.x[[vfunc[i]]]$type=="pc" 
@@ -217,7 +220,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
 #              x.fd <- fdataobj <- data[[vfunc[i]]]
               x.fd <- newx[[vfunc[i]]]
               r = x.fd[["basis"]][["rangeval"]]
-              J <- object$basis.list[[vfunc[i]]]
+              J <- object$vs.list[[vfunc[i]]]
               x.fd$coefs <- x.fd$coefs - object$mean[[vfunc[i]]]$coefs[,1]
               Z = t(x.fd$coefs) %*% J
               colnames(Z) = colnames(J)
@@ -226,10 +229,10 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
               name.coef[[vfunc[i]]] = paste(vfunc[i], 
                                             ".", colnames(object$basis.x[[vfunc[i]]]$harmonics$coefs), 
                                             sep = "")
-              data[[vfunc[i]]]$coefs <- sweep(data[[vfunc[i]]]$coefs, 
+              newx[[vfunc[i]]]$coefs <- sweep(data[[vfunc[i]]]$coefs, 
                                               1, (object$basis.x[[vfunc[i]]]$meanfd$coefs), 
                                               FUN = "-")
-              fd.cen <- data[[vfunc[i]]]
+              fd.cen <- newx[[vfunc[i]]]
               Z <- inprod(fd.cen, object$basis.x[[vfunc[i]]]$harmonics)
               colnames(Z) <- name.coef[[vfunc[i]]]
             }
@@ -279,7 +282,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
           x.fd = Data2fd(argvals = xcen$argvals, y = t(xcen$data), 
                          basisobj = object$basis.x[[vfunc[i]]])
           C = t(x.fd$coefs)
-          cnames <- colnames(object$basis.list[[vfunc[i]]])
+          cnames <- colnames(object$vs.list[[vfunc[i]]])  #basis.list?
           b.est <- matrix(object$coefficients[cnames], 
                           ncol = 1)
           b1 <- C %*% object$basis.list[[vfunc[i]]] %*% b.est
