@@ -166,10 +166,9 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
           }
         }
         else stop(paste(vfunc[i],"seems not to be a functional covariate"))
-      }
-    }  
-  else pf <- tf
-  }
+      } 
+ 
+  }}   else pf <- tf
   pf <- as.formula(pf)
   if (!is.data.frame(XX)) XX=data.frame(XX)
   return(list(pf=pf, mean.list=mean.list, basis.list = basis.list,XX=XX,
