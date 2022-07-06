@@ -262,11 +262,11 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
   z$basis.x <- basis.x
   z$basis.b <- basis.b
   #
-  z$data <- z$data
+  #z$data <- z$data
   z$XX <- XX
   # print("pasa 3") 
   z$data <- data
-  z$fdataobj <- data[[vfunc[1]]]
+  #z$fdataobj <- data[[vfunc[1]]] #Por qué es necesario esto?
   #z$rn <- rn0
   if (is.list(z$lambda.opt)) z$lambda <- TRUE
   #z$JJ <- vs.list   
@@ -371,7 +371,7 @@ lm.penalty <- function(  XX,W,vfunc
   z$df.residual<-n-df
   z$H <- H
   # z$r2 <- 1 - sum(z$residuals^2)/sum(ycen^2)   # no se pasa ycen!!!
-  if  (class(basis.x[[vfunc[1]]])=="basisfd") {
+  if  (inherits(basis.x[[vfunc[1]]],"basisfd")) {
     z$call[[1]] = "fregre.basis"
   }  else {
     if  (basis.x[[vfunc[1]]]$type=="pc")   z$call[[1]] = "fregre.pc"
