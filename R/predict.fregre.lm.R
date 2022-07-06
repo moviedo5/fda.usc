@@ -215,7 +215,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
                 XX = cbind(XX,Z)} 
           }
         else {
-          if (class(data[[vfunc[i]]])[1] == "fd") {
+          if (inherits(newx[[vfunc[i]]], "fd")) {
             if (class(object$basis.x[[vfunc[i]]]) != "pca.fd") {
 #              x.fd <- fdataobj <- data[[vfunc[i]]]
               x.fd <- newx[[vfunc[i]]]
@@ -229,7 +229,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
               name.coef[[vfunc[i]]] = paste(vfunc[i], 
                                             ".", colnames(object$basis.x[[vfunc[i]]]$harmonics$coefs), 
                                             sep = "")
-              newx[[vfunc[i]]]$coefs <- sweep(data[[vfunc[i]]]$coefs, 
+              newx[[vfunc[i]]]$coefs <- sweep(newx[[vfunc[i]]]$coefs, 
                                               1, (object$basis.x[[vfunc[i]]]$meanfd$coefs), 
                                               FUN = "-")
               fd.cen <- newx[[vfunc[i]]]
