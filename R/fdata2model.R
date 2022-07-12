@@ -1,3 +1,4 @@
+# Internal functions
 inprodbasis<-function(basis1,basis2){
 if (class(basis1)=="pca.fd") basis1$type="pca.fd"
 if (class(basis2)=="pca.fd") basis2$type="pca.fd"
@@ -105,8 +106,8 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
 		Z <- Z %*% J
 		colnames(Z)=paste0(vfunc[i],".",colnames(J))
     name.coef[[vfunc[i]]] <- paste(vfunc[i],".",colnames(J),sep="")
-        lencoef <- length(colnames(Z))
-        XX = cbind(XX, Z)
+    lencoef <- length(colnames(Z))
+    XX = cbind(XX, Z)
         for (j in 1:lencoef) {
           pf <- paste(pf, "+", name.coef[[vfunc[i]]][j], sep = "")
           kterms <- kterms + 1
@@ -164,6 +165,14 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
               kterms <- kterms + 1
             }
           }
+		      
+		      lencoef <- length(colnames(Z))
+		      # 220712 Controlar que se usa la longitud de basis.b y no basis.x
+		      if (lambda0) {
+		        lpenalty[[vfunc[i]]] <- lambda[[vfunc[i]]] * PP
+		        ipenalty[[vfunc[i]]] <- (ipenal+1):(ipenal+lencoef)
+		      }
+		      
         }
         else stop(paste(vfunc[i],"seems not to be a functional covariate"))
       } 
@@ -178,7 +187,6 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
 #####################################################
 
 #####################################################
-# # createMatrixPenalty <- function(tt,lambda,P,vs=NULL){
 createMatrixPenalty <- function(tt,lambda,P,vs=NULL){
   np <- length(tt)
   # x <- Z
@@ -193,12 +201,3 @@ createMatrixPenalty <- function(tt,lambda,P,vs=NULL){
   #P <- P.penalty(1:3,c(1))
   return(lambda*P)
 }
-
-
-# #####################################################
-# createMatrixPenalty(1:5,2,c(0,0,1))
-#####################################################
-
-  # incluir escalado para cuando son PC's
-  # lpenalty[[vfunc[i]]] <- createMatrixPenalty(tt,lambda[[vfunc[i]]],P[[vfunc[i]]],vs=NULL){
-
