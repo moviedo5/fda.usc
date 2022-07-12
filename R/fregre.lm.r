@@ -1,4 +1,4 @@
-#' Fitting Functional Linear Models
+#' @title Fitting Functional Linear Models
 #' 
 #' @description Computes functional regression between functional (and non functional)
 #' explanatory variables and scalar response using basis representation.
@@ -32,17 +32,21 @@
 #' \code{\link{create.pc.basis}} or \code{\link{pca.fd}}) the argument
 #' \code{basis.b} \emph{(is unnecessary and)} is ignored.\cr
 #' 
+#' Penalty options are under development, not guaranteed to work properly.
 #' The user can penalty the basis elements by: (i) \code{lambda} is a list of
 #' rough penalty values of each functional covariate, see
-#'  \code{\link{P.penalty}} for more details.
+#'  \code{\link{P.penalty}} for more details. 
 #' 
 #' @param formula an object of class \code{formula} (or one that can be coerced
 #' to that class): a symbolic description of the model to be fitted. The
 #' details of model specification are given under \code{Details}.
-#' @param data List that containing the variables in the model.
+#' @param data List that containing the variables in the model. 
+#' Functional covariates are recommended to be of class fdata. 
+#' Objects of class "fd" can be used at the user's own risk.
 #' @param basis.x List of basis for functional explanatory data estimation.
 #' @param basis.b List of basis for functional beta parameter estimation.
-#' @param lambda List, indexed by the names of the functional covariates, which contains the Roughness penalty parameter.
+#' @param lambda List, indexed by the names of the functional covariates, 
+#' which contains the Roughness penalty parameter. 
 #' @param P List, indexed by the names of the functional covariates, which contains the parameters for the creation of the penalty matrix.
 #' @param weights weights
 #' @param \dots Further arguments passed to or from other methods.
@@ -84,7 +88,7 @@
 #' basis.b <- list("x"=basis2)
 #' f <- Fat ~ Protein + x
 #' ldat <- ldata("df"=dataf,"x"=x)
-#' res <- fregre.lm(f,ldat,  basis.b=basis.b)
+#' res  fregre.lm(f,ldat,  basis.b=basis.b)
 #' summary(res)
 #' f2 <- Fat ~ Protein + xd +xd2
 #' xd <- fdata.deriv(x,nderiv=1,class.out='fdata', nbasis=nbasis.x)
@@ -173,13 +177,14 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
   #Z <- as.matrix(XX[,-1])     
   W <- diag(weights)  
   if (!penalty) {
-    # print("no rn0 no lambda0")
-    # print(colnames(XX))      
+   print("no rn0 no lambda0")
+   print(colnames(XX))      
     if (lenvfunc==0 & length(vnf)==0)      {
       z=lm(formula=pf,data=XX,x=TRUE,...)   
       class(z)<-c("lm","fregre.lm")
       return(z)
     }       else       z <- lm(formula = pf,data=XX,x=TRUE,...)
+  print(summary(res))
     e <- z$residuals
     z$coefs<- summary(z)$coefficients
     z$r2 <- 1 - sum(z$residuals^2)/sum(ycen^2)  

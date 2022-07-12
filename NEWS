@@ -1,4 +1,4 @@
-Version 2.0.4
+Version 2.1.0
 1) fdata2basis always return centred fdataobj and mean. The mean is computed using the basis.
 
 Version 2.0.3:
