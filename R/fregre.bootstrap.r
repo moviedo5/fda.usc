@@ -328,9 +328,10 @@ if (prd==1) {
  matplot( rbind(1:m,1:m),IC,type="l",lty=1,col=1,ylim=ylm,
    xlab="Id newX curves",ylab="predicted value",main=paste("y predicted and ",alpha*100,"% bootstrap CI",sep=""))
    points(yp,col=4,pch=16,cex=.7)  
- output[["y.pred"]]=yp
+
 }
 }
+output[["y.pred"]]=yp
 output[["newX"]]=newX
 return(output)
 }
