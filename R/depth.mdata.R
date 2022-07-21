@@ -426,7 +426,7 @@ mdepth.KFSD=function (x, xx = x, trim = 0.25,
   if (same.dim)
     if (all(x==xx)) {
       M2=M1
-    } else {sam.dim <- FALSE}
+    } else {same.dim <- FALSE}
   if (!same.dim){	
     for (i in 1:n){for (j in 1:n2){
       if (all(x[i,] == xx[j,])) M2[i,j]=K02[i] else M2[i,j]=kern(x[i,],xx[j,],h=hq2)
@@ -525,7 +525,7 @@ mdepth.FSD=function (x, xx = x,
   if (same.dim)
     if (all(x==xx)) {
       M2=M1
-    } else {sam.dim <- FALSE}
+    } else {same.dim <- FALSE}
   if (!same.dim){
     for (i in 1:n){for (j in 1:n2){
       if (all(x[i,] == xx[j,])) M2[i,j]=K02[i] else M2[i,j]=kern(x[i,],xx[j,])

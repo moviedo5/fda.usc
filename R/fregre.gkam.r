@@ -270,7 +270,7 @@ if (family$family == "binomial") {
            res = fregre.np.cv(xfunc, z, h = h, type.CV = "dev.S", Ker=Ker,
            type.S=ty,par.S=parS,metric = mgood, par.metric=par.metric[[namesx[i]]], par.CV = list(obs = y[good],
            family = family, off = off, offdf = offdf,W = diag(w)))
-           #if (control$trace)
+           if (control$trace)
             cat("Var:",namesx[[i]]," h.opt:", res$h.opt," df:",res$df,"\n")           
            eqrank[namesx[i]] <- res$df#length(res$residuals) - res$df.residual
            X[good,namesx[i]] <- res$fitted.values
