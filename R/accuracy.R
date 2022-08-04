@@ -208,7 +208,7 @@ tab2kappa = function (tab) {
 
 # @export tab2wkappa
 tab2wkappa = function (tab) { 
-  lev<- rownames(tab) 
+  lev <- rownames(tab) 
   conf.mat <- tab/sum(tab)
   rowsum <- rowSums(conf.mat)
   colsum <- colSums(conf.mat)
@@ -234,7 +234,7 @@ tab2IOU4class<-function(tab){
   vf<-c(rep(NA,nclass))
   for (j in 1:nclass){
     TP<-diag(tab)[j]
-    FP<-sum(tabl[j,])-TP
+    FP<-sum(tab[j,])-TP
     FN<-sum(tab[,j])-TP
     iou<-TP/(TP+FP+FN)
     vf[j]<-iou
@@ -250,7 +250,7 @@ cat2IOU = function(yobs,ypred){
 
 tab2IOU<-function(tab){
   nclass<-NROW(tab)
-  vf2<-vf<-c(rep(NA,nclass))
+  vf2<-c(rep(NA,nclass))
   TP<-diag(tab)
   for (j in 1:nclass){
     FP<-sum(tab[j,])-TP[j]
