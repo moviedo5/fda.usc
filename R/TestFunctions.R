@@ -1,5 +1,64 @@
+#' @name fEqMoments.test
+#' 
+#' @title Computation of tests for checking the equality of means and/or covariance between two populations under gaussianity. 
+#' 
+#' @description Two tests for the equality of means and covariances of two populations are provided.
+#'  Both tests are constructed under gaussianity following Horvath & Kokoszka, 2012, Chapter 5.
+#' 
+#' @details \code{\link{mean.test.fdata}} computes the test for equality of means. 
+#' \code{\link{cov.test.fdata}} computes the test for equality of covariance operators.
+#' Both tests have asymptotic distributions under the null related with chi-square distribution. Also, a 
+#' parametric bootstrap procedure is implemented in both cases. 
+#' 
+#' @aliases mean.test.fdata cov.test.fdata
+#' @param X.fdata Object containing the first population curves.
+#' \code{\link{fdata}} class object.
+#' @param Y.fdata Object containing the second population curves.  \code{\link{fdata}} class object.
+#' @param method c("X2","Boot"). "X2" includes the asymptotic distribution. "Boot" computes the bootstrap approximation.
+#' @param npc The number of principal components employed. If \code{npc} is negative and 0<\code{abs(npc)}<1, the number of components 
+#' are determined for explaining, at least, \code{abs(p)}\% of variability.
+#' @param alpha Confidence level. By default =0.95.
+#' @param B Number of bootstrap replicas when method="Boot".
+#' @param draw By default, FALSE. Plots the density of the bootstrap replicas jointly with the statistic. 
 
-mean.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),p=5,B=1000,draw=FALSE){
+#' @return  Return a list with:
+#' \itemize{
+#' \item {stat}{ Value of the statistic.} 
+#' \item {pvalue}{ P-values for the test.}
+#' \item {vcrit}{ Critical cutoff for rejecting the null hypothesis.}
+#' \item {p}{ Degrees of freedom for X2 statistic. }
+#' \item {B}{ Number of bootstrap replicas.}
+#' }
+#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
+#' \email{manuel.febrero@@usc.es}
+#' @seealso See Also as \code{\link{fanova.RPm}, \link{fanova.onefactor}}.
+#' @references Inference for Functional Data with Applications. Horvath, L and Kokoszka, P. (2012). Springer. 
+#' @keywords htest
+#' @examples 
+#' \dontrun{
+#' tt=seq(0,1,len=51)
+#' bet=0
+#' mu1=fdata(10*tt*(1-tt)^(1+bet),tt)
+#' mu2=fdata(10*tt^(1+bet)*(1-tt),tt) 
+#' fsig=1
+#' X=rproc2fdata(100,tt,mu1,sigma="vexponential",par.list=list(scale=0.2,theta=0.35))
+#' Y=rproc2fdata(100,tt,mu2,sigma="vexponential",par.list=list(scale=0.2*fsig,theta=0.35))
+#' mean.test.fdata(X,Y,npc=-.98,draw=TRUE)
+#' cov.test.fdata(X,Y,npc=5,draw=TRUE)
+#' bet=0.1
+#' mu1=fdata(10*tt*(1-tt)^(1+bet),tt)
+#' mu2=fdata(10*tt^(1+bet)*(1-tt),tt) 
+#' fsig=1.5
+#' X=rproc2fdata(100,tt,mu1,sigma="vexponential",par.list=list(scale=0.2,theta=0.35))
+#' Y=rproc2fdata(100,tt,mu2,sigma="vexponential",par.list=list(scale=0.2*fsig,theta=0.35))
+#' mean.test.fdata(X,Y,npc=-.98,draw=TRUE)
+#' cov.test.fdata(X,Y,npc=5,draw=TRUE)
+#' }
+#' 
+#' @rdname fEqMoments.test
+#' @export mean.test.fdata
+
+mean.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),npc=5,alpha=0.95,B=1000,draw=FALSE){
   if ("X2" %in% method) ix2=TRUE else {ix2=FALSE;Unm1=NA;Unm2=NA}
   if ("Boot" %in% method) iboot=TRUE else {iboot=FALSE;Unm=NA;Uboot=NA;qboot=NA;draw=FALSE}
   n=nrow(X.fdata)
@@ -14,19 +73,19 @@ mean.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),p=5,B=1000,draw=F
     Unm=as.numeric((n*m/(n+m))*norm.fdata(difm)^2)
     Xb=rproc2fdata(B,t=argvals(mX),sigma=Sig)
     Uboot=drop(norm.fdata(Xb)^2)
-    qboot=quantile(Uboot,prob=.95)
+    qboot=quantile(Uboot,prob=alpha)
   }
   if (ix2){
-    if (p<0 & abs(p)<1) {
+    if (npc<0 & abs(npc)<1) {
       pcall=fdata2pc(c(Xcen$Xcen,Ycen$Xcen),ncomp=min(ncol(X.fdata),nrow(X.fdata)))
       sumvar=cumsum(pcall$d^2)/sum(pcall$d^2)
-      p=min(which(sumvar>=abs(p)))
+      npc=min(which(sumvar>=abs(npc)))
     } else {
-      pcall=fdata2pc(c(Xcen$Xcen,Ycen$Xcen),ncomp=p)
+      pcall=fdata2pc(c(Xcen$Xcen,Ycen$Xcen),ncomp=npc)
     }
-    ai=inprod.fdata(difm,pcall$rotation[1:p])
-    Unm1=(n*m/(n+m))*sum(ai[1:p]^2)
-    Unm2=(n*m/(n+m))*sum(ai[1:p]^2/(pcall$d[1:p]^2/(n+m)))
+    ai=inprod.fdata(difm,pcall$rotation[1:npc])
+    Unm1=(n*m/(n+m))*sum(ai[1:npc]^2)
+    Unm2=(n*m/(n+m))*sum(ai[1:npc]^2/(pcall$d[1:npc]^2/(n+m)))
   }
   if (draw) {
     plot(density(Uboot),main=paste0("Density of ",B," replicas"))
@@ -34,18 +93,18 @@ mean.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),p=5,B=1000,draw=F
     abline(v=Unm1,col=3,lwd=2)
   }
   stat=c(Unm2,Unm1,Unm)
-  pv=c(1-pchisq(Unm2,p),sum(Unm<Uboot)/B)
-  vcrit=c(qchisq(.95,p),qboot)
+  pv=c(1-pchisq(Unm2,npc),sum(Unm<Uboot)/B)
+  vcrit=c(qchisq(alpha,npc),qboot)
   names(stat)=c("X2","Unm(1)","Unm")
   names(pv)=c("X2","Boot")
-  names(vcrit)=c("X2","Boot")
+  names(vcrit)=paste0(c("X2:","Boot:"),alpha)
   return(list(stat=stat,pvalue=pv,
-              vcrit=vcrit,p=p,B=B))
+              vcrit=vcrit,p=npc,B=B))
 }
 
 
 
-cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),p=5,B=1000,draw=FALSE){
+cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),npc=5,alpha=0.95,B=1000,draw=FALSE){
   if ("X2" %in% method) ix2=TRUE else {ix2=FALSE;Unm1=NA;Unm2=NA}
   if ("Boot" %in% method) iboot=TRUE else {iboot=FALSE;Unm=NA;Uboot=NA;qboot=NA;draw=FALSE}
   n=nrow(X.fdata)
@@ -56,16 +115,16 @@ cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),p=5,B=1000,draw=FA
   Sig=var(rbind(Xcen$Xcen$data,Ycen$Xcen$data))
   
   if (ix2){
-    if (p<0 & abs(p)<1) {
+    if (npc<0 & abs(npc)<1) {
       pcall=fdata2pc(c(Xcen$Xcen,Ycen$Xcen),ncomp=min(ncol(X.fdata),nrow(X.fdata)))
       sumvar=cumsum(pcall$d^2)/sum(pcall$d^2)
-      p=min(which(sumvar>=abs(p)))
+      npc=min(which(sumvar>=abs(npc)))
     } else {
-      pcall=fdata2pc(c(Xcen$Xcen,Ycen$Xcen),ncomp=p)
+      pcall=fdata2pc(c(Xcen$Xcen,Ycen$Xcen),ncomp=npc)
     }
-    propvar=sum(pcall$d[1:p]^2)/sum(pcall$d^2)
-    ax=inprod.fdata(Xcen$Xcen,pcall$rotation[1:p])
-    ay=inprod.fdata(Ycen$Xcen,pcall$rotation[1:p])
+    propvar=sum(pcall$d[1:npc]^2)/sum(pcall$d^2)
+    ax=inprod.fdata(Xcen$Xcen,pcall$rotation[1:npc])
+    ay=inprod.fdata(Ycen$Xcen,pcall$rotation[1:npc])
     lambdax=t(ax)%*%ax/n
     lambday=t(ay)%*%ay/m
     dlambda=(n*diag(lambdax)+m*diag(lambday))/(n+m)
@@ -73,8 +132,8 @@ cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),p=5,B=1000,draw=FA
     Tn=sum((lambdax-lambday)^2/ldiag)*n*m/(2*(n+m))
     T1=(.5*(n*m)/(n+m))*sum((log(diag(lambdax))-log(diag(lambday)))^2)
     stat=c(Tn,T1)
-    vcrit=c(qchisq(.95,p*(p+1)/2),qchisq(.95,p))
-    pv=c(1-pchisq(Tn,p*(p+1)/2),1-pchisq(T1,p))
+    vcrit=c(qchisq(alpha,npc*(npc+1)/2),qchisq(alpha,npc))
+    pv=c(1-pchisq(Tn,npc*(npc+1)/2),1-pchisq(T1,npc))
     
   }
   
@@ -90,7 +149,7 @@ cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),p=5,B=1000,draw=FA
       SbY=var(Yb$data)
       Tboot[i]=sum((SbX-SbY)^2)
     }
-    qboot=quantile(Tboot,prob=.95)
+    qboot=quantile(Tboot,prob=alpha)
   }
   if (draw) {
     plot(density(Tboot),main=paste0("Density of ",B," replicas"))
@@ -102,15 +161,14 @@ cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),p=5,B=1000,draw=FA
   vcrit=c(vcrit,qboot)
   names(stat)=c("Tn","T1","HS")
   names(pv)=c("X2(p(p+1)/2)","X2(p)","Boot")
-  names(vcrit)=c("X2(p(p+1)/2)","X2(p)","Boot")
+  names(vcrit)=paste0(c("X2(p(p+1)/2)","X2(p)","Boot"),":",alpha)
   return(list(stat=stat,pvalue=pv,
-              vcrit=vcrit,p=c(p*(p+1)/2,p),B=B))
+              vcrit=vcrit,p=c(npc*(npc+1)/2,npc),B=B))
 }
 
 
 
-XY.RP=function(X,Y,nproj=10,alpha=0.95,npc=5,test=c("KS","AD")){
-#require(twosamples)
+XYRP.test=function(X,Y,nproj=10,npc=5,test=c("KS","AD")){
 require(kSamples)
 pvalues=matrix(NA,nrow=nproj,ncol=length(test))
 colnames(pvalues)=test
@@ -125,12 +183,15 @@ if (test[k]=="KS") {
 pvalues[i,k]=ks.test(Xpr,Ypr,exact=TRUE)$p.value } else {
 pvalues[i,k]=ad.test(Xpr,Ypr,Nsim=1000)$ad[1,3]
 					}
-			}	
+			}
+ 	
 }
-return(pvalues)
+FDR.pv=apply(pvalues,2,pvalue.FDR)
+names(FDR.pv)=paste0("FDR-",test)
+return(list(FDR.pv=FDR.pv,proj.pv=pvalues))
 }
 
-MMD.test=function(X.fdata,Y.fdata,metric="metric.lp",nMC=1000,ops.metric=list(lp=2),draw=FALSE){
+MMD.test=function(X.fdata,Y.fdata,metric="metric.lp",nMC=1000,alpha=.95,ops.metric=list(lp=2),draw=FALSE){
 n=nrow(X.fdata)
 m=nrow(Y.fdata)
 if (is.null(n) | is.null(m)) stop("One of the objects X.fdata, Y.fdata has no rows")
@@ -140,21 +201,11 @@ DY=do.call(metric,c(list(Y.fdata),ops.metric))
 DXY=do.call(metric,c(list(X.fdata,Y.fdata),ops.metric))
 D=rbind(cbind(DX,DXY),cbind(t(DXY),DY))
 
-#hb=quantile(D[D>0],prob=.25)
-#MKp=exp(-0.5*(D/hb)^2)   # RBF kernel
-
 vnorm=drop(do.call("norm.fdata",c(list(fdataobj=c(X.fdata,Y.fdata),metric=get(metric)),ops.metric)))
 onorm=outer(vnorm,vnorm,"+")
 #D=do.call(metric,c(list(fdata1=c(X.fdata,Y.fdata)),ops.metric))
 MKp=0.5*(onorm-D)
 
-#H=diag(n+m)-matrix(1/(n+m),nrow=nrow(MKp),ncol=ncol(MKp))
-#Ktilde=H%*%MKp%*%H
-#MKp=Ktilde
-
-#lambda=eigen(Ktilde)$values
-#k=min(which(cumsum(lambda^2)/sum(lambda^2)>0.98))
-#vcrit=apply(sweep(matrix(rnorm(nMC*k)^2,nrow=nMC,ncol=k),2,lambda[1:k],"*"),1,sum)
 MMD2b=mean(MKp[1:n,1:n])+mean(MKp[(n+1):(n+m),(n+1):(n+m)])-2*mean(MKp[(n+1):(n+m),1:n])
 #Permutations
 MMD2H0=numeric(nMC)
@@ -162,27 +213,57 @@ for (i in 1:nMC){
 pp=sample(1:(n+m))
 MMD2H0[i]=mean(MKp[pp[1:n],pp[1:n]])+mean(MKp[pp[(n+1):(n+m)],pp[(n+1):(n+m)]])-2*mean(MKp[pp[(n+1):(n+m)],pp[1:n]])
 }
-#K=max(MKp)
-#mp=2*n*m/(n+m)
 
-#par(mfrow=c(1,2))
-#plot(density(vcrit*2/mp))
-#abline(v=MMD2b)
 if (draw){
 plot(density(MMD2H0),main="Density of MMD(H0) by Shuffling")
-abline(v=MMD2b)
+abline(v=MMD2b,col=2)
 }
-#pvasym=1/exp((sqrt(MMD2b/(2*K/mp))-1)^2/2)
-#print(paste0("N.PC's:",k," Thr.As.:",round((2*K/mp)*(1+sqrt(2*log(1/0.05)))^2,4), " Thr.MC:",round(quantile(2*vcrit/mp,0.95),3), 
-#	" Thr.Per:",round(quantile(MMD2H0,0.95),3)))
-#pvnum=mean(MMD2b>2*vcrit/mp)
 pvnum2=mean(MMD2b<=MMD2H0)
 
-#result=data.frame(Stat=c(sqrt(MMD2b),mp*MMD2b/2,MMD2b),p.values=c(pvasym,pvnum,pvnum2))
-result=list(stat=MMD2b,p.value=pvnum2,thresh=quantile(MMD2H0,.95)) 
-#rownames(result)=c("Asymp","MC","Perm")
+result=list(stat=MMD2b,p.value=pvnum2,thresh=quantile(MMD2H0,alpha)) 
 return(result)
 }
+
+
+MMDA.test=function(X.fdata,Y.fdata,kern="RBF",metric="metric.lp",nMC=1000,alpha=.95,ops.metric=list(lp=2),draw=FALSE){
+#kern="RBF" Kernel o "metric"
+n=nrow(X.fdata)
+m=nrow(Y.fdata)
+if (is.null(n) | is.null(m)) stop("One of the objects X.fdata, Y.fdata has no rows")
+if (is.function(metric)) metric=deparse(substitute(metric))
+DX=do.call(metric,c(list(X.fdata),ops.metric))
+DY=do.call(metric,c(list(Y.fdata),ops.metric))
+DXY=do.call(metric,c(list(X.fdata,Y.fdata),ops.metric))
+D=rbind(cbind(DX,DXY),cbind(t(DXY),DY))
+#D=do.call(metric,c(list(fdata1=c(X.fdata,Y.fdata)),ops.metric))
+if (kern=="RBF"){
+hb=quantile(D[D>0],prob=.25)
+MKp=exp(-0.5*(D/hb)^2)   # RBF kernel
+} else {
+# metrica
+vnorm=drop(do.call("norm.fdata",c(list(fdataobj=c(X.fdata,Y.fdata),metric=get(metric)),ops.metric)))
+onorm=outer(vnorm,vnorm,"+")
+MKp=0.5*(onorm-D)
+}
+
+H=diag(n+m)-matrix(1/(n+m),nrow=nrow(MKp),ncol=ncol(MKp))
+Ktilde=H%*%MKp%*%H
+MMD2b=n*(mean(MKp[1:n,1:n])+mean(MKp[(n+1):(n+m),(n+1):(n+m)])-2*mean(MKp[(n+1):(n+m),1:n]))
+
+lambda=eigen(Ktilde)$values
+ik=min(which(cumsum(lambda)/sum(lambda)>0.98))
+lambda=lambda/(n+m)
+vcrit=2*apply(sweep(matrix(rnorm(nMC*ik)^2,nrow=nMC,ncol=ik),2,lambda[1:ik],"*"),1,sum)
+pvnum=mean(vcrit>MMD2b)
+if (draw){
+plot(density(vcrit),main="Density of MMD(H0) by Asymptotic Approx.")
+abline(v=MMD2b,col=2)
+}
+#print(paste0(round(MMD2b,3),"-",round(quantile(vcrit,0.95),3)))
+result=list(stat=MMD2b,p.value=pvnum,thresh=quantile(vcrit,alpha)) 
+return(result)
+}
+
 
 
 fEqDistrib.test=function(X.fdata,Y.fdata,metric="metric.lp",method=c("Exch","WildB"),nboot=5000,ops.metric=list(lp=2),iboot=FALSE){
@@ -260,42 +341,6 @@ if (sum(iexch,iwildB)==2){
 	return(result)
 	}
 }
-
-MMDA.test=function(X.fdata,Y.fdata,kern="RBF",metric="metric.lp",nMC=1000,ops.metric=list(lp=2),draw=FALSE){
-#kern="RBF" Kernel o "metric"
-n=nrow(X.fdata)
-m=nrow(Y.fdata)
-if (is.null(n) | is.null(m)) stop("One of the objects X.fdata, Y.fdata has no rows")
-if (is.function(metric)) metric=deparse(substitute(metric))
-DX=do.call(metric,c(list(X.fdata),ops.metric))
-DY=do.call(metric,c(list(Y.fdata),ops.metric))
-DXY=do.call(metric,c(list(X.fdata,Y.fdata),ops.metric))
-D=rbind(cbind(DX,DXY),cbind(t(DXY),DY))
-#D=do.call(metric,c(list(fdata1=c(X.fdata,Y.fdata)),ops.metric))
-if (kern=="RBF"){
-hb=quantile(D[D>0],prob=.25)
-MKp=exp(-0.5*(D/hb)^2)   # RBF kernel
-} else {
-# metrica
-vnorm=drop(do.call("norm.fdata",c(list(fdataobj=c(X.fdata,Y.fdata),metric=get(metric)),ops.metric)))
-onorm=outer(vnorm,vnorm,"+")
-MKp=0.5*(onorm-D)
-}
-
-H=diag(n+m)-matrix(1/(n+m),nrow=nrow(MKp),ncol=ncol(MKp))
-Ktilde=H%*%MKp%*%H
-MMD2b=n*(mean(MKp[1:n,1:n])+mean(MKp[(n+1):(n+m),(n+1):(n+m)])-2*mean(MKp[(n+1):(n+m),1:n]))
-
-lambda=eigen(Ktilde)$values
-ik=min(which(cumsum(lambda)/sum(lambda)>0.98))
-lambda=lambda/(n+m)
-vcrit=2*apply(sweep(matrix(rnorm(nMC*ik)^2,nrow=nMC,ncol=ik),2,lambda[1:ik],"*"),1,sum)
-pvnum=mean(vcrit>MMD2b)
-#print(paste0(round(MMD2b,3),"-",round(quantile(vcrit,0.95),3)))
-result=list(stat=MMD2b,p.value=pvnum,thresh=quantile(vcrit,0.95)) 
-return(result)
-}
-
 
 
 # fEqDistrib2.test=function(X.fdata,Y.fdata,metric="metric.lp",method=c("Exch","WildB"),B=5000,ops.metric=list(lp=2)){
