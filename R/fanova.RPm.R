@@ -42,7 +42,7 @@
 #' x \code{p}), where \code{p} are the number of factors or covariates
 #' considered.
 #' @param RP Vector of number of random projections.
-#' @param alpha Alpha value, by defalult \code{alpha}=0.95.
+#' @param alpha Confidence level, by default \code{alpha}=0.95.
 #' @param zproj Function for generating the projections or an object that
 #' contains that projections.
 #' @param par.zproj List of parameters for \code{zproj} function.

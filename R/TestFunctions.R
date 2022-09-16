@@ -1,6 +1,6 @@
 #' @name fEqMoments.test
 #' 
-#' @title Computation of tests for checking the equality of means and/or covariance between two populations under gaussianity. 
+#' @title Tests for checking the equality of means and/or covariance between two populations under gaussianity. 
 #' 
 #' @description Two tests for the equality of means and covariances of two populations are provided.
 #'  Both tests are constructed under gaussianity following Horvath & Kokoszka, 2012, Chapter 5.
@@ -11,9 +11,8 @@
 #' parametric bootstrap procedure is implemented in both cases. 
 #' 
 #' @aliases mean.test.fdata cov.test.fdata
-#' @param X.fdata Object containing the first population curves.
-#' \code{\link{fdata}} class object.
-#' @param Y.fdata Object containing the second population curves.  \code{\link{fdata}} class object.
+#' @param X.fdata \code{fdata} object containing the curves from the first population.
+#' @param Y.fdata \code{fdata} object containing the curves from the second population.
 #' @param method c("X2","Boot"). "X2" includes the asymptotic distribution. "Boot" computes the bootstrap approximation.
 #' @param npc The number of principal components employed. If \code{npc} is negative and 0<\code{abs(npc)}<1, the number of components 
 #' are determined for explaining, at least, \code{abs(p)}\% of variability.
@@ -103,7 +102,8 @@ mean.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),npc=5,alpha=0.95,
 }
 
 
-
+#' @rdname fEqMoments.test
+#' @export cov.test.fdata
 cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),npc=5,alpha=0.95,B=1000,draw=FALSE){
   if ("X2" %in% method) ix2=TRUE else {ix2=FALSE;Unm1=NA;Unm2=NA}
   if ("Boot" %in% method) iboot=TRUE else {iboot=FALSE;Unm=NA;Uboot=NA;qboot=NA;draw=FALSE}
@@ -166,7 +166,73 @@ cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),npc=5,alpha=0.95,B
               vcrit=vcrit,p=c(npc*(npc+1)/2,npc),B=B))
 }
 
+#' @name fEqDistrib.test
+#' 
+#' @title Tests for checking the equality of distributions between two functional populations. 
+#' 
+#' @description Three tests for the equality of distributions of two populations are provided. The null hypothesis is that the two populations are the same
+#' 
+#' @details \code{\link{XYRP.test}} computes the p-values using random projections. Requires \code{kSamples} library. 
+#' \code{\link{MMD.test}} computes Maximum Mean Discrepancy p-values using permutations (see Sejdinovic et al, (2013)) and \code{\link{MMDA.test}} 
+#' does the same using an asymptotic approximation. 
+#' \code{\link{fEqDistrib.test}} checks the equality of distributions using an embedding in a RKHS and two bootstrap approximations for 
+#' calibration. 
+#' 
+#' @aliases XYRP.test MMD.test MMDA.test fEqDistrib.test
+#' @param X.fdata \code{fdata} object containing the curves from the first population.
+#' @param Y.fdata \code{fdata} object containing the curves from the second population.
+#' @param nproj Number of projections for \code{XYRP.test}.
+#' @param npc The number of principal components employed for generating the random projections.
+#' @param test For \code{XYRP.test} "KS" and/or "AD" for computing Kolmogorov-Smirnov or Anderson-Darling p-values in the projections.
+#' @param kern For \code{MMDA.test} "RBF" or "metric" for indicating the use of Radial Basis Function or directly, the distances.
+#' @param metric Character with the metric function for computing distances among curves. 
+#' @param ops.metric List of parameters to be used with \code{metric}.
+#' @param method In \code{fEqDistrib.test} a character indicating the bootstrap method for computing the distribution under H0.
+#'  "Exch" for Exchangeable bootstrap and "WildB" for Wild Bootstrap. By default, both are provided. 
+#' @param B Number of bootstrap or Monte Carlo replicas.
+#' @param alpha Confidence level for computing the threshold. By default =0.95.
+#' @param iboot In \code{fEqDistrib.test} returns the bootstrap replicas.
+#' @param draw By default, FALSE. Plots the density of the bootstrap replicas jointly with the statistic. 
 
+#' @return  A list with the following components by function:
+#' \itemize{
+#' \item {\code{XYRP.test}}{ \code{FDR.pv}: p-value using FDR, \code{proj.pv}: Matrix of p-values obtained for projections.} 
+#' \item {\code{MMD.test},\code{MMDA.test}} {\code{stat}: Statistic, \code{p.value}: p-value, \code{thresh}: Threshold at level \code{alpha}.}
+#' \item {\code{fEqDistrib.test}}{ \code{result}: \code{data.frame} with columns \code{Stat} and \code{p.value}, 
+#'  \code{Boot}: \code{data.frame} with bootstrap replicas if \code{iboot=TRUE}.}
+#' }
+#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
+#' \email{manuel.febrero@@usc.es}
+#' @seealso  \code{\link{mean.test.fdata}, \link{cov.test.fdata}}.
+#' @references Sejdinovic, D., Sriperumbudur, B., Gretton, A., Fukumizu, K. \emph{Equivalence of distance-based and RKHS-based statistics in Hypothesis Testing} The Annals of Statistics, 2013. 
+#' DOI \bold{10.1214/13-AOS1140}. 
+#' @keywords htest
+#' @examples 
+#' \dontrun{
+#' tt=seq(0,1,len=51)
+#' bet=0
+#' mu1=fdata(10*tt*(1-tt)^(1+bet),tt)
+#' mu2=fdata(10*tt^(1+bet)*(1-tt),tt) 
+#' fsig=1
+#' X=rproc2fdata(100,tt,mu1,sigma="vexponential",par.list=list(scale=0.2,theta=0.35))
+#' Y=rproc2fdata(100,tt,mu2,sigma="vexponential",par.list=list(scale=0.2*fsig,theta=0.35))
+#' mean.test.fdata(X,Y,npc=-.98,draw=TRUE)
+#' cov.test.fdata(X,Y,npc=5,draw=TRUE)
+#' bet=0.1
+#' mu1=fdata(10*tt*(1-tt)^(1+bet),tt)
+#' mu2=fdata(10*tt^(1+bet)*(1-tt),tt) 
+#' fsig=1.5
+#' X=rproc2fdata(100,tt,mu1,sigma="vexponential",par.list=list(scale=0.2,theta=0.35))
+#' Y=rproc2fdata(100,tt,mu2,sigma="vexponential",par.list=list(scale=0.2*fsig,theta=0.35))
+#' mean.test.fdata(X,Y,npc=-.98,draw=TRUE)
+#' cov.test.fdata(X,Y,npc=5,draw=TRUE)
+#' XYRP.test(X,Y,nproj=15)
+#' MMD.test(X,Y,B=1000)
+#' fEqDistrib.test(X,Y,B=1000)
+#' }
+#' 
+#' @rdname fEqDistrib.test
+#' @export XYRP.test
 
 XYRP.test=function(X,Y,nproj=10,npc=5,test=c("KS","AD")){
 require(kSamples)
@@ -191,7 +257,10 @@ names(FDR.pv)=paste0("FDR-",test)
 return(list(FDR.pv=FDR.pv,proj.pv=pvalues))
 }
 
-MMD.test=function(X.fdata,Y.fdata,metric="metric.lp",nMC=1000,alpha=.95,ops.metric=list(lp=2),draw=FALSE){
+#' @rdname fEqDistrib.test
+#' @export MMD.test
+
+MMD.test=function(X.fdata,Y.fdata,metric="metric.lp",B=1000,alpha=.95,kern="RBF",ops.metric=list(lp=2),draw=FALSE){
 n=nrow(X.fdata)
 m=nrow(Y.fdata)
 if (is.null(n) | is.null(m)) stop("One of the objects X.fdata, Y.fdata has no rows")
@@ -200,32 +269,38 @@ DX=do.call(metric,c(list(X.fdata),ops.metric))
 DY=do.call(metric,c(list(Y.fdata),ops.metric))
 DXY=do.call(metric,c(list(X.fdata,Y.fdata),ops.metric))
 D=rbind(cbind(DX,DXY),cbind(t(DXY),DY))
-
+if (kern=="RBF"){
+hb=quantile(D[D>0],prob=.25)
+MKp=exp(-0.5*(D/hb)^2)   # RBF kernel
+} else {
+# metrica
 vnorm=drop(do.call("norm.fdata",c(list(fdataobj=c(X.fdata,Y.fdata),metric=get(metric)),ops.metric)))
 onorm=outer(vnorm,vnorm,"+")
-#D=do.call(metric,c(list(fdata1=c(X.fdata,Y.fdata)),ops.metric))
 MKp=0.5*(onorm-D)
+}
 
 MMD2b=mean(MKp[1:n,1:n])+mean(MKp[(n+1):(n+m),(n+1):(n+m)])-2*mean(MKp[(n+1):(n+m),1:n])
 #Permutations
-MMD2H0=numeric(nMC)
-for (i in 1:nMC){
+MMD2H0=numeric(B)
+for (i in 1:B){
 pp=sample(1:(n+m))
 MMD2H0[i]=mean(MKp[pp[1:n],pp[1:n]])+mean(MKp[pp[(n+1):(n+m)],pp[(n+1):(n+m)]])-2*mean(MKp[pp[(n+1):(n+m)],pp[1:n]])
 }
 
 if (draw){
-plot(density(MMD2H0),main="Density of MMD(H0) by Shuffling")
+plot(density(MMD2H0),main="Density of MMD(H0) by Shuffling",xlim=range(MMD2b,MMD2H0))
 abline(v=MMD2b,col=2)
 }
 pvnum2=mean(MMD2b<=MMD2H0)
 
-result=list(stat=MMD2b,p.value=pvnum2,thresh=quantile(MMD2H0,alpha)) 
+result=list(stat=MMD2b,p.value=pvnum2,thresh=quantile(MMD2H0,alpha,na.rm=TRUE)) 
 return(result)
 }
 
+#' @rdname fEqDistrib.test
+#' @export MMDA.test
 
-MMDA.test=function(X.fdata,Y.fdata,kern="RBF",metric="metric.lp",nMC=1000,alpha=.95,ops.metric=list(lp=2),draw=FALSE){
+MMDA.test=function(X.fdata,Y.fdata,metric="metric.lp",B=1000,alpha=.95,kern="RBF",ops.metric=list(lp=2),draw=FALSE){
 #kern="RBF" Kernel o "metric"
 n=nrow(X.fdata)
 m=nrow(Y.fdata)
@@ -253,25 +328,27 @@ MMD2b=n*(mean(MKp[1:n,1:n])+mean(MKp[(n+1):(n+m),(n+1):(n+m)])-2*mean(MKp[(n+1):
 lambda=eigen(Ktilde)$values
 ik=min(which(cumsum(lambda)/sum(lambda)>0.98))
 lambda=lambda/(n+m)
-vcrit=2*apply(sweep(matrix(rnorm(nMC*ik)^2,nrow=nMC,ncol=ik),2,lambda[1:ik],"*"),1,sum)
+vcrit=2*apply(sweep(matrix(rnorm(B*ik)^2,nrow=B,ncol=ik),2,lambda[1:ik],"*"),1,sum)
 pvnum=mean(vcrit>MMD2b)
 if (draw){
-plot(density(vcrit),main="Density of MMD(H0) by Asymptotic Approx.")
+plot(density(vcrit),main="Density of MMD(H0) by Asymptotic Approx.",xlim=range(MMD2b,vcrit))
 abline(v=MMD2b,col=2)
 }
 #print(paste0(round(MMD2b,3),"-",round(quantile(vcrit,0.95),3)))
-result=list(stat=MMD2b,p.value=pvnum,thresh=quantile(vcrit,alpha)) 
+result=list(stat=MMD2b,p.value=pvnum,thresh=quantile(vcrit,alpha,na.rm=TRUE)) 
 return(result)
 }
 
 
+#' @rdname fEqDistrib.test
+#' @export fEqDistrib.test
 
-fEqDistrib.test=function(X.fdata,Y.fdata,metric="metric.lp",method=c("Exch","WildB"),nboot=5000,ops.metric=list(lp=2),iboot=FALSE){
+
+fEqDistrib.test=function(X.fdata,Y.fdata,metric="metric.lp",method=c("Exch","WildB"),B=5000,ops.metric=list(lp=2),iboot=FALSE){
 n=nrow(X.fdata)
 m=nrow(Y.fdata)
 
 if (is.null(n) | is.null(m)) stop("One of the objects X.fdata, Y.fdata has no rows")
-B=nboot
 DX=do.call(metric,c(list(X.fdata),ops.metric))
 DY=do.call(metric,c(list(Y.fdata),ops.metric))
 DXY=do.call(metric,c(list(X.fdata,Y.fdata),ops.metric))
