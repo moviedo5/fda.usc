@@ -196,9 +196,9 @@ cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),npc=5,alpha=0.95,B
 
 #' @return  A list with the following components by function:
 #' \itemize{
-#' \item {\code{XYRP.test}}{ \code{FDR.pv}: p-value using FDR, \code{proj.pv}: Matrix of p-values obtained for projections.} 
-#' \item {\code{MMD.test},\code{MMDA.test}} {\code{stat}: Statistic, \code{p.value}: p-value, \code{thresh}: Threshold at level \code{alpha}.}
-#' \item {\code{fEqDistrib.test}}{ \code{result}: \code{data.frame} with columns \code{Stat} and \code{p.value}, 
+#' \item {\code{XYRP.test}}:{ \code{FDR.pv}: p-value using FDR, \code{proj.pv}: Matrix of p-values obtained for projections.} 
+#' \item {\code{MMD.test},\code{MMDA.test}}: {\code{stat}: Statistic, \code{p.value}: p-value, \code{thresh}: Threshold at level \code{alpha}.}
+#' \item {\code{fEqDistrib.test}}: { \code{result}: \code{data.frame} with columns \code{Stat} and \code{p.value}, 
 #'  \code{Boot}: \code{data.frame} with bootstrap replicas if \code{iboot=TRUE}.}
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
