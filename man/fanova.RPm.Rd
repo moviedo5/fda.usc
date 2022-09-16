@@ -37,7 +37,7 @@ considered.}
 
 \item{RP}{Vector of number of random projections.}
 
-\item{alpha}{Alpha value, by defalult \code{alpha}=0.95.}
+\item{alpha}{Confidence level, by default \code{alpha}=0.95.}
 
 \item{zproj}{Function for generating the projections or an object that
 contains that projections.}
