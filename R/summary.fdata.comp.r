@@ -12,7 +12,7 @@
 #' @author Manuel Febrero-Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \code{\link{fdata2pc}}, \code{\link{fdata2pls}} and \link[stats]{cor}
 #' @references Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988).
-#' \emph{The New S Language}. Wadsworth \& Brooks/Cole.
+#' The New S Language. Wadsworth & Brooks/Cole.
 #' 
 #' Venables, W. N. and B. D. Ripley (2002). \emph{Modern Applied Statistics
 #' with S}. Springer-Verlag.
