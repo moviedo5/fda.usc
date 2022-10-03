@@ -41,8 +41,8 @@
 #' 
 #' @seealso See also \code{\link{metric.lp}} and \code{\link{fdata}}
 #' 
-#' @references Kullback, S., Leibler, R.A. (1951). \emph{On information and
-#' sufficiency.} Annals of Mathematical Statistics, 22: 79-86
+#' @references Kullback, S., Leibler, R.A. (1951). On information and
+#' sufficiency. Annals of Mathematical Statistics, 22: 79-86
 #' 
 #' @keywords cluster
 #' 
