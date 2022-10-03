@@ -95,17 +95,17 @@
 #' \code{\link{summary.fregre.fd}}\cr Alternative methods:
 #' \code{\link{fregre.lm}}, \code{\link{fregre.np}} and
 #' \code{\link{fregre.np.cv}}
-#' @references Aneiros-Perez G. and Vieu P. (2005). \emph{Semi-functional
-#' partial linear regression}.  Statistics & Probability Letters, 76:1102-1110.
+#' @references Aneiros-Perez G. and Vieu P. (2005). Semi-functional
+#' partial linear regression.  Statistics & Probability Letters, 76:1102-1110.
 #' 
-#' Ferraty, F. and Vieu, P. (2006). \emph{Nonparametric functional data
-#' analysis.} Springer Series in Statistics, New York.
+#' Ferraty, F. and Vieu, P. (2006). Nonparametric functional data
+#' analysis. Springer Series in Statistics, New York.
 #' 
-#' Hardle, W. \emph{Applied Nonparametric Regression}. Cambridge University
+#' Hardle, W. Applied Nonparametric Regression. Cambridge University
 #' Press, 1994.
 #' 
-#' Febrero-Bande, M., Oviedo de la Fuente, M. (2012).  \emph{Statistical
-#' Computing in Functional Data Analysis: The R Package fda.usc.} Journal of
+#' Febrero-Bande, M., Oviedo de la Fuente, M. (2012).  Statistical
+#' Computing in Functional Data Analysis: The R Package fda.usc. Journal of
 #' Statistical Software, 51(4), 1-28. \url{https://www.jstatsoft.org/v51/i04/}
 #' @keywords regression
 #' @examples
