@@ -169,7 +169,8 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
 		      lencoef <- length(colnames(Z))
 		      # 220712 Controlar que se usa la longitud de basis.b y no basis.x
 		      if (lambda0) {
-		        lpenalty[[vfunc[i]]] <- lambda[[vfunc[i]]] * PP
+#		        lpenalty[[vfunc[i]]] <- lambda[[vfunc[i]]] * PP
+		        lpenalty[[vfunc[i]]] <- lambda[[vfunc[i]]] * P
 		        ipenalty[[vfunc[i]]] <- (ipenal+1):(ipenal+lencoef)
 		      }
 		      
