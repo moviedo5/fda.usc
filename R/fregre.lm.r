@@ -184,7 +184,7 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
       class(z)<-c("lm","fregre.lm")
       return(z)
     }       else       z <- lm(formula = pf,data=XX,x=TRUE,...)
-  print(summary(res))
+#  print(summary(res))
     e <- z$residuals
     z$coefs<- summary(z)$coefficients
     z$r2 <- 1 - sum(z$residuals^2)/sum(ycen^2)  
