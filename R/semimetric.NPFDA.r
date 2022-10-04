@@ -73,8 +73,8 @@
 #' data analysis.} Springer Series in Statistics, New York.
 #' 
 #' Ferraty, F. and Vieu, P. (2006). \emph{NPFDA in practice}.  Free access on
-#' line at \url{https://www.math.univ-toulouse.fr/staph/npfda/}
-#' @source \url{https://www.math.univ-toulouse.fr/staph/npfda/}
+#' line at \url{https://www.math.univ-toulouse.fr/~ferraty/SOFTWARES/NPFDA/}
+#' @source \url{https://www.math.univ-toulouse.fr/~ferraty/SOFTWARES/NPFDA/}
 #' @keywords cluster
 #' @examples
 #' \dontrun{ 

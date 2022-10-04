@@ -159,7 +159,7 @@ NULL
 #' @references Ferraty, F. and Vieu, P. (2006). \emph{NPFDA in practice}. Free
 #' access on line at \url{https://www.math.univ-toulouse.fr/~ferraty/SOFTWARES/NPFDA/}
 #' @source
-#' \url{https://www.math.univ-toulouse.fr/~ferray/SOFTWARES/NPFDA/npfda-datasets.html}
+#' \url{https://www.math.univ-toulouse.fr/~ferraty/SOFTWARES/NPFDA/npfda-datasets.html}
 #' @keywords datasets
 #' @examples
 #' 
