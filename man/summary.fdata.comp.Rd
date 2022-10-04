@@ -42,7 +42,7 @@ summary(pls1)
 }
 \references{
 Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988).
-\emph{The New S Language}. Wadsworth \& Brooks/Cole.
+\emph{The New S Language}. Wadsworth & Brooks/Cole.
 
 Venables, W. N. and B. D. Ripley (2002). \emph{Modern Applied Statistics
 with S}. Springer-Verlag.

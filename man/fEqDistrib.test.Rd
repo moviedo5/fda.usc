@@ -7,7 +7,7 @@
 \alias{MMDA.test}
 \title{Tests for checking the equality of distributions between two functional populations.}
 \usage{
-XYRP.test(X, Y, nproj = 10, npc = 5, test = c("KS", "AD"))
+XYRP.test(X.fdata, Y.fdata, nproj = 10, npc = 5, test = c("KS", "AD"))
 
 MMD.test(
   X.fdata,
@@ -42,15 +42,15 @@ fEqDistrib.test(
 )
 }
 \arguments{
+\item{X.fdata}{\code{fdata} object containing the curves from the first population.}
+
+\item{Y.fdata}{\code{fdata} object containing the curves from the second population.}
+
 \item{nproj}{Number of projections for \code{XYRP.test}.}
 
 \item{npc}{The number of principal components employed for generating the random projections.}
 
 \item{test}{For \code{XYRP.test} "KS" and/or "AD" for computing Kolmogorov-Smirnov or Anderson-Darling p-values in the projections.}
-
-\item{X.fdata}{\code{fdata} object containing the curves from the first population.}
-
-\item{Y.fdata}{\code{fdata} object containing the curves from the second population.}
 
 \item{metric}{Character with the metric function for computing distances among curves.}
 
@@ -72,9 +72,9 @@ fEqDistrib.test(
 \value{
 A list with the following components by function:
 \itemize{
-\item {\code{XYRP.test}}{ \code{FDR.pv}: p-value using FDR, \code{proj.pv}: Matrix of p-values obtained for projections.} 
-\item {\code{MMD.test},\code{MMDA.test}} {\code{stat}: Statistic, \code{p.value}: p-value, \code{thresh}: Threshold at level \code{alpha}.}
-\item {\code{fEqDistrib.test}}{ \code{result}: \code{data.frame} with columns \code{Stat} and \code{p.value}, 
+\item {\code{XYRP.test}}:{ \code{FDR.pv}: p-value using FDR, \code{proj.pv}: Matrix of p-values obtained for projections.} 
+\item {\code{MMD.test},\code{MMDA.test}}: {\code{stat}: Statistic, \code{p.value}: p-value, \code{thresh}: Threshold at level \code{alpha}.}
+\item {\code{fEqDistrib.test}}: { \code{result}: \code{data.frame} with columns \code{Stat} and \code{p.value}, 
  \code{Boot}: \code{data.frame} with bootstrap replicas if \code{iboot=TRUE}.}
 }
 }
@@ -97,7 +97,7 @@ mu2=fdata(10*tt^(1+bet)*(1-tt),tt)
 fsig=1
 X=rproc2fdata(100,tt,mu1,sigma="vexponential",par.list=list(scale=0.2,theta=0.35))
 Y=rproc2fdata(100,tt,mu2,sigma="vexponential",par.list=list(scale=0.2*fsig,theta=0.35))
-mean.test.fdata(X,Y,npc=-.98,draw=TRUE)
+fmean.test.fdata(X,Y,npc=-.98,draw=TRUE)
 cov.test.fdata(X,Y,npc=5,draw=TRUE)
 bet=0.1
 mu1=fdata(10*tt*(1-tt)^(1+bet),tt)
@@ -105,7 +105,7 @@ mu2=fdata(10*tt^(1+bet)*(1-tt),tt)
 fsig=1.5
 X=rproc2fdata(100,tt,mu1,sigma="vexponential",par.list=list(scale=0.2,theta=0.35))
 Y=rproc2fdata(100,tt,mu2,sigma="vexponential",par.list=list(scale=0.2*fsig,theta=0.35))
-mean.test.fdata(X,Y,npc=-.98,draw=TRUE)
+fmean.test.fdata(X,Y,npc=-.98,draw=TRUE)
 cov.test.fdata(X,Y,npc=5,draw=TRUE)
 XYRP.test(X,Y,nproj=15)
 MMD.test(X,Y,B=1000)
@@ -118,7 +118,7 @@ Sejdinovic, D., Sriperumbudur, B., Gretton, A., Fukumizu, K. \emph{Equivalence o
 DOI \bold{10.1214/13-AOS1140}.
 }
 \seealso{
-\code{\link{mean.test.fdata}, \link{cov.test.fdata}}.
+\code{\link{fmean.test.fdata}, \link{cov.test.fdata}}.
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente

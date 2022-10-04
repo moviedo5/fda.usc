@@ -9,7 +9,7 @@
 \alias{semimetric.pca}
 \title{Proximities between functional data (semi-metrics)}
 \source{
-\url{http://www.math.univ-toulouse.fr/staph/npfda/}
+\url{https://www.math.univ-toulouse.fr/staph/npfda/}
 }
 \usage{
 semimetric.deriv(
@@ -148,7 +148,7 @@ Ferraty, F. and Vieu, P. (2006). \emph{Nonparametric functional
 data analysis.} Springer Series in Statistics, New York.
 
 Ferraty, F. and Vieu, P. (2006). \emph{NPFDA in practice}.  Free access on
-line at \url{http://www.math.univ-toulouse.fr/staph/npfda/}
+line at \url{https://www.math.univ-toulouse.fr/staph/npfda/}
 }
 \seealso{
 See also \code{\link{metric.lp}} and \code{\link{semimetric.basis}}

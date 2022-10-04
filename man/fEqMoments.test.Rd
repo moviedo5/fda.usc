@@ -2,11 +2,11 @@
 % Please edit documentation in R/TestFunctions.R
 \name{fEqMoments.test}
 \alias{fEqMoments.test}
-\alias{mean.test.fdata}
+\alias{fmean.test.fdata}
 \alias{cov.test.fdata}
 \title{Tests for checking the equality of means and/or covariance between two populations under gaussianity.}
 \usage{
-\method{mean}{test.fdata}(
+fmean.test.fdata(
   X.fdata,
   Y.fdata,
   method = c("X2", "Boot"),
@@ -57,7 +57,7 @@ Two tests for the equality of means and covariances of two populations are provi
  Both tests are constructed under gaussianity following Horvath & Kokoszka, 2012, Chapter 5.
 }
 \details{
-\code{\link{mean.test.fdata}} computes the test for equality of means. 
+\code{\link{fmean.test.fdata}} computes the test for equality of means. 
 \code{\link{cov.test.fdata}} computes the test for equality of covariance operators.
 Both tests have asymptotic distributions under the null related with chi-square distribution. Also, a 
 parametric bootstrap procedure is implemented in both cases.
@@ -71,7 +71,7 @@ mu2=fdata(10*tt^(1+bet)*(1-tt),tt)
 fsig=1
 X=rproc2fdata(100,tt,mu1,sigma="vexponential",par.list=list(scale=0.2,theta=0.35))
 Y=rproc2fdata(100,tt,mu2,sigma="vexponential",par.list=list(scale=0.2*fsig,theta=0.35))
-mean.test.fdata(X,Y,npc=-.98,draw=TRUE)
+fmean.test.fdata(X,Y,npc=-.98,draw=TRUE)
 cov.test.fdata(X,Y,npc=5,draw=TRUE)
 bet=0.1
 mu1=fdata(10*tt*(1-tt)^(1+bet),tt)
@@ -79,7 +79,7 @@ mu2=fdata(10*tt^(1+bet)*(1-tt),tt)
 fsig=1.5
 X=rproc2fdata(100,tt,mu1,sigma="vexponential",par.list=list(scale=0.2,theta=0.35))
 Y=rproc2fdata(100,tt,mu2,sigma="vexponential",par.list=list(scale=0.2*fsig,theta=0.35))
-mean.test.fdata(X,Y,npc=-.98,draw=TRUE)
+fmean.test.fdata(X,Y,npc=-.98,draw=TRUE)
 cov.test.fdata(X,Y,npc=5,draw=TRUE)
 }
 

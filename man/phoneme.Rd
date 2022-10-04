@@ -24,14 +24,14 @@ factor). Factor levels: "sh" 1, "iy" 2, "dcl" 3, "aa" 4 and "ao" 5.\cr \cr
 1, "iy" 2, "dcl" 3, "aa" 4 and "ao" 5.\cr
 }
 \source{
-\url{http://www.math.univ-toulouse.fr/staph/npfda/npfda-datasets.html}
+\url{https://www.math.univ-toulouse.fr/staph/npfda/npfda-datasets.html}
 }
 \description{
 Phoneme curves
 }
 \details{
 The following instructions have been used file: \cr
-\url{http://www.math.univ-toulouse.fr/staph/npfda/npfda-phondiscRS.txt}\cr
+\url{https://www.math.univ-toulouse.fr/staph/npfda/npfda-phondiscRS.txt}\cr
 of \code{Phoneme dataset} file.
 }
 \examples{
@@ -46,7 +46,7 @@ table(phoneme$classlearn)
 }
 \references{
 Ferraty, F. and Vieu, P. (2006). \emph{NPFDA in practice}. Free
-access on line at \url{http://www.math.univ-toulouse.fr/staph/npfda/}
+access on line at \url{https://www.math.univ-toulouse.fr/staph/npfda/}
 }
 \author{
 Manuel Febrero-Bande and Manuel Oviedo de la Fuente

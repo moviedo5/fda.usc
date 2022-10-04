@@ -83,7 +83,7 @@ in \code{\link{fregre.np}}. The output \eqn{y} is scalar. A functional
 covariate \eqn{X} and a multivariate non functional covariate \eqn{Z} are
 considered.
 
-\deqn{y =\emph{r(X)}+\sum_{j=1}^{p}{Z_j\beta_j}+\epsilon}{y =
+\deqn{y =r(X)+\sum_{j=1}^{p}{Z_j\beta_j}+\epsilon}{y =
 r(X)+\sum_(j=1:p) Z_j \beta_j+\epsilon}
 
 The unknown smooth real function \eqn{r} is estimated by means of
