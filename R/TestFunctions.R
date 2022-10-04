@@ -5,12 +5,12 @@
 #' @description Two tests for the equality of means and covariances of two populations are provided.
 #'  Both tests are constructed under gaussianity following Horvath & Kokoszka, 2012, Chapter 5.
 #' 
-#' @details \code{\link{mean.test.fdata}} computes the test for equality of means. 
+#' @details \code{\link{fmean.test.fdata}} computes the test for equality of means. 
 #' \code{\link{cov.test.fdata}} computes the test for equality of covariance operators.
 #' Both tests have asymptotic distributions under the null related with chi-square distribution. Also, a 
 #' parametric bootstrap procedure is implemented in both cases. 
 #' 
-#' @aliases mean.test.fdata cov.test.fdata
+#' @aliases fmean.test.fdata cov.test.fdata
 #' @param X.fdata \code{fdata} object containing the curves from the first population.
 #' @param Y.fdata \code{fdata} object containing the curves from the second population.
 #' @param method c("X2","Boot"). "X2" includes the asymptotic distribution. "Boot" computes the bootstrap approximation.
@@ -42,7 +42,7 @@
 #' fsig=1
 #' X=rproc2fdata(100,tt,mu1,sigma="vexponential",par.list=list(scale=0.2,theta=0.35))
 #' Y=rproc2fdata(100,tt,mu2,sigma="vexponential",par.list=list(scale=0.2*fsig,theta=0.35))
-#' mean.test.fdata(X,Y,npc=-.98,draw=TRUE)
+#' fmean.test.fdata(X,Y,npc=-.98,draw=TRUE)
 #' cov.test.fdata(X,Y,npc=5,draw=TRUE)
 #' bet=0.1
 #' mu1=fdata(10*tt*(1-tt)^(1+bet),tt)
@@ -50,14 +50,14 @@
 #' fsig=1.5
 #' X=rproc2fdata(100,tt,mu1,sigma="vexponential",par.list=list(scale=0.2,theta=0.35))
 #' Y=rproc2fdata(100,tt,mu2,sigma="vexponential",par.list=list(scale=0.2*fsig,theta=0.35))
-#' mean.test.fdata(X,Y,npc=-.98,draw=TRUE)
+#' fmean.test.fdata(X,Y,npc=-.98,draw=TRUE)
 #' cov.test.fdata(X,Y,npc=5,draw=TRUE)
 #' }
 #' 
 #' @rdname fEqMoments.test
-#' @export mean.test.fdata
+#' @export fmean.test.fdata
 
-mean.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),npc=5,alpha=0.95,B=1000,draw=FALSE){
+fmean.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),npc=5,alpha=0.95,B=1000,draw=FALSE){
   if ("X2" %in% method) ix2=TRUE else {ix2=FALSE;Unm1=NA;Unm2=NA}
   if ("Boot" %in% method) iboot=TRUE else {iboot=FALSE;Unm=NA;Uboot=NA;qboot=NA;draw=FALSE}
   n=nrow(X.fdata)
@@ -203,7 +203,7 @@ cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),npc=5,alpha=0.95,B
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.febrero@@usc.es}
-#' @seealso  \code{\link{mean.test.fdata}, \link{cov.test.fdata}}.
+#' @seealso  \code{\link{fmean.test.fdata}, \link{cov.test.fdata}}.
 #' @references Sejdinovic, D., Sriperumbudur, B., Gretton, A., Fukumizu, K. \emph{Equivalence of distance-based and RKHS-based statistics in Hypothesis Testing} The Annals of Statistics, 2013. 
 #' DOI \bold{10.1214/13-AOS1140}. 
 #' @keywords htest
@@ -216,7 +216,7 @@ cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),npc=5,alpha=0.95,B
 #' fsig=1
 #' X=rproc2fdata(100,tt,mu1,sigma="vexponential",par.list=list(scale=0.2,theta=0.35))
 #' Y=rproc2fdata(100,tt,mu2,sigma="vexponential",par.list=list(scale=0.2*fsig,theta=0.35))
-#' mean.test.fdata(X,Y,npc=-.98,draw=TRUE)
+#' fmean.test.fdata(X,Y,npc=-.98,draw=TRUE)
 #' cov.test.fdata(X,Y,npc=5,draw=TRUE)
 #' bet=0.1
 #' mu1=fdata(10*tt*(1-tt)^(1+bet),tt)
@@ -224,7 +224,7 @@ cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),npc=5,alpha=0.95,B
 #' fsig=1.5
 #' X=rproc2fdata(100,tt,mu1,sigma="vexponential",par.list=list(scale=0.2,theta=0.35))
 #' Y=rproc2fdata(100,tt,mu2,sigma="vexponential",par.list=list(scale=0.2*fsig,theta=0.35))
-#' mean.test.fdata(X,Y,npc=-.98,draw=TRUE)
+#' fmean.test.fdata(X,Y,npc=-.98,draw=TRUE)
 #' cov.test.fdata(X,Y,npc=5,draw=TRUE)
 #' XYRP.test(X,Y,nproj=15)
 #' MMD.test(X,Y,B=1000)

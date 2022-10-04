@@ -20,6 +20,7 @@ globalVariables('icnt')
   #importFrom(parallel, "makeCluster", "stopCluster", "detectCores", "clusterExport", "clusterEvalQ")
 #' @importFrom doParallel registerDoParallel
 #' @importFrom iterators  icount
+#' @importFrom kSamples ad.test
 
 #' @importFrom foreach %dopar% getDoParWorkers getDoParRegistered getDoParName getDoParVersion foreach registerDoSEQ setDoSeq setDoPar
 #' @import parallel
