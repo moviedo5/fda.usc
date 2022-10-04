@@ -121,7 +121,7 @@ for (i in 1:length(r2)) {
 #############################################################################
 
 round(apply(pred[,,1:(k-1),,c(1,5,10),drop=FALSE],c(4,5,1:2),mean,na.rm=T),4)#The AR(1) and AR(2) models fail to capture the cycle dynamics in the data, as they do not have any complex conjugate roots
-#http://www.sciencedirect.com/science/article/pii/S0047259X08001590
+#https://www.sciencedirect.com/science/article/pii/S0047259X08001590
 
 
 #The misspecification in the correlation structure for GLS and the smoothing approach is created by using as a working model an AR(1) instead of an AR(2). The amount of misspecification depends on the correlation strength of the generated structure with AR(2); see Figure 2. It is clear that estimating the correlation structure using an AR(1) process will capture mostly frequencies around zero, whereas it will represent poorly frequencies further away from zero.

@@ -299,7 +299,7 @@ This "bug" has involved the following functions: fregre.lm(), fregre.glm() and f
 Release 1.0.0 was released in Oct. 2012 as the working version to
 accompany 'Febrero-Bande, M. and  Oviedo de la Fuente, M. (2012).
 'Statistical Computing in Functional Data Analysis: The R Package fda.usc.
-Journal of Statistical Software, 51(4), 1-28., URL http://www.jstatsoft.org/v51/i04/.'
+Journal of Statistical Software, 51(4), 1-28., URL https://www.jstatsoft.org/v51/i04/.'
 New functions added: 
     depth.RT() implements a random Tukey depth (RT)
 	and its corresponding  some shortcut functions.

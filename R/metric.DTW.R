@@ -18,7 +18,7 @@
 #'   \item WDTW: Weight Dynamic time warping
 #'   \item TWED: twed   
 #' }
-# Futher information in \url{http://timeseriesclassification.com/}
+# Futher information in \url{https://timeseriesclassification.com/}
 #' 
 #' @return DTW matrix 
 #'

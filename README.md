@@ -74,7 +74,7 @@ card](https://zenodo.org/record/3386752/files/RefCard_fda.usc_v1.pdf?download=1)
 Febrero-Bande, M. and Oviedo de la Fuente, M. (2012). Statistical
 Computing in Functional Data Analysis: The R Package fda.usc. *Journal
 of Statistical Software*, 51(4):1-28.
-<http://dx.doi.org/10.18637/jss.v051.i04>
+<https://dx.doi.org/10.18637/jss.v051.i04>
 
 <!-- 
 <https://www.jstatsoft.org/v51/i04/>
@@ -93,7 +93,7 @@ R CMD build fda.usc
 R CMD check fda.usc_2.0.3.tar.gz --as-cran
 R CMD INSTALL fda.usc_2.0.3.tar.gz --build
 
-Manuel Oviedo PhD thesis [Advances in functional regression and classification models](http://hdl.handle.net/10347/18236)
+Manuel Oviedo PhD thesis [Advances in functional regression and classification models](https://hdl.handle.net/10347/18236)
 
 -->
 

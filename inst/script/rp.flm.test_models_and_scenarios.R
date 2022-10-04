@@ -32,9 +32,9 @@
 #' plot(r.bridge(n = 100)$X.fdata)
 #' @author Manuel Febrero-Bande (\email{manuel.febrero@@usc.es}) and Eduardo Garcia-Portugues (\email{edgarcia@@est-econ.uc3m.es}).
 #' @references 
-#' Cardot, H., Ferraty, F., Sarda, P. (2003) Spline estimators for the functional linear model. Statistica Sinica, 13(3), 571--592. \url{http://www3.stat.sinica.edu.tw/statistica/oldpdf/a13n31.pdf}
+#' Cardot, H., Ferraty, F., Sarda, P. (2003) Spline estimators for the functional linear model. Statistica Sinica, 13(3), 571--592. \url{https://www3.stat.sinica.edu.tw/statistica/oldpdf/a13n31.pdf}
 #' 
-#' Hall, P. and Hosseini-Nasab, M. (2006) On properties of functional principal components analysis. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 68(1), 109--126. \url{http://dx.doi.org/10.1111/j.1467-9868.2005.00535.x}
+#' Hall, P. and Hosseini-Nasab, M. (2006) On properties of functional principal components analysis. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 68(1), 109--126. \url{https://dx.doi.org/10.1111/j.1467-9868.2005.00535.x}
 #' @export 
 r.cfs.2003 <- function(n, t = seq(0, 1, len = 201), b = c(2, 4, 5) / sqrt(2), 
                        type = c("a", "b")[1]) {

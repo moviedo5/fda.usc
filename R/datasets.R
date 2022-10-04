@@ -111,7 +111,7 @@ NULL
 #' @references Febrero-Bande, M., Galeano, P., and Gonzalez-Manteiga, W.
 #' (2008).  \emph{Outlier detection in functional data by depth measures with
 #' application to identify abnormal NOx levels}. Environmetrics 19, 4, 331-345.
-#' @source \url{http://mediambient.gencat.cat/ca/inici}
+#' @source \url{https://mediambient.gencat.cat/ca/inici}
 #' @keywords datasets
 #' @examples
 #' 
@@ -132,7 +132,7 @@ NULL
 #' Phoneme curves
 #' 
 #' The following instructions have been used file: \cr
-#' \url{http://www.math.univ-toulouse.fr/staph/npfda/npfda-phondiscRS.txt}\cr
+#' \url{https://www.math.univ-toulouse.fr/staph/npfda/npfda-phondiscRS.txt}\cr
 #' of \code{Phoneme dataset} file.
 #' 
 #' @name phoneme
@@ -157,9 +157,9 @@ NULL
 #' @author Manuel Febrero-Bande and Manuel Oviedo de la Fuente
 #' <manuel.oviedo@@udc.es>
 #' @references Ferraty, F. and Vieu, P. (2006). \emph{NPFDA in practice}. Free
-#' access on line at \url{http://www.math.univ-toulouse.fr/staph/npfda/}
+#' access on line at \url{https://www.math.univ-toulouse.fr/staph/npfda/}
 #' @source
-#' \url{http://www.math.univ-toulouse.fr/staph/npfda/npfda-datasets.html}
+#' \url{https://www.math.univ-toulouse.fr/staph/npfda/npfda-datasets.html}
 #' @keywords datasets
 #' @examples
 #' 

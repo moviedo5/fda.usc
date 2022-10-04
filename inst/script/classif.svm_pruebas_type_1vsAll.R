@@ -96,7 +96,7 @@ pred$posterior[1:11,]-pred2$posterior[1:11,]
 
 
 install.packages("flexmix")
-install.packages("locClass", repos="http://R-Forge.R-project.org")
+install.packages("locClass", repos="https://R-Forge.R-project.org")
 library(locClass)
 ?wlda
 # Hand, D. J., Vinciotti, V. (2003), Local versus global models for classification problems: Fitting models where it matters, The American Statistician, 57(2) 124–130.
@@ -450,7 +450,7 @@ library(xgboost)
 
 install.packages("h2o")
 library(h2o)
-#http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+#https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 #cuenta de usuario (como aemet!)
 h2o.init()
 #For H2O package documentation, ask for help:

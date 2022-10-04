@@ -45,7 +45,7 @@
 #' data analysis.} Springer Series in Statistics, New York.
 #' 
 #' Ferraty, F. and Vieu, P. (2006). \emph{NPFDA in practice}. Free access on
-#' line at \url{http://www.math.univ-toulouse.fr/staph/npfda/}
+#' line at \url{https://www.math.univ-toulouse.fr/staph/npfda/}
 #' @keywords classif
 #' @examples
 #' \dontrun{
