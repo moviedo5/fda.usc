@@ -29,7 +29,7 @@ return(list("centers"=out$centers,"cluster"=grupo))
 # @rdname kmeans.fd
 # @export
 kmeans.centers.update=function(out,group,dfunc=func.trim.FM,draw=TRUE,par.dfunc=list(trim=0.05),...){
-  if (class(out)!="kmeans.fd") stop("Error: incorrect input data")
+  if (!inherits(out,"kmeans.fd")) stop("Error: incorrect input data")
   z=out$fdataobj[["data"]]
   tt=out$fdataobj[["argvals"]]
   rtt<-out$fdataobj[["rangeval"]]

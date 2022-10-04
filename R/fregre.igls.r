@@ -262,14 +262,14 @@ fregre.igls<-function (formula, data, basis.x = NULL, basis.b = NULL, correlatio
           fdat <- data[[vfunc[i]]]
           if (is.null(basis.x[[vfunc[i]]])) 
             basis.x[[vfunc[i]]] <- fdat$basis
-          else if (class(basis.x[[vfunc[i]]]) == "pca.fd") 
+          else if (inherits(basis.x[[vfunc[i]]], "pca.fd")) 
             bsp1 = FALSE
           if (is.null(basis.b[[vfunc[i]]]) & bsp1) 
             basis.b[[vfunc[i]]] <- create.fdata.basis(fdat, 
                                                       l = 1:max(5, floor(basis.x[[vfunc[i]]]$nbasis/5)), 
                                                       type.basis = basis.x[[vfunc[i]]]$type, 
                                                       rangeval = fdat$basis$rangeval)
-          else if (class(basis.x[[vfunc[i]]]) == "pca.fd") 
+          else if (inherits(basis.x[[vfunc[i]]], "pca.fd")) 
             bsp2 = FALSE
           if (bsp1 & bsp2) {
             r = fdat[[2]][[3]]
@@ -666,7 +666,7 @@ fregre.igls<-function (formula, data, basis.x = NULL, basis.b = NULL, correlatio
       beta.l[[vfunc[i]]] = fd(z$coefficients[name.coef[[vfunc[i]]]], 
                               basis.b[[vfunc[i]]])
     else {
-      if (class(data[[vfunc[i]]])[1] == "fdata") {
+      if (inherits(data[[vfunc[i]]], "fdata")) {
         beta.est <- z$coefficients[name.coef[[vfunc[i]]]] * 
           vs.list[[vfunc[i]]]
         beta.est$data <- colSums(beta.est$data)

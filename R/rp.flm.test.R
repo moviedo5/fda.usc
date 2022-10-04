@@ -118,7 +118,7 @@ rdir.pc <- function(n, X.fdata, ncomp = 0.95, fdata2pc.obj =
                     sd = 0, zero.mean = TRUE, norm = FALSE) {
   
   # Check fdata
-  if (class(X.fdata) != "fdata") {
+  if (!inherits(X.fdata, "fdata")) {
     
     stop("X.fdata must be of class fdata")
     

@@ -141,7 +141,7 @@ depth.modep=function(mfdata,mfdataref=mfdata,h=NULL,metric,
                      scale=FALSE,trim=0.25,draw=FALSE,ask=FALSE) 
 {
   equal<-identical(mfdata,mfdataref)
-  if (class(mfdata) == "list"){
+  if (inherits(mfdata,"list")){
     lenl <- length(mfdata)
     lenl2 <- length(mfdataref)
     m0 <- nrow(mfdata[[1]])

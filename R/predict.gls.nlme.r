@@ -3,7 +3,7 @@ predict.gls<-function (object, newdata, na.action = na.fail, ...)
   if (missing(newdata)) {
     return(fitted(object))
   }
-  if (class(object$formula) == "formula")    form <- getCovariateFormula(object$formula)  
+  if (inherits(object$formula, "formula"))    form <- getCovariateFormula(object$formula)  
   else   form <- getCovariateFormula(object)  
   mfArgs <- list(formula = form, data = newdata, na.action = na.action)
   mfArgs$drop.unused.levels <- TRUE

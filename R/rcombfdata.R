@@ -43,7 +43,7 @@
 rcombfdata=function(n = 10, fdataobj, mu,
                     sdarg = rep(1,nrow(fdataobj)),
                     norm = 1){
-  if (class(fdataobj)!="fdata") 
+  if (!inherits(fdataobj,"fdata")) 
     stop("Argument fdataobj must be of class fdata")
   tt <- argvals(fdataobj)
   if (missing(mu)) 
@@ -60,7 +60,7 @@ rcombfdata=function(n = 10, fdataobj, mu,
 #' @rdname rcombfdata
 #' @export
 gridfdata=function(coef,fdataobj,mu){
-  if (class(fdataobj)!="fdata") stop("Argument fdataobj must be of class fdata")
+  if (!inherits(fdataobj,"fdata")) stop("Argument fdataobj must be of class fdata")
   nr=nrow(fdataobj)
   tt <- argvals(fdataobj)
   if (missing(mu)) 

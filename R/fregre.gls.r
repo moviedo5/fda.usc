@@ -259,15 +259,15 @@ if (length(vfunc)>0) {
    }
   }
  	else {
- 		if(class(data[[vfunc[i]]])[1]=="fd"){
+ 		if(inherits(data[[vfunc[i]]],"fd")){
       fdat<-data[[vfunc[i]]]
       if (is.null(basis.x[[vfunc[i]]]))  basis.x[[vfunc[i]]]<-fdat$basis
-      else   if (class(basis.x[[vfunc[i]]])=="pca.fd") bsp1=FALSE
+      else   if (inherits(basis.x[[vfunc[i]]],"pca.fd")) bsp1=FALSE
       if (is.null(basis.b[[vfunc[i]]])& bsp1)
          basis.b[[vfunc[i]]]<-create.fdata.basis(fdat,
          l=1:max(5,floor(basis.x[[vfunc[i]]]$nbasis/5)),type.basis=basis.x[[vfunc[i]]]$type,
          rangeval=fdat$basis$rangeval)
-      else           if (class(basis.x[[vfunc[i]]])=="pca.fd") bsp2=FALSE
+      else           if (inherits(basis.x[[vfunc[i]]],"pca.fd")) bsp2=FALSE
       if (bsp1 & bsp2) {
           r=fdat[[2]][[3]]
 #          tt = seq(r[1], r[2], len = length(fdat[[3]]$time))
@@ -422,7 +422,7 @@ if (length(vfunc)>0) {
  #      df<-n-z$df.residual
 #      z$H<-H
       z$r2 <- 1 - sum(z$residuals^2)/sum(ycen^2)       
-      if  (class(basis.x[[vfunc[1]]])=="basisfd") {
+      if  (inherits(basis.x[[vfunc[1]]],"basisfd")) {
         z$call[[1]] = "fregre.basis"
         }
        else {
@@ -464,7 +464,7 @@ for (i in 1:length(vfunc)) {
  beta.l[[vfunc[i]]]=fd(z[["coefficients"]][name.coef[[vfunc[i]]]],basis.b[[vfunc[i]]])
  }
  else{
-	if(class(data[[vfunc[i]]])[1]=="fdata"){
+	if(inherits(data[[vfunc[i]]],"fdata")){
 #     beta.est<-z$coefficients[name.coef[[vfunc[i]]]]*vs.list[[vfunc[i]]]
      beta.est<-z$coefficients[name.coef[[vfunc[i]]]]*vs.list[[vfunc[i]]]
      beta.est$data<-colSums(beta.est$data)

@@ -137,7 +137,7 @@ k=1
  mean.list=vs.list=JJ=list()
  bsp1<-bsp2<-TRUE
  for (i in 1:lenfunc) {
-   if(class(newx[[vfunc[i]]])[1]=="fdata"){
+   if(inherits(newx[[vfunc[i]]],"fdata")){
       tt<-data[[vfunc[i]]][["argvals"]]
       rtt<-data[[vfunc[i]]][["rangeval"]]
       fdataobj<-data[[vfunc[i]]]
@@ -247,15 +247,15 @@ k=1
          XX = cbind(XX,Z)}
   }
  	else {
- 		if(class(data[[vfunc[i]]])[1]=="fd"){
+ 		if(inherits(data[[vfunc[i]]],"fd")){
       fdat<-data[[vfunc[i]]]
       if (is.null(basis.x[[vfunc[i]]]))  basis.x[[vfunc[i]]]<-fdat$basis
-      else   if (class(basis.x[[vfunc[i]]])=="pca.fd") bsp1=FALSE
+      else   if (inherits(basis.x[[vfunc[i]]],"pca.fd")) bsp1=FALSE
       if (is.null(basis.b[[vfunc[i]]])& bsp1)
          basis.b[[vfunc[i]]]<-create.fdata.basis(fdat,
          l=1:max(5,floor(basis.x[[vfunc[i]]]$nbasis/5)),type.basis=basis.x[[vfunc[i]]]$type,
          rangeval=fdat$basis$rangeval)
-      else           if (class(basis.x[[vfunc[i]]])=="pca.fd") bsp2=FALSE
+      else           if (inherits(basis.x[[vfunc[i]]],"pca.fd")) bsp2=FALSE
       if (bsp1 & bsp2) {
           r=fdat[[2]][[3]]
           if (!is.null( basis.x[[vfunc[i]]]$dropind)) {

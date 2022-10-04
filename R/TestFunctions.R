@@ -234,16 +234,15 @@ cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),npc=5,alpha=0.95,B
 #' @rdname fEqDistrib.test
 #' @export XYRP.test
 
-XYRP.test=function(X,Y,nproj=10,npc=5,test=c("KS","AD")){
-require(kSamples)
+XYRP.test=function(X.fdata,Y.fdata,nproj=10,npc=5,test=c("KS","AD")){
 pvalues=matrix(NA,nrow=nproj,ncol=length(test))
 colnames(pvalues)=test
 rownames(pvalues)=paste0("h",1:nproj)
-aa=create.pc.basis(c(X,Y),1:npc)
+aa=create.pc.basis(c(X.fdata,Y.fdata),1:npc)
 h=rcombfdata(nproj,aa$basis)
 for (i in 1:nproj){
-Xpr=inprod.fdata(h[i],X)
-Ypr=inprod.fdata(h[i],Y)
+Xpr=inprod.fdata(h[i],X.fdata)
+Ypr=inprod.fdata(h[i],Y.fdata)
 for (k in 1:length(test)){
 if (test[k]=="KS") {
 pvalues[i,k]=ks.test(Xpr,Ypr,exact=TRUE)$p.value } else {

@@ -154,7 +154,7 @@ if (length(vfunc)>0)  {
 # print(object$basis.x[[vfunc[i]]])
 # print(object$basis.x[[vfunc[i]]]$type)
 #print(vfunc)
-   if(class(data[[vfunc[i]]])[1]=="fdata")  {
+   if(inherits(data[[vfunc[i]]],"fdata"))  {
      fdataobj<-data[[vfunc[i]]]
       x.fd<-fdataobj[["data"]]
       tt<-fdataobj[["argvals"]]
@@ -193,8 +193,8 @@ if (length(vfunc)>0)  {
        else XX = cbind(XX, Z)
       }
       else {
-          if(class(data[[vfunc[i]]])[1]=="fd")  {
-             if (class(object$basis.x[[vfunc[i]]])!="pca.fd") {
+          if(inherits(data[[vfunc[i]]],"fd"))  {
+             if (!inherits(object$basis.x[[vfunc[i]]],"pca.fd")) {
              x.fd<-fdataobj<-data[[vfunc[i]]]
  	    	     r=x.fd[[2]][[3]]
              J<-object$JJ[[vfunc[i]]]
@@ -516,7 +516,7 @@ sig11<-sig1[(n1+1):n,(n1+1):n]
 #  print(dim(sig22))
 W0<-sig22
     W <- try(solve(W0),silent=TRUE)
-    if (class(W)=="try-error") {
+    if (inherits(W,"try-error")) {
       sv<-svd(W0)
       W<-drop((sv$v%*%diag(1/sv$d)%*%t(sv$u)))
       warning("Inverse of sigma computed by SVD")
@@ -694,7 +694,8 @@ if (!is.null(object$corStruct)) {
 # print("entra corSTruct")             
 if (names(object$correlation)=="cor.AR"|names(object$correlation)=="cor.ARMA")  {
 # print("entra cor.AR cor.ARMA") 
-if ((class(object$corStruct[[1]])[1]=="Arima" | class(object$corStruct[[1]])[1]=="ar") & length(object$corStruct)>1)  {
+#if ((class(object$corStruct[[1]])[1]=="Arima" | class(object$corStruct[[1]])[1]=="ar") & length(object$corStruct)>1)  {
+if (inherits(object$corStruct[[1]],c("Arima","ar"))  & length(object$corStruct)>1)  {
     ype<-NULL
 # print("para cada grupo")
 #print(object[["correlation"]][[1]][["group"]])
@@ -708,7 +709,7 @@ if ((class(object$corStruct[[1]])[1]=="Arima" | class(object$corStruct[[1]])[1]=
 #     ind<-gr==lev[j]
       if (lennn!=0) {
 #        ype[ind]=predict(object$corStruct[[lev[i]]],object$residuals[ind],se.fit=se.fit,n.ahead=lennn)  
-if (class(object$corStruct[[1]])[1]=="Arima")    ype[ind]=predict(object$corStruct[[lev[j]]],se.fit=se.fit,n.ahead=lennn)
+if (inherits(object$corStruct[[1]],"Arima"))    ype[ind]=predict(object$corStruct[[lev[j]]],se.fit=se.fit,n.ahead=lennn)
 #####if (class(object$corStruct[[1]])[1]=="ar")       ype[ind]<-0 # si es diferente viene del arima y no del ar
 #print(ype[ind])
 #print(object$corStruct[[lev[j]]])
@@ -718,13 +719,13 @@ if (class(object$corStruct[[1]])[1]=="Arima")    ype[ind]=predict(object$corStru
     }    
 # print(names(object$corStruc))              
 # print(class(object$corStruc$ar))
-if (class(object$corStruct$ar)=="Arima")  ype=predict(object$corStruct$ar,se.fit=se.fit,n.ahead=nn)
-if (class(object$corStruct$ar)=="ar")      ype=predict(object$corStruct$ar,object$residuals,se.fit=se.fit,n.ahead=nn)
+if (inherits(object$corStruct$ar,"Arima"))  ype=predict(object$corStruct$ar,se.fit=se.fit,n.ahead=nn)
+if (inherits(object$corStruct$ar,"ar"))      ype=predict(object$corStruct$ar,object$residuals,se.fit=se.fit,n.ahead=nn)
 #ype=NULL# PQ DEBE SER 0predict(object$corStruct$ar,se.fit=se.fit,n.ahead=nn)
 #print(ype);print("ype3")
 #    ype=predict(object$corStruct$ar,object$residuals,se.fit=se.fit,n.ahead=nn)
 #print("ype")    ;print(ype)
-if (class(object$corStruct[[1]])[1]=="lm")  {
+if (inherits(object$corStruct[[1]],"lm"))  {
 #    print("cor Struct lm")
     coef.lm<-coef(object$corStruct$lm)
     p<-length(coef.lm)
@@ -917,8 +918,7 @@ predict.fregre.igls<-function (object, newx = NULL, data, df = df
     if (!is.null(object$corStruct)) {
       if (names(object$correlation) == "cor.AR" | names(object$correlation) == 
           "cor.ARMA") {
-        if ((class(object$corStruct[[1]])[1] == "Arima" | 
-             class(object$corStruct[[1]])[1] == "ar") & 
+        if (inherits(object$corStruct[[1]],c("Arima","ar")) & 
             length(object$corStruct) > 1) {
           ype <- NULL
           gr <- data[, object[["correlation"]][[1]][["group"]]]
@@ -929,8 +929,7 @@ predict.fregre.igls<-function (object, newx = NULL, data, df = df
             previousone <- object$corStruct[[lev[j]]]
             ind <- gr == lev[j]
             if (lennn != 0) {
-              if (class(object$corStruct[[1]])[1] == 
-                  "Arima") 
+              if (inherits(object$corStruct[[1]],"Arima")) 
                 out = predict(object$corStruct[[lev[j]]], 
                               se.fit = se.fit, n.ahead = lennn)
               if (se.fit)
@@ -939,15 +938,15 @@ predict.fregre.igls<-function (object, newx = NULL, data, df = df
             }
           }
         }
-        if (class(object$corStruct$ar) == "Arima") {
+        if (inherits(object$corStruct$ar, "Arima")) {
           ype = predict(object$corStruct$ar, se.fit = se.fit, 
                         n.ahead = nn)
         }
-        if (class(object$corStruct$ar) == "ar") {
+        if (inherits(object$corStruct$ar, "ar")) {
           ype = predict(object$corStruct$ar, object$residuals, 
                         se.fit = se.fit, n.ahead = nn)
         }          
-        if (class(object$corStruct[[1]])[1] == "lm") {
+        if (inherits(object$corStruct[[1]], "lm")) {
           coef.lm <- coef(object$corStruct$lm)
           p <- length(coef.lm)
           lenp <- length(p)

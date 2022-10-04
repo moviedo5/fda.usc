@@ -858,7 +858,7 @@ pred2ML <- function(object, new.fdataobj = NULL, ...) {
   if (length(vfunc) > 0) {
     for (i in 1:length(vfunc)) {
       #print("vfunc");      print(vfunc[i])
-      if (class(data[[vfunc[i]]])[1] == "fdata") {
+      if (inherits(data[[vfunc[i]]], "fdata")) {
         fdataobj <- data[[vfunc[i]]]
         dat <- fdataobj$data
         tt <- fdataobj[["argvals"]]
@@ -905,9 +905,8 @@ pred2ML <- function(object, new.fdataobj = NULL, ...) {
           first = FALSE
         }   else XX = cbind(XX, Z)
       }    else {# fd clas
-        if (class(data[[vfunc[i]]])[1] == "fd") {
-          if (class(object$basis.x[[vfunc[i]]]) != 
-              "pca.fd") {
+        if (inherits(data[[vfunc[i]]], "fd")) {
+          if (!inherits(object$basis.x[[vfunc[i]]],"pca.fd")) {
             x.fd <- fdataobj <- data[[vfunc[i]]]
             r = x.fd[[2]][[3]]
             J <- object$JJ[[vfunc[i]]]

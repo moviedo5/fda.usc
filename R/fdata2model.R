@@ -1,7 +1,7 @@
 # Internal functions
 inprodbasis<-function(basis1,basis2){
-if (class(basis1)=="pca.fd") basis1$type="pca.fd"
-if (class(basis2)=="pca.fd") basis2$type="pca.fd"
+if (inherits(basis1,"pca.fd")) basis1$type="pca.fd"
+if (inherits(basis2,"pca.fd")) basis2$type="pca.fd"
 if (is.null(basis1$type) | is.null(basis2$type)) stop("Basis type not recognized")
 if (basis1$type=="pc" | basis1$type=="pls"){
 	nms1=rownames(basis1$basis$data)
@@ -9,7 +9,7 @@ if (basis1$type=="pc" | basis1$type=="pls"){
 	nms2=rownames(basis2$basis$data)
 	J=inprod.fdata(basis1$basis,basis2$basis)
 	}else{
-	if (class(basis2)=="pca.fd") {
+	if (inherits(basis2,"pca.fd")) {
 	baux2=fdata(t(eval.fd(basis1$basis$argvals,basis2$harmonics)),argvals=basis1$basis$argvals,rangeval=basis1$basis$rangeval)
 	nms2=basis2$harmonics$fdnames[[2]]
 		} else { 
@@ -20,7 +20,7 @@ if (basis1$type=="pc" | basis1$type=="pls"){
 	}
 } else if (basis2$type=="pc" | basis2$type=="pls"){
 	nms2=rownames(basis2$basis$data)
-	if (class(basis1)=="pca.fd") {
+	if (inherits(basis1,"pca.fd")) {
 	baux1=fdata(t(eval.fd(basis2$basis$argvals,basis1$harmonics)),argvals=basis2$basis$argvals,rangeval=basis2$basis$rangeval)
 	nms1=basis1$harmonics$fdnames[[2]]
 		} else { 
@@ -29,8 +29,8 @@ if (basis1$type=="pc" | basis1$type=="pls"){
 	}
 	J=inprod.fdata(baux1,basis2$basis)
 } else {
-	if (class(basis1)=="pca.fd") {baux1=basis1$harmonics;nms1=basis1$harmonics$fdnames[[2]]} else {baux1=basis1;nms1=basis1$names}
-	if (class(basis2)=="pca.fd") {baux2=basis2$harmonics;nms2=basis2$harmonics$fdnames[[2]]} else {baux2=basis2;nms2=basis2$names}
+	if (inherits(basis1,"pca.fd")) {baux1=basis1$harmonics;nms1=basis1$harmonics$fdnames[[2]]} else {baux1=basis1;nms1=basis1$names}
+	if (inherits(basis2,"pca.fd")) {baux2=basis2$harmonics;nms2=basis2$harmonics$fdnames[[2]]} else {baux2=basis2;nms2=basis2$names}
 	J=inprod(baux1,baux2)
 }
 rownames(J)=nms1

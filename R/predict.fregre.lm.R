@@ -216,7 +216,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
           }
         else {
           if (inherits(newx[[vfunc[i]]], "fd")) {
-            if (class(object$basis.x[[vfunc[i]]]) != "pca.fd") {
+            if (!inherits(object$basis.x[[vfunc[i]]], "pca.fd")) {
 #              x.fd <- fdataobj <- data[[vfunc[i]]]
               x.fd <- newx[[vfunc[i]]]
               r = x.fd[["basis"]][["rangeval"]]

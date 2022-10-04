@@ -164,7 +164,7 @@ is.ldata=function(x){
     return(x)
   } else{
   for (m in seq_along(x)){
-    if (class(x[[m]])=="data.frame") {
+    if (inherits(x[[m]],"data.frame")) {
       x[[m]] = x[[m]][i,]
     } else {
         x[[m]] = x[[m]][i]

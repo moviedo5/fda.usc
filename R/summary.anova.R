@@ -13,7 +13,7 @@ summary.fanova.RPm<-function (object, ndec=NULL,...) {
            print(round(object$p.Boot,ndec))
      }
  }
- if (class(object)=="fanova.hetero") {
+ if (inherits(object,"fanova.hetero")) {
      cat("\n  - SUMMARY ANOVA HETEROCEDASTHIC - \n")
           print(object)
   }

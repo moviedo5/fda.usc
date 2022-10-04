@@ -87,7 +87,7 @@
 #' @export plot.fdata
 plot.fdata<-function(x,type,main,xlab,ylab,lty=1,mfrow=c(1,1),time=1,...) {
 #if (missing(lty)) lty = par.fda.usc$lty
-if (any(class(x)=="fdata2d"))  {
+if (inherits(x,"fdata2d"))  {
 #stop("Object is not fdata2d class")
 if (missing(type)) type="image.contour"
 #if (missing(main)) main=x[["names"]][["main"]]
@@ -289,7 +289,7 @@ plot.depth<-function(x,trim, levgray=.9,...){
   x <- dep$fdataobj
   y <- dep$fdataori
   
-  if (class(dep)=="depth"){
+  if (inherits(dep,"depth")){
     name=dep$name
     mtrim=dep$mtrim
     nl=nrow(mtrim)

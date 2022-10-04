@@ -70,7 +70,7 @@ plot.depth<-function(x,trim, levgray=.9,...){
   x <- dep$fdataobj
   y <- dep$fdataori
 
-	if (class(dep)=="depth"){
+	if (inherits(dep,"depth")){
   	name=dep$name
   	mtrim=dep$mtrim
   	nl=nrow(mtrim)

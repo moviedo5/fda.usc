@@ -205,7 +205,7 @@ cor.ARMA<-function (x, p, d = 0, q = 0, method = "lm", order.max = 1)
 ###############################################################################
 corExpo<-function(xy,range, method = "euclidean",p=2){
  if (is.data.frame(xy)) xy <-data.matrix(xy)
- if (class(xy)=="dist") dxy<-data.matrix(xy)
+ if (inherits(xy,"dist")) dxy<-data.matrix(xy)
  else dxy<- as.matrix(dist(xy,method=method,p=p,diag =TRUE, upper = TRUE))
  vdxy<-as.vector(dxy)
 if (missing(range)) range<-quantile(vdxy,.9)/3

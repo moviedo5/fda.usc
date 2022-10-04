@@ -53,7 +53,7 @@ if (length(vfunc)>0)  {
 	  if (first) {XX=Z; first=FALSE} else {XX=cbind(XX,Z)}
 	  } else {
 	  if (inherits(newx[[vfunc[i]]],"fd")) {
-            if (class(object$basis.x[[vfunc[i]]]) != "pca.fd") {
+            if (!inherits(object$basis.x[[vfunc[i]]], "pca.fd")) {
               x.fd <- newx[[vfunc[i]]]
               r = x.fd[["basis"]][["rangeval"]]
               J <- object$vs.list[[vfunc[i]]]
