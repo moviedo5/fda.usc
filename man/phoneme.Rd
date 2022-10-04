@@ -24,7 +24,7 @@ factor). Factor levels: "sh" 1, "iy" 2, "dcl" 3, "aa" 4 and "ao" 5.\cr \cr
 1, "iy" 2, "dcl" 3, "aa" 4 and "ao" 5.\cr
 }
 \source{
-\url{https://www.math.univ-toulouse.fr/~ferray/SOFTWARES/NPFDA/npfda-datasets.html}
+\url{https://www.math.univ-toulouse.fr/~ferraty/SOFTWARES/NPFDA/npfda-datasets.html}
 }
 \description{
 Phoneme curves

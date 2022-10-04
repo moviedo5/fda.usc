@@ -146,7 +146,7 @@ and Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 
 \emph{Contributors:} Pedro Galeano, Alicia Nieto-Reyes, Eduardo
 Garcia-Portugues \email{eduardo.garcia@usc.es} and STAPH group
-\url{https://www.math.univ-toulouse.fr/staph/} 
+\url{https://www.math.univ-toulouse.fr/~ferraty/} 
 
 \emph{Maintainer:} Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 }
