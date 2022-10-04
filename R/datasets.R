@@ -132,7 +132,7 @@ NULL
 #' Phoneme curves
 #' 
 #' The following instructions have been used file: \cr
-#' \url{https://www.math.univ-toulouse.fr/staph/npfda/npfda-phondiscRS.txt}\cr
+#' \url{https://www.math.univ-toulouse.fr/~ferraty/SOFTWARES/NPFDA/npfda-phondiscRS.txt}\cr
 #' of \code{Phoneme dataset} file.
 #' 
 #' @name phoneme
@@ -157,9 +157,9 @@ NULL
 #' @author Manuel Febrero-Bande and Manuel Oviedo de la Fuente
 #' <manuel.oviedo@@udc.es>
 #' @references Ferraty, F. and Vieu, P. (2006). \emph{NPFDA in practice}. Free
-#' access on line at \url{https://www.math.univ-toulouse.fr/staph/npfda/}
+#' access on line at \url{https://www.math.univ-toulouse.fr/~ferraty/SOFTWARES/NPFDA/}
 #' @source
-#' \url{https://www.math.univ-toulouse.fr/staph/npfda/npfda-datasets.html}
+#' \url{https://www.math.univ-toulouse.fr/~ferray/SOFTWARES/NPFDA/npfda-datasets.html}
 #' @keywords datasets
 #' @examples
 #' 
