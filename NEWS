@@ -1,5 +1,7 @@
-Version 2.1.0
+﻿Version 2.1.0
 1) fdata2basis always return centred fdataobj and mean. The mean is computed using the basis.
+2) New funtions: fEqMoments.test, fmean.test.fdata, cov.test.fdata for checking the equality of means and/or covariance between two populations under gaussianity. 
+3) New funtions: fEqDistrib.test, XYRP.test, MMD.test, MMDA.test, fEqDistrib.test for checking the equality of distributions between two functional populations. 
 
 Version 2.0.3:
 1) summary.fdata.comp(), Several changes on summary.fdata.comp

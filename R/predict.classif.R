@@ -128,20 +128,20 @@ predict.classif <- function (object, new.fdataobj = NULL,
                    
                    classif.np={
                      pred2np(object, new.fdataobj = new.fdataobj,...)},
-                    classif.adaboost={
-                      
-                     pr<-predict.classif.adaboost(object, newdata = new.fdataobj, type = "probs", ...)
-                     pr
-                     },
-                   classif.bootstrap={
-   #                  print("aaa")
-                     #pr<-predict.classif.bootstrap(object,
-                     pr<-pred2boot(object,
-                                               newdata = new.fdataobj
-                                               , type = "probs", ...)
-                     #print("si predice bootstap")
-                     pr
-                     },
+   #                  classif.adaboost={
+   #                    
+   #                   pr<-predict.classif.adaboost(object, newdata = new.fdataobj, type = "probs", ...)
+   #                   pr
+   #                   },
+   # #                 classif.bootstrap={
+   # # #                  print("aaa")
+   # #                   #pr<-predict.classif.bootstrap(object,
+   # #                   pr<-pred2boot(object,
+   # #                                             newdata = new.fdataobj
+   # #                                             , type = "probs", ...)
+   # #                   #print("si predice bootstap")
+   # #                   pr
+   # #                   },
                    classif.DD={
                      #print("si predice DD")
                      pr<-predict.classif.DD(object,  new.fdataobj,  type, ...)

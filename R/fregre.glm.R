@@ -130,13 +130,9 @@ fregre.glm=function(formula,family = gaussian(), data,
     hay.pls<-FALSE
     
     
-    out <- fdata2model.penalty(vfunc = vfunc, vnf=vnf, response=response
-                               , data=data, basis.x = basis.x, basis.b=basis.b, 
+    out <- fdata2model.penalty(vfunc = vfunc, vnf=vnf, response=response,
+							data=data, basis.x = basis.x, basis.b=basis.b, 
                                pf=pf, tf=tf)
-    
-    # print("sale fdata2model")
-    
-#    vs.list <- out$vs.list
     mean.list <- out$mean.list
     name.coef <- out$name.coef
 #    bsp1<-out$bsp1

@@ -337,8 +337,8 @@ a<- predict(a3$fit[[1]], newx = ,a3$fit[[1]]$x,type ='linear.predictor')
 a<- predict(a3$fit[[1]], newx = a3$fit[[1]]$x,type ='votes')
 a
 ####################################
-#fdata2model<-fda.usc:::fdata2model
-#weights4class<-fda.usc:::weights4class
+fdata2model<-fda.usc:::fdata2model
+weights4class<-fda.usc:::weights4class
 
  require(fda.usc)
 data(phoneme)

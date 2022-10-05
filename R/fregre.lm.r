@@ -150,8 +150,8 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
   #P <- lambda <- NULL
   #out <- fdata2model.penalty(vfunc, vnf, response, data, basis.x,basis.b,pf,tf,lambda,P)
   #print("entra fdata2model")
-  out <- fdata2model.penalty(vfunc = vfunc, vnf=vnf, response=response
-                             , data=data, basis.x = basis.x, basis.b=basis.b, 
+  out <- fdata2model.penalty(vfunc = vfunc, vnf=vnf, response=response,
+							 data=data, basis.x = basis.x, basis.b=basis.b, 
                              pf=pf, tf=tf, lambda=lambda, P=P)
   #print("sale fdata2model")
   mean.list <- out$mean.list
@@ -281,7 +281,7 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
   z
 }     
 ################# auxiliary functions: 
-# design2coefs(); design2hat() lm.penalty(); fdata2model.penalty (ïn fdata2model.R)
+# design2coefs(); design2hat() lm.penalty(); fdata2model.penalty (in fdata2model.R)
 design2coefs <- function(Z,W,y){
   tZ <- t(Z)      
   # option 1
