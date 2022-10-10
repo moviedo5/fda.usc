@@ -96,35 +96,35 @@ Adapted version from the original method in repression: \code{\link{fregre.gsam.
 \examples{
 \dontrun{
 data(tecator)
-x=tecator$absorp.fdata
-x1<-fdata.deriv(x)
-x2<-fdata.deriv(x,nderiv=2)
-y=factor(ifelse(tecator$y$Fat<12,0,1))
-xcat0<-cut(rnorm(length(y)),4)
-xcat1<-cut(tecator$y$Protein,4)
-xcat2<-cut(tecator$y$Water,4)
+x <- tecator$absorp.fdata
+x1 <- fdata.deriv(x)
+x2 <- fdata.deriv(x,nderiv=2)
+y <- factor(ifelse(tecator$y$Fat<12,0,1))
+xcat0 <- cut(rnorm(length(y)),4)
+xcat1 <- cut(tecator$y$Protein,4)
+xcat2 <- cut(tecator$y$Water,4)
 ind <- 1:129
 dat    <- data.frame("Fat"=y, x1$data, xcat1, xcat2)
 ldat <- ldata("df"=dat[ind,],"x"=x[ind,],"x1"=x1[ind,],"x2"=x2[ind,])
 # 3 functionals (x,x1,x2), 3 factors (xcat0, xcat1, xcat2)
 # and 100 scalars (impact poitns of x1) 
 
-res.gam<-classif.gsam(Fat~s(x),data=ldat)
-summary(res.gam1)
+res.gam <- classif.gsam(Fat~s(x),data=ldat)
+summary(res.gam)
 
 # Time consuming
-res.gam.vs<-classif.gsam.vs("Fat",data=ldat)
+res.gam.vs <- classif.gsam.vs("Fat",data=ldat)
 summary(res.gam.vs)
 res.gam.vs$i.predictor
 res.gam.vs$ipredictor
 
 # Prediction 
-newldat <- list("df"=dat[-ind,],"x"=x[-ind,],
+newldat <- ldata("df"=dat[-ind,],"x"=x[-ind,],
                 "x1"=x1[-ind,],"x2"=x2[-ind,])
-pred.gam<-predict(res.gam,newldat)                
-pred.gam.vs<-predict(res.gam.vs,newldat)
-cat2meas(newldat$df$Fat,pred.gam)
-cat2meas(newldat$df$Fat,pred.gam.vs)
+pred.gam <- predict(res.gam,newldat)                
+pred.gam.vs <- predict(res.gam.vs,newldat)
+cat2meas(newldat$df$Fat, pred.gam)
+cat2meas(newldat$df$Fat, pred.gam.vs)
 }
 }
 \references{

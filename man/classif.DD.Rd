@@ -174,46 +174,48 @@ classifier and the method \emph{One vs the Rest} in the logistic case
 \dontrun{
 # DD-classif for functional data
 data(tecator)
-ab=tecator$absorp.fdata
-ab1=fdata.deriv(ab,nderiv=1)
-ab2=fdata.deriv(ab,nderiv=2)
-gfat=factor(as.numeric(tecator$y$Fat>=15))
+ab <- tecator$absorp.fdata
+ab1 <- fdata.deriv(ab, nderiv = 1)
+ab2 <- fdata.deriv(ab, nderiv = 2)
+gfat <- factor(as.numeric(tecator$y$Fat>=15))
 
 # DD-classif for p=1 functional  data set
-out01=classif.DD(gfat,ab,depth="mode",classif="np")
-out02=classif.DD(gfat,ab2,depth="mode",classif="np")
+out01 <- classif.DD(gfat,ab,depth="mode",classif="np")
+out02 <- classif.DD(gfat,ab2,depth="mode",classif="np")
 # DD-plot in gray scale
-ctrl<-list(draw=T,col=gray(c(0,.5)),alpha=.2)
-out02bis=classif.DD(gfat,ab2,depth="mode",classif="np",control=ctrl)
+ctrl< <- list(draw=T,col=gray(c(0,.5)),alpha=.2)
+out02bis <- classif.DD(gfat,ab2,depth="mode",classif="np",control=ctrl)
 
 # 2 depth functions (same curves) 
-out03=classif.DD(gfat,list(ab2,ab2),depth=c("RP","mode"),classif="np")
+ldat <- mfdata("ab" = ab, "ab2" = ab2)
+out03 <- classif.DD(gfat,list(ab2,ab2),depth=c("RP","mode"),classif="np")
 # DD-classif for p=2 functional data set
-ldata<-list("ab"=ab,"ab2"=ab2)
 # Weighted version 
-out04=classif.DD(gfat,ldata,depth="mode",classif="np",w=c(0.5,0.5))
+out04 <- classif.DD(gfat, ldat, depth="mode",
+                    classif="np", w=c(0.5,0.5))
 # Model version
-out05=classif.DD(gfat,ldata,depth="mode",classif="np")
+out05 <- classif.DD(gfat,ldat,depth="mode",classif="np")
 # Integrated version (for multivariate functional data)
-out06=classif.DD(gfat,ldata,depth="modep",classif="np")
+out06 <- classif.DD(gfat,ldat,depth="modep",classif="np")
 
 # DD-classif for multivariate data
 data(iris)
-group<-iris[,5]
-x<-iris[,1:4]
-out10=classif.DD(group,x,depth="LD",classif="lda")
-summary(out10)
-out11=classif.DD(group,list(x,x),depth=c("MhD","LD"),classif="lda")
-summary(out11)
+group <- iris[,5]
+x <- iris[,1:4]
+out07 <- classif.DD(group,x,depth="LD",classif="lda")
+summary(out07)
+out08 <- classif.DD(group, list(x,x), depth=c("MhD","LD"),
+                    classif="lda")
+summary(out08)
 
 # DD-classif for functional data: g levels 
 data(phoneme)
-mlearn<-phoneme[["learn"]]
-glearn<-as.numeric(phoneme[["classlearn"]])-1
-out20=classif.DD(glearn,mlearn,depth="FM",classif="glm")
-out21=classif.DD(glearn,list(mlearn,mlearn),depth=c("FM","RP"),classif="glm")
-summary(out20)
-summary(out21)
+mlearn <- phoneme[["learn"]]
+glearn <- as.numeric(phoneme[["classlearn"]])-1
+out09 <- classif.DD(glearn,mlearn,depth="FM",classif="glm")
+out10 <- classif.DD(glearn,list(mlearn,mlearn),depth=c("FM","RP"),classif="glm")
+summary(out09)
+summary(out10)
 }
 }
 \references{

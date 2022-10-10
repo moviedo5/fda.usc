@@ -1,63 +1,53 @@
 #######################
-classif.gsam2boost=function(group,fdataobj,family=binomial(),weights=NULL,
-basis.x=NULL,basis.b=NULL,par.gsam=NULL,CV=FALSE,...){
-C<-match.call()
-a<-list()
-mf <- match.call(expand.dots = FALSE)
-m <- match(c( "group","fdataobj","family","basis.x","basis.b","par.gsam","CV"), names(mf), 0L)
-numg=nlevels(as.factor(group)) 
-  if (is.fdata(fdataobj))   {
-     gsam<-C[[3]];
-     if (is.null(par.gsam$func)&is.null(par.gsam$k))   {gsam<-paste("s(X)",sep="")}
-     else  {
-        if (!is.null(par.gsam$func)&!is.null(par.gsam$k))
-            gsam<-paste(par.gsam$func,"(X,k=",par.gsam$k,")",sep="")
-        else if (is.null(par.gsam$func)&!is.null(par.gsam$k))
-            gsam<-paste("s(X,k=",par.gsam$k,")",sep="")
-            else         if (!is.null(par.gsam$func)&is.null(par.gsam$k))
-            gsam<-paste(par.gsam$func,"(X)",sep="")
-           }
-#      pf2<-as.formula(paste(C[[2]], "~", gsam,sep = ""))
+classif.gsam2boost=function(group,fdataobj,family=binomial(),
+                            weights=NULL, basis.x=NULL,basis.b=NULL,
+                            par.gsam=NULL,CV=FALSE,...){
+ C <- match.call()
+ a <- list()
+ mf <- match.call(expand.dots = FALSE)
+ m <- match(c( "group","fdataobj","family","basis.x","basis.b","par.gsam","CV"), names(mf), 0L)
+ numg <- nlevels(as.factor(group)) 
+ if (is.fdata(fdataobj))   {
+   gsam<-C[[3]];
+   if (is.null(par.gsam$func)&is.null(par.gsam$k))   {gsam<-paste("s(X)",sep="")}
+   else  {
+    if (!is.null(par.gsam$func)&!is.null(par.gsam$k))
+        gsam<-paste(par.gsam$func,"(X,k=",par.gsam$k,")",sep="")
+    else if (is.null(par.gsam$func)&!is.null(par.gsam$k))
+      gsam<-paste("s(X,k=",par.gsam$k,")",sep="")
+         else         if (!is.null(par.gsam$func)&is.null(par.gsam$k))
+         gsam<-paste(par.gsam$func,"(X)",sep="")
+  }
+  pf2<-as.formula(paste("y~", gsam,sep = ""))
+  dataf<-data.frame("y"=group)
+  ldata<-list("df"=dataf,"X"=fdataobj)
+  X<-C[[3]]       
+  }   else {   
+      if (is.null(par.gsam$func)) par.gsam$func<-"s"
+      if (is.null(par.gsam$k)) par.gsam$k<--1        
+    dataf<-data.frame("y"=group,fdataobj)
+      ldata<-list("df"=dataf)
+      if (is.matrix(fdataobj)) nms<-colnames(fdataobj)
+      else nms<-names(fdataobj)               
+      gsam<-paste("+",par.gsam$func,"(",nms,",k=",par.gsam$k,")",sep="",collapse="")
       pf2<-as.formula(paste("y~", gsam,sep = ""))
-      dataf<-data.frame("y"=group)
-      ldata<-list("df"=dataf,"X"=fdataobj)
-      X<-C[[3]]       
-      }
-   else {   
-        if (is.null(par.gsam$func)) par.gsam$func<-"s"
-        if (is.null(par.gsam$k)) par.gsam$k<--1        
-        dataf<-data.frame("y"=group,fdataobj)
-        ldata<-list("df"=dataf)
-        if (is.matrix(fdataobj)) nms<-colnames(fdataobj)
-        else nms<-names(fdataobj)               
-        gsam<-paste("+",par.gsam$func,"(",nms,",k=",par.gsam$k,")",sep="",collapse="")
-#      pf2<-as.formula(paste(C[[2]], "~", gsam,sep = ""))
-        pf2<-as.formula(paste("y~", gsam,sep = ""))
-              
-#        if (is.null(par.gsam$formula)) {
-#          aaa<-paste("s(",nms,")",collapse="+")
-#          pf2<-formula(paste("y~",aaa,sep=""))
-#          }
-#        else pf2<-par.gsam$formula  
-        X<-C[[3]]              
-     }   
-newy<-y<-ldata$df$y
-if (!is.factor(y)) y<-as.factor(y)
-n<-length(y);
-newdata<-ldata
-
-   ngroup<-nlevels(y)
-   lev<-levels(y)
-prob<-ngroup<-length(table(y))
-if (!is.null(basis.x)) basis.x=list("X"=basis.x)
-if (!is.null(basis.b)) basis.b=list("X"=basis.b)
-formula<-pf2
-lev <-levels(y)
-if (ngroup==2) {
+      X<-C[[3]]              
+  }   
+ newy <- y <- ldata$df$y
+ if (!is.factor(y)) y <- as.factor(y)
+ n <- length(y);
+ newdata <- ldata
+ ngroup<-nlevels(y)
+ lev<-levels(y)
+ prob<-ngroup<-length(table(y))
+ if (!is.null(basis.x)) basis.x=list("X"=basis.x)
+ if (!is.null(basis.b)) basis.b=list("X"=basis.b)
+ formula<-pf2
+ lev <-levels(y)
+ if (ngroup==2) {
       #lev<-(as.numeric(names(table(y)))
       newy<-ifelse(y==lev[1],0,1)
       newdata$df$y<-newy
-#      formula<-formula(paste("y~",gsam),sep="")
       a[[1]]<-fregre.gsam(formula,data=newdata,family=family,weights=weights,basis.x=basis.x,
       basis.b=basis.b,CV=CV,...)
       yest<-ifelse(a[[1]]$fitted.values<.5,lev[1],lev[2])
@@ -71,38 +61,30 @@ if (ngroup==2) {
          }
       else prob[2]<-0
       prob.group<-a[[1]]$fitted.values
-      #devolver a mayores y estimada
-   }
-else {
-   #lev<-as.numeric(names(table(y)))
-   prob.group<-array(NA,dim=c(n,ngroup))
-   colnames(prob.group)<-lev
-   for (i in 1:ngroup) {
-    # print(0)     
-              newy<-ifelse(y==lev[i],0,1)
-              newdata$df$y<-newy
-#              formula<-formula(paste("y~",gsam),sep="")
- #             print(2)
-
-
-              a[[i]]<-fregre.gsam(formula,data=newdata,family=family, 
-                                  weights=weights,basis.x=basis.x,basis.b=basis.b,CV=CV,...)
-#print(3)              
-              prob.group[,i]<-a[[i]]$fitted.values
-            }
-   yest<-lev[apply(prob.group,1,which.min)]######no sera which.max
-   yest<-factor(yest,levels=lev)
-   tab<-table(yest,y)
-   for (i in 1:ngroup) {     prob[i]=tab[i,i]/sum(tab[,i])     }
-   names(prob)<-lev
-}
-max.prob=sum(diag(tab))/sum(tab)
-output<-list(fdataobj=fdataobj,group=y,group.est=as.factor(yest),
-prob.classification=prob,prob.group=prob.group,C=C,m=m,max.prob=max.prob,
-formula=formula,data=newdata)
-output$fit <- a
-class(output) <- "classif"
-return(output)
+ } else {
+  prob.group<-array(NA,dim=c(n,ngroup))
+  colnames(prob.group)<-lev
+  for (i in 1:ngroup) {
+      newy<-ifelse(y==lev[i],0,1)
+      newdata$df$y<-newy
+      a[[i]]<-fregre.gsam(formula,data=newdata,family=family, 
+                          weights=weights,basis.x=basis.x,
+                          basis.b=basis.b,CV=CV,...)
+      prob.group[,i]<-a[[i]]$fitted.values
+  }
+  yest<-lev[apply(prob.group,1,which.min)]######no sera which.max
+  yest<-factor(yest,levels=lev)
+  tab<-table(yest,y)
+  for (i in 1:ngroup) {     prob[i]=tab[i,i]/sum(tab[,i])     }
+  names(prob)<-lev
+ }
+ max.prob=sum(diag(tab))/sum(tab)
+ output<-list(fdataobj=fdataobj,group=y,group.est=as.factor(yest),
+ prob.classification=prob,prob.group=prob.group,C=C,m=m,max.prob=max.prob,
+ formula=formula,data=newdata)
+ output$fit <- a
+ class(output) <- "classif"
+ return(output)
 }
 
 
@@ -144,7 +126,7 @@ classif.glm2boost=function(group,fdataobj,family=binomial(),basis.x=NULL,
     #      lev<-as.numeric(names(table(y)))
     newy<-ifelse(y==lev[1],0,1)
     newdata$df$y<-newy
-    a[[1]]<-fregre.glm(formula,data=newdata,family=binomial,basis.x=basis.x,
+     a[[1]]<-fregre.gsam(formula,data=newdata,family=binomial,basis.x=basis.x,
                        basis.b=basis.b,CV=CV)                
     yest<-ifelse(a[[1]]$fitted.values<.5,lev[1],lev[2])
     tab<-table(yest,y)
@@ -165,8 +147,8 @@ classif.glm2boost=function(group,fdataobj,family=binomial(),basis.x=NULL,
     for (i in 1:ngroup) {
       newy<-ifelse(y==lev[i],0,1)
       newdata$df$y<-newy
-      a[[i]]<-fregre.glm(formula,data=newdata,family=family,basis.x=basis.x,
-                         basis.b=basis.b,CV=CV)
+      a[[i]]<-fregre.gsam(formula,data=newdata,family=family,basis.x=basis.x,
+                         basis.b=basis.b)
       prob.group[,i]<-a[[i]]$fitted.values
     }
     yest<-lev[apply(prob.group,1,which.min)]
@@ -177,12 +159,13 @@ classif.glm2boost=function(group,fdataobj,family=binomial(),basis.x=NULL,
   }
   max.prob=sum(diag(tab))/sum(tab)
   output<-list(fdataobj=fdataobj,group=y,group.est=as.factor(yest),
-               prob.classification=prob,prob.group=prob.group,C=C,m=m,max.prob=max.prob
-               ,formula=formula,data=newdata)
+               prob.classification=prob,prob.group=prob.group,C=C,
+               m=m,max.prob=max.prob,formula=formula,data=newdata)
   output$fit<-a  
   class(output) <- "classif"
   return(output)
 }
+
 #######################
 classif.rpart2boost=function(group,fdataobj,basis.x=NULL,basis.b=NULL,...){   
 if (!is.factor(group)) group<-as.factor(group)

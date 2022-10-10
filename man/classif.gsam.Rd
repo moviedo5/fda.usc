@@ -85,20 +85,17 @@ procedure.
 }
 \examples{
 \dontrun{
-require(fda.usc)
 data(phoneme)
-mlearn<-phoneme[["learn"]]
-glearn<-phoneme[["classlearn"]]
-mtest<-phoneme[["test"]]
-gtest<-phoneme[["classtest"]]
-dataf<-data.frame(glearn)
-dat=list("df"=dataf,"x"=mlearn)
-a1<-classif.gsam(glearn~s(x,k=3),data=dat)
+ldat <- ldata("df" = data.frame(y = phoneme[["classlearn"]]),
+              "x" = phoneme[["learn"]])
+              classifKgroups <- fda.usc:::classifKgroups
+a1 <- classif.gsam( y ~ s(x,k=3),data=ldat)
 summary(a1)
-newdat<-list("x"=mtest)
-p1<-predict(a1,newdat)
-table(gtest,p1)
-sum(p1==gtest)/250
+newldat <- ldata("df" = data.frame(y = phoneme[["classtest"]]),
+              "x" = phoneme[["test"]])
+p1 <- predict(a1,newldat)
+table(newldat$df$y,p1)
+sum(p1==newldat$df$y)/250
 }
 }
 \references{

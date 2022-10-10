@@ -75,25 +75,22 @@
 #' @keywords classif
 #' @examples
 #' \dontrun{
-#' require(fda.usc)
 #' data(phoneme)
-#' mlearn<-phoneme[["learn"]]
-#' glearn<-phoneme[["classlearn"]]
-#' mtest<-phoneme[["test"]]
-#' gtest<-phoneme[["classtest"]]
-#' dataf<-data.frame(glearn)
-#' dat=list("df"=dataf,"x"=mlearn)
-#' a1<-classif.gsam(glearn~s(x,k=3),data=dat)
+#' ldat <- ldata("df" = data.frame(y = phoneme[["classlearn"]]),
+#'               "x" = phoneme[["learn"]])
+#'               classifKgroups <- fda.usc:::classifKgroups
+#' a1 <- classif.gsam( y ~ s(x,k=3),data=ldat)
 #' summary(a1)
-#' newdat<-list("x"=mtest)
-#' p1<-predict(a1,newdat)
-#' table(gtest,p1)
-#' sum(p1==gtest)/250
+#' newldat <- ldata("df" = data.frame(y = phoneme[["classtest"]]),
+#'               "x" = phoneme[["test"]])
+#' p1 <- predict(a1,newldat)
+#' table(newldat$df$y,p1)
+#' sum(p1==newldat$df$y)/250
 #' }
 #' @export classif.gsam
-classif.gsam<-function (formula, data, family = binomial(),  weights = "equal",
-          basis.x = NULL,  CV = FALSE, prob=0.5,
-          type= "1vsall",...) 
+classif.gsam <- function (formula, data, family = binomial(),  
+                        weights = "equal", basis.x = NULL,  
+                        CV = FALSE, prob=0.5, type = "1vsall",...) 
 {
   C <- match.call()
   a <- list()
@@ -129,8 +126,8 @@ classif.gsam<-function (formula, data, family = binomial(),  weights = "equal",
     newy <- y
     newdata$df$y <- newy
     a[[1]] <- fregre.gsam(formula, data = newdata, family = family, 
-                          weights = weights, basis.x = basis.x, basis.b = basis.x, 
-                          CV = CV, ...)
+                          weights = weights, basis.x = basis.x, 
+                          basis.b = basis.x, CV = CV, ...)
     out2glm <- classif2groups(a,y,prob,ny)
   }
   else {
@@ -151,12 +148,12 @@ classif.gsam<-function (formula, data, family = binomial(),  weights = "equal",
         newdata$df[response] <- newy
         a[[ivot]]<-fregre.gsam(formula,data=newdata,family=family, 
                                weights = weights,basis.x=basis.x,
-                              basis.b=basis.x,CV=CV, subset = i2a2,...)
+                              basis.b=basis.x, CV = CV, subset = i2a2,...)
         prob.log <- a[[ivot]]$fitted.values  > prob
-        votos[i2a2, cvot[1,ivot]] <- votos[i2a2, cvot[1,ivot]]+as.numeric(prob.log)
-        votos[i2a2, cvot[2,ivot]] <- votos[i2a2, cvot[2,ivot]]+as.numeric(!prob.log)
+        votos[i2a2, cvot[1,ivot]] <- votos[i2a2, cvot[1,ivot]] + as.numeric(prob.log)
+        votos[i2a2, cvot[2,ivot]] <- votos[i2a2, cvot[2,ivot]] + as.numeric(!prob.log)
       }
-      out2glm<-classifKgroups(y,votos,ny)
+      out2glm <- classifKgroups(y,votos,ny)
     }
     else { # One vs Other
       prob.group<-array(NA,dim=c(n,ngroup))
@@ -168,18 +165,19 @@ classif.gsam<-function (formula, data, family = binomial(),  weights = "equal",
         weights0[igroup] <- weights0[igroup]/ sum(weights0[igroup])
         weights0[!igroup] <- weights0[!igroup]/sum(weights0[!igroup])
         newdata$df[response]<-newy
-        a[[i]]<-fregre.gsam(formula,data=newdata,family=family,weights = weights0,basis.x=basis.x,
-                           basis.b=basis.x, CV=CV,...)
-        prob.group[,i]<-a[[i]]$fitted.values
+        a[[i]]<-fregre.gsam(formula,data=newdata,family=family,
+                            weights = weights0,basis.x=basis.x,
+                            basis.b=basis.x, CV=CV,...)
+        prob.group[,i] <- a[[i]]$fitted.values
       }
-      out2glm<-classifKgroups(y,prob.group,ny)
+      out2glm <- classifKgroups(y, prob.group, ny)
     }
   }
   yest <- out2glm$yest
   prob1 <- out2glm$prob1
   prob.group <- out2glm$prob.group
-  max.prob=mean(yest==y)
-  output <- list(formula = formula, data = data, group = y, 
+  max.prob <- mean(yest==y)
+  output <- list(formula = formula, data = data, group = y,  levels = ny, 
                  group.est = yest, prob.classification = prob1, prob.group = prob.group, 
                  C = C, m = m, max.prob = max.prob, fit = a, prob = prob, type = type)
  if (ngroup > 2){
@@ -191,3 +189,4 @@ classif.gsam<-function (formula, data, family = binomial(),  weights = "equal",
   class(output) <- "classif"
   return(output)
 }
+

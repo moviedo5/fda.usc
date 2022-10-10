@@ -45,7 +45,7 @@ function for \code{vector} and \code{matric} objects. \cr
 \examples{
 \dontrun{
 data(tecator)
-names(tecator)[2]<-"df"
+names(tecator)[2] <- "df"
 # Example 1 (list of distances)
 ldist <- metric.ldata(tecator,method="none")
 lapply(ldist,names)

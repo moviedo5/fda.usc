@@ -33,26 +33,26 @@
 #' @examples
 #' \dontrun{
 #' data(phoneme)
-#' mlearn<-phoneme[["learn"]][1:100]
-#' glearn<-phoneme[["classlearn"]][1:100]
+#' mlearn <- phoneme[["learn"]][1:100]
+#' glearn <- phoneme[["classlearn"]][1:100]
 #' 
 #' #	ESTIMATION knn
-#' out1=classif.knn(glearn,mlearn,knn=3)
+#' out1 <- classif.knn(glearn, mlearn, knn = 3)
 #' summary(out1)
 #' 
 #' #	PREDICTION knn
-#' mtest<-phoneme[["test"]][1:100]
-#' gtest<-phoneme[["classtest"]][1:100]
-#' pred1=predict(out1,mtest)
-#' table(pred1,gtest)
-#' 
+#' mtest <- phoneme[["test"]][1:100]
+#' gtest <- phoneme[["classtest"]][1:100]
+#' pred1 <- predict(out1, mtest)
+#' table(pred1, gtest)
+#'  
 #' #	ESTIMATION kernel 
-#' h=2^(0:5)
+#' h <- 2^(0:5)
 #' # using metric distances computed in classif.knn
-#' out2=classif.kernel(glearn,mlearn,h=h,metric=out1$mdist)
+#' out2 <- classif.kernel(glearn, mlearn, h = h, metric = out1$mdist)
 #' summary(out2)
 #' #	PREDICTION kernel
-#' pred2=predict(out2,mtest)
+#' pred2 <- predict(out2,mtest)
 #' table(pred2,gtest)
 #' }
 #' 
@@ -66,7 +66,7 @@ predict.classif <- function (object, new.fdataobj = NULL,
     stop("No classif object entered")
   if (is.null(new.fdataobj)) 
     return(object$group.est)
-  if (is.null(object$prob)) object$prob<-0.5
+  if (is.null(object$prob)) object$prob <- 0.5
   isfdata <- is.fdata(new.fdataobj)
   #object$group <- factor(object$group, levels = levels(object$group)[which(table(object$group) >    0)])
   if (is.null(object$levels)) object$levels <-  levels(object$group)
@@ -562,15 +562,20 @@ pred2gkam <- function(object, new.fdataobj = NULL,  ...) {
 
 ####################################
 pred2gsam <- function(object, new.fdataobj = NULL, ...) {
+  
+ #  object <- a1;  new.fdataobj <- newldat
+  
   lev <- object$levels
-  if (is.null(object$type)) object$type ="1vsall"
+  if (is.null(object$type)) 
+    object$type ="1vsall"
   prob <- ngroup <- length(lev)
-  prob.group <- array(NA, dim = c(nrow(new.fdataobj[[1]]), 
-                                  ngroup))
+  prob.group <- array(NA, 
+                      dim = c(nrow(new.fdataobj[[1]]), ngroup)
+                      )
   colnames(prob.group) <- lev
   if (ngroup == 2) {
-    probs <- predict.fregre.gsam(object$fit[[1]], newx = new.fdataobj, 
-                                 ...)
+    probs <- predict.fregre.gsam(object$fit[[1]], 
+                                 newx = new.fdataobj,...)
     yest <- ifelse(probs > object$prob, lev[2], lev[1])
     prob.group[, 1] <- 1- probs
     prob.group[, 2] <- probs
@@ -599,19 +604,22 @@ pred2gsam <- function(object, new.fdataobj = NULL, ...) {
         prob.grup<-pvotos
       }
     }    else{
-      for (i in 1:ngroup) {
-        prob.group[, i] <- predict.fregre.gsam(object$fit[[i]], 
-                                               newx = new.fdataobj, ...)
+    for (i in 1:ngroup) {
+      prob.group[,i] <- predict.fregre.gsam(object$fit[[i]], 
+                                            newx = new.fdataobj,...)
       }
       group.pred <- factor(lev[apply(prob.group, 1, which.max)], levels = lev)
     }
   }
   return(list("group.pred"=group.pred,"prob.group"=prob.group))
 }
+##################################
+
+
 
 
 ####################################
-pred2gsam2boost<- function(object, new.fdataobj = NULL, ...) {
+pred2gsam2boost <- function(object, new.fdataobj = NULL, ...) {
   lev <- object$levels
   if (is.null(object$type)) object$type ="1vsall"
   prob <- ngroup <- length(lev)
@@ -880,7 +888,9 @@ pred2ML <- function(object, new.fdataobj = NULL, ...) {
          # J <- object$JJ[[vfunc[i]]]
           J <- object$basis.list[[vfunc[i]]]
           Z = t(x.fd$coefs) %*% J
-          colnames(Z) = colnames(J)
+          name2 <- paste(vfunc[i], ".",colnames(J), sep = "")
+          colnames(Z) <- name2
+          
         } else {
         #  print("eeeeeeeeeeeeeeeeeeellllllllllllllllllllllllllssssssssssssssssssssssssssssssssseeeeeeeeeeee")
           # return(pred2pc(object,vfunc,fdataobj,lev=lev))
@@ -947,24 +957,3 @@ if (object$C[[1]]=="classif.cv.glmnet" & NCOL(XX)==1)
   #print("sale ML")#;print(out)  
   return(out)
 }
-
-
-
-# 
-# class(ldatasim)<-c("ldata",class(ldatasim))
-# pred2<-predict.classif( res.glm2,ldatatest)
-# table(newy,pred2)
-# 
-# ii <- 1:100
-# pred2<-predict.classif( res.glm2,ldatasim[ii,row=T])
-# 
-# table(pred2,res.glm2$group.est)
-# 
-# table(ldatasim$df$y,res.glm2$group.est)
-# table(ldatasim$df$y[ii],pred2)
-# 
-# 
-# traceback()
-# ##################################################
-#pred3 <- predict.classif( res.glm3,ldatatest)
-

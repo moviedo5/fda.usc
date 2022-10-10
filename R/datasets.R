@@ -42,10 +42,9 @@
 #' data(aemet)
 #' names(aemet)
 #' names(aemet$df)
-#' par(mfrow=c(3,1))
-#' plot(aemet$temp)
-#' plot(aemet$wind.speed)
-#' plot(aemet$logprec)
+#' class(aemet)<-c("ldata","list") # ldata object
+#' lat <- ifelse(aemet$df$latitude<31,"red","blue")
+#' plot(aemet,col=lat)
 #' }
 NULL
 

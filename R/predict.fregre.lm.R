@@ -84,27 +84,28 @@
 #' x.d2 <- fdata.deriv(x,nderiv=2)
 #' tt <- x[["argvals"]]
 #' dataf <- as.data.frame(tecator$y)
-#' ldat <- ldata("df"=dataf[ind,],"x.d2"=x.d2[ind])
-#' basis.x <- list("x.d2"=create.pc.basis(ldat$x.d2))
-#' res <- fregre.gsam(Fat~s(Water,k=3)+s(x.d2,k=3),data=ldat,
-#'                    family=gaussian(),basis.x=basis.x)
-#' newldat <- list("df"=dataf[-ind,],"x.d2"=x.d2[-ind])
-#' pred <- predict(res,newldat)
+#' ldat <- ldata("df" = dataf[ind,], "x.d2" = x.d2[ind])
+#' basis.x <- list("x.d2" = create.pc.basis(ldat$x.d2))
+#' res <- fregre.gsam(Fat ~  s(x.d2,k=3),
+#'                    data=ldat, family = gaussian(),
+#'                    basis.x = basis.x)
+#' newldat <- ldata("df" = dataf[-ind,], "x.d2" = x.d2[-ind])
+#' pred <- predict(res, newldat)
 #' plot(pred,tecator$y$Fat[-ind])
-#' res.glm <- fregre.glm(Fat  ~ Water+x.d2, data=ldat,
-#'                   family=gaussian(),basis.x=basis.x)
-#' pred.glm <- predict(res.glm,newldat)
+#' res.glm <- fregre.glm(Fat  ~  x.d2, data = ldat,
+#'                   family = gaussian(),basis.x = basis.x)
+#' pred.glm <- predict(res.glm, newldat)
 #' newy <- tecator$y$Fat[-ind]
 #' points(pred.glm,tecator$y$Fat[-ind],col=2)
 #' 
 #' # Time-consuming 
-#' res.gkam <- fregre.gkam(Fat ~ x.d2, data=ldat)
-#' pred.gkam <- predict(res.gkam,newldata)
-#' points(pred.gkam,tecator$y$Fat[-ind],col=4)
+#' res.gkam <- fregre.gkam(Fat ~ x.d2, data = ldat)
+#' pred.gkam <- predict(res.gkam, newldat)
+#' points(pred.gkam,tecator$y$Fat[-ind],col = 4)
 #' 
-#' ((1/length(newy))*sum((drop(newy)-pred)^2))/var(newy)
-#' ((1/length(newy))*sum((newy-pred.glm)^2))/var(newy)    
-#' ((1/length(newy))*sum((newy-pred.gkam)^2))/var(newy)    
+#' ((1/length(newy)) * sum((drop(newy)-pred)^2)) / var(newy)
+#' ((1/length(newy)) * sum((newy-pred.glm)^2)) / var(newy)    
+#' ((1/length(newy)) * sum((newy-pred.gkam)^2)) / var(newy)    
 #' }                                                                                                              
 #' @rdname predict.fregre.lm
 #' @export 
@@ -316,7 +317,7 @@ predict.fregre.lm<-function (object, newx = NULL, type = "response", se.fit = FA
 }
 #################################
 #################################
-effect.fake <- function(object,terms){
+effect.fake <- function(object, terms){
   #fake<-predict(object,type = "terms")
   fake <- terms
   vfunc <- names(object$basis.list)
@@ -330,11 +331,11 @@ effect.fake <- function(object,terms){
     ifunc<-colnames(object$basis.list[[i]])
     dfnames <- intersect(tr,ifunc)
     vf <- c(vf,dfnames)
-    effects<-cbind(effects,rowSums(fake[,dfnames,drop=F]))
+    effects<-cbind(effects,rowSums(fake[,dfnames, drop = F]))
   }
   colnames(effects)<-vfunc
   dfnames <- setdiff(tr,vf)
-  effects<-cbind(fake[,dfnames,drop=F],effects)
+  effects <- cbind(fake[,dfnames,drop=F], effects)
   effects  
 }
 #################################

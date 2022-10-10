@@ -91,39 +91,45 @@ procedure.
 \examples{
 \dontrun{
 data(tecator)
-x=tecator$absorp.fdata
-x.d1<-fdata.deriv(x)
-tt<-x[["argvals"]]
-dataf=as.data.frame(tecator$y)
-nbasis.x=11;nbasis.b=5
-basis1=create.bspline.basis(rangeval=range(tt),nbasis=nbasis.x)
-basis2=create.bspline.basis(rangeval=range(tt),nbasis=nbasis.b)
-f=Fat~s(Protein)+s(x)
-basis.x=list("x"=basis1,"x.d1"=basis1)
-basis.b=list("x"=basis2,"x.d1"=basis2)
-ldata=list("df"=dataf,"x"=x,"x.d1"=x.d1)
-res=fregre.gsam(Fat~Water+s(Protein)+x+s(x.d1),ldata,family=gaussian(),
-basis.x=basis.x,basis.b=basis.b)
-res
-res2=fregre.gsam(Fat~te(Protein,k=3)+x,data=ldata,family=gaussian())
+x <- tecator$absorp.fdata
+x.d1 <- fdata.deriv(x)
+tt <- x[["argvals"]]
+dataf <- as.data.frame(tecator$y)
+nbasis.x <- 11
+nbasis.b <- 5
+basis1 <- create.bspline.basis(rangeval=range(tt),nbasis=nbasis.x)
+basis2 <- create.bspline.basis(rangeval=range(tt),nbasis=nbasis.b)
+f <- Fat ~ s(Protein) + s(x)
+basis.x <- list("x"=basis1,"x.d1"=basis1)
+basis.b <- list("x"=basis2,"x.d1"=basis2)
+ldat <- ldata("df" = dataf, "x" = x , "x.d1" = x.d1)
+res <- fregre.gsam(Fat ~ Water + s(Protein) + x + s(x.d1), ldat,
+                   family = gaussian(),  basis.x = basis.x,
+                   basis.b = basis.b)
+summary(res)
+pred <- predict(res,ldat)
+plot(pred-res$fitted)
+pred2 <- predict.gam(res,res$XX)
+plot(pred2-res$fitted)
+plot(pred2-pred)
+res2 <- fregre.gsam(Fat ~ te(Protein, k = 3) + x, data =  ldat,
+                     family=gaussian())
 summary(res2)
 
 ##  dropind basis pc
-basis.pc0=create.pc.basis(x,c(2,4,7))
-basis.pc1=create.pc.basis(x.d1,c(1:3))
-basis.x=list("x"=basis.pc0,"x.d1"=basis.pc1)
-ldata=list("df"=dataf,"x"=x,"x.d1"=x.d1)  
-res.pc=fregre.gsam(f,data=ldata,family=gaussian(),
-basis.x=basis.x,basis.b=basis.b)
+basis.pc0 <- create.pc.basis(x,c(2,4,7))
+basis.pc1 <- create.pc.basis(x.d1,c(1:3))
+basis.x <- list("x"=basis.pc0,"x.d1"=basis.pc1)
+ldata <- ldata("df"=dataf,"x"=x,"x.d1"=x.d1)  
+res.pc <- fregre.gsam(f,data=ldata,family=gaussian(),
+          basis.x=basis.x,basis.b=basis.b)
 summary(res.pc)
  
 ##  Binomial family
-x=tecator$absorp.fdata
-tecator$y$Fat<-ifelse(tecator$y$Fat>20,1,0)
-x.d1<-fdata.deriv(x)
-dataf=as.data.frame(tecator$y)
-ldata=list("df"=dataf,"x"=x,"x.d1"=x.d1)
-res.bin=fregre.gsam(Fat~Protein+s(x),ldata,family=binomial())
+ldat$df$FatCat <- factor(ifelse(tecator$y$Fat > 20, 1, 0))
+res.bin <- fregre.gsam(FatCat ~ Protein + s(x),ldat,family=binomial())
+summary(res.bin)
+table(ldat$df$FatCat, ifelse(res.bin$fitted.values < 0.5,0,1))
 }
 }
 \references{

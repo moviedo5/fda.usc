@@ -96,13 +96,12 @@ compute the distances between the rows of a data matrix (as
 \examples{
 \dontrun{
 data(phoneme)
-mlearn<-phoneme[["learn"]]
-glearn<-phoneme[["classlearn"]]
-
-h=9:19
-out=classif.np(glearn,mlearn,h=h)
+mlearn <- phoneme[["learn"]]
+glearn <- phoneme[["classlearn"]]
+h <- 9:19
+out <- classif.np(glearn,mlearn,h=h)
 summary(out)
-# round(out$prob.group,4)
+head(round(out$prob.group,4))
 }
 
 }

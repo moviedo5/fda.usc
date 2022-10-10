@@ -32,26 +32,26 @@ of class \code{classif}.  Returns the predicted classes using a previously train
 \examples{
 \dontrun{
 data(phoneme)
-mlearn<-phoneme[["learn"]][1:100]
-glearn<-phoneme[["classlearn"]][1:100]
+mlearn <- phoneme[["learn"]][1:100]
+glearn <- phoneme[["classlearn"]][1:100]
 
 #	ESTIMATION knn
-out1=classif.knn(glearn,mlearn,knn=3)
+out1 <- classif.knn(glearn, mlearn, knn = 3)
 summary(out1)
 
 #	PREDICTION knn
-mtest<-phoneme[["test"]][1:100]
-gtest<-phoneme[["classtest"]][1:100]
-pred1=predict(out1,mtest)
-table(pred1,gtest)
-
+mtest <- phoneme[["test"]][1:100]
+gtest <- phoneme[["classtest"]][1:100]
+pred1 <- predict(out1, mtest)
+table(pred1, gtest)
+ 
 #	ESTIMATION kernel 
-h=2^(0:5)
+h <- 2^(0:5)
 # using metric distances computed in classif.knn
-out2=classif.kernel(glearn,mlearn,h=h,metric=out1$mdist)
+out2 <- classif.kernel(glearn, mlearn, h = h, metric = out1$mdist)
 summary(out2)
 #	PREDICTION kernel
-pred2=predict(out2,mtest)
+pred2 <- predict(out2,mtest)
 table(pred2,gtest)
 }
 

@@ -90,17 +90,15 @@ procedure.
 \examples{
 \dontrun{
 data(phoneme)
-mlearn<-phoneme[["learn"]]
-glearn<-phoneme[["classlearn"]]
-mtest<-phoneme[["test"]]
-gtest<-phoneme[["classtest"]]
-dataf<-data.frame(glearn)
-dat=list("df"=dataf,"x"=mlearn)
-a1<-classif.glm(glearn~x, data = dat)
-newdat<-list("x"=mtest)
-p1<-predict(a1,newdat)
-table(gtest,p1)
-sum(p1==gtest)/250
+ldat <- ldata("df" = data.frame(y = phoneme[["classlearn"]]),
+             "x" = phoneme[["learn"]])
+a1 <- classif.glm(y ~ x, data = ldat)
+summary(a1)
+newldat <- ldata("df" = data.frame(y = phoneme[["classtest"]]),
+                "x" = phoneme[["test"]])
+p1 <- predict(a1,newldat)
+table(newldat$df$y,p1)
+sum(p1==newldat$df$y)/250
 }
 }
 \references{

@@ -150,7 +150,7 @@ classif.nnet=function(formula, data, basis.x=NULL
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  basis.list <- out.func$basis.list
+  basis.list <- out.func$vs.list #basis.list
   mean.list=out.func$mean.list
   rm(out.func)
   n<- ndatos <-NROW(XX)
@@ -394,7 +394,7 @@ classif.rpart=function(formula, data, basis.x=NULL ,weights="equal",type="1vsall
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  basis.list <- out.func$basis.list
+  basis.list <- out.func$vs.list
   mean.list=out.func$mean.list
   rm(out.func)
   
@@ -517,7 +517,7 @@ classif.svm=function(formula, data, basis.x=NULL
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  basis.list <- out.func$basis.list
+  basis.list <- out.func$vs.list
   mean.list=out.func$mean.list
   rm(out.func)
   n <- ndatos <- NROW(XX)
@@ -690,7 +690,7 @@ classif.ksvm=function(formula, data, basis.x=NULL ,weights = "equal",...){
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  basis.list <- out.func$basis.list
+  basis.list <- out.func$vs.list
   mean.list=out.func$mean.list
   rm(out.func)
   par.method <- as.list(substitute(list(...)))[-1L]
@@ -839,7 +839,7 @@ classif.randomForest=function(formula, data, basis.x=NULL,
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  basis.list <- out.func$basis.list
+  basis.list <- out.func$vs.list
   mean.list=out.func$mean.list
   rm(out.func)
   n <- NROW(XX)
@@ -976,7 +976,7 @@ classif.lda=function(formula, data, basis.x=NULL
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  basis.list <- out.func$basis.list
+  basis.list <- out.func$vs.list
   mean.list=out.func$mean.list
   rm(out.func)
   n <- ndatos <- NROW(XX)
@@ -1131,7 +1131,7 @@ classif.qda=function(formula, data, basis.x=NULL
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  basis.list <- out.func$basis.list
+  basis.list <- out.func$vs.list
   mean.list=out.func$mean.list
   rm(out.func)
   n <- ndatos <- NROW(XX)
@@ -1284,7 +1284,7 @@ classif.naiveBayes=function(formula, data, basis.x=NULL, laplace = 0,...)
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  basis.list <- out.func$basis.list
+  basis.list <- out.func$vs.list
   mean.list=out.func$mean.list
   rm(out.func)
   ndatos <- nrow(XX)
@@ -1420,7 +1420,7 @@ classif.cv.glmnet=function(formula, data, basis.x=NULL
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  basis.list <- out.func$basis.list
+  basis.list <- out.func$vs.list
   mean.list=out.func$mean.list
   rm(out.func)
   n <- ndatos <-NROW(XX)
@@ -1547,7 +1547,7 @@ classif.gbm=function(formula, data, basis.x=NULL
   pf <- out.func$pf          
   basis.x <- out.func$basis.x
   XX <- out.func$XX
-  basis.list <- out.func$basis.list
+  basis.list <- out.func$vs.list
   mean.list=out.func$mean.list
   rm(out.func)
   n<- ndatos <-NROW(XX)

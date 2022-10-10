@@ -192,7 +192,8 @@ fdata2model.penalty <- function(vfunc, vnf, response, data,
 #####################################################
 fdata2model <- function(vfunc, vnf, response, data,
                         basis.x=NULL, basis.b = NULL, pf,tf){
-  out <- 1+1
+  out <- fdata2model.penalty(vfunc, vnf, response, data,
+                                  basis.x , basis.b, pf,tf)
   return(out)
 }
 #####################################################
