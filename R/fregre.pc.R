@@ -413,7 +413,6 @@ fregre.pls=function(fdataobj, y=NULL, l = NULL,
     mat[-1,-1] <- lambda*P
     mat[1,1] <- 0   
   }
-  print(mat)
   S <- t(Z)%*%Z+mat
   S <- Minverse(S)
 #  H <- Z%*%S%*%t(Z)

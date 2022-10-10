@@ -299,13 +299,13 @@ flm.test=function(X.fdata,Y,beta0.fdata=NULL,B=5000,est.method="pls",
 		}else if(est.method=="pls"){
 			
 			if(is.null(p)){
-print("PLS1")
+        # print("PLS1")
 				# Method
 				meth="PCvM test for the functional linear model using optimal PLS basis representation"
 			
 				# Choose the number of the basis: SICc is probably the best criteria
 				mod.pls=fregre.pls.cv(fdataobj=X.fdata,y=Y,kmax=10,criteria="SICc") 
-print("PLS2")				
+        #   print("PLS2")				
 				p.opt=length(mod.pls$pls.opt)
 				ord.opt=mod.pls$pls.opt
 				
