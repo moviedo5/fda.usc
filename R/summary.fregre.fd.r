@@ -125,8 +125,8 @@ summary.fregre.fd<-function(object,times.influ=3,times.sigma=3,draw=TRUE,...){
      cat(" *** Summary Functional Regression with Partial Least Squares*** \n\n")
             cat("-Call: ");    print(object$call)
             cat("\n")
-            print(object$coefs)
-            cat("\n-R squared: ",object$r2)
+            print(object$coefficients)
+              cat("\n-R squared: ",object$r2)
 #            cat("\n-Residual variance: ",object$sr2,"\n")
               cat("\n-Residual variance: ",
             object$sr2,"on ",n-object$df.residual," degrees of freedom\n")

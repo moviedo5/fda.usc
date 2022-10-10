@@ -71,10 +71,15 @@ second derivative (curvature) by \code{P=P.penalty(fdataobj["argvals"],P)},
 \examples{
 \dontrun{
 data(tecator)
-x<-tecator$absorp.fdata
-y<-tecator$y$Fat
-res=fregre.pls(x,y,c(1:8),lambda=10)
+x <- tecator$absorp.fdata
+y <- tecator$y$Fat
+res <- fregre.pls(x,y,c(1:4))
 summary(res)
+res1 <- fregre.pls(x,y,l=1:4,lambda=100,P=c(1))
+res4 <- fregre.pls(x,y,l=1:4,lambda=1,P=c(0,0,1))
+summary(res4)#' plot(res$beta.est)
+lines(res1$beta.est,col=4)
+lines(res4$beta.est,col=2)
 }
 }
 \references{

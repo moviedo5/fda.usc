@@ -87,21 +87,22 @@ The response can be fitted by:
 \examples{
 \dontrun{
 data(tecator)
-absorp=tecator$absorp.fdata
-ind=1:129
-x=absorp[ind,]
-y=tecator$y$Fat[ind]
-res=fregre.pc(x,y)
+absorp <- tecator$absorp.fdata
+ind <- 1:129
+x <- absorp[ind,]
+y <- tecator$y$Fat[ind]
+res <- fregre.pc(x,y)
 summary(res)
-res2=fregre.pc(x,y,l=c(1,3,4))
+res2 <- fregre.pc(x,y,l=c(1,3,4))
 summary(res2)
 # Functional Ridge Regression
-res3=fregre.pc(x,y,l=c(1,3,4),lambda=1,P=1)
+res3 <- fregre.pc(x,y,l=c(1,3,4),lambda=1,P=1)
 summary(res3)
 # Functional Regression with 2nd derivative penalization
-res4=fregre.pc(x,y,l=c(1,3,4),lambda=1,P=c(0,0,1))
+res4 <- fregre.pc(x,y,l=c(1,3,4),lambda=1,P=c(0,0,1))
 summary(res4)
-betas<-c(res$beta.est,res2$beta.est,res3$beta.est,res4$beta.est)
+betas <- c(res$beta.est,res2$beta.est,
+           res3$beta.est,res4$beta.est)
 plot(betas)
 } 
 

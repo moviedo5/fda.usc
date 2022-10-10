@@ -86,107 +86,111 @@
 #' @examples
 #' \dontrun{
 #' data(tecator)
-#' absorp=tecator$absorp.fdata
-#' ind=1:129
-#' x=absorp[ind,]
-#' y=tecator$y$Fat[ind]
-#' res=fregre.pc(x,y)
+#' absorp <- tecator$absorp.fdata
+#' ind <- 1:129
+#' x <- absorp[ind,]
+#' y <- tecator$y$Fat[ind]
+#' res <- fregre.pc(x,y)
 #' summary(res)
-#' res2=fregre.pc(x,y,l=c(1,3,4))
+#' res2 <- fregre.pc(x,y,l=c(1,3,4))
 #' summary(res2)
 #' # Functional Ridge Regression
-#' res3=fregre.pc(x,y,l=c(1,3,4),lambda=1,P=1)
+#' res3 <- fregre.pc(x,y,l=c(1,3,4),lambda=1,P=1)
 #' summary(res3)
 #' # Functional Regression with 2nd derivative penalization
-#' res4=fregre.pc(x,y,l=c(1,3,4),lambda=1,P=c(0,0,1))
+#' res4 <- fregre.pc(x,y,l=c(1,3,4),lambda=1,P=c(0,0,1))
 #' summary(res4)
-#' betas<-c(res$beta.est,res2$beta.est,res3$beta.est,res4$beta.est)
+#' betas <- c(res$beta.est,res2$beta.est,
+#'            res3$beta.est,res4$beta.est)
 #' plot(betas)
 #' } 
 #' 
 #' @export fregre.pc
-fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n),...){
+fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),
+                    weights=rep(1,len=n),...){
   if (is(fdataobj,"fdata.comp")) {
-    pc<-fdataobj
-    fdataobj<-pc$fdataobj
+    pc <- fdataobj
+    fdataobj <- pc$fdataobj
     if (is.null(l))    {
-      l<-pc$l
+      l <- pc$l
     }
     else if (length(l)>nrow(pc$basis)) stop("Incorrect value for  argument l")
     x <- fdataobj[["data"]]
     tt <- fdataobj[["argvals"]]                                                    
   }
   else {
-    if (is.null(l)) l<- 1:3
-    if (!is.fdata(fdataobj))    fdataobj = fdata(fdataobj)
+    if (is.null(l)) l <- 1:3
+    if (!is.fdata(fdataobj))    fdataobj <- fdata(fdataobj)
     #  omit<-omit.fdata(fdataobj,y)
     #  fdataobj<-omit[[1]]
     #  y<-omit[[2]]
-    tt<-fdataobj[["argvals"]]
-    x<-fdataobj[["data"]]
-    pc<-fdata2pc(fdataobj,ncomp=max(l),lambda=lambda,P=P)
+    tt <- fdataobj[["argvals"]]
+    x <- fdataobj[["data"]]
+    pc <- fdata2pc(fdataobj,ncomp=max(l),lambda=lambda,P=P)
   }  
   rtt <- fdataobj[["rangeval"]]
   names <- fdataobj[["names"]]
-  n = nrow(x); np <- ncol(x);lenl = length(l)
+  n <- nrow(x)
+  np <- ncol(x)
+  lenl = length(l)
   if (is.null(rownames(x)))        rownames(x) <- 1:n
-  X <-xcen<-pc$fdataobj.cen
+  X <- xcen <- pc$fdataobj.cen
   if (n != (length(y)))   stop("ERROR IN THE DATA DIMENSIONS")
   C <- match.call()
-  ycen = y - mean(y)
-  vs<-t(pc$basis$data[l,,drop=F])
-  scores<-Z<-(pc$coefs[,l,drop=F])
-  cnames<-colnames(pc$coefs)[l]
-  df<-lenl+1
-  J<-min(np,lenl)
-  ymean<-mean(y)
-  ycen<- y - ymean
-  W<-diag(weights) 
+  ycen <- y - mean(y)
+  vs <-t (pc$basis$data[l,,drop=F])
+  scores <- Z <- (pc$coefs[,l,drop=F])
+  cnames <- colnames(pc$coefs)[l]
+  df <- lenl+1
+  J <- min(np,lenl)
+  ymean <- mean(y)
+  ycen <-  y - ymean
+  W <- diag(weights) 
   if (is.logical(lambda)) {
-    #   val<-log(.25*(pc$d[1]^2),base=2)
-    lambda<-.25*(pc$d[1]^2)#lambda<-c(0,2^seq(0,val,len=10))
+    #   val <- log(.25*(pc$d[1]^2),base=2)
+    lambda <- .25*(pc$d[1]^2)#lambda <- c(0,2^seq(0,val,len=10))
   }
   if (lambda>0) {
-    xmean<-pc$mean
-    d<-pc$newd[l]
-    D<-diag(d)
-    diagJ<-diag(J)
-    #    lenrn<-length(rn)
-    scores<-cbind(rep(1,n),pc$coefs[,l])
-    order.deriv<-0     
+    xmean <- pc$mean
+    d <- pc$newd[l]
+    D <- diag(d)
+    diagJ <- diag(J)
+    #    lenrn <- length(rn)
+    scores <- cbind(rep(1,n),pc$coefs[,l])
+    order.deriv <- 0     
     if (!is.matrix(P)){
       if (is.vector(P)) {
-        for (i in 1:length(P))   {      if (P[i]!=0)         order.deriv<-i}
-        P<-P.penalty(tt,P)
+        for (i in 1:length(P))   {      if (P[i]!=0)         order.deriv <- i}
+        P <- P.penalty(tt,P)
         
-        P<-t(vs)%*%P%*%vs 
-        P<-P*(diff(rtt)/(np -1))^(order.deriv*2-1)
+        P <- t(vs)%*%P%*%vs 
+        P <- P*(diff(rtt)/(np -1))^(order.deriv*2-1)
       }         }
-    mat<-diag(J+1)
-    mat[-1,-1]<-lambda*P
-    mat[1,1]<-0
-    Sb<-t(scores)%*%W%*%scores+mat
-    # S<-solve(Sb)       
+    mat <- diag(J+1)
+    mat[-1,-1] <- lambda*P
+    mat[1,1] <- 0
+    Sb <- t(scores)%*%W%*%scores + mat
+    # S <- solve(Sb)       
     #    S=solve(t(Z)%*%W%*%Z)    
-    S<-Minverse(Sb) 
-    Cinv<-S%*%t(scores)%*%W         
-    coefs<-Cinv%*%y
-    yp<-drop(scores%*%coefs)
-    H<-scores%*%Cinv
-    df<-fdata.trace(H)
-    coefs<-drop(coefs)
-    names(coefs)<-c("Intercept",cnames)
-    beta.est<-coefs[-1]*pc$basis[l]
-    beta.est$data<-colSums(beta.est$data)
-    beta.est$names$main<-"beta.est"
-    beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
-    e<-y-yp
-    rdf<-n-df
+    S <- Minverse(Sb) 
+    Cinv <- S%*%t(scores)%*%W         
+    coefs <- Cinv%*%y
+    yp <- drop(scores%*%coefs)
+    H <- scores%*%Cinv
+    df <- fdata.trace(H)
+    coefs <- drop(coefs)
+    names(coefs) <- c("Intercept",cnames)
+    beta.est <- coefs[-1]*pc$basis[l]
+    beta.est$data <- colSums(beta.est$data)
+    beta.est$names$main <- "beta.est"
+    beta.est$data  <-  matrix(as.numeric(beta.est$data),nrow=1)
+    e <- y-yp
+    rdf <- n-df
     sr2 <- sum(e^2)/ rdf
     r2 <- 1 - sum(e^2)/sum(ycen^2)
     r2.adj<- 1 - (1 - r2) * ((n -    1)/ rdf)
     #    GCV <- sum(e^2)/(n - df)^2
-    object.lm = list()
+    object.lm <- list()
     object.lm$coefficients <- coefs
     object.lm$residuals <- drop(e)
     object.lm$fitted.values <- yp
@@ -194,12 +198,12 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
     object.lm$y <- y
     object.lm$rank <- df
     object.lm$df.residual <-  rdf
-    Z=cbind(rep(1,len=n),Z)
-    colnames(Z)[1] = "(Intercept)"
-    std.error = sqrt(diag(S) *sr2)
-    Vp<-sr2*S 
-    t.value = coefs/std.error
-    p.value = 2 * pt(abs(t.value), rdf, lower.tail = FALSE)
+    Z <- cbind(rep(1,len=n),Z)
+    colnames(Z)[1] <- "(Intercept)"
+    std.error <- sqrt(diag(S) *sr2)
+    Vp <- sr2*S 
+    t.value <- coefs/std.error
+    p.value <- 2 * pt(abs(t.value), rdf, lower.tail = FALSE)
     coefficients <- cbind(coefs, std.error, t.value, p.value)
     colnames(coefficients) <- c("Estimate", "Std. Error",
                                 "t value", "Pr(>|t|)")
@@ -212,25 +216,26 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
   }
   else {
     #print("no rn")
-    response = "y"
-    dataf<-data.frame(y,Z,weights)
-    colnames(dataf)<-c("y",cnames,"weights")
+    response <- "y"
+    dataf <- data.frame(y,Z,weights)
+    colnames(dataf) <- c("y",cnames,"weights")
     pf <- paste(response, "~", sep = "")
-    for (i in 1:length(cnames)) pf <- paste(pf,"+",cnames[i],sep="")
-    object.lm = lm(formula = pf,data=data.frame(dataf),weights=weights,x=TRUE, y=TRUE)
-    beta.est<-object.lm$coefficients[2:(lenl+1)]*pc$basis[l]
-    beta.est$data<-colSums(beta.est$data)
+    for (i in 1:length(cnames)) 
+      pf <- paste(pf,"+",cnames[i],sep="")
+    object.lm <- lm(formula = pf,data=data.frame(dataf),weights=weights,x=TRUE, y=TRUE)
+    beta.est <- object.lm$coefficients[2:(lenl+1)]*pc$basis[l]
+    beta.est$data <- colSums(beta.est$data)
     beta.est$names$main<-"beta.est"
     beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
     Z=cbind(rep(1,len=n),Z)
     #    S=solve(t(Z)%*%W%*%Z)    
-    S<-t(Z)%*%W%*%Z
-    S<-Minverse(S) 
-    H<-Z%*%S%*%t(Z)
-    e<-object.lm$residuals
-    df<-fdata.trace(df)#n- object.lm$df
+    S <- t(Z)%*%W%*%Z
+    S <- Minverse(S) 
+    H <- Z%*%S%*%t(Z)
+    e <- object.lm$residuals
+    df <- fdata.trace(df)#n- object.lm$df
     sr2 <- sum(e^2)/(n - df)
-    Vp<-sr2*S 
+    Vp <- sr2*S 
     r2 <- 1 - sum(e^2)/sum(ycen^2)
     #     r2.adj<- 1 - (1 - r2) * ((n -    1)/(n-df))
     #     GCV <- sum(e^2)/(n - df)^2
@@ -325,13 +330,20 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),weights=rep(1,len=n
 #' @examples
 #' \dontrun{
 #' data(tecator)
-#' x<-tecator$absorp.fdata
-#' y<-tecator$y$Fat
-#' res=fregre.pls(x,y,c(1:8),lambda=10)
+#' x <- tecator$absorp.fdata
+#' y <- tecator$y$Fat
+#' res <- fregre.pls(x,y,c(1:4))
 #' summary(res)
+#' res1 <- fregre.pls(x,y,l=1:4,lambda=100,P=c(1))
+#' res4 <- fregre.pls(x,y,l=1:4,lambda=1,P=c(0,0,1))
+#' summary(res4)#' plot(res$beta.est)
+#' lines(res1$beta.est,col=4)
+#' lines(res4$beta.est,col=2)
+
 #' }
 #' @export fregre.pls
-fregre.pls=function(fdataobj, y=NULL, l = NULL,lambda=0,P=c(0,0,1),...){
+fregre.pls=function(fdataobj, y=NULL, l = NULL,
+                    lambda=0,P=c(0,0,1),...){
   if (is(fdataobj,"fdata.comp")) {
     pc <- fdataobj
     fdataobj <- pc$fdataobj
@@ -352,24 +364,28 @@ fregre.pls=function(fdataobj, y=NULL, l = NULL,lambda=0,P=c(0,0,1),...){
   tt <- fdataobj[["argvals"]]
   rtt <- fdataobj[["rangeval"]]
   names <- fdataobj[["names"]]
-  n = nrow(x); np <- ncol(x);lenl = length(l)
-  if (n != (length(y)))   stop("ERROR IN THE DATA DIMENSIONS")
+  n <- nrow(x)
+  np <- ncol(x)
+  lenl <- length(l)
+  if (n != (length(y)))   
+    stop("ERROR IN THE DATA DIMENSIONS")
   C <- match.call()
   if (is.null(rownames(x)))        rownames(x) <- 1:n
-  ycen = y - mean(y)
+  ycen <- y - mean(y)
   vs <- pc$basis$data[,,drop=FALSE]
-  Z<-pc$coefs[,l,drop=F]
-  xcen<-pc$fdataobj.cen
-  cnames<-colnames(pc$coefs)[l]
-  response = "y"
-  df<-data.frame(y,Z)
-  colnames(df)<-c("y",cnames)
+  Z <- pc$coefs[,l,drop=F]
+  xcen <- pc$fdataobj.cen
+  cnames <- colnames(pc$coefs)[l]
+  response <- "y"
+  df <- data.frame(y,Z)
+  colnames(df) <- c("y",cnames)
   pf <- paste(response, "~", sep = "")
-  for (i in 1:length(cnames)) pf <- paste(pf,"+",cnames[i],sep="")
-  object.lm = lm(formula = pf, data =df , x = TRUE,y = TRUE)
-  beta.est<-object.lm$coefficients[2:(lenl+1)]*pc$basis[l]
-  beta.est$data<-apply(beta.est$data,2,sum)
-  beta.est$names$main<-"beta.est"
+  for (i in 1:length(cnames)) 
+    pf <- paste(pf,"+",cnames[i],sep="")
+  object.lm <- lm(formula = pf, data =df , x = TRUE,y = TRUE)
+  beta.est <- object.lm$coefficients[2:(lenl+1)]*pc$basis[l]
+  beta.est$data <- apply(beta.est$data,2,sum)
+  beta.est$names$main <- "beta.est"
   beta.est$data <- matrix(as.numeric(beta.est$data),nrow=1)
   #            if  (pc$type=="pls") {
   if (pc$norm)  {
@@ -380,41 +396,59 @@ fregre.pls=function(fdataobj, y=NULL, l = NULL,lambda=0,P=c(0,0,1),...){
   #    H<-diag(hat(Z, intercept = TRUE),ncol=n)
   # H2<-lm.influence(object.lm, do.coef = T)$hat# o bien
   #    I <- diag(1/(n*pc$lambdas[l]), ncol = lenl) #1/n
-  Z=cbind(rep(1,len=n),Z)
-  order.deriv<-0 
+  Z <- cbind(rep(1,len=n),Z)
+  order.deriv <- 0 
   if (lambda==0) mat<-0
   else {      
     if (!is.matrix(P)){
       if (is.vector(P)) {
-        for (i in 1:length(P))   {      if (P[i]!=0)         order.deriv<-i}
-        P<-P.penalty(tt,P)                
-        P<-vs%*%P%*%t(vs) 
-        P<-P*(diff(rtt)/(np -1))^(order.deriv*2-1)
+        for (i in 1:length(P))   {
+          if (P[i]!=0)         order.deriv<-i
+          }
+        P <- P.penalty(tt,P)                
+        P <- vs%*%P%*%t(vs) 
+        P <- P*(diff(rtt)/(np -1))^(order.deriv*2-1)
       }         }
     mat<-diag(lenl+1)
-    mat[-1,-1]<-lambda*P
-    mat[1,1]<-0   
+    mat[-1,-1] <- lambda*P
+    mat[1,1] <- 0   
   }
-  S<-t(Z)%*%Z+mat
-  S<-Minverse(S)
-  H<-Z%*%S%*%t(Z)
-  e<-object.lm$residuals
-  df = max(fdata.trace(H),pc$df[lenl]+1)
-  rdf<-n-df
+  print(mat)
+  S <- t(Z)%*%Z+mat
+  S <- Minverse(S)
+#  H <- Z%*%S%*%t(Z)
+  
+#Sb <- t(scores)%*%W%*%scores + mat
+# S <- Minverse(Sb) 
+ Cinv <- S%*%t(Z)         
+ coefs <- Cinv%*%y
+ yp <- drop(Z%*%coefs)
+ H <- Z%*%Cinv
+
+ 
+ coefs <- drop(coefs)
+ names(coefs) <- c("Intercept",cnames)
+ beta.est <- coefs[-1]*pc$basis[l]
+ beta.est$data <- colSums(beta.est$data)
+ beta.est$names$main <- "beta.est"
+ beta.est$data  <-  matrix(as.numeric(beta.est$data),nrow=1)
+ 
+  e <- y - yp
+  df <- max(fdata.trace(H),pc$df[lenl]+1)
+  rdf <- n-df
   sr2 <- sum(e^2)/rdf
-  Vp<-sr2*S 
+  Vp <- sr2*S 
   r2 <- 1 - sum(e^2)/sum(ycen^2)
   #    r2.adj<- 1 - (1 - r2) * ((n -    1)/ rdf)
   #    GCV <- sum(e^2)/rdf^2             #GCV=GCV,
-  
-  std.error = sqrt(diag(S) *sr2)
-  t.value =object.lm$coefficients/std.error
-  p.value = 2 * pt(abs(t.value), rdf, lower.tail = FALSE)
-  coefficients <- cbind(object.lm$coefficients, std.error, t.value, p.value)
+  std.error <- sqrt(diag(S) *sr2)
+  t.value  <- coefs/std.error
+  p.value <- 2 * pt(abs(t.value), rdf, lower.tail = FALSE)
+  coefficients <- cbind(coefs, std.error, t.value, p.value)
   colnames(coefficients) <- c("Estimate", "Std. Error","t value", "Pr(>|t|)")
   
-  out <- list(call = C,coefficients=object.lm$coefficients, residuals = object.lm$residuals,
-              fitted.values =object.lm$fitted.values, beta.est = beta.est, scoefs=coefficients,
+  out <- list(call = C,coefficients=coefs, residuals = e,
+              fitted.values =yp, beta.est = beta.est, scoefs=coefficients,
               H=H,df.residual = rdf,r2=r2, sr2 = sr2, Vp=Vp,l = l,lambda=lambda,P=P, fdata.comp=pc,
               lm=object.lm,fdataobj = fdataobj,y = y)
   class(out) = "fregre.fd"
