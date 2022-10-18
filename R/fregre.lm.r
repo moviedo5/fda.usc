@@ -177,9 +177,7 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
   #Z <- as.matrix(XX[,-1])     
   W <- diag(weights)  
   if (!penalty) {
-   print("no rn0 no lambda0")
-   print(colnames(XX))      
-    if (lenvfunc==0 & length(vnf)==0)      {
+   if (lenvfunc==0 & length(vnf)==0)      {
       z=lm(formula=pf,data=XX,x=TRUE,...)   
       class(z)<-c("lm","fregre.lm")
       return(z)
