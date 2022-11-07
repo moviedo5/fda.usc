@@ -186,7 +186,7 @@ while ((i<max.iter) && (!same_centers)) {
                              #,cluster.size=cluster.size
                              ,...)
     if (!iterar){
-    same_centers <- out2$centers$data == out3$centers$data
+    same_centers <- all(out2$centers$data == out3$centers$data)
     out1$centers <- out2$centers
     i=i+1
     }
