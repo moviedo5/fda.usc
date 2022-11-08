@@ -314,7 +314,7 @@ if (!is(mfdataref,"list")) stop("mfdataref input must be a list of fdata objects
 #  modu = apply(z, 1, modulo)
 #  z = z/modu
   if (is.fdata(proj)) {
-     if (fdataobj$argvals!=proj$argvals || ncol(fdataobj)!=ncol(proj)) stop("Error en proj dimension")
+     if (any(fdataobj$argvals!=proj$argvals) || ncol(fdataobj)!=ncol(proj)) stop("Error en proj dimension")
      z<-proj
      nproj<-nrow(z)
     }
