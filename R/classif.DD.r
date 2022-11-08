@@ -1094,7 +1094,7 @@ classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
            names(dat)<-c("group1",nam2)
            par.classif$formula<-formula(paste("group1~",paste(names(dat)[-1],collapse="+")))
            par.classif$data<-dat
-           func.clas<-do.call("classif.rpart",par.classif)
+           func.clas<-do.call("classif.rpart2boost",par.classif)
            group.est<-predict(func.clas,dat,type="class")
            mis<-mean(group.est!=group)
            if (draw & ng2<=2) {
