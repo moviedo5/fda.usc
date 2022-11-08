@@ -143,14 +143,14 @@ classif.glm <- function (formula, data, family = binomial(), weights = "equal",
         newy[ind1 ]<- 1
         newy[ind2 ]<- 0
         newdata$df[response] <- newy
-        print(formula)
-        print(names(newdata$df))
-        print(names(basis.x))
+#        print(formula)
+#        print(names(newdata$df))
+#        print(names(basis.x))
         a[[ivot]]<-suppressWarnings(fregre.glm(formula,data=newdata,family=family, weights =  w
                               ,basis.x=basis.x,basis.b=basis.b,CV=CV,subset = i2a2)
                               #,...)
                               )
-        print("SS")
+#        print("SS")
         prob.log <- a[[ivot]]$fitted.values  > prob
         votos[i2a2, cvot[1,ivot]] <- votos[i2a2, cvot[1,ivot]] + as.numeric(prob.log)
         votos[i2a2, cvot[2,ivot]] <- votos[i2a2, cvot[2,ivot]] + as.numeric(!prob.log)
