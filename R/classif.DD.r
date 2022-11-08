@@ -1092,7 +1092,7 @@ classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
          rpart={
            dat<-data.frame(group,Df)
            names(dat)<-c("group1",nam2)
-           par.classif$formula<-formula(paste("group1~",names(dat)[-1],collapse="+"))
+           par.classif$formula<-formula(paste("group1~",paste(names(dat)[-1],collapse="+")))
            par.classif$data<-dat
            func.clas<-do.call("classif.rpart",par.classif)
            group.est<-predict(func.clas,dat,type="class")
