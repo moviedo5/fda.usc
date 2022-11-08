@@ -971,7 +971,7 @@ classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
                               Df[,1][ind0[3]],( Df[,1][ind0[3]])^2,( Df[,1][ind0[3]])^3),byrow=TRUE,3,3)
                ww <- c(Df[,2][ind0[1]],Df[,2][ind0[2]],Df[,2][ind0[3]])
                a0.3 <- solve.ab(A,ww)
-             x.g1<-fdataobj[group==lev[1], ]
+               x.g1<-fdataobj[group==lev[1], ]
                x.g2<-fdataobj[group==lev[2], ]
                if (is.fdata(fdataobj))
                  nam.depth2<-paste("depth.",depth0,sep="")
@@ -1092,9 +1092,9 @@ classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
          rpart={
            dat<-data.frame(group,Df)
            names(dat)<-c("group1",nam2)
-           par.classif$formula<-formula(paste("group1~",names(dat)[-1]))
+           par.classif$formula<-formula(paste("group1~",names(dat)[-1],collapse="+"))
            par.classif$data<-dat
-           func.clas<-do.call("rpart",par.classif)
+           func.clas<-do.call("classif.rpart",par.classif)
            group.est<-predict(func.clas,dat,type="class")
            mis<-mean(group.est!=group)
            if (draw & ng2<=2) {
@@ -1124,7 +1124,6 @@ classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
            par.classif$fdataobj<-dat
            par.classif$group<-group                    
            #if (is.null(par.classif$family)) par.classif$family<-binomial()
-           
            func.clas<-do.call("classif.gsam2boost",par.classif)
            group.est<-func.clas$group.est
            incorrect<-group.est!=group

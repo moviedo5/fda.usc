@@ -25,7 +25,7 @@ classif.gsam2boost=function(group,fdataobj,family=binomial(),
   }   else {   
       if (is.null(par.gsam$func)) par.gsam$func<-"s"
       if (is.null(par.gsam$k)) par.gsam$k<--1        
-    dataf<-data.frame("y"=group,fdataobj)
+      dataf<-data.frame("y"=group,fdataobj)
       ldata<-list("df"=dataf)
       if (is.matrix(fdataobj)) nms<-colnames(fdataobj)
       else nms<-names(fdataobj)               
@@ -98,7 +98,7 @@ classif.glm2boost=function(group,fdataobj,family=binomial(),basis.x=NULL,
   if (is.fdata(fdataobj))   {
     dataf<-data.frame("y"=group)
     ldata<-list("df"=dataf,"X"=fdataobj)
-    formula<-formula(y~X)       
+    formula<-as.formula("y~X")       
   }
   else {
     if (is.matrix(fdataobj)) nms<-colnames(fdataobj)
@@ -109,7 +109,7 @@ classif.glm2boost=function(group,fdataobj,family=binomial(),basis.x=NULL,
     dataf<-data.frame("y"=group,fdataobj)
     ldata<-list("df"=dataf)
     aaa<-paste(nms,collapse="+")
-    formula<-formula(paste("y~",aaa,sep=""))      
+    formula<-as.formula(paste("y~",aaa,sep=""))      
   }
   newy<-y<-ldata$df$y
   if (!is.factor(y)) y<-as.factor(y)
