@@ -297,7 +297,7 @@ depth.RP<-function(fdataobj,fdataori=fdataobj,trim=0.25,nproj=50,proj="vexponent
   #### new
   if (is.fdata(proj)) {
     nproj<-nrow(proj)
-    if (fdataobj$argvals!=proj$argvals || ncol(fdataobj)!=ncol(proj)) stop("Error in proj dimension")
+    if (any(fdataobj$argvals!=proj$argvals) || ncol(fdataobj)!=ncol(proj)) stop("Error in proj dimension")
     z<-proj
   }
   else {
@@ -410,7 +410,7 @@ depth.RPD<-function (fdataobj,fdataori=fdataobj, nproj = 20, proj=1,deriv = c(0,
   vproject = matrix(0, nrow = n, ncol = length(deriv))
   vproject2 = matrix(0, nrow = n2, ncol = length(deriv))    
   if (is.fdata(proj)) {
-    if (fdataobj$argvals!=proj$argvals || m!=ncol(proj)) stop("Error in proj dimension")
+    if (any(fdataobj$argvals!=proj$argvals) || m!=ncol(proj)) stop("Error in proj dimension")
     z<-proj
     nproj<-nrow(z)
   }
@@ -504,7 +504,7 @@ depth.RT  <-function (fdataobj,fdataori=fdataobj, trim = 0.25, nproj = 10, proj 
   
   if (is.fdata(proj)) {
     nproj <- nrow(proj)
-    if (fdataobj$argvals != proj$argvals || ncol(fdataobj) != 
+    if (any(fdataobj$argvals != proj$argvals) || ncol(fdataobj) != 
         ncol(proj)) 
       stop("Error en proj dimension")
     z <- proj
