@@ -1090,6 +1090,7 @@ classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
              }
          },
          rpart={
+           require("rpart")
            dat<-data.frame(group,Df)
            names(dat)<-c("group1",nam2)
            par.classif$formula<-formula(paste("group1~",paste(names(dat)[-1],collapse="+")))
