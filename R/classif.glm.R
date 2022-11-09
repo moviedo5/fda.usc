@@ -113,7 +113,7 @@ classif.glm <- function (formula, data, family = binomial(), weights = "equal",
   }
   newdata <- data
   ny <- levels(y)
-  prob2<-prob1 <- ngroup <- nlevels(y)
+  prob1 <- ngroup <- nlevels(y)
   w <- weights
   
   if (ngroup == 2) {
@@ -134,7 +134,7 @@ classif.glm <- function (formula, data, family = binomial(), weights = "equal",
       nvot<-ncol(cvot)
       votos<-matrix(0,n,ngroup)
       colnames(votos) <- ny
-      b0<-list()
+#      b0<-list()
       for (ivot in 1:nvot) {  
         ind1 <- y==ny[cvot[1,ivot]]
         ind2 <- y==ny[cvot[2,ivot]] 
