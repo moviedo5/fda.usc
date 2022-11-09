@@ -262,7 +262,7 @@ pred2lda <- function(object, new.fdataobj = NULL,  ...) {
   prob.group <- array(NA, dim = c(nn, ngroup))
   colnames(prob.group) <- lev								  
   #new.fdataobj <- as.matrix(new.fdataobj)
-  if (ngroup == 2 | object$type != "majority") {
+  if (ngroup == 2 || object$type != "majority") {
     #print("2 grupos o 1vsAll")
     #print(class(object$fit[[1]]))
     probs=predict(object$fit[[1]], new.fdataobj,...)
@@ -871,13 +871,13 @@ pred2ML <- function(object, new.fdataobj = NULL, ...) {
         dat <- fdataobj$data
         tt <- fdataobj[["argvals"]]
         if (is.null(rownames(dat))) 
-          rownames(dat) <- 1:nrow(dat)
+          rownames(dat) <- seq_len(nrow(dat))
         fdnames = list(time = tt, reps = rownames(dat), 
                        values = "values")
         x.fd <- fdataobj[["data"]]
         tt <- fdataobj[["argvals"]]
         rtt <- fdataobj[["rangeval"]]
-        if (object$basis.x[[vfunc[i]]]$type != "pc" & 
+        if (object$basis.x[[vfunc[i]]]$type != "pc" && 
             object$basis.x[[vfunc[i]]]$type != "pls") {
  # print("basiss")
           x.fd = Data2fd(argvals = tt, y = t(fdata.cen(fdataobj, 
