@@ -907,7 +907,7 @@ pred2ML <- function(object, new.fdataobj = NULL, ...) {
               newXcen$data <- newXcen$data/(rep(1,nrow(newXcen)) %*% t(sd.X))
             }
           }
-          Z <- inprod.fdata(newXcen, object$basis.x[[vfunc[i]]])
+          Z <- inprod.fdata(newXcen, object$basis.x[[vfunc[i]]]$basis)
           colnames(Z) <- name.coef
           Z <- data.frame(Z)
           
