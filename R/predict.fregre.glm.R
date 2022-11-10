@@ -15,7 +15,7 @@ predict.fregre.glm<-function(object, newx = NULL, type = "response",...){
 # data=newx
  basis.x=object$basis.x
  basis.b=object$basis.b
- formula=object$formula
+ formula=object$formula.ini
  tf <- terms.formula(formula)
  terms <- attr(tf, "term.labels")
 # nt <- length(terms)
