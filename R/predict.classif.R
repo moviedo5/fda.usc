@@ -165,46 +165,49 @@ predict.classif <- function (object, new.fdataobj = NULL,
 
 #############################################################################
 pred2glm2boost <- function(object, new.fdataobj = NULL,  ...) {
-  isfdata <- FALSE
-  if (is.fdata(new.fdataobj))  isfdata<-TRUE
-  newdata <- object$data 
-  if (isfdata)     newfdata <- list(X = new.fdataobj)
-  else newfdata <- new.fdataobj
-
   lev <- levels(object$group)
+  if (is.null(object$type)) object$type="1vsall"
   prob <- ngroup <- length(lev)
   nn <- nrow(new.fdataobj[[1]])
   prob.group <- array(NA, dim = c(nn,ngroup))
   colnames(prob.group) <- lev
+
   if (is.null(object$prob)) object$prob<- .5
   if (ngroup == 2) {
-    probs <- predict.fregre.glm(object$fit[[1]], newx = newfdata, ...)
+    probs <- predict.fregre.glm(object$fit[[1]], newx = new.fdataobj, ...)
     yest <- ifelse(probs > object$prob, lev[2], lev[1])  
     prob.group[, 1] <- 1-probs
     prob.group[, 2] <-  probs
     group.pred <- factor(yest, levels = lev)
     return(list("group.pred"=group.pred,"prob.group"=prob.group))
   }  else {
-#print("mas de un grupo1")    
-#    print(dim(newfdata[[1]]))
-#    print(class(object))
-#    group.pred<- predict(object, newx = newfdata,...)
-#print("mas de un grupo2")        
-#print(group.pred)  
-    #return(list("group.pred"=group.pred))
+	if (object$type=="majority"){
+	if (ngroup>2) {
+	cvot <- combn(ngroup,2)
+	nvot<-nrow(new.fdataobj[[1]])
+	pvotos<-votos<-matrix(0,nn,ngroup)
+	for (ivot in 1:nvot){
+	pred<-predict.fregre.glm(object$fit[[ivot]],new.fdataobj,...)
+    group.log<- (pred>object$prob)
+	pvotos[,cvot[1,ivot]]<-pvotos[,cvot[1,ivot]]+pred
+	pvotos[,cvot[2,ivot]]<-pvotos[,cvot[2,ivot]]+(1-pred)
+     votos[,cvot[1,ivot]]<-votos[,cvot[1,ivot]]+as.numeric(group.log)
+     votos[,cvot[2,ivot]]<-votos[,cvot[2,ivot]]+as.numeric(!group.log)
+	}
+    maj.voto<-apply(votos,1,which.max)
+    group.pred<-factor(lev[maj.voto],levels=lev)
+    prob.grup<-pvotos
+	}
+	} else {
      for (i in 1:ngroup) {
-       obj <- object$fit[[i]]
-
- #      print(obj$formula)
-       #prob.group[, i] <- predict.fregre.glm(obj, newx = newfdata, ...)
-       pr<-predict.glm(obj,  newfdata$df,type="response")
-       #pr <- predict.classif(obj, newx = newfdata, ...)
-       prob.group[, i] <- pr
-     }
-     yest <- apply(prob.group, 1, which.min)
-     group.pred <- factor(lev[yest], levels = lev)
-  }
+	  prob.group[,i]<-predict.fregre.glm(object$fit[[i]],
+			newx=new.fdataobj,...)
+						}
+     group.pred <- factor(lev[apply(prob.group,1,which.min)], levels = lev)
+	}
+}
   return(list("group.pred"=group.pred,"prob.group"=prob.group))
+
 }
 
 ##########################################
