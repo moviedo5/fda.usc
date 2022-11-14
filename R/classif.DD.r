@@ -468,8 +468,7 @@ classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
   }
   switch(classif,
          DD1={ 
-           
-           if (ng2>2) {
+            if (ng2>2) {
              #  stop("DD-plot for more than 2 levels not available")
              warning("Majority voting classification")
              par.classif$rotate<-FALSE #NOT IMPLEMENTED YET
@@ -993,7 +992,6 @@ classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
                mis<-mean(incorrect) 
                ####### #new exchange axis (rotate)
                if (is.null(par.classif$rotate))   par.classif$rotate<-FALSE #################
-               
                if (par.classif$rotate)   {
                  Df<-Df[,2:1]
                  ind<-ind[,2:1]

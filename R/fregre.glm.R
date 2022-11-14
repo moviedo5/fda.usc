@@ -116,7 +116,7 @@ fregre.glm=function(formula,family = gaussian(), data,
     vint <- setdiff(terms,vtab)
     vfunc <- setdiff(vfunc2,vint)
     off <- attr(tf,"offset")
-    name.coef <-  nam  <-  par.fregre <- beta.l <- list()
+    par.fregre <- list()
     kterms <- 1
     n <- length(data[["df"]][,response])
     # XX <- data.frame(data[["df"]][,c(response)],weights)
@@ -138,8 +138,7 @@ fregre.glm=function(formula,family = gaussian(), data,
 #    bsp1<-out$bsp1
     pf <- out$pf
     XX <- out$XX
-    basis.x <- out$basis.x
-    basis.b <- out$basis.b
+
     par.fregre$formula=pf
     par.fregre$data=XX
     y <- XX[,1] 
@@ -182,7 +181,10 @@ fregre.glm=function(formula,family = gaussian(), data,
     #} 
     # if (missing(weights)) weights <- rep(1,len=n)
     # W <- diag(weights)  
-      
+  if (length(vfunc)>0){ 
+    basis.x <- out$basis.x
+    basis.b <- out$basis.b
+    beta.l<-list()
   for (i in 1:length(vfunc)) {
      z$coefficients[is.na(z$coefficients)]<-0
      if (inherits(basis.b[[vfunc[i]]],"basisfd")) 
@@ -218,7 +220,7 @@ fregre.glm=function(formula,family = gaussian(), data,
       }
     }
   }
-
+  } 
     #  z$H <- design2hat(Z,W)  # usarla en fdata2model
     # z$yp <- z$H %*% y
     #    z$coefficients <- design2coefs(Z,W,y)  # usarla en fdata2model

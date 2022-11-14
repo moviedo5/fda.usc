@@ -402,7 +402,7 @@ fregre.gsam <- function (formula
   #  print(bsp1)
   z$mean <- mean.list
   z$formula <- as.formula(pf)
-  zformula.ini <- formula
+  z$formula.ini <- formula
   z$basis.x=basis.x
   z$basis.b=basis.b
   z$basis.list<-basis.list

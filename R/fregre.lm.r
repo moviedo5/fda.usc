@@ -210,7 +210,7 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
     # z$fitted.values-XX[,1]
   }       
   #    z$call<-z$call[1:2]
-  
+  if (length(vfunc)>0){
   for (i in 1:length(vfunc)) {
     z$coefficients[is.na(z$coefficients)]<-0
      if (inherits(basis.b[[vfunc[i]]],"basisfd")) 
@@ -246,7 +246,7 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
       }
     }
   }
-  
+  }
   # z$H <- design2hat(Z,W)  # usarla en fdata2model
   # print("design2hat")
   # print(names(z))
