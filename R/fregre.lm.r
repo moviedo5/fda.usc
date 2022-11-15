@@ -258,12 +258,18 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
   z$sr2 <- sum(e^2)/z$df.residual
   ###################### z$Vp <- z$sr2*S
   z$Vp <- z$sr2 * z$H  # 20210321
-  z$beta.l <- beta.l
+
   z$formula <- pf
-  z$mean <- mean.list
   z$formula.ini <- formula
   z$basis.x <- basis.x
   z$basis.b <- basis.b
+  z$mean <- mean.list
+  if (length(vfunc)>0){
+      z$beta.l <- beta.l
+  } else {
+  z$beta.l=NULL
+  }
+  z$vs.list <- out$vs.list 
   #
   #z$data <- z$data
   z$XX <- XX
@@ -273,7 +279,7 @@ fregre.lm <- function(formula, data, basis.x = NULL, basis.b = NULL
   #z$rn <- rn0
   if (is.list(z$lambda.opt)) z$lambda <- TRUE
   #z$JJ <- vs.list   
-  z$vs.list <- out$vs.list   
+  
   class(z) <- c("fregre.lm","lm")
   # class(z$beta.l) <- c("mfdata","list")
   z

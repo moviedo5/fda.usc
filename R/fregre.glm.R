@@ -135,6 +135,8 @@ fregre.glm=function(formula,family = gaussian(), data,
                                pf=pf, tf=tf)
     mean.list <- out$mean.list
     name.coef <- out$name.coef
+    basis.x <- out$basis.x
+    basis.b <- out$basis.b
 #    bsp1<-out$bsp1
     pf <- out$pf
     XX <- out$XX
@@ -182,8 +184,7 @@ fregre.glm=function(formula,family = gaussian(), data,
     # if (missing(weights)) weights <- rep(1,len=n)
     # W <- diag(weights)  
   if (length(vfunc)>0){ 
-    basis.x <- out$basis.x
-    basis.b <- out$basis.b
+
     beta.l<-list()
   for (i in 1:length(vfunc)) {
      z$coefficients[is.na(z$coefficients)]<-0
@@ -230,12 +231,14 @@ fregre.glm=function(formula,family = gaussian(), data,
     z$sr2 <- sum(e^2)/z$df.residual
     ###################### z$Vp <- z$sr2*S
     z$Vp <- z$sr2 * z$H  # 20210321
-    z$beta.l <- beta.l
+
     z$formula <- pf
     z$mean <- mean.list
     z$formula.ini <- formula
-    z$basis.x <- basis.x
-    z$basis.b <- basis.b
+    if (length(vfunc)>0){
+    z$beta.l <- beta.l } else {
+    z$beta.l <- NULL
+    }
     z$vs.list <- out$vs.list
     z$data <- z$data
     z$XX <- XX
