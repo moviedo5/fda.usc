@@ -126,8 +126,11 @@ classif.glm2boost=function(group,fdataobj,family=binomial(),basis.x=NULL,
     #      lev<-as.numeric(names(table(y)))
     newy<-ifelse(y==lev[1],0,1)
     newdata$df$y<-newy
-     a[[1]]<-fregre.gsam(formula,data=newdata,family=binomial,basis.x=basis.x,
+     a[[1]]<-fregre.glm(formula,data=newdata,family=binomial,basis.x=basis.x,
                        basis.b=basis.b,CV=CV)                
+
+#    a[[1]]<-fregre.gsam(formula,data=newdata,family=binomial,basis.x=basis.x,
+#                       basis.b=basis.b,CV=CV)                
     yest<-ifelse(a[[1]]$fitted.values<.5,lev[1],lev[2])
     tab<-table(yest,y)
     prob[1]=tab[1,1]/sum(tab[,1])
@@ -147,8 +150,10 @@ classif.glm2boost=function(group,fdataobj,family=binomial(),basis.x=NULL,
     for (i in 1:ngroup) {
       newy<-ifelse(y==lev[i],0,1)
       newdata$df$y<-newy
-      a[[i]]<-fregre.gsam(formula,data=newdata,family=family,basis.x=basis.x,
+      a[[i]]<-fregre.glm(formula,data=newdata,family=family,basis.x=basis.x,
                          basis.b=basis.b)
+#      a[[i]]<-fregre.gsam(formula,data=newdata,family=family,basis.x=basis.x,
+#                         basis.b=basis.b)
       prob.group[,i]<-a[[i]]$fitted.values
     }
     yest<-lev[apply(prob.group,1,which.min)]
