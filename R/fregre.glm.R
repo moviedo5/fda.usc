@@ -231,14 +231,14 @@ fregre.glm=function(formula,family = gaussian(), data,
     z$sr2 <- sum(e^2)/z$df.residual
     ###################### z$Vp <- z$sr2*S
     z$Vp <- z$sr2 * z$H  # 20210321
-
-    z$formula <- pf
     z$mean <- mean.list
+    z$formula <- pf
     z$formula.ini <- formula
     if (length(vfunc)>0){
     z$beta.l <- beta.l } else {
     z$beta.l <- NULL
     }
+    z$basis.x=basis.x
     z$vs.list <- out$vs.list
     z$data <- z$data
     z$XX <- XX
