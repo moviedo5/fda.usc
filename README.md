@@ -2,7 +2,9 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
-# fda.usc: Functional Data Analysis and Utilities for Statistical Computing <img src="inst/figures/fda.usc.png" align="right" width="140" />
+# fda.usc: Functional Data Analysis and Utilities for Statistical Computing 
+
+<!-- ![](inst/figures/fda.usc.png) -->
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/fda.usc)](https://cran.r-project.org/package=fda.usc)
 [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.en.html)
