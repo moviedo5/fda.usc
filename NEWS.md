@@ -2,11 +2,14 @@
 
 * fda.usc 2.1.0 is a major release with several new feature and fixed bugs.
 
-* fdata2basis() always return centred fdataobj and mean. The mean is computed using the basis.
+* `fdata2basis()` always return centred fdataobj and mean. The mean is computed 
+  using the basis.
 
-* New funtions: fEqMoments.test(), fmean.test.fdata(), cov.test.fdata() for checking the equality of means and/or covariance between two populations under gaussianity. 
+* New funtions: `fEqMoments.test()`, `fmean.test.fdata()`, `cov.test.fdata()` for checking 
+  the equality of means and/or covariance between two populations under gaussianity. 
 
-* New funtions: fEqDistrib.test(), XYRP.test(), MMD.test(), MMDA.test(), fEqDistrib.test() for checking the equality of distributions between two functional populations. 
+* New funtions: `fEqDistrib.test()`, `XYRP.test()`, `MMD.test()`, `MMDA.test()`, 
+  `fEqDistrib.test()` for checking the equality of distributions between two functional populations. 
 
 # fda.usc 2.0.3
 
@@ -22,6 +25,7 @@
 10. summary for fdata2basis()
  
 # fda.usc 2.0.2
+
 * fdata.bootstrap and fregre.bootstrap functions addapted to parallel backend.
 * Corrected bug in kmeans.fd() function.
 * Bug corrected in predict.fregre.glm(), predict.fregre.lm() and predict.gsam(), now works with type="effects".
@@ -37,9 +41,10 @@
 
 1. Modification in fdata() function to avoid class()== and class()!= instead use is(),
 2. kmeans.fd function:
-a. "par.ini" argument is depreciated, the user can use "method" argument. 
-b. "cluster.size" argument are added.
-c. New internal function predict.kmeans.fd.
+
+    a. "par.ini" argument is depreciated, the user can use "method" argument. 
+    b. "cluster.size" argument are added.
+    c. New internal function predict.kmeans.fd.
 
 3. Bug corrected in internal function pred2glm2boost(), it is used for predictions of classiff.DD outputs
 
