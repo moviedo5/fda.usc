@@ -4,7 +4,9 @@
 
 # fda.usc: Functional Data Analysis and Utilities for Statistical Computing 
 
-<!-- ![](inst/figures/fda.usc.png) -->
+<!-- ![](inst/figures/fda.usc.png)
+pkgdown::build_site()
+-->
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/fda.usc)](https://cran.r-project.org/package=fda.usc)
 [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.en.html)
