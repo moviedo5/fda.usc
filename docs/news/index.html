@@ -53,83 +53,101 @@
 <li><p><code><a href="../reference/fdata2basis.html">fdata2basis()</a></code> always return centred fdataobj and mean. The mean is computed using the basis.</p></li>
 <li><p>New funtions: <code><a href="../reference/fEqMoments.test.html">fEqMoments.test()</a></code>, <code><a href="../reference/fEqMoments.test.html">fmean.test.fdata()</a></code>, <code><a href="../reference/fEqMoments.test.html">cov.test.fdata()</a></code> for checking the equality of means and/or covariance between two populations under gaussianity.</p></li>
 <li><p>New funtions: <code><a href="../reference/fEqDistrib.test.html">fEqDistrib.test()</a></code>, <code><a href="../reference/fEqDistrib.test.html">XYRP.test()</a></code>, <code><a href="../reference/fEqDistrib.test.html">MMD.test()</a></code>, <code><a href="../reference/fEqDistrib.test.html">MMDA.test()</a></code>, <code><a href="../reference/fEqDistrib.test.html">fEqDistrib.test()</a></code> for checking the equality of distributions between two functional populations.</p></li>
+<li><p>The wavelength units in the Tecator dataset are labeled as nm in dataset description, but they are nm in the original description. (bug detected by vnmabus)</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.0.3" id="fdausc-203">fda.usc 2.0.3<a class="anchor" aria-label="anchor" href="#fdausc-203"></a></h2>
-<ol style="list-style-type: decimal"><li>summary.fdata.comp(), Several changes on summary.fdata.comp</li>
-<li>Now, we uses data.matrix (instead of as.matrix) to convert data.table in a matrix class object, option recommended when data.frame contains characters.</li>
-<li>classif.cv.glmnet() and classif.gbm(), functional basis classsification using cv.glmnet(), require glmnet package, and gbm(), require gbm package.</li>
-<li>h.default(), new argument ‘Ker’</li>
-<li>mfdata(), new class object for multivariate functional data</li>
-<li>fregre.basis.cv(), fregre.basis.cv() and fregre.pc() return df.residual object</li>
-<li>Bug corrected in S.LPR() and S.LLR()</li>
-<li>classif.gsam.vs, new function for variable selection in additive classifier</li>
-<li>fdata2basis() is used in fregre.lm() and predict.fregre.lm()</li>
-<li>summary for fdata2basis()</li>
-</ol></div>
+<ul><li>Several changes on <code><a href="../reference/summary.fdata.comp.html">summary.fdata.comp()</a></code>
+</li>
+<li>Now, we uses <code>data.matrix</code> (instead of as.matrix) to convert data.table in a matrix class object, option recommended when data.frame contains characters.</li>
+<li>
+<code><a href="../reference/classif.ML.html">classif.cv.glmnet()</a></code> and <code><a href="../reference/classif.ML.html">classif.gbm()</a></code>, functional basis classsification using <code>cv.glmnet()</code>, require glmnet package, and <code>gbm()</code>, require gbm package.</li>
+<li>
+<code><a href="../reference/h.default.html">h.default()</a></code>, new argument ‘Ker’</li>
+<li>
+<code><a href="../reference/mfdata.html">mfdata()</a></code>, new class object for multivariate functional data</li>
+<li>
+<code><a href="../reference/fregre.basis.cv.html">fregre.basis.cv()</a></code>, <code><a href="../reference/fregre.basis.cv.html">fregre.basis.cv()</a></code> and <code><a href="../reference/fregre.pc.html">fregre.pc()</a></code> return df.residual object</li>
+<li>Bug corrected in <code><a href="../reference/S.np.html">S.LPR()</a></code> and <code><a href="../reference/S.np.html">S.LLR()</a></code>
+</li>
+<li>
+<code>classif.gsam.vs</code>, new function for variable selection in additive classifier</li>
+<li>
+<code><a href="../reference/fdata2basis.html">fdata2basis()</a></code> is used in <code><a href="../reference/fregre.lm.html">fregre.lm()</a></code> and <code><a href="../reference/predict.fregre.lm.html">predict.fregre.lm()</a></code>
+</li>
+<li>summary for <code><a href="../reference/fdata2basis.html">fdata2basis()</a></code>
+</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.0.2" id="fdausc-202">fda.usc 2.0.2<small>2020-02-17</small><a class="anchor" aria-label="anchor" href="#fdausc-202"></a></h2>
-<ul><li>fdata.bootstrap and fregre.bootstrap functions addapted to parallel backend.</li>
-<li>Corrected bug in kmeans.fd() function.</li>
-<li>Bug corrected in predict.fregre.glm(), predict.fregre.lm() and predict.gsam(), now works with type=“effects”.</li>
-<li>The “main”, “xlab” and “ylab” arguments can be used in the plot.bifd() function.</li>
-<li>plot.ldata() draws each curve according to the factor indicated in the argument “var.name”.</li>
-<li>Minor changes in ldata(), “na.rm = T” is removed in the sweep function.</li>
+<ul><li>
+<code><a href="../reference/fdata.bootstrap.html">fdata.bootstrap()</a></code> and <code><a href="../reference/fregre.bootstrap.html">fregre.bootstrap()</a></code> functions addapted to parallel backend.</li>
+<li>Corrected bug in <code><a href="../reference/kmeans.fd.html">kmeans.fd()</a></code> function.</li>
+<li>Bug corrected in <code><a href="../reference/predict.fregre.lm.html">predict.fregre.glm()</a></code>, <code><a href="../reference/predict.fregre.lm.html">predict.fregre.lm()</a></code> and <code>predict.gsam()</code>, now works with type=“effects”.</li>
+<li>The “main”, “xlab” and “ylab” arguments can be used in the <code><a href="../reference/plot.fdata.html">plot.bifd()</a></code> function.</li>
+<li>
+<code><a href="../reference/ldata.html">plot.ldata()</a></code> draws each curve according to the factor indicated in the argument “var.name”.</li>
+<li>Minor changes in <code><a href="../reference/ldata.html">ldata()</a></code>, “na.rm = T” is removed in the sweep function.</li>
 <li>The documentation for the argument ‘…’ that is not included in the “usage” was deleted.</li>
-<li>Modification in internal function wmestadis() used in fanova.onefactor(), now it replicates the statistic defined by Cuevas, 2004.</li>
-<li>Deleted arguments “y” and “corplot” in summary.fdata.comp() function.</li>
-<li>Deleted dev.new() in code of summary.fdata.comp() function.</li>
+<li>Modification in internal function <code>wmestadis()</code> used in <code><a href="../reference/fanova.onefactor.html">fanova.onefactor()</a></code>, now it replicates the statistic defined by Cuevas, 2004.</li>
+<li>Deleted arguments “y” and “corplot” in <code><a href="../reference/summary.fdata.comp.html">summary.fdata.comp()</a></code> function.</li>
+<li>Deleted <code><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.new()</a></code> in code of <code><a href="../reference/summary.fdata.comp.html">summary.fdata.comp()</a></code> function.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.0.1" id="fdausc-201">fda.usc 2.0.1<small>2019-12-16</small><a class="anchor" aria-label="anchor" href="#fdausc-201"></a></h2>
-<ol style="list-style-type: decimal"><li><p>Modification in fdata() function to avoid class()== and class()!= instead use is(),</p></li>
+<ul><li><p>Modification in <code><a href="../reference/fdata.html">fdata()</a></code> function to avoid class()== and class()!= instead use <code>is()</code>,</p></li>
 <li>
-<p>kmeans.fd function:</p>
+<p><code><a href="../reference/kmeans.fd.html">kmeans.fd()</a></code> function:</p>
 <ol style="list-style-type: lower-alpha"><li>“par.ini” argument is depreciated, the user can use “method” argument.</li>
 <li>“cluster.size” argument are added.</li>
-<li>New internal function predict.kmeans.fd.</li>
+<li>New internal function <code>predict.kmeans.fd</code>.</li>
 </ol></li>
-<li><p>Bug corrected in internal function pred2glm2boost(), it is used for predictions of classiff.DD outputs</p></li>
-<li><p>New functions: Ops.ldata, Math.ldata, Summary.ldata, mean.ldata and mean.fdata (deprecated ldata.mean, mfdata.mean)</p></li>
-<li><p>Modifications in ldata.cen</p></li>
-<li><p>A bug in S.LPR() has been fixed.</p></li>
-<li><p>A bug in internal function wmestadis() used in fanova.onefactor() has been fixed.</p></li>
-</ol></div>
+<li><p>Bug corrected in internal function <code>pred2glm2boost()</code>, it is used for predictions of <code>classiff.DD()</code> outputs</p></li>
+<li><p>New functions: <code><a href="../reference/ldata.html">Ops.ldata()</a></code>, <code><a href="../reference/ldata.html">Math.ldata()</a></code>, <code><a href="../reference/ldata.html">Summary.ldata()</a></code>, <code><a href="../reference/ldata.html">mean.ldata()</a></code> and <code><a href="../reference/ldata.html">mean.fdata()</a></code> (deprecated <code>ldata.mean()</code>, <code>mfdata.mean()</code>)</p></li>
+<li><p>Modifications in <code><a href="../reference/ldata.html">ldata.cen()</a></code></p></li>
+<li><p>A bug in <code><a href="../reference/S.np.html">S.LPR()</a></code> has been fixed.</p></li>
+<li><p>A bug in internal function <code>wmestadis()</code> used in <code><a href="../reference/fanova.onefactor.html">fanova.onefactor()</a></code> has been fixed.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.0.0" id="fdausc-200">fda.usc 2.0.0<small>2019-11-14</small><a class="anchor" aria-label="anchor" href="#fdausc-200"></a></h2>
 <p>Version 2.0.0 is a major release with several new features, including:</p>
-<ul><li><p>inprod.fdata and metric.lp funcitons addapted to parallel backend.</p></li>
-<li><p>zzz.R file includes .onAttach() function (welcome package message)</p></li>
-<li><p>ops.fda.usc.R file includes ops.fda.usc() function that control general parameters of packages such as ncores argument.</p></li>
-<li><p>par.fda.usc.R file is deleted: par.fda.usc is now an internal object created and modified by ops.fda.usc()</p></li>
-<li><p>New function metric.DTW computes distances between functional data using dynamic time warping (DTW) metric.WDTW and metric.TWED are extended version. (not parallelized yet, pending to completed the Rd document)</p></li>
-<li><p>New functions S.LPR and S.LCR for computing smoothing matrix S by nonparametric method.</p></li>
-<li><p>The functions anova.hetero, anova.onefactor, anova.RPm, influence.fdata, influence.quan, min.basis, min.np and unlist.fdata are renamed fanova.hetero, fanova.onefactor, fanova.RPm, influence.fregre.fd, influence_quan, optim.basis, optim.np and unlist_fdata</p></li>
-<li><p>optim.np (deprecated min.np) allows Local polynomial regression with correlated errors using the new parameter (correl=TRUE)</p></li>
-<li><p>Kernel.correlated new functions</p></li>
+<ul><li><p><code><a href="../reference/inprod.fdata.html">inprod.fdata()</a></code> and <code>metric.lp</code> funcitons addapted to parallel backend.</p></li>
+<li><p>zzz.R file includes <code>.onAttach()</code> function (welcome package message)</p></li>
+<li><p>ops.fda.usc.R file includes <code><a href="../reference/ops.fda.usc.html">ops.fda.usc()</a></code> function that control general parameters of packages such as ncores argument.</p></li>
+<li><p>par.fda.usc.R file is deleted: par.fda.usc is now an internal object created and modified by <code><a href="../reference/ops.fda.usc.html">ops.fda.usc()</a></code></p></li>
+<li><p>New function <code><a href="../reference/metric.DTW.html">metric.DTW()</a></code> computes distances between functional data using dynamic time warping (DTW) <code><a href="../reference/metric.DTW.html">metric.WDTW()</a></code> and <code><a href="../reference/metric.DTW.html">metric.TWED()</a></code> are extended version (not parallelized yet, pending to completed the Rd document)</p></li>
+<li><p>New functions <code><a href="../reference/S.np.html">S.LPR()</a></code> and <code><a href="../reference/S.np.html">S.LCR()</a></code> for computing smoothing matrix S by nonparametric method.</p></li>
+<li><p>The functions anova.hetero(), anova.onefactor(), anova.RPm(), influence.fdata(), influence.quan(), min.basis(), min.np() and unlist.fdata() are renamed fanova.hetero(), fanova.onefactor(), fanova.RPm(), <code><a href="../reference/influence.fregre.fd.html">influence.fregre.fd()</a></code>, influence_quan(), <code><a href="../reference/optim.basis.html">optim.basis()</a></code>, <code><a href="../reference/optim.np.html">optim.np()</a></code> and <code><a href="../reference/fda.usc.internal.html">unlist_fdata()</a></code></p></li>
+<li><p>optim.np() (deprecated min.np()) allows Local polynomial regression with correlated errors using the new parameter (correl=TRUE)</p></li>
+<li><p><code>Kernel.correlated()</code> new functions</p></li>
 <li><p>New class: “ldata”:</p></li>
-</ul><ol style="list-style-type: decimal"><li><p>ldata() class definition.</p></li>
-<li><p>Redefined metric.ldata, it computes distance for ldata object: list with m functional data “mfdata” and univariate data included in a data frame called “df”</p></li>
-<li><p>New function metric.mfdata: compute distance for mfdata class object: list with m functional data</p></li>
-<li><p>plot.ldata: plots for ldata object, it allows drawing using a color bar.</p></li>
-<li><p>plot.mfdata: plot for mfdata object (internal function, pending to completed the Rd document)</p></li>
-<li><p>depth.modep, depth.mode call metric.lp and metric.ldata propperly</p></li>
-<li><p>New functions: subset.ldata, is.lfdata “[.lfdata” “[.ldata” is.ldata names.ldata c.ldata</p></li>
-</ol><ul><li><p>classic.tree() is replaced by the classic.rpart() (which requires the rpart library to be installed). The internal function classif.tree2boost() and the dependency of the rpart package are also removed</p></li>
+</ul><ol style="list-style-type: decimal"><li><p><code><a href="../reference/ldata.html">ldata()</a></code> class definition.</p></li>
+<li><p>Redefined <code><a href="../reference/metric.ldata.html">metric.ldata()</a></code>, it computes distance for ldata object: list with m functional data <code><a href="../reference/mfdata.html">mfdata()</a></code> and univariate data included in a data frame called “df”</p></li>
+<li><p>New function <code><a href="../reference/metric.ldata.html">metric.mfdata()</a></code>: compute distance for mfdata class object: list with m functional data</p></li>
+<li><p><code><a href="../reference/ldata.html">plot.ldata()</a></code>: plots for ldata object, it allows drawing using a color bar.</p></li>
+<li><p><code><a href="../reference/mfdata.html">plot.mfdata()</a></code>: plot formfdata object (internal function, pending to completed the Rd document)</p></li>
+<li><p><code><a href="../reference/depth.mfdata.html">depth.modep()</a></code>, depth.mode() call <code><a href="../reference/metric.lp.html">metric.lp()</a></code> and <code><a href="../reference/metric.ldata.html">metric.ldata()</a></code> propperly</p></li>
+<li><p>New functions: <code><a href="../reference/ldata.html">subset.ldata()</a></code>, <code>is.lfdata()</code>, <code>[.lfdata()</code>, <code>[.ldata</code>, <code><a href="../reference/ldata.html">is.ldata()</a></code>, <code><a href="../reference/ldata.html">names.ldata()</a></code> and <code><a href="../reference/ldata.html">c.ldata()</a></code></p></li>
+</ol><ul><li><p><code>classic.tree()</code> is replaced by the <code>classic.rpart()</code> (which requires the rpart library to be installed). The internal function <code>classif.tree2boost()</code> and the dependency of the rpart package are also removed</p></li>
 <li><p>New functions and utilities in accuracy.r file.</p></li>
 <li>
 <p>New functions related with Machine Learning procedures (rdepend on packages not included in “fda.usc”):</p>
-<ul><li>classif.svm and classif.naiveBayes(e1071 pkg), classif.ksvm (personalized pkg),</li>
-<li>classif.rpart (rpart pkg), classif.nnet (nnet pkg), classif.multinom (nnet pkg),</li>
-<li>classif.randomForest (randomForest)</li>
-<li>clasiff.univariante is used in classif.DD and allow multiclass labels</li>
-<li>classif.kfold selects the parameters using k-fold cross-validation</li>
+<ul><li>
+<code><a href="../reference/classif.ML.html">classif.svm()</a></code> and <code><a href="../reference/classif.ML.html">classif.naiveBayes()</a></code> (e1071 pkg), <code><a href="../reference/classif.ML.html">classif.ksvm()</a></code> (personalized pkg),</li>
+<li>
+<code><a href="../reference/classif.ML.html">classif.rpart()</a></code> (rpart pkg), <code><a href="../reference/classif.ML.html">classif.nnet()</a></code> (nnet pkg), <code><a href="../reference/classif.ML.html">classif.multinom()</a></code> (nnet pkg),</li>
+<li>
+<code><a href="../reference/classif.ML.html">classif.randomForest()</a></code> (randomForest)</li>
+<li>
+<code>clasiff.univariante()</code> is used in classif.DD and allow multiclass labels</li>
+<li>
+<code><a href="../reference/classif.kfold.html">classif.kfold()</a></code> selects the parameters using k-fold cross-validation</li>
 </ul></li>
-<li><p>Minor changes in classif.gkam and fregre.gkam</p></li>
-<li><p>Settings in fregre.np, fregre.np.cv with type.S = S.KNN</p></li>
+<li><p>Minor changes in <code><a href="../reference/classif.gkam.html">classif.gkam()</a></code> and <code><a href="../reference/fregre.gkam.html">fregre.gkam()</a></code></p></li>
+<li><p>Settings in <code><a href="../reference/fregre.np.html">fregre.np()</a></code>, <code><a href="../reference/fregre.np.cv.html">fregre.np.cv()</a></code> with type.S = S.KNN</p></li>
 <li><p>New script file: FDA_REviewClasif_V2 classification example</p></li>
-<li><p>Bug corrected in h.default (specially using k-nearest neighbors smoothing, type.S=“S.KNN”)</p></li>
-<li><p>“type.CV” and “par.CV” arguments are removed in classif.np, classif.kernel and classif.knn</p></li>
+<li><p>Bug corrected in <code><a href="../reference/h.default.html">h.default()</a></code> (specially using k-nearest neighbors smoothing, type.S=“S.KNN”)</p></li>
+<li><p>“type.CV” and “par.CV()” arguments are removed in <code><a href="../reference/classif.np.html">classif.np()</a></code>, <code><a href="../reference/classif.np.html">classif.kernel()</a></code> and <code><a href="../reference/classif.np.html">classif.knn()</a></code></p></li>
 <li><p>dcor.xy.r/.Rd includes Rdnames</p></li>
 <li><p>fdata2model.R shortcut to use in classif and fregre method</p></li>
 </ul></div>
@@ -138,187 +156,201 @@
 <ul><li><p>This version was released in Jan. 2019 to accompany Manuel Oviedo de la Fuente PhD Thesis, see Minerva (University of Santiago de Compostela) repository.</p></li>
 <li><p>New function implemented: fregre.gsam.vs() accompany paper: Febrero-Bande, M., Gonz'{a}lez-Manteiga, W. and Oviedo de la Fuente, M. Variable selection in functional additive regression models, (2018).<br>
 Computational Statistics, 1-19. DOI: 10.1007/s00180-018-0844-5</p></li>
-<li><p>The current function “fregre.basis.cv” returns an object called fregre.basis (same output as if the “fregre.basis” function had been used) that uses the selected parameters according to the indicated criteria (see example below). The previous function version (up to version 1.5.0) has been renamed in the function “fregre.basis.cv.old”. It is marked as deprecated in the current version and will be deleted in the next version of the package, thanks to Beatriz Bueno.</p></li>
-<li><p>New functions: plot.fregre.lm and summary.fregre.lm solve errors in the summary of the in fregre.lm function, thanks to Prof. Andros Kourtellos.</p></li>
-<li><p>A bug in fregre.pc has been fixed (thanks to Prof. Eduardo Garcia-Portugues).</p></li>
+<li><p>The current function <code><a href="../reference/fregre.basis.cv.html">fregre.basis.cv()</a></code> returns an object called fregre.basis (same output as if the <code><a href="../reference/fregre.basis.html">fregre.basis()</a></code> function had been used) that uses the selected parameters according to the indicated criteria (see example below). The previous function version (up to version 1.5.0) has been renamed in the function “fregre.basis.cv.old”. It is marked as deprecated in the current version and will be deleted in the next version of the package, thanks to Beatriz Bueno.</p></li>
+<li><p>New functions: plot.fregre.lm and summary.fregre.lm() solve errors in the summary of the in <code><a href="../reference/fregre.lm.html">fregre.lm()</a></code> function, thanks to Prof. Andros Kourtellos.</p></li>
+<li><p>A bug in <code><a href="../reference/fregre.pc.html">fregre.pc()</a></code> has been fixed (thanks to Prof. Eduardo Garcia-Portugues).</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.4.0" id="fdausc-140">fda.usc 1.4.0<small>2018-02-14</small><a class="anchor" aria-label="anchor" href="#fdausc-140"></a></h2>
 <ul><li><p>This was published in December 2017 to accompany the document:</p></li>
-<li><p>Ordonez, C., Oviedo de la Fuente, M., Roca-Pardinas, J., Rodriguez-Perez, J. R. (2017). Determining optimum wavelengths for leaf water content estimation from reflectance: A distance correlation approach. ,</p></li>
-</ul><ol start="2018" style="list-style-type: decimal"><li>173,41-50 DOI: 10.1016/j.chemolab.2017.12.001.</li>
-</ol><ul><li><p>New functions implemented: LMDC.select() and LMDC.regression().</p></li>
+<li><p>Ordonez, C., Oviedo de la Fuente, M., Roca-Pardinas, J., Rodriguez-Perez, J. R. (2017). Determining optimum wavelengths for leaf water content estimation from reflectance: A distance correlation approach. , (2018) 173,41-50 DOI: 10.1016/j.chemolab.2017.12.001.</p></li>
+<li><p>New functions implemented: <code><a href="../reference/LMDC.select.html">LMDC.select()</a></code> and <code>LMDC.regression()</code>.</p></li>
 <li>
 <p>Oviedo de la Fuente M, Febrero-Bande M, Muñoz MP, Domínguez À (2018) Predicting seasonal influenza transmission using functional regression models with temporal dependence. PLoS ONE 13(4): e0194250. DOI: 10.1371/journal.pone.0194250</p>
-<ul><li>The functions fregre.gls and fregre.igls implement the functional linear model with dependent errors (functional GLs and functional iterative GLS respectively). +The “fda.usc/inst/script/” folder contains the code that reproduces the results of the paper (see the scripts whose prefix is “PLOS”).</li>
+<ul><li>The functions fregre.gls and fregre.igls implement the functional linear model with dependent errors (functional GLs and functional iterative GLS respectively).</li>
+<li>The “fda.usc/inst/script/” folder contains the code that reproduces the results of the paper (see the scripts whose prefix is “PLOS”).</li>
 </ul></li>
 <li><p>This package version also companion for the paper:</p></li>
 <li><p>“Goodness-of-fit tests for the functional linear model based on randomly projected empirical processes” Cuesta-Albertos et al., 2017). The package implements goodness-of-fit tests for the functional linear model with scalar response.</p></li>
-<li><p>A bug in functional derivative by raw derivation (function fdata.deriv() with method=“diff”) has been fixed, thanks to Marcos Matabuena.</p></li>
-<li><p>A bug in classif.knn() and predict.classif() has been fixed, thanks to Ricardo Recarey.</p></li>
-<li><p>A bug in CV.S() function has been fixed, thanks to Miquel Carbajo.</p></li>
-<li><p>A bug in anova.hetero has been fixed, thanks to Beatriz Bueno.</p></li>
+<li><p>A bug in functional derivative by raw derivation (function <code><a href="../reference/fdata.deriv.html">fdata.deriv()</a></code> with method=“diff”) has been fixed, thanks to Marcos Matabuena.</p></li>
+<li><p>A bug in <code><a href="../reference/classif.np.html">classif.knn()</a></code> and predict.classif() has been fixed, thanks to Ricardo Recarey.</p></li>
+<li><p>A bug in <code><a href="../reference/CV.S.html">CV.S()</a></code> function has been fixed, thanks to Miquel Carbajo.</p></li>
+<li><p>A bug in <code><a href="../reference/fanova.hetero.html">anova.hetero()</a></code> has been fixed, thanks to Beatriz Bueno.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3.0" id="fdausc-130">fda.usc 1.3.0<small>2016-11-14</small><a class="anchor" aria-label="anchor" href="#fdausc-130"></a></h2>
-<ul><li><p>Beta version functions to Fit Functional Linear Model Using Generalized Least Squares: “fregre.gls”, “fregre.igls”, “GCCV.S”, “predict.fregre.gls” and “predict.fregre.igls” Internal function “auxiliar”, “corSigma”, “corStruct”.</p></li>
-<li><p>The functionality of the functions “+.fdata”, “-.fdata”, “*.fdata” an “/.fdata” has been improved.</p></li>
-<li><p>S3 functions for fdata class calculations: “is.na.fdata” and “anyNA.fdata”. Function “count.na.fdata” returns a vector with the number of “NA” of each curve.</p></li>
+<ul><li><p>Beta version functions to Fit Functional Linear Model Using Generalized Least Squares: <code><a href="../reference/fregre.gls.html">fregre.gls()</a></code>, <code><a href="../reference/fregre.igls.html">fregre.igls()</a></code>, <code><a href="../reference/GCCV.S.html">GCCV.S()</a></code>, <code><a href="../reference/predict.fregre.gls.html">predict.fregre.gls()</a></code> and <code><a href="../reference/predict.fregre.gls.html">predict.fregre.igls()</a></code>. Internal function “auxiliar”, “corSigma()”, “corStruct()”.</p></li>
+<li><p>The functionality of the functions “+.fdata()”, “-.fdata()”, “*.fdata()” an “/.fdata” has been improved.</p></li>
+<li><p>S3 functions for fdata class calculations: <code><a href="../reference/fda.usc.internal.html">is.na.fdata()</a></code> and <code>anyNA.fdata</code>. Function “count.na.fdata()” returns a vector with the number of “NA” of each curve.</p></li>
 <li><p>Internal function “count.na” is deprecated.</p></li>
 <li><p>fdata function converts “xtab” and “ftable” class object into “fdata” class object.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.3" id="fdausc-123">fda.usc 1.2.3<small>2016-04-28</small><a class="anchor" aria-label="anchor" href="#fdausc-123"></a></h2>
-<ul><li>Modification of classif.DD function for DDk classifier.</li>
-<li>New functions length.fdata, NROW.fdata, NCOL.fdata, gridfdata and rcombfdata. depth.KFSD function implements a depth measure based on Kernelized Functional Spatial Depth.<br>
-depth.FSD function implements a depth measure based on Functional Spatial Depth.<br></li>
-<li>A bug in fregre.pc() function has been fixed.</li>
-<li>A bug in depth.RPD() function has been fixed.</li>
+<ul><li>Modification of <code><a href="../reference/classif.DD.html">classif.DD()</a></code> function for DDk classifier.</li>
+<li>New functions <code><a href="../reference/fda.usc.internal.html">length.fdata()</a></code>, <code><a href="../reference/fda.usc.internal.html">NROW.fdata()</a></code>, <code><a href="../reference/fda.usc.internal.html">NCOL.fdata()</a></code>, <code><a href="../reference/rcombfdata.html">gridfdata()</a></code> and <code><a href="../reference/rcombfdata.html">rcombfdata()</a></code>. <code><a href="../reference/depth.fdata.html">depth.KFSD()</a></code> function implements a depth measure based on Kernelized Functional Spatial Depth.<br><code><a href="../reference/depth.fdata.html">depth.FSD()</a></code> function implements a depth measure based on Functional Spatial Depth.<br></li>
+<li>A bug in <code><a href="../reference/fregre.pc.html">fregre.pc()</a></code> function has been fixed.</li>
+<li>A bug in <code><a href="../reference/depth.fdata.html">depth.RPD()</a></code> function has been fixed.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.2" id="fdausc-122">fda.usc 1.2.2<small>2015-12-10</small><a class="anchor" aria-label="anchor" href="#fdausc-122"></a></h2>
-<ul><li>Warning message in fregre.basis.cv(), fregre.pc.cv() and fregre.pls.cv(), fregre.basis(), fregre.pc() and fregre.pls() functions when system is computationally singular.</li>
+<ul><li>Warning message in <code><a href="../reference/fregre.basis.cv.html">fregre.basis.cv()</a></code>, <code><a href="../reference/fregre.pc.cv.html">fregre.pc.cv()</a></code> and <code><a href="../reference/fregre.pls.cv.html">fregre.pls.cv()</a></code>, <code><a href="../reference/fregre.basis.html">fregre.basis()</a></code>, <code><a href="../reference/fregre.pc.html">fregre.pc()</a></code> and <code><a href="../reference/fregre.pls.html">fregre.pls()</a></code> functions when system is computationally singular.</li>
 <li>A bug in predict.classif() function using a fitted object by classif.knn() has been fixed.</li>
 <li>The argument “trim” is modified from 0.1 to 0.25 in the function quantile.outliers.trim</li>
 <li>The internal distance functions: euclidean, manhattan, minkowski and maximum allow a vector of weights.</li>
-<li>In classif.DD function, the polynomial classifier (“DD1”, “DD2” and “DD3”) uses the original procedure proposed by Li et al. (2012), rotating the DD-plot (to exchange abscise and ordinate). The procedure extend to multi-class problems by incorporating the method of majority voting in the case of polynomial classifier and the method One vs the Rest in the logistic case (“glm” and “gam”).</li>
-<li>The fregre.gkam function only considers functional covariates (not implemented for non-functional covariates).</li>
-<li>In the depth.FM function it has been renamed the argument “dfunc” by “dfunc2”. subset.fdata is a wrapper function of subset function.</li>
+<li>In <code><a href="../reference/classif.DD.html">classif.DD()</a></code> function, the polynomial classifier (“DD1”, “DD2” and “DD3”) uses the original procedure proposed by Li et al. (2012), rotating the DD-plot (to exchange abscise and ordinate). The procedure extend to multi-class problems by incorporating the method of majority voting in the case of polynomial classifier and the method One vs the Rest in the logistic case (“glm” and “gam”).</li>
+<li>The <code><a href="../reference/fregre.gkam.html">fregre.gkam()</a></code> function only considers functional covariates (not implemented for non-functional covariates).</li>
+<li>In the <code><a href="../reference/depth.fdata.html">depth.FM()</a></code> function it has been renamed the argument “dfunc” by “dfunc2”. <code><a href="../reference/subset.fdata.html">subset.fdata()</a></code> is a wrapper function of subset function.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.1" id="fdausc-121">fda.usc 1.2.1<small>2014-12-01</small><a class="anchor" aria-label="anchor" href="#fdausc-121"></a></h2>
-<ul><li>The functions dcor.xy, dcor.test(), bcdcor.dist() and dcor.dist() (wrapper function of energy package) are added. fregre.gsam() function can be used without smoothed vairables.</li>
-<li>A bug in “selec” argument of summary.fregre.gkam() has been fixed.</li>
+<ul><li>The functions <code>dcor.xy</code>, <code><a href="../reference/dcor.xy.html">dcor.test()</a></code>, <code><a href="../reference/dcor.xy.html">bcdcor.dist()</a></code> and <code><a href="../reference/dcor.xy.html">dcor.dist()</a></code> (wrapper function of energy package) are added. <code><a href="../reference/fregre.gsam.html">fregre.gsam()</a></code> function can be used without smoothed vairables.</li>
+<li>A bug in “selec” argument of <code><a href="../reference/summary.fregre.gkam.html">summary.fregre.gkam()</a></code> has been fixed.</li>
 <li>A bug in “h” argument of fregre.plm() has been fixed.</li>
-<li>A bug in sigma=“vexponential” of rproc2fdata() has been fixed. The default values depth.RPp, depth.RP and rproc2fdata() have been modified.</li>
-<li>A classif.DD function uses the same bandwidth “h” for k groups in modal depth and same projections “proj” for k groups in RP depth.</li>
-<li>A bug in predict.fregre.gsam() when PLS are previously estimated using norm=TRUE has been fixed.</li>
+<li>A bug in sigma=“vexponential” of <code><a href="../reference/rproc2fdata.html">rproc2fdata()</a></code> has been fixed. The default values depth.RPp, depth.RP and <code><a href="../reference/rproc2fdata.html">rproc2fdata()</a></code> have been modified.</li>
+<li>A <code><a href="../reference/classif.DD.html">classif.DD()</a></code> function uses the same bandwidth “h” for k groups in modal depth and same projections “proj” for k groups in RP depth.</li>
+<li>A bug in <code><a href="../reference/predict.fregre.lm.html">predict.fregre.gsam()</a></code> when PLS are previously estimated using norm=TRUE has been fixed.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.0" id="fdausc-120">fda.usc 1.2.0<small>2014-05-29</small><a class="anchor" aria-label="anchor" href="#fdausc-120"></a></h2>
-<ul><li>New functions,</li>
-<li>classif.DD, fits Nonparametric Classification Procedure Based on DD-plot (depth-versus-depth plot) for G groups.</li>
-<li>depth.FMp, depth.modep and depth.RPp functions provide the depth measure for a list of p–functional data objects.</li>
-<li>metric.ldata, computes distance for a list of p–functional data objects.</li>
-<li>metric.hausdorff, computes hausdorff distance.</li>
+<p>New functions:</p>
+<ul><li>
+<code><a href="../reference/classif.DD.html">classif.DD()</a></code>, fits Nonparametric Classification Procedure Based on DD-plot (depth-versus-depth plot) for G groups.</li>
+<li>
+<code><a href="../reference/depth.mfdata.html">depth.FMp()</a></code>, <code>depth.modep</code> and <code><a href="../reference/depth.mfdata.html">depth.RPp()</a></code> functions provide the depth measure for a list of p–functional data objects.</li>
+<li>
+<code><a href="../reference/metric.ldata.html">metric.ldata()</a></code>, computes distance for a list of p–functional data objects.</li>
+<li>
+<code><a href="../reference/metric.hausdorff.html">metric.hausdorff()</a></code>, computes hausdorff distance.</li>
 <li>Multivariate depth functions have been renamed: “depth.” to “mdepth.”.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.0" id="fdausc-110">fda.usc 1.1.0<small>2013-12-16</small><a class="anchor" aria-label="anchor" href="#fdausc-110"></a></h2>
-<ul><li><p>New functions,</p></li>
-<li><p>fregre.basis.fr fits functional response model.</p></li>
-<li><p>metric.kl computes Kullback–Leibler distance.</p></li>
-<li><p>anova.onefactor: tests one–way anova model for functional data.</p></li>
-<li><p>split.fdata, unlist.fdata: A wrapper functions of the split and unlist function for functional data.</p></li>
-<li><p>func.mean.formula computes the mean curve for the each level of grouping variable.</p></li>
-<li><p>New dataset, Mithochondiral calcium overload (MCO) data set.</p></li>
-</ul><p>*New utilities, + fdata converts arrays of 3 dimension in a functional data of 2 dimension plot.fdata allows functional data of 2 dimension. + The functions fdata2ppc, fdata2ppls, fregre.ppc, fregre.ppls, fregre.ppc.cv, fregre.ppls.cv are deprecated in favor of fdata2pc,fdata2pls, fregre.pc, fregre.pc.cv, fregre.pls, fregre.pls.cv. These latter functions include penalty arguments.</p>
-</div>
+<p>New functions:</p>
+<ul><li>
+<code><a href="../reference/fregre.basis.fr.html">fregre.basis.fr()</a></code> fits functional response model.</li>
+<li>
+<code><a href="../reference/metric.kl.html">metric.kl()</a></code> computes Kullback–Leibler distance.</li>
+<li>
+<code><a href="../reference/fanova.onefactor.html">anova.onefactor()</a></code>: tests one–way anova model for functional data.</li>
+<li>
+<code><a href="../reference/fdata.methods.html">split.fdata()</a></code>, <code>unlist.fdata()</code>: A wrapper functions of the split and unlist function for functional data.</li>
+<li>
+<code><a href="../reference/Descriptive.html">func.mean.formula()</a></code> computes the mean curve for the each level of grouping variable.</li>
+</ul><p>New dataset: Mithochondiral calcium overload (MCO) data set.</p>
+<p>New utilities:</p>
+<ul><li>
+<code><a href="../reference/fdata.html">fdata()</a></code> converts arrays of 3 dimension in a functional data of 2 dimension <code><a href="../reference/plot.fdata.html">plot.fdata()</a></code> allows functional data of 2 dimension.</li>
+<li>The functions fdata2ppc(), fdata2ppls(), fregre.ppc(), fregre.ppls(), fregre.ppc.cv(), fregre.ppls.cv() are deprecated in favor of <code><a href="../reference/fdata2pc.html">fdata2pc()</a></code>, <code><a href="../reference/fdata2pls.html">fdata2pls()</a></code>, <code><a href="../reference/fregre.pc.html">fregre.pc()</a></code>, <code><a href="../reference/fregre.pc.cv.html">fregre.pc.cv()</a></code>, <code><a href="../reference/fregre.pls.html">fregre.pls()</a></code>, <code><a href="../reference/fregre.pls.cv.html">fregre.pls.cv()</a></code>. These latter functions include penalty arguments.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.5" id="fdausc-105">fda.usc 1.0.5<small>2013-07-24</small><a class="anchor" aria-label="anchor" href="#fdausc-105"></a></h2>
 <ul><li>“pls” package dependency has been removed.</li>
-<li>A bug in outlier.ltr() function has been fixed in the case of the rownames (of fdata) can not be converted to numeric values.</li>
-<li>A bug in fregre.lm() function has been fixed in the case of one of the covariates is a factor and penalization argument is required (rn or lambda greater than zero).</li>
-<li>The new argument “lambda” in fregre.lm() penalizes the derivative of second order of the functional data.</li>
-<li>New arguments in predict.fregre.fd() and predict.fregre.lm() produce confidence or prediction intervals at the specified level mimicking predict.lm().</li>
-<li>New argument “verbose” in min.basis(), min.np() and rproc2fdata().</li>
-<li>The argument “mu” in rproc2fdata() allows vector and also fdata class object.</li>
+<li>A bug in <code>outlier.ltr()</code> function has been fixed in the case of the rownames (of fdata) can not be converted to numeric values.</li>
+<li>A bug in <code><a href="../reference/fregre.lm.html">fregre.lm()</a></code> function has been fixed in the case of one of the covariates is a factor and penalization argument is required (rn or lambda greater than zero).</li>
+<li>The new argument “lambda” in <code><a href="../reference/fregre.lm.html">fregre.lm()</a></code> penalizes the derivative of second order of the functional data.</li>
+<li>New arguments in <code><a href="../reference/predict.fregre.fd.html">predict.fregre.fd()</a></code> and <code><a href="../reference/predict.fregre.lm.html">predict.fregre.lm()</a></code> produce confidence or prediction intervals at the specified level mimicking <code><a href="https://rdrr.io/r/stats/predict.lm.html" class="external-link">predict.lm()</a></code>.</li>
+<li>New argument “verbose” in min.basis(), min.np() and <code><a href="../reference/rproc2fdata.html">rproc2fdata()</a></code>.</li>
+<li>The argument “mu” in <code><a href="../reference/rproc2fdata.html">rproc2fdata()</a></code> allows vector and also fdata class object.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.4" id="fdausc-104">fda.usc 1.0.4<small>2013-02-07</small><a class="anchor" aria-label="anchor" href="#fdausc-104"></a></h2>
-<ul><li>A bug in fregre.pls() function has been fixed in the case of the FPLS basis are created with the argument norm is TRUE (the curves are centred and scaled).</li>
-<li>A bug in outliers.depth.trim() function has been fixed in the case of the procedure requires more than one iteration step.</li>
+<ul><li>A bug in <code><a href="../reference/fregre.pls.html">fregre.pls()</a></code> function has been fixed in the case of the FPLS basis are created with the argument norm is TRUE (the curves are centred and scaled).</li>
+<li>A bug in <code><a href="../reference/Outliers.fdata.html">outliers.depth.trim()</a></code> function has been fixed in the case of the procedure requires more than one iteration step.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.3" id="fdausc-103">fda.usc 1.0.3<small>2013-01-29</small><a class="anchor" aria-label="anchor" href="#fdausc-103"></a></h2>
-<ul><li>This version introduces new function classif.depth() that fits a nonparametric classification procedure based on maximum depth measure.</li>
-<li>Penalized FPC an FPLS basis are computed in create.pc.basis and create.pls.basis by the new arguments “lambda” and “P”.</li>
-<li>A bug in predict.fregre.fd() function has been fixed (in the case of the “object” is fitted using funtional partial least square basis).</li>
+<ul><li>This version introduces new function <code><a href="../reference/classif.depth.html">classif.depth()</a></code> that fits a nonparametric classification procedure based on maximum depth measure.</li>
+<li>Penalized FPC an FPLS basis are computed in <code><a href="../reference/create.fdata.basis.html">create.pc.basis()</a></code> and <code><a href="../reference/create.fdata.basis.html">create.pls.basis()</a></code> by the new arguments “lambda” and “P”.</li>
+<li>A bug in <code><a href="../reference/predict.fregre.fd.html">predict.fregre.fd()</a></code> function has been fixed (in the case of the “object” is fitted using funtional partial least square basis).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.2" id="fdausc-102">fda.usc 1.0.2<small>2013-01-15</small><a class="anchor" aria-label="anchor" href="#fdausc-102"></a></h2>
 <ul><li>Release 1.0.2 introduces new functions:</li>
 <li>New argument “se.fit” in predict.fregre.fd() and predict.fregre.lm() function.</li>
-<li>A bug in CV.S() function when “y” argument is a fdata object has been fixed.</li>
+<li>A bug in <code><a href="../reference/CV.S.html">CV.S()</a></code> function when “y” argument is a fdata object has been fixed.</li>
 <li>This “bug” has involved the min.np() function.</li>
-<li>In metric.lp() function NA values are returned, if the fdata has NA’s values.</li>
-<li>In metric.lp() function supremum distance is computed, if “lp” argument is 0.</li>
+<li>In <code><a href="../reference/metric.lp.html">metric.lp()</a></code> function NA values are returned, if the fdata has NA’s values.</li>
+<li>In <code><a href="../reference/metric.lp.html">metric.lp()</a></code> function supremum distance is computed, if “lp” argument is 0.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.1" id="fdausc-101">fda.usc 1.0.1<small>2013-01-10</small><a class="anchor" aria-label="anchor" href="#fdausc-101"></a></h2>
 <p>New functions:</p>
-<ul><li><p>New depth functions and its corresponding shortcut functions (see help(Descriptive) form more details):</p></li>
-<li><p>depth.SD() provides the simplicial depth measure for bivariate data.</p></li>
-<li><p>depth.PD() provides the depth measure using random projections for multivariate data.</p></li>
-<li><p>depth.MhD() provides the Mahalanobis depth measure for multivariate data.</p></li>
-<li><p>depth.HD() provides the half-space depth measure for multivariate data.</p></li>
+<ul><li><p>New depth functions and its corresponding shortcut functions (see <code><a href="../reference/Descriptive.html">help(Descriptive)</a></code> form more details):</p></li>
+<li><p><code>depth.SD()</code> provides the simplicial depth measure for bivariate data.</p></li>
+<li><p><code>depth.PD()</code> provides the depth measure using random projections for multivariate data.</p></li>
+<li><p><code>depth.MhD()</code> provides the Mahalanobis depth measure for multivariate data.</p></li>
+<li><p><code>depth.HD()</code> provides the half-space depth measure for multivariate data.</p></li>
 <li><p>It introduces a new functions for functional PC and PLS regression:</p></li>
-<li><p>fregre.ppc,fregre.ppls, fregre.ppc.cv,fregre.ppls.cv, and the auxiliary functions: fdata2ppc,fdata2ppls,P.penalty.</p></li>
-<li><p>The function rber.gold() has been renamed by rwild() function. *Now, rwild() contructs the Wild bootstrap residuals.</p></li>
-<li><p>order.fdata() is a wrapper function of order function.</p></li>
+<li><p>fregre.ppc, fregre.ppls, fregre.ppc.cv, fregre.ppls.cv, and the auxiliary functions: fdata2ppc, fdata2ppls, P.penalty.</p></li>
+<li><p>The function rber.gold() has been renamed by <code><a href="../reference/rwild.html">rwild()</a></code> function.</p></li>
+<li><p>ow, r<code>wild()</code> contructs the Wild bootstrap residuals.</p></li>
+<li><p><code><a href="../reference/fdata.methods.html">order.fdata()</a></code> is a wrapper function of order function.</p></li>
 </ul><p>New arguments and options:</p>
-<p><em>New arguments “wild” and “type.wild” in fregre.bootstrap(). </em> In fregre.glm(), fregre.gsam(), classif.glm2boost(), classif.gsam2boost() the “fdataobj” argument allows a multivariate data or functional data. * fregre.lm() allows penalization by “rn” parameter (ridge regression). * fregre.pc() and fregre.basis() allow weighted least squares by “weights” argument.</p>
+<p><em>New arguments “wild” and “type.wild” in <code><a href="../reference/fregre.bootstrap.html">fregre.bootstrap()</a></code>. </em> In <code><a href="../reference/fregre.glm.html">fregre.glm()</a></code>, <code><a href="../reference/fregre.gsam.html">fregre.gsam()</a></code>, classif.glm2boost(), classif.gsam2boost() the “fdataobj” argument allows a multivariate data or functional data. * <code><a href="../reference/fregre.lm.html">fregre.lm()</a></code> allows penalization by “rn” parameter (ridge regression). * <code><a href="../reference/fregre.pc.html">fregre.pc()</a></code> and fregre.basis() allow weighted least squares by “weights” argument.</p>
 <ul><li>Correction of bugs:</li>
-<li>A bug in “draw” argument of fdata.bootstrap() has been fixed.</li>
-<li>A bug in predict.classif() function ussing a fitted object by classif.knn() has been fixed.</li>
-<li>A bug in create.pc.basis() function when “l” argument has length 1 has been fixed.</li>
-<li>This “bug” has involved the following functions: fregre.lm(), fregre.glm() and fregre.gsam().</li>
+<li>A bug in “draw” argument of <code><a href="../reference/fdata.bootstrap.html">fdata.bootstrap()</a></code> has been fixed.</li>
+<li>A bug in <code><a href="../reference/predict.classif.html">predict.classif()</a></code> function ussing a fitted object by <code><a href="../reference/classif.np.html">classif.knn()</a></code> has been fixed.</li>
+<li>A bug in <code><a href="../reference/create.fdata.basis.html">create.pc.basis()</a></code> function when “l” argument has length 1 has been fixed.</li>
+<li>This “bug” has involved the following functions: <code><a href="../reference/fregre.lm.html">fregre.lm()</a></code>, <code><a href="../reference/fregre.glm.html">fregre.glm()</a></code> and <code><a href="../reference/fregre.gsam.html">fregre.gsam()</a></code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.0" id="fdausc-100">fda.usc 1.0.0<small>2012-10-19</small><a class="anchor" aria-label="anchor" href="#fdausc-100"></a></h2>
-<p>*Release 1.0.0 was released in Oct. 2012 as the working version to accompany ’Febrero-Bande, M. and Oviedo de la Fuente, M. (2012). ’Statistical Computing in Functional Data Analysis: The R Package fda.usc. Journal of Statistical Software, 51(4), 1-28., URL <a href="https://www.jstatsoft.org/article/view/v051i04" class="external-link uri">https://www.jstatsoft.org/article/view/v051i04</a></p>
-<ul><li>New functions added:
-<ul><li>depth.RT() implements a random Tukey depth (RT) and its corresponding some shortcut functions. metric.dist() methods as wrappers for dist(),</li>
-<li>New arguments in depth.FM(), depth.RP(), depth.mode() and fdata().</li>
+<ul><li><p>Release 1.0.0 was released in Oct. 2012 as the working version to accompany ’Febrero-Bande, M. and Oviedo de la Fuente, M. (2012). ’Statistical Computing in Functional Data Analysis: The R Package fda.usc. Journal of Statistical Software, 51(4), 1-28., URL <a href="https://www.jstatsoft.org/article/view/v051i04" class="external-link uri">https://www.jstatsoft.org/article/view/v051i04</a></p></li>
+<li>
+<p>New functions added:</p>
+<ul><li>
+<code><a href="../reference/depth.fdata.html">depth.RT()</a></code> implements a random Tukey depth (RT) and its corresponding some shortcut functions. <code><a href="../reference/metric.dist.html">metric.dist()</a></code> methods as wrappers for dist(),</li>
+<li>New arguments in <code><a href="../reference/depth.fdata.html">depth.FM()</a></code>, <code><a href="../reference/depth.fdata.html">depth.RP()</a></code>, <code><a href="../reference/depth.fdata.html">depth.mode()</a></code> and <code><a href="../reference/fdata.html">fdata()</a></code>.</li>
 </ul></li>
-<li>The functions: fregre.glm(), fregre.gsam(), fregre.gkam(), classif.np(), classif.glm(), classi.glm() allow functional and multivariate analysis.</li>
+<li><p>The functions: <code><a href="../reference/fregre.glm.html">fregre.glm()</a></code>, <code><a href="../reference/fregre.gsam.html">fregre.gsam()</a></code>, <code><a href="../reference/fregre.gkam.html">fregre.gkam()</a></code>, <code><a href="../reference/classif.np.html">classif.np()</a></code>, <code><a href="../reference/classif.glm.html">classif.glm()</a></code>, <code>classi.glm()</code> allow functional and multivariate analysis.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.8.1" id="fdausc-0981">fda.usc 0.9.8.1<small>2012-07-03</small><a class="anchor" aria-label="anchor" href="#fdausc-0981"></a></h2>
 <p>Release 0.9.8.1 introduces new functions flm.Ftest() and dfv.test(). The first performs a functional F-test and the second implements the test of Delsol, Ferraty and Vieu (2010).</p>
-<p>Function flm.test() now has a better computational performance and function Aijr() has been replaced by Adot().</p>
-<p>New argument “lambda” in fdata2fd() function.</p>
-<p>New argument “rn” in create.pc.basis() function.</p>
-<p>fregre.kgam() has been renamed to fregre.gkam().</p>
+<p>Function <code><a href="../reference/flm.test.html">flm.test()</a></code> now has a better computational performance and function Aijr() has been replaced by <code><a href="../reference/PCvM.statistic.html">Adot()</a></code>.</p>
+<p>New argument “lambda” in <code><a href="../reference/fdata2fd.html">fdata2fd()</a></code> function.</p>
+<p>New argument “rn” in <code><a href="../reference/create.fdata.basis.html">create.pc.basis()</a></code> function.</p>
+<p>fregre.kgam() has been renamed to <code><a href="../reference/fregre.gkam.html">fregre.gkam()</a></code>.</p>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.8" id="fdausc-098">fda.usc 0.9.8<small>2012-06-07</small><a class="anchor" aria-label="anchor" href="#fdausc-098"></a></h2>
-<p>Release 0.9.8 introduces a new function flm.test() that allows to test for the Functional Linear Model with scalar response for a given dataset. Is based on the new functions PCvM.statistic(), Aijr() and rber.gold().</p>
-<p>A bug in fregre.kgam has been fixed.</p>
+<p>Release 0.9.8 introduces a new function <code><a href="../reference/flm.test.html">flm.test()</a></code> that allows to test for the Functional Linear Model with scalar response for a given dataset. Is based on the new functions <code><a href="../reference/PCvM.statistic.html">PCvM.statistic()</a></code>, Aijr() and rber.gold().</p>
+<p>A bug in fregre.kgam() has been fixed.</p>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.7" id="fdausc-097">fda.usc 0.9.7<small>2012-05-08</small><a class="anchor" aria-label="anchor" href="#fdausc-097"></a></h2>
 <ul><li><p>New functions:</p></li>
 <li><p>fregre.kgam(), classif.kgam(), dev.S(),</p></li>
 <li><p>predict.fregre.kgam(), print.fregre.kgam(),</p></li>
-<li><p>summary.fregre.kgam(), fregre.gsam(),</p></li>
-<li><p>classif.np(), classif.kgam(), classif.gsam().</p></li>
-<li><p>New argument “par.S” in: fregre.np(), fregre.np.cv(), fregre.plm(), S.NW(), S.KNN(), S.LLR().</p></li>
-<li><p>New attributes for: metric.lp(), semimetric.basis() and semimetric.NPFDA()</p></li>
+<li><p>summary.fregre.kgam(), <code><a href="../reference/fregre.gsam.html">fregre.gsam()</a></code>,</p></li>
+<li><p><code><a href="../reference/classif.np.html">classif.np()</a></code>, classif.kgam(), <code><a href="../reference/classif.gsam.html">classif.gsam()</a></code>.</p></li>
+<li><p>New argument “par.S” in: <code><a href="../reference/fregre.np.html">fregre.np()</a></code>, <code><a href="../reference/fregre.np.cv.html">fregre.np.cv()</a></code>, <code><a href="../reference/fregre.plm.html">fregre.plm()</a></code>, <code><a href="../reference/S.np.html">S.NW()</a></code>, <code><a href="../reference/S.np.html">S.KNN()</a></code>, <code><a href="../reference/S.np.html">S.LLR()</a></code>.</p></li>
+<li><p>New attributes for: <code><a href="../reference/metric.lp.html">metric.lp()</a></code>, <code><a href="../reference/semimetric.basis.html">semimetric.basis()</a></code> and <code><a href="../reference/semimetric.NPFDA.html">semimetric.NPFDA()</a></code></p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.6" id="fdausc-096">fda.usc 0.9.6<small>2012-03-06</small><a class="anchor" aria-label="anchor" href="#fdausc-096"></a></h2>
 <ul><li><p>Release 0.9.6 renames the functions:</p></li>
-<li><p>pc.fdata()–&gt;fdata2pc()</p></li>
-<li><p>pls.fdata()–&gt;fdata2pls()</p></li>
-<li><p>pc.cor()–&gt;summary.fdata.comp()</p></li>
-<li><p>pc.fdata()–&gt;summary.fdata.comp()</p></li>
-<li><p>It added create.pls.basis(), Math.fdata(), Ops.fdata(), Summary.fdata() and dis.cos.cor() function.</p></li>
-<li><p>New argument par.S in: fregre.np, fregre.np.cv, fregre.plm, New argument cv in: S.NW,S.KNN, S.LLR</p></li>
-<li><p>In metric.lp the argument p now is called lp.</p></li>
+<li><p>pc.fdata()–&gt;<code><a href="../reference/fdata2pc.html">fdata2pc()</a></code></p></li>
+<li><p>pls.fdata()–&gt;<code><a href="../reference/fdata2pls.html">fdata2pls()</a></code></p></li>
+<li><p>pc.cor()–&gt;<code><a href="../reference/summary.fdata.comp.html">summary.fdata.comp()</a></code></p></li>
+<li><p>pc.fdata()–&gt;<code><a href="../reference/summary.fdata.comp.html">summary.fdata.comp()</a></code></p></li>
+<li><p>It added <code><a href="../reference/create.fdata.basis.html">create.pls.basis()</a></code>, <code><a href="../reference/fdata.methods.html">Math.fdata()</a></code>, <code><a href="../reference/fdata.methods.html">Ops.fdata()</a></code>, <code><a href="../reference/fdata.methods.html">Summary.fdata()</a></code> and <code><a href="../reference/dis.cos.cor.html">dis.cos.cor()</a></code> function.</p></li>
+<li><p>New argument par.S in: <code><a href="../reference/fregre.np.html">fregre.np()</a></code>, <code><a href="../reference/fregre.np.cv.html">fregre.np.cv()</a></code>, <code><a href="../reference/fregre.plm.html">fregre.plm()</a></code>, New argument cv in: <code><a href="../reference/S.np.html">S.NW()</a></code>, <code><a href="../reference/S.np.html">S.KNN()</a></code>, <code><a href="../reference/S.np.html">S.LLR()</a></code></p></li>
+<li><p>In <code><a href="../reference/metric.lp.html">metric.lp()</a></code> the argument p now is called lp.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.5" id="fdausc-095">fda.usc 0.9.5<small>2011-04-27</small><a class="anchor" aria-label="anchor" href="#fdausc-095"></a></h2>
-<p>Release 0.9.5 improves fdata.bootstrap() function (better computational efficiency). It introduces a new functions: for Partial Linear Square (pls.fdata(), fregre.pls() and fregre.pls.cv()) and Simpson integration (int.simpson() and int.simpson2()). It modifies the functions metric.lp(), inprod.fdata(), summary.fregre.fd() and predict.fregre.fd().</p>
+<p>Release 0.9.5 improves <code><a href="../reference/fdata.bootstrap.html">fdata.bootstrap()</a></code> function (better computational efficiency). It introduces a new functions: for Partial Linear Square (pls.fdata(), <code><a href="../reference/fregre.pls.html">fregre.pls()</a></code> and <code><a href="../reference/fregre.pls.cv.html">fregre.pls.cv()</a></code>) and Simpson integration (int.simpson() and int.simpson2()). It modifies the functions <code><a href="../reference/metric.lp.html">metric.lp()</a></code>, <code><a href="../reference/inprod.fdata.html">inprod.fdata()</a></code>, <code><a href="../reference/summary.fregre.fd.html">summary.fregre.fd()</a></code> and <code><a href="../reference/predict.fregre.fd.html">predict.fregre.fd()</a></code>.</p>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9.4" id="fdausc-094">fda.usc 0.9.4<small>2011-03-09</small><a class="anchor" aria-label="anchor" href="#fdausc-094"></a></h2>
-<p>Release 0.9.4 added 3 script files: Outliers_fdata.R, flm_beta_estimation_brownian_data.R and Classif_phoneme.R. It has introduced the functions fregre.glm() and predict.fregre.glm() which allow fit and predict respectively Functional Generalized Linear Models. It has introduced the functions create.pc.basis and create.fdata.basis which allow to create basis objects for functional data of class “fdata”.</p>
+<p>Release 0.9.4 added 3 script files: Outliers_fdata.R, flm_beta_estimation_brownian_data.R and Classif_phoneme.R. It has introduced the functions <code><a href="../reference/fregre.glm.html">fregre.glm()</a></code> and <code><a href="../reference/predict.fregre.lm.html">predict.fregre.glm()</a></code> which allow fit and predict respectively Functional Generalized Linear Models. It has introduced the functions create.pc.basis and <code><a href="../reference/create.fdata.basis.html">create.fdata.basis()</a></code> which allow to create basis objects for functional data of class “fdata”.</p>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.9" id="fdausc-09">fda.usc 0.9<small>2011-01-26</small><a class="anchor" aria-label="anchor" href="#fdausc-09"></a></h2>
-<p>Release 0.9 introduces a new function h.default() that simplifies the calculation of the bandwidth parameter “h” in the functions: fregre.np(), fregre.np.cv() and fregre.plm().<br>
-In most of the functions has added a stop control when the dataset has missing data (NA’s). It adds the attribute “call” to the distance matrix calculated in metric.lp(), semimetric.basis() and semimetric.NPFDA() functions.</p>
+<p>Release 0.9 introduces a new function <code><a href="../reference/h.default.html">h.default()</a></code> that simplifies the calculation of the bandwidth parameter “h” in the functions: <code><a href="../reference/fregre.np.html">fregre.np()</a></code>, <code><a href="../reference/fregre.np.cv.html">fregre.np.cv()</a></code> and <code><a href="../reference/fregre.plm.html">fregre.plm()</a></code>.<br>
+In most of the functions has added a stop control when the dataset has missing data (NA’s). It adds the attribute “call” to the distance matrix calculated in <code><a href="../reference/metric.lp.html">metric.lp()</a></code>, <code><a href="../reference/semimetric.basis.html">semimetric.basis()</a></code> and <code><a href="../reference/semimetric.NPFDA.html">semimetric.NPFDA()</a></code> functions.</p>
 </div>
   </div>
 
