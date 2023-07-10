@@ -150,7 +150,7 @@ if (is.vector(ncl)) {
 if (is.null(colnames(out1$d))) 
   cnames<-colnames(out1$d)<-1:NCOL(out1$d)
 else cnames<-colnames(out1$d)
-while ((i<max.iter) && (!same_centers)) {
+while ((i<max.iter) & (!same_centers)) {
   iterar<-FALSE
  out3=kmeans.assig.groups(out1,draw=draw)
   names(out3$cluster) <- cnames
