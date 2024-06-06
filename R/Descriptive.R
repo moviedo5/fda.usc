@@ -125,7 +125,7 @@ func.mean<-function (x) {
     clases <- sapply(x,class)
     iclases <- (clases %in% c("numeric","integer","double"))
     #x <- as.data.frame(t(colMeans(x[,iclases,drop=F],na.rm = TRUE)))
-    x <- colMeans(---------------------x[,iclases,drop=F],na.rm = TRUE)
+    x <- colMeans(x[,iclases,drop=F],na.rm = TRUE)
     names(x) <- nam[iclases]
     #attributes(x)$df.class <- iclases
     xnew[!iclases] <- NA
