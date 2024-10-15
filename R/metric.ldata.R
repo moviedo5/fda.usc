@@ -68,7 +68,7 @@ dist.list <- function (ldata,...) {
     ldist
 }
 ################################# 
-# Devulve una lista con las distancias para cada variable del "df"
+# Devuelve una lista con las distancias para cada variable del "df"
 # y el resto de objetos fdata
 dist.ldata <- function(ldata, metric=NULL, par.metric=NULL,...){
   if (!is.ldata(ldata)) stop("No ldata object")
@@ -318,7 +318,7 @@ metric.mfdata=function(mfdata1,mfdata2=NULL
                       ,metric
                       ,par.metric=list()
                       ,w
-                      ,method="none"#"euclidean"
+                      ,method="none"      #"euclidean"
                       ) {
   one.mfdata=F
   if (is.null(mfdata2)) {
