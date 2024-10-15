@@ -113,7 +113,7 @@ dist.ldata <- function(ldata, metric=NULL, par.metric=NULL,...){
 
 ################################################################################
 # created 20190614 used in metric.ldata, metric.mfdata
-list.select <- function(x,include,exclude){
+list.select <- function(x,include="all",exclude="none"){
   #Internal, used in metric.mfdata
   var.name <- names(x)
   a <- sapply(x, class,USE.NAMES = T)
