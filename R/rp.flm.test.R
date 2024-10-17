@@ -400,6 +400,7 @@ rp.flm.statistic <- function(proj.X, residuals, proj.X.ord = NULL, F.code = TRUE
 #' progress.
 #' @param same.rwild wether to employ the same wild bootstrap residuals for
 #' different projections or not.
+#' @param seed seed to be employed with \code{set.seed} for initializing random projections.
 #' @param ... further arguments passed to \link[fda]{create.basis} (not
 #' \code{rangeval} that is taken as the \code{rangeval} of \code{X.fdata}).
 #' @return An object with class \code{"htest"} whose underlying structure is a
@@ -549,7 +550,7 @@ rp.flm.statistic <- function(proj.X, residuals, proj.X.ord = NULL, F.code = TRUE
 rp.flm.test <- function(X.fdata, Y, beta0.fdata = NULL, B = 1000, n.proj = 10, 
                         est.method = "pc", p = NULL, p.criterion = "SICc", 
                         pmax = 20, type.basis = "bspline", projs = 0.95, 
-                        verbose = TRUE, same.rwild = FALSE, ...) {
+                        verbose = TRUE, same.rwild = FALSE, seed=NULL,...) {
   
   # Sample size
   n <- dim(X.fdata)[1]
@@ -722,8 +723,11 @@ rp.flm.test <- function(X.fdata, Y, beta0.fdata = NULL, B = 1000, n.proj = 10,
   ## Computation of the statistic
   
   # Fix seed for projections and bootstrap samples
-  old <- .Random.seed
-  set.seed(987654321)
+  if (is.null(seed)) seed=20030101
+  if (exists(".Random.seed")) {
+  old <- .Random.seed } else {set.seed(seed);old<- .Random.seed}
+  set.seed(seed)
+  #set.seed(987654321)
   on.exit({.Random.seed <<- old})
   
   # Sample random directions
