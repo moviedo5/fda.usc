@@ -105,7 +105,7 @@ basis.x <- list("x"=basis1)
 basis.b <- list("x"=basis2)
 f <- Fat ~ Protein + x
 ldat <- ldata("df"=dataf,"x"=x)
-res  fregre.lm(f,ldat,  basis.b=basis.b)
+res <- fregre.lm(f,ldat,  basis.b=basis.b)
 summary(res)
 f2 <- Fat ~ Protein + xd +xd2
 xd <- fdata.deriv(x,nderiv=1,class.out='fdata', nbasis=nbasis.x)

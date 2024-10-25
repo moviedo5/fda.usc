@@ -66,7 +66,7 @@ of Statistical Software*, 51(4):1-28.
 <!-- 
 <https://www.jstatsoft.org/v51/i04/>
 library(roxygen2)
-setwd("C:/Users/moviedo/github/fda.usc/")
+# setwd("D:/Users/moviedo/github/fda.usc/")
 getwd()
 pkgbuild::compile_dll()
 roxygenize()
@@ -75,10 +75,11 @@ devtools::document()
 library(devtools)
 
 # devtools::install_github("moviedo5/fda.usc",auth_user="moviedo5")
-
+R CMD check --as-cran and R-wind-builder 
+ 
 R CMD build fda.usc
-R CMD check fda.usc_2.1.0.tar.gz --as-cran
-R CMD INSTALL fda.usc_2.1.0.tar.gz --build
+R CMD check fda.usc_2.2.0.tar.gz --as-cran  R-wind-builder 
+R CMD INSTALL fda.usc_2.2.0.tar.gz --build
 
 Manuel Oviedo PhD thesis [Advances in functional regression and classification models](https://hdl.handle.net/10347/18236)
 

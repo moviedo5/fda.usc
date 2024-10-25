@@ -118,7 +118,7 @@ GCV<-function(model){
 }
 #################################################
 
-print.select.glm <- function(x,...){
+print_select_glm <- function(x,...){
   cat("\n Model selected:\n")
   print(x$model)
   cat("\n Stepwise GoF:\n")
@@ -128,7 +128,7 @@ print.select.glm <- function(x,...){
 }
 
 
-print.select.gsam <- function(x,...){
+print_select_gsam <- function(x,...){
   cat("\n Model selected:\n")
   print(x$model)
   cat("\n Stepwise GoF:\n")
@@ -150,7 +150,7 @@ print.select.gsam <- function(x,...){
 
 #################################################
 
-print.fregre.glm.vs<- function(x,...){
+print_fregre_glm_vs<- function(x,...){
   cat("\n Model selected:\n")
   print(x$model)
   cat("\n Stepwise GoF:\n")
@@ -159,7 +159,7 @@ print.fregre.glm.vs<- function(x,...){
   print(x$i.predictor)  
 }
 
-print.fregre.gsam.vs <- function(x,...){
+print_fregre_gsam_vs <- function(x,...){
   cat("\n Model selected:\n")
   print(x$model)
   cat("\n Stepwise GoF:\n")

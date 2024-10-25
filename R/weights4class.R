@@ -10,12 +10,12 @@
 weights4class <- function(x,type=c("equal","inverse")){
   output<-  switch(type[1],
                    equal=rep(1,len=length(x)),
-                   inverse=weights.inverse(x)
+                   inverse=weights_inverse(x)
   )
   output
 }
 
-weights.inverse<-function(x){
+weights_inverse<-function(x){
   tab<-table(x)
   ii <- sum(tab)/tab
   ii<-as.numeric(ii[x])
@@ -37,3 +37,4 @@ prob2classif<-function(yobs,ypred){
   diag(tab)/colSums(tab)
   
 }
+

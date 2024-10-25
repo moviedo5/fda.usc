@@ -63,7 +63,7 @@ plot.mdepth<-function(x, trim,  levgray=.9,...){
     }
 }
 #################################################################################
-plot.depth<-function(x,trim, levgray=.9,...){
+plot.depth<-function(x, trim, levgray=.9,...){
   dep <- x
   if (missing(trim)) 
     trim<-dep$trim

@@ -1,5 +1,5 @@
 ##############################
-solve.ab <- function(a, b, tol = sqrt(.Machine$double.eps), LINPACK = FALSE, ...){
+solve_ab <- function(a, b, tol = sqrt(.Machine$double.eps), LINPACK = FALSE, ...){
 inv <- try(solve(a,b,tol, LINPACK,...),silent=TRUE)
 if (is(inv,"try-error")) {   
   sv <-svd(a)
@@ -15,7 +15,7 @@ quad.fit.opt <- function(index,dep,ind,tt){
   Dg<-dep[,2]
   A <- matrix(c(Df[index[1]],(Df[index[1]])^2, Df[index[2]],(Df[index[2]])^2),byrow=TRUE,2,2)
   w <- c(Dg[index[1]],Dg[index[2]])
-  a <- solve.ab(A,w) 
+  a <- solve_ab(A,w) 
   a02 <- a  
   if ( any(is.na(a02))) a <- c(1,1,1)
   mcr<-MCR0.p(a,dep,ind)
@@ -43,7 +43,7 @@ cubic.fit.opt <- function(index,dep,ind,tt){
                 Df[index[2]],(Df[index[2]])^2,(Df[index[2]])^3,
                 Df[index[3]],(Df[index[3]])^2,(Df[index[3]])^3),byrow=TRUE,3,3)
   w <- c(Dg[index[1]],Dg[index[2]],Dg[index[3]])  
-  a <- solve.ab(A,w)
+  a <- solve_ab(A,w)
   a02 <- a 
   if ( any(is.na(a02))) a <- c(1,1,1)
   mcr<-MCR0.p(a,dep,ind)

@@ -42,7 +42,6 @@
 #' data(aemet)
 #' names(aemet)
 #' names(aemet$df)
-#' class(aemet)<-c("ldata","list") # ldata object
 #' lat <- ifelse(aemet$df$latitude<31,"red","blue")
 #' plot(aemet,col=lat)
 #' }
@@ -214,13 +213,12 @@ NULL
 #' in cardiomyocytes during ischemic conditions. \emph{American Journal
 #' Physiology Heart Circulatori Physiology}. 2003 Sep;285(3):H999--1006.
 #' @keywords datasets
-#' @examples
-#' 
+#' @examples 
 #' data(MCO)
 #' names(MCO)
 #' par(mfrow=c(1,2))
-#' plot(MCO$intact,col=MCO$classintact)
-#' plot(MCO$permea,col=MCO$classpermea)
+#' plot.fdata(MCO$intact, col=MCO$classintact)
+#' plot.fdata(MCO$permea, col=MCO$classintact)
 #' 
 NULL
 

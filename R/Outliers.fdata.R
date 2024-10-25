@@ -16,24 +16,24 @@
 #'   \code{outliers.thres.lrt}.
 #'  Outlier detection in functional data by depth measures: 
 #'  \itemize{
-#'  \item \code{outliers.depth.pond} function weights the data according to depth.
-#'  \item \code{outliers.depth.trim} function uses trimmed data.
+#'  \item {\code{outliers.depth.pond}}{ function weights the data according to depth.}
+#'  \item {\code{outliers.depth.trim}}{ function uses trimmed data.}
 #'  }
-#'  quantile.outliers.pond and quantile.outliers.trim functions provides the quantiles of the bootstrap samples for functional outlier detection by, respectively, weigthed and trimmed procedures. Bootstrap smoothing function (\code{\link{fdata.bootstrap}} with \code{nb} resamples) is applied to these weighted or trimmed data. If \code{smo=0} smoothed bootstrap is not performed.  The function returns a vector of size \code{1}x\code{nb} with bootstrap replicas of the quantile.
+#'  quantile_outliers_pond and quantile_outliers_trim functions provides the quantiles of the bootstrap samples for functional outlier detection by, respectively, weigthed and trimmed procedures. Bootstrap smoothing function (\code{\link{fdata.bootstrap}} with \code{nb} resamples) is applied to these weighted or trimmed data. If \code{smo=0} smoothed bootstrap is not performed.  The function returns a vector of size \code{1}x\code{nb} with bootstrap replicas of the quantile.
 #' @return
 #'  \itemize{
-#'  \item \code{outliers}{ Indexes of functional outlier.}
-#'  \item \code{dep.out}{ Depth value of functional outlier.}      
-#'  \item \code{dep.out}{ Iteration in which the  functional outlier is detected.}        
-#'  \item \code{quantile}{ Threshold for outlier detection.}  
-#'  \item \code{dep}{ Depth value of functional data.}
+#'  \item \code{outliers}: Indexes of functional outlier.
+#'  \item \code{dep.out}: Depth value of functional outlier.  
+#'  \item \code{dep.out}: Iteration in which the  functional outlier is detected.
+#'  \item \code{quantile}: Threshold for outlier detection.
+#'  \item \code{dep}: Depth value of functional data.
 #'}
 #' @references
-#' Cuevas A, Febrero M, Fraiman R. 2006.  \emph{On the use of bootstrap for estimating functions with functional data.} Computational Statistics and Data Analysis 51: 1063{-}1074.
+#' Cuevas A, Febrero M, Fraiman R. 2006.  \emph{On the use of bootstrap for estimating functions with functional data}. Computational Statistics and Data Analysis 51: 1063-1074.
 #'   
 #' Febrero-Bande, M., Galeano, P., and Gonzalez-Manteiga, W. (2008).  \emph{Outlier detection in functional data by depth measures with application to identify abnormal NOx levels}. Environmetrics 19, 4, 331{-}345. 
 #' 
-#' Febrero-Bande, M., Galeano, P. and Gonzalez-Manteiga, W.	 (2007). \emph{A functional analysis of NOx levels: location and scale estimation and outlier detection}. Computational Statistics 22, 3, 411{-}427.
+#' Febrero-Bande, M., Galeano, P. and Gonzalez-Manteiga, W.	 (2007). \emph{A functional analysis of NOx levels: location and scale estimation and outlier detection}. Computational Statistics 22, 3, 411-427.
 #' 
 #' Febrero-Bande,  M., Oviedo de la Fuente, M. (2012).  \emph{Statistical Computing in Functional Data Analysis: The R Package fda.usc.}
 #' Journal of Statistical Software, 51(4), 1-28. \url{https://www.jstatsoft.org/v51/i04/}
@@ -64,7 +64,7 @@ n<-nrow(fdataobj)
 m<-ncol(fdataobj)
 if (is.null(n) && is.null(m)) stop("ERROR IN THE DATA DIMENSIONS")
 if (is.null(row.names(fdataobj[["data"]]))) row.names(fdataobj[["data"]])=1:n
-cutoff<-quantile(quantile.outliers.pond(x,dfunc=dfunc,nb=nb,smo=smo,...),probs=quan)
+cutoff<-quantile(quantile_outliers_pond(x,dfunc=dfunc,nb=nb,smo=smo,...),probs=quan)
     hay<-1
     outliers<-dep.out<-ite<-c()
     curvasgood<-fdataobj

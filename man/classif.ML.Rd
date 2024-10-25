@@ -100,16 +100,16 @@ a voting scheme is applied: requires  G (G - 1) / 2 binary classifiers.}
 \value{
 Return \code{classif} object plus:
 \itemize{
-\item \code{formula}{ formula.}
-\item \code{data}{ List that containing the variables in the model.} 
-\item \code{group}{ Factor of length \emph{n}} 
-\item \code{group.est}{ Estimated vector groups}
-\item \code{prob.classification}{ Probability of correct classification by group.}
-\item \code{prob.group}{ Matrix of predicted class probabilities. For each
-functional point shows the probability of each possible group membership.}
-\item \code{max.prob}{ Highest probability of correct classification.}
-\item \code{type}  Type of classification scheme: 1 vs all  or majority voting.
-\item \code{fit} list of binary classification fitted models.
+\item \code{formula}: formula.
+\item \code{data}: List that containing the variables in the model.
+\item \code{group}: Factor of length \emph{n}. 
+\item \code{group.est}: Estimated vector groups.
+\item \code{prob.classification}: Probability of correct classification by group.
+\item \code{prob.group}: Matrix of predicted class probabilities. For each
+functional point shows the probability of each possible group membership.
+\item \code{max.prob}: Highest probability of correct classification.
+\item\code{type}:  Type of classification scheme: 1 vs all  or majority voting.
+\item \code{fit}: list of binary classification fitted models.
 }
 }
 \description{
@@ -137,7 +137,7 @@ Wrapper versions for multivariate and functional classification:
 \item \code{classif.lda},\code{classif.qda}: uses \code{lda} and  \code{qda} functions and requires \code{MASS} package.
 \item \code{classif.nnet}: uses \code{nnet} function and requires \code{nnet} package.
 \item \code{classif.rpart}: uses \code{nnet} function and requires \code{rpart} package.
-\item \code{classif.svm},\code{classif.naiveBayes}: uses \code{svm} and  \code{naiveBayes} functions and requires \code{e1071} package.
+\item \code{classif.svm}, \code{classif.naiveBayes}: uses \code{svm} and  \code{naiveBayes} functions and requires \code{e1071} package.
 \item \code{classif.ksvm}: uses \code{weighted.ksvm } function and requires \code{personalized} package.
 \item \code{classif.randomForest}: uses \code{randomForest} function and requires \code{randomForest} package.
 \item \code{classif.cv.glmnet}: uses \code{cv.glmnet} function and requires \code{glmnet} package.

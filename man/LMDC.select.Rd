@@ -66,17 +66,17 @@ used in do.call function like "what" argument.}
 is used in do.call function like "args" argument.}
 }
 \value{
-LMDC.select function return a list of two elements:
+\code{LMDC.select} function returns a list of two elements:
 \itemize{
-\item \code{cor}{ the value of distance correlation for each covariate.} 
-\item \code{maxLocal}{ index or locations of local maxima distance correlations.}
+\item {\code{cor}}{ the value of distance correlation for each covariate.} 
+\item {\code{maxLocal}}{ index or locations of local maxima distance correlations.}
 }
-LMDC.regre function return a list of folowing elements:
+\code{LMDC.regre} function returns a list of folowing elements:
 \itemize{
-\item{model}{ object corresponding to the estimated method using the selected variables}
-\item{xvar}{ names of selected variables (impact points).} 
-\item{edf}{ Effective Degrees of Freedom.} 
-\item{nvar}{Number of selected variables (impact points).}
+\item \code{model}: object corresponding to the estimated method using the selected variables.
+\item \code{xvar}: names of selected variables (impact points).
+\item \code{edf}: effective degrees of freedom.
+\item \code{nvar}: number of selected variables (impact points).
 }
 }
 \description{

@@ -47,18 +47,17 @@ number in [0,1].}
 }
 \value{
 \itemize{
-\item \code{group.est} {Estimated vector groups by classified method
-selected.}  
-\item \code{misclassification} { Probability of misclassification.} 
-\item \code{prob.classification} { Probability of correct classification by group level.} 
-\item  \code{dep} { Data frame with the depth of the curves for functional data (or points for multivariate data) in
-\code{fdataobj} w.r.t. each \code{group} level.} 
-\item \code{depth} { Character vector specifying the type of depth functions used.} 
-\item \code{par.depth} { List of parameters for \code{depth} function.} 
-\item \code{classif} { Type of classifier used.} 
-\item \code{par.classif}{ List of parameters for \code{classif} procedure.}
-\item \code{w}{ Optional case weights.} 
-\item \code{fit}{ Fitted object by \code{classif} method using the depth as covariate.}
+\item \code{group.est}: Estimated vector groups by classified method selected.
+\item \code{misclassification}:  Probability of misclassification.
+\item \code{prob.classification}:  Probability of correct classification by group level.
+\item \code{dep}:  Data frame with the depth of the curves for functional data (or points for multivariate data) in
+\code{fdataobj} w.r.t. each \code{group} level.
+\item \code{depth}:  Character vector specifying the type of depth functions used.
+\item \code{par.depth}:  List of parameters for \code{depth} function.
+\item \code{classif}:  Type of classifier used.
+\item \code{par.classif}:  List of parameters for \code{classif} procedure.
+\item \code{w}:  Optional case weights.
+\item \code{fit}: Fitted object by \code{classif} method using the depth as covariate.
 }
 }
 \description{
@@ -78,20 +77,20 @@ parameters for depth function in \code{par.depth}.
 
 (i) Type of depth function from functional data, see \code{\link{Depth}}:
 \itemize{ 
-\item \code{"FM"}: Fraiman and Muniz depth.  
-\item \code{"mode"}: h--modal depth. 
-\item \code{"RT"}: random Tukey depth. 
-\item \code{"RP"}: random project depth.
-\item \code{"RPD"}: double random project depth.
+\item {\code{"FM"}}{ Fraiman and Muniz depth.}
+\item {\code{"mode"}}{ h--modal depth. }
+\item {\code{"RT"}}{ random Tukey depth. }
+\item {\code{"RP"}}{ random project depth.}
+\item {\code{"RPD"}}{ double random project depth.}
   }
 (ii) Type of depth function from multivariate functional data, see \code{\link{depth.mfdata}}:
 \itemize{ 
-\item \code{"FMp"}: Fraiman and Muniz depth with common support.
+\item {\code{"FMp"}}{ Fraiman and Muniz depth with common support.
 Suppose that all p--fdata objects have the same support (same rangevals),
-see \code{\link{depth.FMp}}.  
-\item \code{"modep"}: h--modal depth using a p--dimensional metric, see \code{\link{depth.modep}}.
-\item \code{"RPp"}: random project depth using a p--variate depth with the
-projections, see \code{\link{depth.RPp}}.  
+see \code{\link{depth.FMp}}.}  
+\item {\code{"modep"}}{ h--modal depth using a p--dimensional metric, see \code{\link{depth.modep}}.}
+\item {\code{"RPp"}}{ random project depth using a p--variate depth with the
+projections, see \code{\link{depth.RPp}}.}
 }
 
 If the procedure requires to compute a distance such as in \code{"knn"} or \code{"np"} classifier or
@@ -102,11 +101,11 @@ for multivariate data.
 (iii) Type of depth function from multivariate data, see
 \code{\link{Depth.Multivariate}}: 
 \itemize{ 
-\item \code{"SD"}: Simplicial depth (for bivariate data).  
-\item \code{"HS"}: Half-space depth.  
+\item \code{"SD"}: Simplicial depth (for bivariate data).
+\item \code{"HS"}: Half-space depth. 
 \item \code{"MhD"}: Mahalanobis depth.
 \item \code{"RD"}: random projections depth. 
-\item \code{"LD"}: Likelihood depth.  
+\item \code{"LD"}: Likelihood depth. 
 }
 
 \item The function calculates the misclassification rate based on data depth
@@ -121,12 +120,10 @@ computed in step (1) using the following classifiers.
  \code{\link{classif.glm}}.  
 \item \code{"gam"}: Logistic regression is computed using Generalized Additive Models
  \code{\link{classif.gsam}}.
-\item \code{"lda"}: Linear Discriminant Analysis is computed using
-\code{\link{lda}}. 
+\item \code{"lda"}: Linear Discriminant Analysis is computed using \code{\link{lda}}. 
 \item \code{"qda"}: Quadratic Discriminant Analysis is computed using \code{\link{qda}}.  
-\item \code{"knn"}: k-Nearest Neighbour classification is computed using \code{\link{classif.knn}}.  
-\item \code{"np"}: Non-parametric Kernel classifier is computed using
-\code{\link{classif.np}}.  
+\item \code{"knn"}: k-Nearest Neighbour classification is computed using \code{\link{classif.knn}}.
+\item \code{"np"}: Non-parametric Kernel classifier is computed using \code{\link{classif.np}}.  
 }
 The user can be specify the parameters for classifier function in \code{par.classif} such as the smoothing parameter
 \code{par.classif[["h"]]}, if \code{classif="np"} or the k-Nearest
@@ -183,7 +180,7 @@ gfat <- factor(as.numeric(tecator$y$Fat>=15))
 out01 <- classif.DD(gfat,ab,depth="mode",classif="np")
 out02 <- classif.DD(gfat,ab2,depth="mode",classif="np")
 # DD-plot in gray scale
-ctrl< <- list(draw=T,col=gray(c(0,.5)),alpha=.2)
+ctrl <- list(draw=T,col=gray(c(0,.5)),alpha=.2)
 out02bis <- classif.DD(gfat,ab2,depth="mode",classif="np",control=ctrl)
 
 # 2 depth functions (same curves) 

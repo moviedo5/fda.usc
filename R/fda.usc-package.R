@@ -129,7 +129,6 @@
 #' 
 #' @name fda.usc-package
 #' @aliases fda.usc-package fda.usc
-#' @docType package
 #' @author \emph{Authors:} Manuel Febrero Bande \email{manuel.febrero@@usc.es}
 #' and Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #' 
@@ -143,4 +142,6 @@
 #' fda.usc.} Journal of Statistical Software, 51(4), 1-28.
 #' \doi{10.18637/jss.v051.i04}
 #' @keywords package
+# @docType package
+#' "_PACKAGE"
 NULL

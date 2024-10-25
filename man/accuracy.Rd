@@ -43,24 +43,24 @@ pred2meas(yobs, ypred, measure = "RMSE")
 \item \code{\link{cat2meas}} compute \eqn{tab=table(yobs,ypred)} and calls \code{\link{tab2meas}} function.
 \item \code{\link{tab2meas}} function computes the following measures (see \code{measure} argument) for a binary classification model:
 \itemize{
-\item \code{accuracy}{ the accuracy classification score}
-\item \code{recall}, \code{sensitivity,TPrate}{ \eqn{R=TP/(TP+FN)}}
-\item \code{precision}{ \eqn{P=TP/(TP+FP)}}
-\item \code{specificity},\code{TNrate}{ \eqn{TN/(TN+FP)}}
-\item \code{FPrate}{ \eqn{FP/(TN+FP)}}
-\item \code{FNrate}{ \eqn{FN/(TP+FN)}}
-\item \code{Fmeasure}{ \eqn{2/(1/R+1/P)}}
-\item \code{Gmean}{ \eqn{sqrt(R*TN/(TN+FP))}}
-\item \code{kappa}{ the kappa index}
-\item \code{cost}{ \eqn{sum(diag(tab)/rowSums(tab)*cost)/sum(cost)}}
-\item \code{IOU}{ \eqn{TP/(TP+FN+FP)}} mean of Intersection over Union 
-\item \code{IOU4class}{ \eqn{TP/(TP+FN+FP)}} Intersection over Union by level
+\item \code{accuracy}: the accuracy classification score.
+\item \code{recall}: \code{sensitivity,TPrate}{ \eqn{R=TP/(TP+FN)}}.
+\item \code{precision}: \eqn{P=TP/(TP+FP)}.
+\item \code{specificity}: \code{TNrate}{ \eqn{TN/(TN+FP)}}.
+\item \code{FPrate}: \eqn{FP/(TN+FP)}.
+\item \code{FNrate}: \eqn{FN/(TP+FN)}.
+\item \code{Fmeasure}: \eqn{2/(1/R+1/P)}.
+\item \code{Gmean}: \eqn{sqrt(R*TN/(TN+FP))}.
+\item \code{kappa}: kappa index.
+\item \code{cost}: \eqn{sum(diag(tab)/rowSums(tab)*cost)/sum(cost)}.
+\item \code{IOU}: \eqn{TP/(TP+FN+FP)} mean of Intersection over Union.
+\item \code{IOU4class}: \eqn{TP/(TP+FN+FP)} Intersection over Union by level.
 }
 \item \code{\link{pred2meas}} function computes the following  measures of error, usign the \code{measure} argument, for observed and predicted vectors:
 \itemize{
-\item \code{MSE}{ Mean squared error, \eqn{\frac{\sum{(ypred- yobs)^2}}{n} }{\sum (ypred- yobs)^2 /n }}
-\item \code{RMSE}{ Root mean squared error \eqn{\sqrt{\frac{\sum{(ypred- yobs)^2}}{n} }}{\sqrt(\sum (ypred- yobs)^2 /n )}}
-\item \code{MAE}{ Mean Absolute Error, \eqn{\frac{\sum |yobs - ypred|}{n}}{\sum |yobs - ypred| /n}}
+\item \code{MSE}: Mean squared error, \eqn{\frac{\sum{(ypred- yobs)^2}}{n} }{\sum (ypred- yobs)^2 /n }.
+\item \code{RMSE}: Root mean squared error \eqn{\sqrt{\frac{\sum{(ypred- yobs)^2}}{n} }}{\sqrt(\sum (ypred- yobs)^2 /n )}.
+\item \code{MAE}: Mean Absolute Error, \eqn{\frac{\sum |yobs - ypred|}{n}}{\sum |yobs - ypred| /n}.
 }
 }
 }

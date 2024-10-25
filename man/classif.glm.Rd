@@ -54,14 +54,14 @@ a voting scheme is applied: requires  G (G - 1) / 2 binary classifiers.}
 \value{
 Return \code{glm} object plus:
 \itemize{
-\item \code{formula}{ formula.}
-\item \code{data}{ List that containing the variables in the model.} 
-\item \code{group}{ Factor of length \emph{n}} 
-\item \code{group.est}{ Estimated vector groups}
-\item \code{prob.classification}{ Probability of correct classification by group.}
-\item \code{prob.group}{ Matrix of predicted class probabilities. For each
+\item{\code{formula}: formula.}
+\item{\code{data}: List that containing the variables in the model.} 
+\item{\code{group}: Factor of length \emph{n}.} 
+\item{\code{group.est}: Estimated vector groups.}
+\item{\code{prob.classification}: Probability of correct classification by group.}
+\item{\code{prob.group}: Matrix of predicted class probabilities. For each
 functional point shows the probability of each possible group membership.}
-\item \code{max.prob}{ Highest probability of correct classification.}
+\item{\code{max.prob}: Highest probability of correct classification.}
 }
 }
 \description{

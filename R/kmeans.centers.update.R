@@ -1,5 +1,5 @@
 
-kmeans.centers.update=function(out,group
+kmeans_centers_update=function(out,group
                                ,dfunc=func.trim.FM,draw=TRUE
                                ,par.dfunc=list(trim=0.05)
                                ,...){

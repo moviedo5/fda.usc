@@ -41,12 +41,11 @@ seconds) of the experiment shows a erratic behavior (not very relevant in
 the experiment context) during this period.
 }
 \examples{
-
 data(MCO)
 names(MCO)
 par(mfrow=c(1,2))
-plot(MCO$intact,col=MCO$classintact)
-plot(MCO$permea,col=MCO$classpermea)
+plot.fdata(MCO$intact, col=MCO$classintact)
+plot.fdata(MCO$permea, col=MCO$classintact)
 
 }
 \references{

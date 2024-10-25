@@ -64,19 +64,17 @@ metric function and \code{\link{Kernel}} function.}
 }
 \value{
 \itemize{
-\item {fdataobj}{ \code{\link{fdata}} class object.} 
-\item {group}{ Factor of length \code{n}.} 
-\item {group.est}{ Estimated vector groups}
-\item {prob.group}{ Matrix of predicted class probabilities. For each
-functional point shows the probability of each possible group membership.}
-\item {max.prob}{ Highest probability of correct classification.}
-\item {h.opt}{ Optimal smoothing parameter or bandwidht estimated.} 
-\item {D}{ Matrix of distances of the optimal quantile distance \code{hh.opt}.}
-\item {prob.classification}{ Probability of correct classification by group.}
-\item {misclassification}{ Vector of probability of misclassification by
-number of neighbors \code{knn}.} 
-\item {h}{ Vector of smoothing parameter or bandwidht.} 
-\item {C}{ A call of function \code{classif.kernel}.}
+\item \code{fdataobj}: \code{\link{fdata}} class object.
+\item \code{group}: Factor of length \code{n}.
+\item \code{group.est}: Estimated vector groups.
+\item \code{prob.group}: Matrix of predicted class probabilities. For each functional point shows the probability of each possible group membership.
+\item \code{max.prob}: Highest probability of correct classification.
+\item \code{h.opt}: Optimal smoothing parameter or bandwidht estimated.
+\item \code{D}: Matrix of distances of the optimal quantile distance \code{hh.opt}.
+\item \code{prob.classification}: Probability of correct classification by group.
+\item \code{misclassification}: Vector of probability of misclassification by number of neighbors \code{knn}.
+\item \code{h}: Vector of smoothing parameter or bandwidht.
+\item \code{C}: A call of function \code{classif.kernel}.
 }
 }
 \description{
@@ -84,8 +82,9 @@ Fits Nonparametric Supervised Classification for Functional Data.
 }
 \details{
 Make the group classification of a training dataset using kernel or KNN
-estimation: \code{\link{Kernel}}.\cr Different types of metric funtions can
-be used.
+estimation: \code{\link{Kernel}}.
+
+Different types of metric funtions can be used.
 }
 \note{
 If \code{fdataobj} is a data.frame the function considers the case of

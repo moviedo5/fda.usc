@@ -245,10 +245,10 @@ if (length(vfunc)>0)  {
 # ypx<-nlme::predict.gls(object=object,newdata=object$XX[1:10,])    
 # # #print(ypx)
 # print("2")
-ypx  <-predict.gls(object=object,newdata=XX,se.fit=se.fit,...)     #call to internal function predict.gls an not to nlme::predict.gls
+ypx  <- predict_gls(object=object,newdata=XX,se.fit=se.fit,...)     #call to internal function predict_gls an not to nlme::predict.gls
 # print("3")
 #class(object)<-class(object)[-1]
-#ypxx <-predict.lm(object=object,newdata=XX,se.fit=se.fit,...)     #call to internal function predict.gls an not to nlme::predict.gls 
+#ypxx <-predict.lm(object=object,newdata=XX,se.fit=se.fit,...)     #call to internal function predict_gls an not to nlme::predict.gls 
 ypxx <-predictSE.gls(object, XX, se.fit = se.fit, ...)
 # print("4")
 #print(ypx)

@@ -108,17 +108,17 @@ localMaxima <- function(x) {
 #' used in do.call function like "what" argument.
 #' @param par.method List of parameters used to call the method. This argument
 #' is used in do.call function like "args" argument.
-#' @return LMDC.select function return a list of two elements:
+#' @return \code{LMDC.select} function returns a list of two elements:
 #' \itemize{
-#' \item \code{cor}{ the value of distance correlation for each covariate.} 
-#' \item \code{maxLocal}{ index or locations of local maxima distance correlations.}
+#' \item {\code{cor}}{ the value of distance correlation for each covariate.} 
+#' \item {\code{maxLocal}}{ index or locations of local maxima distance correlations.}
 #' }
-#' LMDC.regre function return a list of folowing elements:
+#' \code{LMDC.regre} function returns a list of folowing elements:
 #' \itemize{
-#' \item{model}{ object corresponding to the estimated method using the selected variables}
-#' \item{xvar}{ names of selected variables (impact points).} 
-#' \item{edf}{ Effective Degrees of Freedom.} 
-#' \item{nvar}{Number of selected variables (impact points).}
+#' \item \code{model}: object corresponding to the estimated method using the selected variables.
+#' \item \code{xvar}: names of selected variables (impact points).
+#' \item \code{edf}: effective degrees of freedom.
+#' \item \code{nvar}: number of selected variables (impact points).
 #' }
 #' @author Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{lm}}, \code{\link{gam}},
@@ -269,7 +269,7 @@ LMDC.select <- function(y, covar, data, tol = .06, pvalue = .05,
 
 #######################################################
 #' @rdname LMDC.select
-#' @export
+#' @export 
 LMDC.regre <- function(y,covar,data,newdata,pvalue=.05,
                        method="lm", par.method = NULL,
                        plot=FALSE,verbose=FALSE){
@@ -349,7 +349,6 @@ LMDC.regre <- function(y,covar,data,newdata,pvalue=.05,
   }
   if (method == "rpart"){
     ff<-as.formula(paste(y,"~",paste(covar,collapse="+"),collapse=""))
-    #model0 <- rpart(ff, data = data)
     par.method$formula <- ff
     par.method$data <- data
     model0 <- do.call(method,par.method)
@@ -442,7 +441,6 @@ LMDC.regre <- function(y,covar,data,newdata,pvalue=.05,
   }
   if (method == "npreg"){
     #ff<-as.formula(paste(y,"~",paste(covar,collapse="+"),collapse=""))
-    #model0 <- rpart(ff, data = data)
     #par.method$formula <- ff
     #par.method$data <- data
     par.method$txdat<-data[,covar,drop=F]
@@ -493,5 +491,3 @@ LMDC.regre <- function(y,covar,data,newdata,pvalue=.05,
   return(list(model=model0, xvar=xvar, pred=pred0,edf=edf,nvar=nvar))     
 }  
 ################################################################################
-################################################################################
-

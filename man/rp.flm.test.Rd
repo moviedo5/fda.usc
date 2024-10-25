@@ -19,6 +19,7 @@ rp.flm.test(
   projs = 0.95,
   verbose = TRUE,
   same.rwild = FALSE,
+  seed = NULL,
   ...
 )
 }
@@ -77,6 +78,8 @@ progress.}
 
 \item{same.rwild}{wether to employ the same wild bootstrap residuals for
 different projections or not.}
+
+\item{seed}{seed to be employed with \code{set.seed} for initializing random projections.}
 
 \item{...}{further arguments passed to \link[fda]{create.basis} (not
 \code{rangeval} that is taken as the \code{rangeval} of \code{X.fdata}).}

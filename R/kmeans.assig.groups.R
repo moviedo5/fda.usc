@@ -1,4 +1,4 @@
-kmeans.assig.groups=function(out,draw=TRUE,...){
+kmeans_assig_groups=function(out,draw=TRUE,...){
   if (!is.null(out$lcenters))  
     lxm=out$lcenters else   lxm=NULL
 #  mdist = out$z.dist

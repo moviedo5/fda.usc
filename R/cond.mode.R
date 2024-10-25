@@ -13,9 +13,9 @@
 #' 
 #' @return Return the mode for conditional distribution function.
 #' \itemize{
-#' \item \code{mode.cond}{ Conditional mode.} 
-#' \item \code{x}{ Grid of length \code{n} where the the conditional density function is evaluated.} 
-#' \item \code{f}{ The conditional density function evaluated in \code{x}.}
+#' \item {\code{mode.cond}}{ Conditional mode.} 
+#' \item {\code{x}}{ Grid of length \code{n} where the the conditional density function is evaluated.} 
+#' \item {\code{f}}{ The conditional density function evaluated in \code{x}.}
 #' }
 #' 
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente

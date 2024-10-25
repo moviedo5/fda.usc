@@ -48,7 +48,6 @@ It marks 36 UTF-8 string of names of stations and 3 UTF-8 string names of provin
 data(aemet)
 names(aemet)
 names(aemet$df)
-class(aemet)<-c("ldata","list") # ldata object
 lat <- ifelse(aemet$df$latitude<31,"red","blue")
 plot(aemet,col=lat)
 }

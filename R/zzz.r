@@ -11,11 +11,9 @@ globalVariables('icnt')
 #' @import methods
 #' @import utils
 #' @import grDevices
-# @import graphics
 #' @import stats
-  
-  # @import rpart deleted
-  
+#' @import knitr
+
   #import(foreach,"getDoParWorkers","getDoParRegistered","getDoParName","getDoParVersion","foreach","registerDoSEQ","setDoSeq","setDoPar")
   #importFrom(parallel, "makeCluster", "stopCluster", "detectCores", "clusterExport", "clusterEvalQ")
 #' @importFrom doParallel registerDoParallel
@@ -31,7 +29,7 @@ globalVariables('icnt')
   
   
 
-  .onAttach <- function(lib, pkg,...){
+.onAttach <- function(lib, pkg,...){
     pkg.info <- drop(read.dcf(file=system.file("DESCRIPTION", package="fda.usc"),
                               fields=c("Title","Version","Date")))
     foo <- suppressWarnings(foreach::"%dopar%"(foreach::foreach(i=1), {}))
@@ -46,5 +44,5 @@ globalVariables('icnt')
             #" ops.fda.usc() changes the parameters of the package\n",
       "----------------------------------------------------------------------------------\n"
     )
-  }
+}
   
