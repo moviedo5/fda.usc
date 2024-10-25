@@ -51,7 +51,7 @@ A hands on introduction to  can be found in the reference
 [vignette](https://www.jstatsoft.org/article/view/v051i04/).
 
 Details on specific functions are in the [reference
-manual](https://cran.r-project.org/package=fda.usc/fda.usc.pdf).
+manual](docs/fda.usc-manual.pdf).
 
 Cheatsheet [fda.usc reference
 card](https://zenodo.org/record/3386752/files/RefCard_fda.usc_v1.pdf?download=1).
