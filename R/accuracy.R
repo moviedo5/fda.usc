@@ -10,19 +10,32 @@
 #' \item \code{\link{cat2meas}} compute \eqn{tab=table(yobs,ypred)} and calls \code{\link{tab2meas}} function.
 #' \item \code{\link{tab2meas}} function computes the following measures (see \code{measure} argument) for a binary classification model:
 #' \itemize{
-#' \item \code{accuracy}: the accuracy classification score.
-#' \item \code{recall}: \code{sensitivity,TPrate}{ \eqn{R=TP/(TP+FN)}}.
-#' \item \code{precision}: \eqn{P=TP/(TP+FP)}.
-#' \item \code{specificity}: \code{TNrate}{ \eqn{TN/(TN+FP)}}.
-#' \item \code{FPrate}: \eqn{FP/(TN+FP)}.
-#' \item \code{FNrate}: \eqn{FN/(TP+FN)}.
-#' \item \code{Fmeasure}: \eqn{2/(1/R+1/P)}.
-#' \item \code{Gmean}: \eqn{sqrt(R*TN/(TN+FP))}.
-#' \item \code{kappa}: kappa index.
-#' \item \code{cost}: \eqn{sum(diag(tab)/rowSums(tab)*cost)/sum(cost)}.
-#' \item \code{IOU}: \eqn{TP/(TP+FN+FP)} mean of Intersection over Union.
-#' \item \code{IOU4class}: \eqn{TP/(TP+FN+FP)} Intersection over Union by level.
-#' }
+#' \item \code{accuracy}: Proportion of correct predictions.
+#'   \eqn{\frac{TP + TN}{TP + TN + FP + FN}}
+#' \item \code{sensitivity, TPrate, recall}: True Positive Rate or recall.
+#'   \eqn{\frac{TP}{TP + FN}}
+#' \item \code{precision}: Positive Predictive Value.
+#'   \eqn{\frac{TP}{TP + FP}}
+#' \item \code{specificity, TNrate}: True Negative Rate.
+#'   \eqn{\frac{TN}{TN + FP}}
+#' \item \code{FPrate}: False Positive Rate.
+#'   \eqn{\frac{FP}{TN + FP}}
+#' \item \code{FNrate}: False Negative Rate.
+#'   \eqn{\frac{FN}{TP + FN}}
+#' \item \code{Fmeasure}: Harmonic mean of precision and recall.
+#'   \eqn{\frac{2}{\frac{1}{\text{recall}} + \frac{1}{\text{precision}}}}
+#' \item \code{Gmean}: Geometric Mean of recall and specificity.
+#'   \eqn{\sqrt{\left(\frac{TP}{TP + FN}\right) \cdot \left(\frac{TN}{TN + FP}\right)}}
+#' \item \code{kappa}: Cohen's Kappa index.
+#'   \eqn{Kappa = \frac{P_o - P_e}{1 - P_e}} where \eqn{P_o} is the proportion of observed agreement, 
+#'   \eqn{\frac{TP + TN}{TP + TN + FP + FN}}, and \eqn{P_e} is the proportion of agreement expected by chance, 
+#'   \eqn{\frac{(TP + FP)(TP + FN) + (TN + FN)(TN + FP)}{(TP + TN + FP + FN)^2}}.
+#' \item \code{cost}: Weighted accuracy, calculated as 
+#'   \eqn{\frac{\sum (\text{diag(tab)} / \text{rowSums(tab)} \cdot \text{cost})}{\sum(\text{cost})}}
+#' \item \code{IOU}: Mean Intersection over Union.
+#'   \eqn{\frac{TP}{TP + FN + FP}}
+#' \item \code{IOU4class}: Intersection over Union by class level.
+#'   \eqn{\frac{TP}{TP + FN + FP}}#' }
 #\item \code{\link{tab2meas}} function computes the \code{accuracy}, \code{kappa} and \code{cost} measures  for a multiclass vectors-
 #' \item \code{\link{pred2meas}} function computes the following  measures of error, usign the \code{measure} argument, for observed and predicted vectors:
 #' \itemize{

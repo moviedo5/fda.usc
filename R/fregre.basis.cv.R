@@ -42,14 +42,13 @@
 #' @param verbose If \code{TRUE} information about the procedure is printed.
 #' Default is \code{FALSE}.
 #' @param \dots Further arguments passed to or from other methods.
-#' @return Return:\cr 
+#' @return Return:
 #' \itemize{
-#' \item {\code{fregre.basis}}{ Fitted regression object by the best parameters (basis elements for data and beta and lambda penalty).} 
-#' \item {basis.x.opt:}{ Basis used for functional explanatory data estimation \code{fdata}.}
-#' \item {basis.b.opt:}{ Basis used for for functional \code{beta} parameter
-#' estimation.} 
-#' \item {lambda.opt:}{ \code{lambda} value that minimizes CV or GCV method.}
-#' \item {gcv.opt:}{ Minimum value of CV or GCV method.} 
+#' \item \code{fregre.basis}: Fitted regression object by the best parameters (basis elements for data and beta and lambda penalty). 
+#' \item \code{basis.x.opt}: Basis used for functional explanatory data estimation \code{fdata}. 
+#' \item \code{basis.b.opt}: Basis used for functional \code{beta} parameter estimation. 
+#' \item \code{lambda.opt}: \code{lambda} value that minimizes CV or GCV method. 
+#' \item \code{gcv.opt}: Minimum value of CV or GCV method. 
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}

@@ -65,13 +65,13 @@ prediction intervals. See \code{link{predict.lm}} for more details.}
 \value{
 Return the predicted values and optionally:
 \itemize{
-\item {predict.lm,predict.glm,predict.gam}{ produces a vector of predictions
+\item \code{predict.lm,predict.glm,predict.gam}: produces a vector of predictions
 or a matrix of predictions and bounds with column names fit, lwr, and upr if
 interval is set. If se.fit is TRUE, a list with the following components is
-returned: fit vector or matrix as above.} 
-\item {se.fit}{ standard error of predicted means.} 
-\item {residual.scale}{ residual standard deviations.}
-\item {df}{ degrees of freedom for residual.}
+returned: fit vector or matrix as above.
+\item \code{se.fit}: standard error of predicted means.
+\item \code{residual.scale}: residual standard deviations.
+\item \code{df}: degrees of freedom for residual.
 }
 }
 \description{
@@ -96,13 +96,13 @@ backfitting algorithm.
 }
 
 These functions use the model fitting function \code{\link{lm}},
-\code{\link{glm}} or \code{\link{gam}} properties.\cr If using functional
+\code{\link{glm}} or \link[mgcv]{gam} properties.\cr If using functional
 data derived, is recommended to use a number of bases to represent beta
 lower than the number of bases used to represent the functional data. \cr
 The first item in the \code{data} list of \code{newx} argument is called
 \emph{"df"} and is a data frame with the response and non functional
 explanatory variables, as \code{\link{lm}}, \code{\link{glm}} or
-\code{\link{gam}}. Functional variables (\code{fdata} and \code{fd} class)
+\link[mgcv]{gam}. Functional variables (\code{fdata} and \code{fd} class)
 are introduced in the following items in the \code{data} list of \code{newx}
 argument.
 }

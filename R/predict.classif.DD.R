@@ -13,9 +13,8 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return 
 #' \itemize{
-#' \item {group.pred}{Vector of groups or classes predicted}
-#' \item {prob.group}{For each functional data shows the probability of each
-#' group membership.}
+#' \item \code{group.pred}:Vector of groups or classes predicted
+#' \item \code{prob.group}: For each functional data shows the probability of each group membership.
 #' }
 #' @author Febrero-Bande, M., and Oviedo de la Fuente, M.
 #' @seealso See also \code{\link{classif.DD}} .

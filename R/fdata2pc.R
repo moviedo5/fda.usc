@@ -22,16 +22,17 @@
 #' @param norm If \code{TRUE} the \code{fdataobj} are centered and scaled.
 #' @param \dots Further arguments passed to or from other methods.
 #' @return \code{fdata2pls} function return: 
+#' @return The \code{fdata2pls} function returns: 
 #' \itemize{
-#' \item {df}{ degree of freedom}
-#' \item {rotation}{ \code{\link{fdata}} class object.} 
-#' \item {x}{ Is true the value of the rotated data (the centred data multiplied by the rotation matrix) is returned.}
-#' \item {fdataobj.cen}{ The centered \code{fdataobj} object.} 
-#' \item {mean}{ mean of \code{fdataobj}.} 
-#' \item {l}{Vector of index of principal components.} 
-#' \item {C}{ The matched call.}
-#' \item {lambda}{ Amount of penalization.} 
-#' \item {P}{ Penalty matrix.}
+#' \item \code{df}: Degree of freedom.
+#' \item \code{rotation}: \code{\link{fdata}} class object. 
+#' \item \code{x}: The value of the rotated data (the centered data multiplied by the rotation matrix) is returned.
+#' \item \code{fdataobj.cen}: The centered \code{fdataobj} object. 
+#' \item \code{mean}: Mean of \code{fdataobj}. 
+#' \item \code{l}: Vector of indices of principal components. 
+#' \item \code{C}: The matched call.
+#' \item \code{lambda}: Amount of penalization. 
+#' \item \code{P}: Penalty matrix.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente  \email{manuel.oviedo@@usc.es}
 #' @seealso  Used in:
@@ -353,15 +354,15 @@ mplsr <- function(X, Y, ncomp = 2, lambda=0, P=c(0,0,1),...)
 #' @param \dots Further arguments passed to or from other methods.
 #' @return
 #' \itemize{
-#' \item {d}{ The standard deviations of the functional principal components.} 
-#' \item {rotation}{ are also known as loadings.  A \code{fdata} class object whose rows contain the eigenvectors.} 
-#' \item {x}{ are also known as scores. The value of the rotated functional data is returned.}
-#' \item {fdataobj.cen}{ The centered \code{fdataobj} object.} 
-#' \item {mean}{ The functional mean of \code{fdataobj} object.} 
-#' \item {l}{ Vector of index of principal components.} 
-#' \item {C}{ The matched call.} 
-#' \item {lambda}{ Amount of penalization.} 
-#' \item {P}{ Penalty matrix.}
+#' \item \code{d}: The standard deviations of the functional principal components. 
+#' \item \code{rotation}: Also known as loadings. A \code{fdata} class object whose rows contain the eigenvectors. 
+#' \item \code{x}: Also known as scores. The value of the rotated functional data is returned.
+#' \item \code{fdataobj.cen}: The centered \code{fdataobj} object. 
+#' \item \code{mean}: The functional mean of the \code{fdataobj} object. 
+#' \item \code{l}: Vector of indices of principal components. 
+#' \item \code{C}: The matched call. 
+#' \item \code{lambda}: Amount of penalization. 
+#' \item \code{P}: Penalty matrix.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@usc.es}

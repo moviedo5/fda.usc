@@ -40,16 +40,16 @@ are determined for explaining, at least, \code{abs(p)}\% of variability.}
 
 \item{B}{Number of bootstrap replicas when method="Boot".}
 
-\item{draw}{By default, FALSE. Plots the density of the bootstrap replicas jointly with the statistic.}
+\item{draw}{By default, \code{FALSE}. Plots the density of the bootstrap replicas jointly with the statistic.}
 }
 \value{
 Return a list with:
 \itemize{
-\item {stat}{ Value of the statistic.} 
-\item {pvalue}{ P-values for the test.}
-\item {vcrit}{ Critical cutoff for rejecting the null hypothesis.}
-\item {p}{ Degrees of freedom for X2 statistic. }
-\item {B}{ Number of bootstrap replicas.}
+\item \code{stat}: Value of the statistic.
+\item \code{pvalue}: P-values for the test.
+\item \code{vcrit}: Critical cutoff for rejecting the null hypothesis.
+\item \code{p}: Degrees of freedom for X2 statistic.
+\item \code{B}: Number of bootstrap replicas.
 }
 }
 \description{

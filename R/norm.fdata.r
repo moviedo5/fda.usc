@@ -12,7 +12,7 @@
 #' 
 #' @aliases norm.fdata norm.fd
 #' @param fdataobj \code{\link{fdata}} class object.
-#' @param fdobj Functional data or curves of \code{\link{fd}} class.
+#' @param fdobj Functional data or curves of \link[fda]{fd} class.
 #' @param metric Metric function, by default \code{\link{metric.lp}}.
 #' @param \dots Further arguments passed to or from other methods.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente

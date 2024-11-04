@@ -21,13 +21,13 @@ flm.Ftest(X.fdata, Y, B = 5000, verbose = TRUE)
 \value{
 The value for \code{Ftest.statistic} is simply the F-test statistic. The value for \code{flm.Ftest} is an object with class \code{"htest"} whose underlying structure is a list containing the following components:
 \itemize{
- \item {statistic}{ The value of the F-test statistic.}
- \item {boot.statistics} {A vector of length \code{B} with the values of the bootstrap F-test statistics.}
- \item {p.value} {The p-value of the test.}
- \item {method}{ The character string "Functional Linear Model F-test".}
- \item {B}{ The number of bootstrap replicates used.}
- \item {data.name}{ The character string "Y=<X,0>+e"}
- }
+ \item \code{statistic}: The value of the F-test statistic.
+ \item \code{boot.statistics}: A vector of length \code{B} with the values of the bootstrap F-test statistics.
+ \item \code{p.value}: The p-value of the test.
+ \item \code{method}: The character string "Functional Linear Model F-test".
+ \item \code{B}: The number of bootstrap replicates used.
+ \item \code{data.name}: The character string "Y=<X,0>+e".
+}
 }
 \description{
 The function \code{flm.Ftest} tests the null hypothesis of no interaction between a functional covariate and a scalar response inside the Functional Linear Model (FLM): \eqn{Y=\big<X,\beta\big>+\epsilon}{Y=<X,\beta>+\epsilon}. The null hypothesis is \eqn{H_0:\,\beta=0}{H_0: \beta=0} and the alternative is \eqn{H_1:\,\beta\neq 0}{H_1: \beta\neq 0}. 

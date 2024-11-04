@@ -24,15 +24,15 @@ acceleration.  If P is a matrix: the penalty matrix object.}
 }
 \value{
 \itemize{
-\item {d}{ The standard deviations of the functional principal components.} 
-\item {rotation}{ are also known as loadings.  A \code{fdata} class object whose rows contain the eigenvectors.} 
-\item {x}{ are also known as scores. The value of the rotated functional data is returned.}
-\item {fdataobj.cen}{ The centered \code{fdataobj} object.} 
-\item {mean}{ The functional mean of \code{fdataobj} object.} 
-\item {l}{ Vector of index of principal components.} 
-\item {C}{ The matched call.} 
-\item {lambda}{ Amount of penalization.} 
-\item {P}{ Penalty matrix.}
+\item \code{d}: The standard deviations of the functional principal components. 
+\item \code{rotation}: Also known as loadings. A \code{fdata} class object whose rows contain the eigenvectors. 
+\item \code{x}: Also known as scores. The value of the rotated functional data is returned.
+\item \code{fdataobj.cen}: The centered \code{fdataobj} object. 
+\item \code{mean}: The functional mean of the \code{fdataobj} object. 
+\item \code{l}: Vector of indices of principal components. 
+\item \code{C}: The matched call. 
+\item \code{lambda}: Amount of penalization. 
+\item \code{P}: Penalty matrix.
 }
 }
 \description{

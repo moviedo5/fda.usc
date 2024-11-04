@@ -82,13 +82,13 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return
 #' \itemize{
-#' \item {lmed}{ Index deepest element \code{median}.} 
-#' \item {ltrim}{ Index of curves with trimmed mean \code{mtrim}.}
-#' \item {dep} { Depth of each curve of fdataobj w.r.t. fdataori.} 
-#' \item {dfunc} { second depth function used as multivariate depth, see details section.} 
-#' \item {par.dfunc} {list of parameters for the dfunc depth function.} 
-#' \item {proj} { The projection value of each point on the curves. }
-#' \item {dist} { Distance matrix between curves or functional data.}
+#' \item \code{lmed}: Index deepest element \code{median}.
+#' \item \code{ltrim}: Index of curves with trimmed mean \code{mtrim}.
+#' \item \code{dep}: Depth of each curve of \code{fdataobj} w.r.t. \code{fdataori}.
+#' \item \code{dfunc}: Second depth function used as multivariate depth, see details section.
+#' \item \code{par.dfunc}: List of parameters for the \code{dfunc} depth function.
+#' \item \code{proj}: The projection value of each point on the curves.
+#' \item \code{dist}: Distance matrix between curves or functional data.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}
@@ -96,11 +96,7 @@
 #' @references Cuevas, A., Febrero-Bande, M. and Fraiman, R. (2007).
 #' \emph{Robust estimation and classification for functional data via
 #' projection-based depth notions.} Computational Statistics 22, 3, 481-496.
-#' %Fraiman R, Muniz G. 2001.  \emph{Trimmed means for functional data.} Test
-#' 10: 419{-}440. %Febrero-Bande, M., Oviedo de la Fuente, M. (2012).
-#' \emph{Statistical Computing in Functional Data Analysis: The R Package
-#' fda.usc.}Journal of Statistical Software, 51(4), 1-28.
-#' \url{https://www.jstatsoft.org/v51/i04/}
+#' 
 #' @keywords descriptive
 #' @examples
 #' \dontrun{

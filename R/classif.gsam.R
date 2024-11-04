@@ -10,9 +10,9 @@
 #' Functional covariates of class \code{fdata} or \code{fd} are introduced in
 #' the following items in the \code{data} list.\cr \code{basis.x} is a list of
 #' basis for represent each functional covariate. The basis object can be
-#' created by the function: \code{\link{create.pc.basis}}, \code{\link{pca.fd}}
+#' created by the function: \code{\link{create.pc.basis}}, \link[fda]{pca.fd}
 #' \code{\link{create.pc.basis}}, \code{\link{create.fdata.basis}} o
-#' \code{\link{create.basis}}.
+#' \link[fda]{create.basis}.
 #' 
 #' @aliases  classif.gsam  
 #' @param formula an object of class \code{formula} (or one that can be coerced

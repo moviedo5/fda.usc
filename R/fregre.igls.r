@@ -44,11 +44,11 @@
 #'  dependence structure chosen.
 #' \item Repeats steps 2 and 3 until convergence (small changes in \eqn{b_\Sigma} and/or \eqn{\hat{\theta}}). 
 #' }
-#' @return An object of class \code{"fregre.igls"} representing the functional linear model
+#' @return An object of class \code{fregre.igls} representing the functional linear model
 #' fit with temporal dependence errors.
 #' Beside, the class(z) is  similar to "fregre.lm" plus the following objects:
 #' \itemize{
-#'  \item{corStruct}{ Fitted  AR or ARIMA model.  }
+#'  \item \code{corStruct}: Fitted  AR or ARIMA model.  
 #  \item{formula.ini}{ formula in call.}
 #  \item{fdataob}{ }
 #  \item{rn}{ rn}

@@ -38,14 +38,14 @@
 #' be passed for kernel method.
 #' @return Returns GCV or CV values calculated for input parameters.
 #' \itemize{
-#' \item \code{gcv}{ GCV or CV for a vector of values of the smoothing parameter
-#' \code{h} } 
-#' \item \code{fdataobj}{ \code{\link{fdata}} class object.}
-#' \item \code{fdata.est}{ Estimated \code{fdata} class object.} 
-#' \item \code{h.opt}{ \code{h} value that minimizes CV or GCV method.} 
-#' \item \code{S.opt}{ Smoothing matrix for the minimum CV or GCV method.} 
-#' \item \code{gcv.opt}{ Minimum of CV or GCV method.} 
-#' \item \code{h}{ Smoothing parameter or bandwidth.}
+#' \item \code{gcv}: GCV or CV for a vector of values of the smoothing parameter
+#' \code{h}. 
+#' \item \code{fdataobj}: \code{\link{fdata}} class object.
+#' \item \code{fdata.est}: Estimated \code{fdata} class object.
+#' \item \code{h.opt}: \code{h} value that minimizes CV or GCV method.
+#' \item \code{S.opt}: Smoothing matrix for the minimum CV or GCV method.
+#' \item \code{gcv.opt}: Minimum of CV or GCV method.
+#' \item \code{h}: Smoothing parameter or bandwidth.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}

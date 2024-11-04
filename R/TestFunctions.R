@@ -18,15 +18,15 @@
 #' are determined for explaining, at least, \code{abs(p)}\% of variability.
 #' @param alpha Confidence level. By default =0.95.
 #' @param B Number of bootstrap replicas when method="Boot".
-#' @param draw By default, FALSE. Plots the density of the bootstrap replicas jointly with the statistic. 
+#' @param draw By default, \code{FALSE}. Plots the density of the bootstrap replicas jointly with the statistic. 
 
-#' @return  Return a list with:
+#' @return Return a list with:
 #' \itemize{
-#' \item {stat}{ Value of the statistic.} 
-#' \item {pvalue}{ P-values for the test.}
-#' \item {vcrit}{ Critical cutoff for rejecting the null hypothesis.}
-#' \item {p}{ Degrees of freedom for X2 statistic. }
-#' \item {B}{ Number of bootstrap replicas.}
+#' \item \code{stat}: Value of the statistic.
+#' \item \code{pvalue}: P-values for the test.
+#' \item \code{vcrit}: Critical cutoff for rejecting the null hypothesis.
+#' \item \code{p}: Degrees of freedom for X2 statistic.
+#' \item \code{B}: Number of bootstrap replicas.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.febrero@@usc.es}
@@ -194,12 +194,12 @@ cov.test.fdata=function(X.fdata,Y.fdata,method=c("X2","Boot"),npc=5,alpha=0.95,B
 #' @param iboot In \code{fEqDistrib.test} returns the bootstrap replicas.
 #' @param draw By default, FALSE. Plots the density of the bootstrap replicas jointly with the statistic. 
 
-#' @return  A list with the following components by function:
+#' @return A list with the following components by function:
 #' \itemize{
-#' \item {\code{XYRP.test}}:{ \code{FDR.pv}: p-value using FDR, \code{proj.pv}: Matrix of p-values obtained for projections.} 
-#' \item {\code{MMD.test},\code{MMDA.test}}: {\code{stat}: Statistic, \code{p.value}: p-value, \code{thresh}: Threshold at level \code{alpha}.}
-#' \item {\code{fEqDistrib.test}}: { \code{result}: \code{data.frame} with columns \code{Stat} and \code{p.value}, 
-#'  \code{Boot}: \code{data.frame} with bootstrap replicas if \code{iboot=TRUE}.}
+#' \item \code{XYRP.test}, \code{FDR.pv}: p-value using FDR, \code{proj.pv}: Matrix of p-values obtained for projections.
+#' \item \code{MMD.test}, \code{MMDA.test}: \code{stat}: Statistic, \code{p.value}: p-value, \code{thresh}: Threshold at level \code{alpha}.
+#' \item \code{fEqDistrib.test}, \code{result}: \code{data.frame} with columns \code{Stat} and \code{p.value}, 
+#' \code{Boot}: \code{data.frame} with bootstrap replicas if \code{iboot=TRUE}.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.febrero@@usc.es}

@@ -109,7 +109,7 @@ NULL
 #' @references Febrero-Bande, M., Galeano, P., and Gonzalez-Manteiga, W.
 #' (2008).  \emph{Outlier detection in functional data by depth measures with
 #' application to identify abnormal NOx levels}. Environmetrics 19, 4, 331-345.
-#' @source \url{https://mediambient.gencat.cat/ca/inici}
+#' @source \url{https://mediambient.gencat.cat/ca/05_ambits_dactuacio/}
 #' @keywords datasets
 #' @examples
 #' 

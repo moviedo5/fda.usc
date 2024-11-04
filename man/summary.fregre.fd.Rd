@@ -25,9 +25,9 @@
 }
 \value{
 \itemize{
-\item {Influence}{ Vector of influence measures.} 
-\item {i.influence}{ Index of possible influence curves.} 
-\item {i.atypical}{ Index of possible atypical curves or possible outliers.}
+\item \code{Influence}: Vector of influence measures.
+\item \code{i.influence}: Index of possible influence curves.
+\item \code{i.atypical}: Index of possible atypical curves or possible outliers.
 }
 }
 \description{

@@ -39,11 +39,10 @@ the second derivative (curvature).}
 \value{
 Return:
 \itemize{
-\item \code{fregre.pls}{ Fitted regression object by the best (\code{pls.opt}) components.} 
-\item \code{pls.opt}{ Index of PLS components' selected.} 
-\item \code{MSC.min}{ Minimum Model Selection Criteria (MSC) value for
-the (\code{pls.opt} components.} 
-\item \code{MSC}{ Minimum Model Selection Criteria (MSC) value for \code{kmax} components.}
+\item \code{fregre.pls}: Fitted regression object by the best (\code{pls.opt}) components.
+\item \code{pls.opt}: Index of PLS components selected.
+\item \code{MSC.min}: Minimum Model Selection Criteria (MSC) value for the (\code{pls.opt}) components.
+\item \code{MSC}: Minimum Model Selection Criteria (MSC) value for \code{kmax} components.
 }
 }
 \description{

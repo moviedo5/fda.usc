@@ -24,12 +24,12 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Return:
 #' \itemize{ 
-#' \item \code{quan.cook.for}{ Distance Cook Prediction Quantile.}
-#' \item \code{quan.cook.est}{ Distance Cook Estimation Quantile.}
-#' \item \code{quan.cook.Pena}{ Pena Distance Quantile.}
-#' \item \code{mues.est}{ Sample Cook generated.} 
-#' \item \code{mues.pena}{ Sample Pena generated.} 
-#' \item \code{beta.boot}{ Functional beta estimated by bootstrap method.}
+#' \item \code{quan.cook.for}:  Distance Cook Prediction Quantile.
+#' \item \code{quan.cook.est}: Distance Cook Estimation Quantile.
+#' \item \code{quan.cook.Pena}: Pena Distance Quantile.
+#' \item \code{mues.est}: Sample Cook generated. 
+#' \item \code{mues.pena}: Sample Pena generated.
+#' \item \code{beta.boot}: Functional beta estimated by bootstrap method.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}

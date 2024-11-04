@@ -41,17 +41,17 @@ test statistic.}
 
 \item{n.proj}{vector with the number of projections to consider.}
 
-\item{est.method}{estimation method for \eqn{\beta}{\beta}, only used in the
+\item{est.method}{Estimation method for \eqn{\beta}{\beta}, only used in the
 composite case. There are three methods: 
 \itemize{ 
-\item {list("\"pc\"")}{ if \code{p} is given, then \eqn{\beta}{\beta} is estimated by
-\code{\link{fregre.pc}}. Otherwise, \code{p} is chosen using \code{\link{fregre.pc.cv}} and the \code{p.criterion} criterion.}
-\item {list("\"pls\"")}{ if \code{p} is given, \eqn{\beta}{\beta} is estimated by \code{\link{fregre.pls}}. 
-Otherwise, \code{p} is chosen using \code{\link{fregre.pls.cv}} and the \code{p.criterion} criterion.}
-\item {list("\"basis\"")}{ if \code{p} is given, \eqn{\beta}{\beta} is estimated by \code{\link{fregre.basis}}. 
-Otherwise, \code{p} is' chosen using \code{\link{fregre.basis.cv}} and the \code{p.criterion} criterion. 
+\item \code{"pc"}: if \code{p} is given, then \eqn{\beta}{\beta} is estimated by
+\code{\link{fregre.pc}}. Otherwise, \code{p} is chosen using \code{\link{fregre.pc.cv}} and the \code{p.criterion} criterion.
+\item \code{"pls"}: if \code{p} is given, \eqn{\beta}{\beta} is estimated by \code{\link{fregre.pls}}. 
+Otherwise, \code{p} is chosen using \code{\link{fregre.pls.cv}} and the \code{p.criterion} criterion.
+\item \code{"basis"}: if \code{p} is given, \eqn{\beta}{\beta} is estimated by \code{\link{fregre.basis}}. 
+Otherwise, \code{p} is chosen using \code{\link{fregre.basis.cv}} and the \code{p.criterion} criterion. 
 Both in \code{\link{fregre.basis}} and \code{\link{fregre.basis.cv}}, the same basis for
-\code{basis.x} and \code{basis.b} is considered.} 
+\code{basis.x} and \code{basis.b} is considered.
 }}
 
 \item{p}{number of elements for the basis representation of
@@ -88,24 +88,24 @@ different projections or not.}
 An object with class \code{"htest"} whose underlying structure is a
 list containing the following components: 
 \itemize{
-\item {list("p.values.fdr")}{ a matrix of size \code{c(n.proj, 2)}, containing
-in each row the FDR p-values of the CvM and KS tests up to that projection.}
-\item {list("proj.statistics")}{ a matrix of size \code{c(max(n.proj), 2)}
-with the value of the test statistic on each projection.}
-\item {list("boot.proj.statistics")}{ an array of size \code{c(max(n.proj), 2,
-B)} with the values of the bootstrap test statistics for each projection.}
-\item {list("proj.p.values")}{ a matrix of size \code{c(max(n.proj), 2)}}
-\item {list("method")}{ information about the test performed and the kind of
-estimation performed.} 
-\item {list("B")}{ number of bootstrap replicates used.} 
-\item {list("n.proj")}{ number of projections specified}
-\item {list("projs")}{ random directions employed to project \code{X.fdata}.}
-\item {list("type.basis")}{ type of basis for \code{est.method = "basis"}.}
-\item {list("beta.est")}{ estimated functional parameter \eqn{\hat \beta}{\hat
-\beta} in the composite hypothesis. For the simple hypothesis, \code{beta0.fdata}.} 
-\item {list("p")}{ number of basis elements considered for estimation of \eqn{\beta}{\beta}.} 
-\item {list("p.criterion")}{ criterion employed for selecting \code{p}.} 
-\item {list("data.name")}{ the character string "Y = <X, b> + e"} 
+\item \code{p.values.fdr}: a matrix of size \code{c(n.proj, 2)}, containing
+in each row the FDR p-values of the CvM and KS tests up to that projection.
+\item \code{proj.statistics}: a matrix of size \code{c(max(n.proj), 2)}
+with the value of the test statistic on each projection.
+\item \code{boot.proj.statistics}: an array of size \code{c(max(n.proj), 2,
+B)} with the values of the bootstrap test statistics for each projection.
+\item \code{proj.p.values}: a matrix of size \code{c(max(n.proj), 2)}.
+\item \code{method}: information about the test performed and the kind of
+estimation performed.
+\item \code{B}: number of bootstrap replicates used.
+\item \code{n.proj}: number of projections specified.
+\item \code{projs}: random directions employed to project \code{X.fdata}.
+\item \code{type.basis}: type of basis for \code{est.method = "basis"}.
+\item \code{beta.est}: estimated functional parameter \eqn{\hat \beta}{\hat
+\beta} in the composite hypothesis. For the simple hypothesis, \code{beta0.fdata}.
+\item \code{p}: number of basis elements considered for estimation of \eqn{\beta}{\beta}.
+\item \code{p.criterion}: criterion employed for selecting \code{p}.
+\item \code{data.name}: the character string "Y = <X, b> + e".
 }
 }
 \description{

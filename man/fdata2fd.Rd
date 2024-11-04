@@ -56,7 +56,7 @@ fda.usc.} Journal of Statistical Software, 51(4), 1-28.
 \url{https://www.jstatsoft.org/v51/i04/}
 }
 \seealso{
-See Also as \code{\link{fdata}} and \code{\link{Data2fd}}
+See Also as \code{\link{fdata}} and \link[fda]{Data2fd}
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente

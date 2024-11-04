@@ -68,26 +68,25 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return 
 #' \itemize{
-#' \item \code{call}{ The matched call.} 
-#' \item \code{fitted.values}{ Estimated scalar response.} 
-#' \item \code{residuals}{ \code{y} minus \code{fitted values}.}
-#' \item \code{df.residual}{ The residual degrees of freedom.} 
-#' \item \code{H}{ Hat matrix.}
-#' \item \code{r2}{ Coefficient of determination.} 
-#' \item \code{sr2}{ Residual variance.}
-#' \item \code{y}{ Scalar response.} 
-#' \item \code{fdataobj}{ Functional explanatory data.}
-#' \item \code{XX}{ Non functional explanatory data.} 
-#' \item \code{mdist}{ Distance matrix between curves.} 
-#' \item \code{betah}{ beta coefficient estimated} 
-#' \item \code{data}{ List that containing the variables in the model.} 
-#' \item \code{Ker}{ Asymmetric kernel used.} 
-#' \item \code{h.opt}{ Value that minimizes CV or GCV method.} 
-#' \item \code{h}{ Smoothing parameter or bandwidth.}
-#' \item \code{data}{ List that containing the
-#' variables in the model.} 
-#' \item \code{gcv}{ GCV values.} 
-#' \item \code{formula}{ formula.}
+#' \item \code{call}: The matched call. 
+#' \item \code{fitted.values}: Estimated scalar response. 
+#' \item \code{residuals}: \code{y} minus \code{fitted values}.
+#' \item \code{df.residual}: The residual degrees of freedom. 
+#' \item \code{H}: Hat matrix.
+#' \item \code{r2}: Coefficient of determination. 
+#' \item \code{sr2}: Residual variance.
+#' \item \code{y}: Scalar response. 
+#' \item \code{fdataobj}: Functional explanatory data.
+#' \item \code{XX}: Non functional explanatory data. 
+#' \item \code{mdist}: Distance matrix between curves. 
+#' \item \code{betah}: beta coefficient estimated. 
+#' \item \code{data}: List that containing the variables in the model. 
+#' \item \code{Ker}: Asymmetric kernel used. 
+#' \item \code{h.opt}: Value that minimizes CV or GCV method. 
+#' \item \code{h}: Smoothing parameter or bandwidth.
+#' \item \code{data}: List that containing the variables in the model.
+#' \item \code{gcv}: GCV values. 
+#' \item \code{formula}: formula.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}

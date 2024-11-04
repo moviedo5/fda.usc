@@ -55,11 +55,11 @@ See the following internal functions  for a description and a code example in sc
 \item{\dots}{Further arguments passed to or from other methods.}
 }
 \value{
-An object of class \code{"fregre.igls"} representing the functional linear model
+An object of class \code{fregre.igls} representing the functional linear model
 fit with temporal dependence errors.
 Beside, the class(z) is  similar to "fregre.lm" plus the following objects:
 \itemize{
- \item{corStruct}{ Fitted  AR or ARIMA model.  }
+ \item \code{corStruct}: Fitted  AR or ARIMA model.  
  }
 }
 \description{

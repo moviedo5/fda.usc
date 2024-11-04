@@ -10,12 +10,12 @@
 #' Functional covariates of class \code{fdata} or \code{fd} are introduced in
 #' the following items in the \code{data} list.\cr \code{basis.x} is a list of
 #' basis for represent each functional covariate. The basis object can be
-#' created by the function: \code{\link{create.pc.basis}}, \code{\link{pca.fd}}
+#' created by the function: \code{\link{create.pc.basis}}, \link[fda]{pca.fd}
 #' \code{\link{create.pc.basis}}, \code{\link{create.fdata.basis}} o
-#' \code{\link{create.basis}}.\cr \code{basis.b} is a list of basis for
+#' \link[fda]{create.basis}.\cr \code{basis.b} is a list of basis for
 #' represent each functional beta parameter. If \code{basis.x} is a list of
 #' functional principal components basis (see \code{\link{create.pc.basis}} or
-#' \code{\link{pca.fd}}) the argument \code{basis.b} is ignored.
+#' \link[fda]{pca.fd}) the argument \code{basis.b} is ignored.
 #' 
 #' @param formula an object of class \code{formula} (or one that can be coerced
 #' to that class): a symbolic description of the model to be fitted. The

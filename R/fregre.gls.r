@@ -11,9 +11,9 @@
 #' \code{model}, \code{correlation}, \code{weights}, and \code{subset}. By
 #' default the variables are taken from the environment from which \code{gls}
 #' is called.
-#' @param correlation an optional \code{\link{corStruct}} object describing the
+#' @param correlation an optional \link[nlme]{corStruct} object describing the
 #' within-group correlation structure. See the documentation of
-#' \code{\link{corClasses}} for a description of the available \code{corStruct}
+#' \link[nlme]{corClasses} for a description of the available \code{corStruct}
 #' classes. If a grouping variable is to be used, it must be specified in the
 #' \code{form} argument to the \code{corStruct} constructor. Defaults to
 #' \code{NULL}, corresponding to uncorrelated errors.
@@ -21,11 +21,11 @@
 #' @param basis.b List of basis for \eqn{\beta(t)} parameter estimation.
 #' @param rn List of Ridge parameter.
 #' @param lambda List of Roughness penalty parameter.
-#' @param weights an optional \code{\link{varFunc}} object or one-sided formula
+#' @param weights an optional \link[nlme]{varFunc} object or one-sided formula
 #' describing the within-group heteroscedasticity structure. If given as a
-#' formula, it is used as the argument to \code{\link{varFixed}}, corresponding
-#' to fixed variance weights. See the documentation on \code{\link{varClasses}}
-#' for a description of the available \code{\link{varFunc}} classes. Defaults
+#' formula, it is used as the argument to \link[nlme]{varFixed}, corresponding
+#' to fixed variance weights. See the documentation on \link[nlme]{varClasses}
+#' for a description of the available \link[nlme]{varFunc} classes. Defaults
 #' to \code{NULL}, corresponding to homoscedastic errors.
 #' @param subset an optional expression indicating which subset of the rows of
 #' \code{data} should be used in the fit. This can be a logical vector, or a
@@ -37,32 +37,34 @@
 #' is maximized.  Defaults to \code{"REML"}.
 #' @param control a list of control values for the estimation algorithm to
 #' replace the default values returned by the function
-#' \code{\link{glsControl}}.  Defaults to an empty list.
+#' \link[nlme]{glsControl}.  Defaults to an empty list.
 #' @param verbose an optional logical value. If \code{TRUE} information on the
 #' evolution of the iterative algorithm is printed. Default is \code{FALSE}.
 #' @param criteria GCCV criteria, see \code{\link{GCCV.S}}.
 #' @param \dots some methods for this generic require additional arguments.
-#' None are used in this methodl.
-#' @return an object of class \code{"gls"} representing the functional linear
+#' None are used in this method.
+#' 
+#' @return 
+#' An object of class \code{"gls"} representing the functional linear
 #' model fit. Generic functions such as \code{print}, \code{plot}, and
 #' \code{summary} have methods to show the results of the fit.\cr 
-#' See \code{\link{glsObject}} for the components of the fit. The functions
-#' \code{\link{resid}}, \code{\link{coef}} and \code{\link{fitted}}, can be
+#' See \link[nlme]{glsObject} for the components of the fit. The functions
+#' \code{\link{resid}}, \code{\link{coef}}, and \code{\link{fitted}} can be
 #' used to extract some of its components.\cr 
-#' Beside, the class(z) is "gls", "lm" and "fregre.lm" with the following
+#' Besides, the class(z) is "gls", "lm", and "fregre.lm" with the following
 #' objects: 
 #' \itemize{
-#' \item \code{sr2:}{ Residual variance.} 
-#' \item \code{Vp:}{ Estimated covariance matrix for the parameters.} 
-#' \item \code{lambda:}{ A roughness penalty.}
-#' \item \code{basis.x:}{ Basis used for \code{fdata} or \code{fd} covariates.}
-#' \item \code{basis.b:}{ Basis used for beta parameter estimation.} 
-#' \item \code{beta.l:}{ List of estimated beta parameter of functional covariates.} 
-#' \item \code{data:}{ List that containing the variables in the model.} 
-#' \item \code{formula:}{ formula used in ajusted model.} 
-#' \item \code{formula.ini:}{ formula in call.}
-#' \item \code{W:}{ inverse of covariance matrix} 
-#' \item \code{correlation:}{ See glsObject for the components of the fit. }
+#' \item \code{sr2}: Residual variance. 
+#' \item \code{Vp}: Estimated covariance matrix for the parameters. 
+#' \item \code{lambda}: A roughness penalty.
+#' \item \code{basis.x}: Basis used for \code{fdata} or \code{fd} covariates.
+#' \item \code{basis.b}: Basis used for beta parameter estimation. 
+#' \item \code{beta.l}: List of estimated beta parameter of functional covariates. 
+#' \item \code{data}: List containing the variables in the model. 
+#' \item \code{formula}: Formula used in the adjusted model. 
+#' \item \code{formula.ini}: Formula in call.
+#' \item \code{W}: Inverse of covariance matrix. 
+#' \item \code{correlation}: See \code{glsObject} for the components of the fit.
 #' }
 #' @references Oviedo de la Fuente, M., Febrero-Bande, M., Pilar Munoz, and
 #' Dominguez, A.  (2018). Predicting seasonal influenza transmission using 

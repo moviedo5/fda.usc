@@ -18,7 +18,7 @@ for \code{x} axis "Hours" and \code{ylab} title for \code{y} axis "NOx
 festive day" 0 and "festive day" 1.\cr
 }
 \source{
-\url{https://mediambient.gencat.cat/ca/inici}
+\url{https://mediambient.gencat.cat/ca/05_ambits_dactuacio/}
 }
 \description{
 NOx levels measured every hour by a control station in Poblenou in Barcelona

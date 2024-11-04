@@ -28,22 +28,19 @@
 #' be passed by default to \link[fda]{create.basis}.
 #' @return
 #' \itemize{
-#' \item \code{gcv}{ Returns GCV values calculated for input parameters.}
-#' \item \code{fdataobj}{ Matrix of set cases with dimension (\code{n} x \code{m}),
-#' where \code{n} is the number of curves and \code{m} are the points observed
-#' in each curve.} 
-#' \item \code{fdata.est}{ Estimated \code{fdata} class object.}
-#' \item \code{numbasis.opt}{ \code{numbasis} value that minimizes CV or GCV method.}
-#' \item \code{lambda.opt}{ \code{lambda} value that minimizes CV or GCV method.}
-#' \item \code{basis.opt}{ \code{basis} for the minimum CV or GCV method.}
-#' \item \code{S.opt}{ Smoothing matrix for the minimum CV or GCV method.}
-#' \item \code{gcv.opt}{ Minimum of CV or GCV method.} 
-#' \item \code{lambda}{ A roughness penalty. By default, no penalty \code{lambda=0}.}
-#' \item \code{numbasis}{ Number of basis to use.} 
-#' \item \code{verbose}{ If \code{TRUE} information about GCV values
-#' and input parameters is printed. Default is \code{FALSE}.}
-#'  }
-#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
+#' \item \code{gcv}: Returns GCV values calculated for input parameters.
+#' \item \code{fdataobj}: Matrix of set cases with dimension (\code{n} x \code{m}), where \code{n} is the number of curves and \code{m} are the points observed in each curve. 
+#' \item \code{fdata.est}: Estimated \code{fdata} class object.
+#' \item \code{numbasis.opt}: \code{numbasis} value that minimizes CV or GCV method.
+#' \item \code{lambda.opt}: \code{lambda} value that minimizes CV or GCV method.
+#' \item \code{basis.opt}: \code{basis} for the minimum CV or GCV method.
+#' \item \code{S.opt}: Smoothing matrix for the minimum CV or GCV method.
+#' \item \code{gcv.opt}: Minimum of CV or GCV method. 
+#' \item \code{lambda}: A roughness penalty. By default, no penalty \code{lambda=0}.
+#' \item \code{numbasis}: Number of basis to use. 
+#' \item \code{verbose}: If \code{TRUE} information about GCV values and input parameters is printed. Default is \code{FALSE}.
+#' }
+#' #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as \code{\link{S.basis}}. \cr Alternative method:
 #' \code{\link{optim.np}}

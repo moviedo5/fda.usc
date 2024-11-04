@@ -38,24 +38,25 @@
 #' default: \code{maxit}, \code{epsilon}, \code{trace} and \code{inverse}
 #' @param inverse ="svd" (by default) or ="solve" method.
 #' @param \dots Further arguments passed to or from other methods.
-#' @return \itemize{
-#' \item \code{result:}{ List of non-parametric estimation by covariate.}
-#' \item \code{fitted.values:}{ Estimated scalar response.} 
-#' \item \code{residuals:}{ \code{y} minus \code{fitted values}.} 
-#' \item \code{effects:}{ The residual degrees of freedom.} 
-#' \item \code{alpha:}{ Hat matrix.} 
-#' \item \code{family:}{ Coefficient of determination.} 
-#' \item \code{linear.predictors:}{ Residual variance.}
-#' \item \code{deviance:}{ Scalar response.} 
-#' \item \code{aic:}{ Functional explanatory data.}
-#' \item \code{null.deviance:}{ Non functional explanatory data.} 
-#' \item \code{iter}:{ Distance matrix between curves.} 
-#' \item \code{w:}{ beta coefficient estimated}
-#' \item \code{eqrank:}{ List that containing the variables in the model.}
-#' \item \code{prior.weights:}{ Asymmetric kernel used.} 
-#' \item \code{y:}{ Scalar response.}
-#' \item \code{H:}{ Hat matrix, see Opsomer and Ruppert(1997) for more details.}
-#' \item \code{converged:}{ conv.}
+#' @return 
+#' \itemize{
+#' \item \code{result}: List of non-parametric estimation by covariate.
+#' \item \code{fitted.values}: Estimated scalar response. 
+#' \item \code{residuals}: \code{y} minus \code{fitted values}. 
+#' \item \code{effects}: The residual degrees of freedom. 
+#' \item \code{alpha}: Hat matrix. 
+#' \item \code{family}: Coefficient of determination. 
+#' \item \code{linear.predictors}: Residual variance.
+#' \item \code{deviance}: Scalar response. 
+#' \item \code{aic}: Functional explanatory data.
+#' \item \code{null.deviance}: Non functional explanatory data. 
+#' \item \code{iter}: Distance matrix between curves. 
+#' \item \code{w}: Beta coefficient estimated.
+#' \item \code{eqrank}: List that containing the variables in the model.
+#' \item \code{prior.weights}: Asymmetric kernel used. 
+#' \item \code{y}: Scalar response.
+#' \item \code{H}: Hat matrix, see Opsomer and Ruppert (1997) for more details.
+#' \item \code{converged}: Conv.
 #' }
 #' @author Febrero-Bande, M. and Oviedo de la Fuente, M.
 #' @seealso See Also as: \code{\link{fregre.gsam}}, \code{\link{fregre.glm}}

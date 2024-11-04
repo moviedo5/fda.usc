@@ -38,23 +38,23 @@ P is the penalty matrix object.}
 \value{
 Return:
 \itemize{
-\item \code{call}{ The matched call of \code{\link{fregre.pc}} function.} 
-\item \code{coefficients}{ A named vector of coefficients.}
-\item \code{residuals}{ \code{y}-\code{fitted values}.} 
-\item \code{fitted.values}{ Estimated scalar response.} 
-\item \code{beta.est}{ beta coefficient estimated of class \code{fdata}}
-\item \code{df.residual}{ The residual degrees of freedom. In ridge regression, \code{df(rn)} is the effective degrees of freedom.} 
-\item \code{r2}{ Coefficient of determination.}
-\item \code{sr2}{ Residual variance.} 
-\item \code{Vp}{ Estimated covariance matrix for the parameters.} 
-\item \code{H}{ Hat matrix.}
-\item \code{l}{ Index of principal components selected.} 
-\item \code{lambda}{ Amount of shrinkage.} 
-\item \code{P}{ Penalty matrix.} 
-\item \code{fdata.comp}{ Fitted object in \code{\link{fdata2pc}} function.} 
-\item \code{lm}{ \code{lm} object.}
-\item \code{fdataobj}{ Functional explanatory data.} 
-\item \code{y}{ Scalar response.}
+\item \code{call}: The matched call of \code{\link{fregre.pc}} function.
+\item \code{coefficients}: A named vector of coefficients.
+\item \code{residuals}: \code{y} minus \code{fitted values}.
+\item \code{fitted.values}: Estimated scalar response.
+\item \code{beta.est}: Beta coefficient estimated of class \code{fdata}.
+\item \code{df.residual}: The residual degrees of freedom. In ridge regression, \code{df(rn)} is the effective degrees of freedom.
+\item \code{r2}: Coefficient of determination.
+\item \code{sr2}: Residual variance.
+\item \code{Vp}: Estimated covariance matrix for the parameters.
+\item \code{H}: Hat matrix.
+\item \code{l}: Index of principal components selected.
+\item \code{lambda}: Amount of shrinkage.
+\item \code{P}: Penalty matrix.
+\item \code{fdata.comp}: Fitted object in \code{\link{fdata2pc}} function.
+\item \code{lm}: \code{lm} object.
+\item \code{fdataobj}: Functional explanatory data.
+\item \code{y}: Scalar response.
 }
 }
 \description{

@@ -17,27 +17,27 @@
 #' \code{OUT}.
 #' @param \dots Further arguments passed to or from other methods.
 #' 
-#' @details The \code{fdata.bootstrap()} computes a confidence ball using bootstrap in
+#' @details The \code{\link{fdata.bootstrap}} computes a confidence ball using bootstrap in
 #' the following way: 
 #' \itemize{ 
-#' \item Let \eqn{X_1(t),\ldots,X_n(t)}{X_1(t),...,X_n(t)} the original data and
-#' \eqn{T=T(X_1(t),\ldots,X_n(t))}{T=T(X_1(t),...,X_n(t))} the sample' statistic.
+#' \item Let \eqn{X_1(t),\ldots,X_n(t)}{X_1(t),...,X_n(t)} be the original data and
+#' \eqn{T=T(X_1(t),\ldots,X_n(t))}{T=T(X_1(t),...,X_n(t))} be the sample statistic.
 #' 
 #' \item Calculate the \code{nb} bootstrap resamples
-#' \eqn{\left\{X_{1}^{*}{(t)},\cdots,X_n^*(t)\right\}}{(X*_1(t),...,X*_n(t))},
-#' using the following scheme \eqn{X_i^*(t)=X_i(t)+Z(t)}{X*_i(t)=X_i(t)+Z(t)} 
+#' \eqn{\left\{X_{1}^{*}(t),\cdots,X_n^*(t)\right\}}{(X*_1(t),...,X*_n(t))},
+#' using the following scheme: \eqn{X_i^*(t)=X_i(t)+Z(t)}{X*_i(t)=X_i(t)+Z(t)}, 
 #' where \eqn{Z(t)}{Z(t)} is normally distributed with mean 0 and covariance matrix
 #' \eqn{\gamma\Sigma_x}{\gamma\Sigma_x}, where \eqn{\Sigma_x}{\Sigma_x} is the
-#' covariance matrix of' \eqn{\left\{X_1(t),\ldots,X_n(t)\right\}}{(X*_1(t),...,X*_n(t))} 
+#' covariance matrix of \eqn{\left\{X_1(t),\ldots,X_n(t)\right\}}{(X*_1(t),...,X*_n(t))} 
 #' and \eqn{\gamma}{\gamma} is the smoothing parameter.  
 #' 
 #' \item Let \eqn{T^{*j}=T(X^{*j}_1(t),...,X^{*j}_n(t))}{T^{*j}=T(X^{*j}_1(t),...,X^{*j}_n(t))}
-#' the estimate using the \eqn{j} resample.  
+#' be the estimate using the \eqn{j} resample.  
 #' 
 #' \item Compute \eqn{d(T,T^{*j})}, \eqn{j=1,\ldots,nb}. Define the bootstrap 
 #' confidence ball of level \eqn{1-\alpha}{1-\alpha} as \eqn{CB(\alpha)=X\in E}{CB(\alpha)=X \in E} 
-#' such that \eqn{d(T,X)\leq d_{\alpha}}{d(T,X)<= d\alpha} being
-#' \eqn{d_{\alpha}}{d\alpha} the quantile \eqn{(1-\alpha)}{(1-\alpha)} of the
+#' such that \eqn{d(T,X)\leq d_{\alpha}}{d(T,X) \leq d_{\alpha}} being
+#' \eqn{d_{\alpha}}{d_{\alpha}} the quantile \eqn{(1-\alpha)}{(1-\alpha)} of the
 #' distances between the bootstrap resamples and the sample estimate. 
 #' }
 #' 
@@ -51,12 +51,11 @@
 #' 
 #' @return 
 #' \itemize{
-#' \item{statistic}{ \code{fdata} class object with the statistic
-#' estimate from \code{nb} bootstrap samples.} 
-#' \item{dband}{ Bootstrap estimate of \code{(1-alpha)\%} distance.} 
-#' \item{rep.dist}{ Distance from every replicate.} 
-#' \item{resamples}{ \code{fdata} class object with the bootstrap resamples.} 
-#' \item{fdataobj}{ \code{fdata} class object.}
+#' \item \code{statistic}: \code{fdata} class object with the statistic estimate from \code{nb} bootstrap samples.
+#' \item \code{dband}: Bootstrap estimate of \code{(1-alpha)\%} distance.
+#' \item \code{rep.dist}: Distance from every replicate.
+#' \item \code{resamples}: \code{fdata} class object with the bootstrap resamples.
+#' \item \code{fdataobj}: \code{fdata} class object.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}

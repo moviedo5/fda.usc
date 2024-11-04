@@ -35,25 +35,26 @@ fregre.basis(
 \value{
 Return:
 \itemize{
-\item {call:}{ The matched call.} 
-\item {coefficients:}{ A named vector of coefficients}
-\item {residuals:}{ \code{y} minus \code{fitted values}.} 
-\item {fitted.values:}{ Estimated scalar response.} 
-\item {beta.est:}{ beta parameter estimated of class \code{fd}} 
-\item {weights:}{(only for' weighted fits) the specified weights.} 
-\item {df.residual:}{ The residual degrees of' freedom.} 
-\item {r2:}{ Coefficient of determination.} 
-\item {sr2:}{ Residual' variance.} 
-\item {Vp:}{ Estimated covariance matrix for the parameters.}
-\item {H:}{ Hat matrix.} 
-\item {y:}{ Response.}
-\item {fdataobj:}{ Functional explanatory data of class \code{fdata}.}
-\item {a.est:}{ Intercept parameter estimated} 
-\item {basis.b:}{ Basis used' for beta parameter estimation.} 
-\item {lambda.opt:}{ A roughness penalty.}
-\item {Lfdobj:}{ Order of a derivative or a linear differential operator.}
-\item {P:}{ Penalty matrix.} 
-\item {lm:}{ Return \code{lm} object }
+\item \code{call}: The matched call. 
+\item \code{coefficients}: A named vector of coefficients.
+\item \code{residuals}: \code{y} minus \code{fitted values}. 
+\item \code{fitted.values}: Estimated scalar response. 
+\item \code{beta.est}: Estimated beta parameter of class \code{fd}. 
+\item \code{weights}: (only for weighted fits) the specified weights. 
+\item \code{df.residual}: The residual degrees of freedom. 
+\item \code{r2}: Coefficient of determination. 
+\item \code{sr2}: Residual variance. 
+\item \code{Vp}: Estimated covariance matrix for the parameters.
+\item \code{H}: Hat matrix. 
+\item \code{y}: Response.
+\item \code{fdataobj}: Functional explanatory data of class \code{fdata}. 
+\item \code{a.est}: Intercept parameter estimated. 
+\item \code{x.fd}: Centered functional explanatory data of class \code{fd}. 
+\item \code{basis.b}: Basis used for beta parameter estimation. 
+\item \code{lambda.opt}: A roughness penalty.
+\item \code{Lfdobj}: Order of a derivative or a linear differential operator. 
+\item \code{P}: Penalty matrix. 
+\item \code{lm}: Return \code{lm} object.
 }
 }
 \description{
@@ -96,7 +97,7 @@ representation on the basis of functional data \eqn{X(t)} and the functional
 parameter \eqn{\beta(t)}, respectively.
 
 If \code{basis=}\code{NULL} creates the \code{bspline} basis by
-\code{\link{create.bspline.basis}}. \cr If the functional covariate
+\link[fda]{create.bspline.basis}. \cr If the functional covariate
 \code{fdataobj} is a matrix or data.frame, it creates an object of class
 "fdata" with default attributes, see \code{\link{fdata}}.\cr If
 \code{basis.x$type=``fourier''} and \code{basis.b$type=``fourier''}, the

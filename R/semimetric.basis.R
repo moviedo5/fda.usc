@@ -6,10 +6,10 @@
 #' @details Approximates semi-metric distances for functional data of two \code{fd}
 #' class objects.  If functional data are not functional \code{fd} class, the
 #' \code{semimetric.basis} function creates a basis to represent the functional
-#' data, by default is used \code{\link{create.bspline.basis}} and the
+#' data, by default is used \link[fda]{create.bspline.basis} and the
 #' \code{fdata} class object is converted to \code{fd} class using the
-#' \code{\link{Data2fd}}.\cr The function calculates distances between the
-#' derivative of order \code{nderiv} of curves using \code{\link{deriv.fd}}
+#' \link[fda]{Data2fd}.\cr The function calculates distances between the
+#' derivative of order \code{nderiv} of curves using \link[fda]{deriv.fd}
 #' function.
 #' 
 #' @param fdata1 Functional data 1 or curve 1.
@@ -22,7 +22,7 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Returns a proximities matrix between functional data.
 #' @seealso See also \code{\link{metric.lp}}, \code{\link{semimetric.NPFDA}}
-#' and \code{\link{deriv.fd}}
+#' and \link[fda]{deriv.fd}
 #' @references Ferraty, F. and Vieu, P. (2006). \emph{Nonparametric functional
 #' data analysis.} Springer Series in Statistics, New York.
 #' @keywords cluster

@@ -47,7 +47,7 @@
 #' contains that projections.
 #' @param par.zproj List of parameters for \code{zproj} function.
 #' @param hetero \code{logical}. If \code{TRUE} (by default) means heteroskedastic ANOVA.
-#' @param pr code{logical}. If \code{TRUE} prints intermediate results.
+#' @param pr \code{logical}. If \code{TRUE} prints intermediate results.
 #' @param w Vector of weights (only for multivariate problems).
 #' @param nboot Number of bootstrap samples, by default no bootstrap
 #' computations, \code{nboot}=0.
@@ -58,26 +58,24 @@
 #' 
 #' @return An object with the following components:\cr 
 #' \itemize{
-#' \item {proj}{ The projection value of each point on the curves. Matrix with dimension
-#' (\code{RP} x \code{m}), where \code{RP} is the number of projection and
-#' \code{m} are the points observed in each projection curve.} 
-#' \item {mins}{
-#' minimum number for each random projection.} 
-#' \item {result}{ p-value for each
-#' random projection.} 
-#' \item {test.Bonf}{ significance (TRUE or FALSE) for
-#' vector of random projections \code{RP} in columns and factor (and special
-#' contrast) by rows.} 
-#' \item {p.Bonf}{ p-value for vector of random projections
-#' \code{RP} in columns and factor (and special contrast) by rows.}
-#' \item {test.fdr}{ False Discovery Rate (TRUE or FALSE) for vector of random
-#' projections \code{RP} in columns and factor (and special contrast) by rows.}
-#' \item {p.fdr}{ p-value of False Discovery Rate for vector of random
-#' projections \code{RP} in columns and factor (and special contrast) by rows.}
-#' \item {test.Boot}{ False Discovery Rate (TRUE or FALSE) for vector of random
-#' projections \code{RP} in columns and factor (and special contrast) by rows.}
-#' \item {p.Boot}{ p-value of Bootstrap sambple for vector of random projections
-#' \code{RP} in columns and factor (and special contrast) by rows.}
+#' \item \code{proj}: The projection value of each point on the curves. Matrix with dimensions
+#' (\code{RP} x \code{m}), where \code{RP} is the number of projections and
+#' \code{m} is the number of points observed in each projection curve. 
+#' \item \code{mins}: Minimum number for each random projection. 
+#' \item \code{result}: p-value for each random projection. 
+#' \item \code{test.Bonf}: Significance (TRUE or FALSE) for
+#' vector of random projections \code{RP} in columns and factors (and special
+#' contrasts) in rows. 
+#' \item \code{p.Bonf}: p-value for vector of random projections
+#' \code{RP} in columns and factors (and special contrasts) in rows.
+#' \item \code{test.fdr}: False Discovery Rate (TRUE or FALSE) for vector of random
+#' projections \code{RP} in columns and factors (and special contrasts) in rows.
+#' \item \code{p.fdr}: p-value of False Discovery Rate for vector of random
+#' projections \code{RP} in columns and factors (and special contrasts) in rows.
+#' \item \code{test.Boot}: False Discovery Rate (TRUE or FALSE) for vector of random
+#' projections \code{RP} in columns and factors (and special contrasts) in rows.
+#' \item \code{p.Boot}: p-value of Bootstrap sample for vector of random projections
+#' \code{RP} in columns and factors (and special contrasts) in rows.
 #' }
 #' @note If \code{hetero=TRUE} then all factors must be categorical.
 #' @author Juan A. Cuesta-Albertos, Manuel Febrero-Bande, Manuel Oviedo de la

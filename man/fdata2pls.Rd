@@ -25,17 +25,19 @@ acceleration.  If P is a matrix: the penalty matrix object.}
 \item{\dots}{Further arguments passed to or from other methods.}
 }
 \value{
-\code{fdata2pls} function return: 
+\code{fdata2pls} function return:
+
+The \code{fdata2pls} function returns: 
 \itemize{
-\item {df}{ degree of freedom}
-\item {rotation}{ \code{\link{fdata}} class object.} 
-\item {x}{ Is true the value of the rotated data (the centred data multiplied by the rotation matrix) is returned.}
-\item {fdataobj.cen}{ The centered \code{fdataobj} object.} 
-\item {mean}{ mean of \code{fdataobj}.} 
-\item {l}{Vector of index of principal components.} 
-\item {C}{ The matched call.}
-\item {lambda}{ Amount of penalization.} 
-\item {P}{ Penalty matrix.}
+\item \code{df}: Degree of freedom.
+\item \code{rotation}: \code{\link{fdata}} class object. 
+\item \code{x}: The value of the rotated data (the centered data multiplied by the rotation matrix) is returned.
+\item \code{fdataobj.cen}: The centered \code{fdataobj} object. 
+\item \code{mean}: Mean of \code{fdataobj}. 
+\item \code{l}: Vector of indices of principal components. 
+\item \code{C}: The matched call.
+\item \code{lambda}: Amount of penalization. 
+\item \code{P}: Penalty matrix.
 }
 }
 \description{

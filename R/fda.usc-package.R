@@ -68,7 +68,7 @@
 #' \tab \code{\link{fregre.plm}}: Semifunctional Partial Linear Regression (an extension of  \code{\link{lm}} model)\cr 
 #' \tab \code{\link{fregre.lm}}: Functional Linear Regression (an extension of  \code{\link{lm}} model) \cr 
 #' \tab \code{\link{fregre.glm}}: Functional Generalized Linear Regression (an extension of  \code{\link{glm}} model) \cr 
-#' \tab \code{\link{fregre.gsam}}: Functional Generalized Spectral Additive Regression  (an extension of  \code{\link{gam}} model)\cr
+#' \tab \code{\link{fregre.gsam}}: Functional Generalized Spectral Additive Regression  (an extension of  \link[mgcv]{gam} model)\cr
 #' \tab \code{\link{fregre.gkam}}: Functional Generalized Kernel Additive Regression (an extension of  \code{\link{fregre.np}} model) \cr 
 #' }
 #' 

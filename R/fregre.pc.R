@@ -40,23 +40,23 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Return:
 #' \itemize{
-#' \item \code{call}{ The matched call of \code{\link{fregre.pc}} function.} 
-#' \item \code{coefficients}{ A named vector of coefficients.}
-#' \item \code{residuals}{ \code{y}-\code{fitted values}.} 
-#' \item \code{fitted.values}{ Estimated scalar response.} 
-#' \item \code{beta.est}{ beta coefficient estimated of class \code{fdata}}
-#' \item \code{df.residual}{ The residual degrees of freedom. In ridge regression, \code{df(rn)} is the effective degrees of freedom.} 
-#' \item \code{r2}{ Coefficient of determination.}
-#' \item \code{sr2}{ Residual variance.} 
-#' \item \code{Vp}{ Estimated covariance matrix for the parameters.} 
-#' \item \code{H}{ Hat matrix.}
-#' \item \code{l}{ Index of principal components selected.} 
-#' \item \code{lambda}{ Amount of shrinkage.} 
-#' \item \code{P}{ Penalty matrix.} 
-#' \item \code{fdata.comp}{ Fitted object in \code{\link{fdata2pc}} function.} 
-#' \item \code{lm}{ \code{lm} object.}
-#' \item \code{fdataobj}{ Functional explanatory data.} 
-#' \item \code{y}{ Scalar response.}
+#' \item \code{call}: The matched call of \code{\link{fregre.pc}} function.
+#' \item \code{coefficients}: A named vector of coefficients.
+#' \item \code{residuals}: \code{y} minus \code{fitted values}.
+#' \item \code{fitted.values}: Estimated scalar response.
+#' \item \code{beta.est}: Beta coefficient estimated of class \code{fdata}.
+#' \item \code{df.residual}: The residual degrees of freedom. In ridge regression, \code{df(rn)} is the effective degrees of freedom.
+#' \item \code{r2}: Coefficient of determination.
+#' \item \code{sr2}: Residual variance.
+#' \item \code{Vp}: Estimated covariance matrix for the parameters.
+#' \item \code{H}: Hat matrix.
+#' \item \code{l}: Index of principal components selected.
+#' \item \code{lambda}: Amount of shrinkage.
+#' \item \code{P}: Penalty matrix.
+#' \item \code{fdata.comp}: Fitted object in \code{\link{fdata2pc}} function.
+#' \item \code{lm}: \code{lm} object.
+#' \item \code{fdataobj}: Functional explanatory data.
+#' \item \code{y}: Scalar response.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}
@@ -287,22 +287,22 @@ fregre.pc=function (fdataobj, y, l =NULL,lambda=0,P=c(0,0,1),
 #' 
 #' @return Return: 
 #' \itemize{
-#' \item \code{call}{ The matched call of \code{\link{fregre.pls}} function.} 
-#' \item \code{beta.est}{ Beta coefficient estimated of class \code{fdata}.} 
-#' \item \code{coefficients}{ A named vector of coefficients.}
-#' \item \code{fitted.values}{ Estimated scalar response.} 
-#' \item \code{residuals}{\code{y}-\code{fitted values}.} 
-#' \item \code{H}{ Hat matrix.} 
-#' \item \code{df.residual}{ The residual degrees of freedom.} 
-#' \item \code{r2}{ Coefficient of determination.}
-#' \item \code{GCV}{ GCV criterion.} 
-#' \item \code{sr2}{ Residual variance.} 
-#' \item \code{l}{ Index of components to include in the model.} 
-#' \item \code{lambda}{ Amount of shrinkage.}
-#' \item \code{fdata.comp}{ Fitted object in \code{\link{fdata2pls}} function.}
-#' \item \code{lm}{ Fitted object in \code{\link{lm}} function} 
-#' \item \code{fdataobj}{ Functional explanatory data.} 
-#' \item \code{y}{ Scalar response.}
+#' \item \code{call}: The matched call of \code{\link{fregre.pls}} function.
+#' \item \code{beta.est}: Beta coefficient estimated of class \code{fdata}.
+#' \item \code{coefficients}: A named vector of coefficients.
+#' \item \code{fitted.values}: Estimated scalar response.
+#' \item \code{residuals}: \code{y} minus \code{fitted values}.
+#' \item \code{H}: Hat matrix.
+#' \item \code{df.residual}: The residual degrees of freedom.
+#' \item \code{r2}: Coefficient of determination.
+#' \item \code{GCV}: GCV criterion.
+#' \item \code{sr2}: Residual variance.
+#' \item \code{l}: Index of components to include in the model.
+#' \item \code{lambda}: Amount of shrinkage.
+#' \item \code{fdata.comp}: Fitted object in \code{\link{fdata2pls}} function.
+#' \item \code{lm}: Fitted object in \code{\link{lm}} function.
+#' \item \code{fdataobj}: Functional explanatory data.
+#' \item \code{y}: Scalar response.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}
@@ -507,11 +507,10 @@ fregre.pls=function(fdataobj, y=NULL, l = NULL,
 #' @param \dots Further arguments passed to \code{\link{fregre.pls}}.
 #' @return Return:
 #' \itemize{
-#' \item \code{fregre.pls}{ Fitted regression object by the best (\code{pls.opt}) components.} 
-#' \item \code{pls.opt}{ Index of PLS components' selected.} 
-#' \item \code{MSC.min}{ Minimum Model Selection Criteria (MSC) value for
-#' the (\code{pls.opt} components.} 
-#' \item \code{MSC}{ Minimum Model Selection Criteria (MSC) value for \code{kmax} components.}
+#' \item \code{fregre.pls}: Fitted regression object by the best (\code{pls.opt}) components.
+#' \item \code{pls.opt}: Index of PLS components selected.
+#' \item \code{MSC.min}: Minimum Model Selection Criteria (MSC) value for the (\code{pls.opt}) components.
+#' \item \code{MSC}: Minimum Model Selection Criteria (MSC) value for \code{kmax} components.
 #' }
 #' @note \code{criteria=``CV''} is not recommended: time-consuming.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
@@ -713,10 +712,10 @@ fregre.pls.cv=function (fdataobj, y, kmax=8,lambda=0,P=c(0,0,1),
 #' \code{\link{fregre.pls}}
 #' @return Return:
 #' \itemize{
-#' \item \code{fregre.pc}{ Fitted regression object by the best (\code{pc.opt}) components.} 
-#' \item \code{pc.opt}{ Index of PC components selected.} 
-#' \item \code{MSC.min}{ Minimum Model Selection Criteria (MSC) value for the (\code{pc.opt} components.} 
-#' \item \code{MSC}{ Minimum Model Selection Criteria (MSC) value for \code{kmax} components.}
+#' \item \code{fregre.pc}: Fitted regression object by the best (\code{pc.opt}) components.
+#' \item \code{pc.opt}: Index of PC components selected.
+#' \item \code{MSC.min}: Minimum Model Selection Criteria (MSC) value for the (\code{pc.opt}) components.
+#' \item \code{MSC}: Minimum Model Selection Criteria (MSC) value for \code{kmax} components.
 #' }
 #' @note \code{criteria=``CV''} is not recommended: time-consuming.
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente

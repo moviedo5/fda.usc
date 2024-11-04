@@ -24,12 +24,12 @@
 #' Functional covariates of class \code{fdata} or \code{fd} are introduced in
 #' the following items in the \code{data} list.\cr \code{basis.x} is a list of
 #' basis for represent each functional covariate. The b object can be
-#' created by the function: \code{\link{create.pc.basis}}, \code{\link{pca.fd}}
+#' created by the function: \code{\link{create.pc.basis}}, \link[fda]{pca.fd}
 #' \code{\link{create.pc.basis}}, \code{\link{create.fdata.basis}} o
 #' \code{\link{create.basis}}.\cr \code{basis.b} is a list of basis for
 #' represent each functional beta parameter. If \code{basis.x} is a list of
 #' functional principal components basis (see \code{\link{create.pc.basis}} or
-#' \code{\link{pca.fd}}) the argument \code{basis.b} is ignored.
+#' \link[fda]{pca.fd}) the argument \code{basis.b} is ignored.
 #' 
 #' @aliases classif.rpart classif.nnet classif.randomForest classif.cv.glmnet
 #' classif.svm classif.ksvm classif.naiveBayes classif.lda classif.qda classif.multinom
@@ -65,7 +65,7 @@
 #' \item \code{fit}: list of binary classification fitted models.
 #' }
 #' @author Febrero-Bande, M. and Oviedo de la Fuente, M.
-#' @seealso See Also as: \code{\link{rpart}}.\cr Alternative method:
+#' @seealso See Also as: \link[rpart]{rpart}.\cr Alternative method:
 #' \code{\link{classif.np}}, \code{\link{classif.glm}},
 #' \code{\link{classif.gsam}} and \code{\link{classif.gkam}}.
 #' @references Ramsay, James O., and Silverman, Bernard W. (2006), 

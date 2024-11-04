@@ -41,8 +41,8 @@ Computes the derivative of functional data.
 \emph{"monomial"} or \emph{"polynomial"}.
  \code{fdata.deriv} function creates a basis to represent the functional
 data. 
-The functional data are converted to class \code{fd} using the
-\code{\link{Data2fd}} function and the basis indicated in the \code{method}.
+The functional data are converted to class \code{fd} using the \link[fda]{Data2fd}
+function and the basis indicated in the \code{method}.
 Finally, the function calculates the derivative of order \code{nderiv} of
 curves using \code{\link{deriv.fd}} function.\cr 
 \item If \code{method}=\emph{"fmm"}, \emph{"periodic"}, \emph{"natural"} or
@@ -69,7 +69,7 @@ plot(fdata.deriv(absorp,nderiv=1,method="bspline",class.out='fd',nbasis=11))
 
 }
 \seealso{
-See also \code{\link{deriv.fd}}, \code{\link{splinefun}} and
+See also \link[fda]{deriv.fd} , \code{\link{splinefun}} and
 \code{\link{fdata}}
 }
 \keyword{manip}

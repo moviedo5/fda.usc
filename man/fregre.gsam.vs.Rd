@@ -79,10 +79,10 @@ covariates and the response).}
 Return an object corresponding to the estimated additive mdoel using 
 the selected variables (ame output as the\code{\link{fregre.gsam}} function) and the following elements:
 \itemize{
-\item{\code{gof}}, the goodness of fit for each step of VS algorithm.
-\item{\code{i.predictor}}, \code{vector} with 1 if the variable is selected, 0 otherwise.
-\item{\code{ipredictor}}, \code{vector} with the name of selected variables (in order of selection)
-\item{\code{dcor}}, the value of distance correlation for each potential covariate and the residual of the model in each step.
+\item \code{gof}: the goodness of fit for each step of VS algorithm.
+\item \code{i.predictor}: \code{vector} with 1 if the variable is selected, 0 otherwise.
+\item \code{ipredictor}: \code{vector} with the name of selected variables (in order of selection)
+\item \code{dcor}: the value of distance correlation for each potential covariate and the residual of the model in each step.
 }
 }
 \description{
@@ -95,19 +95,19 @@ This function is an extension of the functional generalized spectral additive
 regression models: \code{\link{fregre.gsam}} where the \eqn{E[Y|X,Z]} is related to the 
 linear prediction \eqn{\eta} via a link function \eqn{g(\cdot)}{g(.)} with integrated 
 smoothness estimation by the smooth functions \eqn{f(\cdot)}{f(.)}. 
-\deqn{E[Y|X,Z])=\eta=g^{-1}(\alpha+\sum_{i=1}^{p}f_{i}(Z^{i})+\sum_{k=1}^{q}\sum_{j=1}^{k_q}{f_{j}^{k}(\xi_j^k)})}{E[Y|X,Z]=\eta=g^{-1}(\alpha+\sum_i  f_i(Z_{i})+\sum_k^q\sum_{j=1}^{k_q}{f_j^k(\xi_j^k)})}
-where \eqn{\xi_j^k}{\xi_j^k} is the coefficient of the basis  function expansion of 
-\eqn{X^k}, (in PCA analysis \eqn{\xi_j^k}{\xi_j^k} is the score of the \eqn{j}-functional
-PC of \eqn{X^k}.
+\deqn{E[Y|X,Z] = \eta = g^{-1}(\alpha + \sum_{i=1}^{p} f_{i}(Z^{i}) + \sum_{k=1}^{q} \sum_{j=1}^{k_q} f_{j}^{k}(\xi_j^k))}
+where \eqn{\xi_j^k}{\xi_j^k} is the coefficient of the basis function expansion of 
+\eqn{X^k}, (in PCA analysis, \eqn{\xi_j^k}{\xi_j^k} is the score of the \eqn{j}-functional
+PC of \eqn{X^k}).
  
-The smooth functions \eqn{f(\cdot)}{f(.)} can be added to the right hand side of the formula
+The smooth functions \eqn{f(\cdot)}{f(.)} can be added to the right-hand side of the formula
 to specify that the linear predictor depends on smooth functions of predictors using smooth 
-terms \code{\link{s}} and \code{\link{te}} as in  \code{\link{gam}} (or linear functionals of 
-these as \eqn{Z\beta} and \eqn{\big<X(t),\beta\big>}{< X(t),\beta(t) >} in \code{\link{fregre.glm}}).
+terms \link[mgcv]{s} and \link[mgcv]{te} as in \link[mgcv]{gam} (or linear functionals of 
+these as \eqn{Z\beta} and \eqn{\langle X(t), \beta(t) \rangle} in \code{\link{fregre.glm}}).
 }
 \note{
 If the formula only contains a non functional explanatory variables (multivariate covariates),
- the function compute a standard  \code{\link{gam}} procedure.
+ the function compute a standard  \link[mgcv]{gam} procedure.
 }
 \examples{
 \dontrun{ 
@@ -193,7 +193,7 @@ Fuente, M. Variable selection in functional additive regression models,
 (2018).  Computational Statistics, 1-19. DOI: \doi{10.1007/s00180-018-0844-5}
 }
 \seealso{
-See Also as:  \code{\link{predict.fregre.gsam}} and \code{\link{summary.gam}}.
+See Also as:  \code{\link{predict.fregre.gsam}} and \link[mgcv]{summary.gam}.
 Alternative methods: \code{\link{fregre.glm}}, \code{\link{fregre.gsam}}
  and \code{\link{fregre.gkam}}.
 }

@@ -1,4 +1,5 @@
 # fda.usc 2.2.0
+Modification in several Rd fiels: Lost braces in \itemize; \value handles \item{}{} 
 
 classif.DD.aux.r, `solve.ab`  has been renamed to `solve_ab`.
 classif.kfold.R, `all.vars1`  has been renamed to `all_vars1`.

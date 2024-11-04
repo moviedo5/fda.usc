@@ -56,16 +56,14 @@ for the predicted response values.}
 \value{
 Return:
 \itemize{
-\item \code{model}{ \code{fregre.pc}, \code{fregre.pls} or \code{fregre.basis} object.} 
-\item \code{beta.boot}{ functional beta estimated by the \code{nb} bootstrap regressions.} 
-\item \code{norm.boot}{ norm of diferences beetween the nboot betas estimated by bootstrap and beta estimated by regression model.} 
-\item \code{coefs.boot}{ matrix with the bootstrap estimated basis coefficients.} 
-\item \code{kn.boot}{ vector or list of length \code{nb} with index of the basis, PC or PLS factors selected in each bootstrap
-regression.} 
-\item \code{y.pred}{ predicted response values using \code{newX} covariates.} 
-\item \code{y.boot}{ matrix of bootstrap predicted response values using \code{newX} covariates.} 
-\item \code{newX}{ a \code{fdata} class containing the values of the model covariates at which predictions are required (only
-for smoothed bootstrap).}
+\item \code{model}: \code{fregre.pc}, \code{fregre.pls} or \code{fregre.basis} object. 
+\item \code{beta.boot}: Functional beta estimated by the \code{nb} bootstrap regressions. 
+\item \code{norm.boot}: Norm of differences between the \code{nboot} betas estimated by bootstrap and beta estimated by the regression model. 
+\item \code{coefs.boot}: Matrix with the bootstrap estimated basis coefficients. 
+\item \code{kn.boot}: Vector or list of length \code{nb} with index of the basis, PC or PLS factors selected in each bootstrap regression. 
+\item \code{y.pred}: Predicted response values using \code{newX} covariates. 
+\item \code{y.boot}: Matrix of bootstrap predicted response values using \code{newX} covariates. 
+\item \code{newX}: A \code{fdata} class containing the values of the model covariates at which predictions are required (only for smoothed bootstrap).
 }
 }
 \description{

@@ -41,18 +41,18 @@ metric function.}
 \value{
 Return:
 \itemize{
-\item {call}{ The matched call.} 
-\item {fitted.values}{ Estimated scalar response.} 
-\item {H}{ Hat matrix.} 
-\item {residuals}{ \code{y} minus \code{fitted values}.} 
-\item {df.residual}{ The residual degrees of freedom.} 
-\item {r2}{ Coefficient of determination.} 
-\item {sr2}{ Residual variance.} 
-\item {y}{ Response.} 
-\item {fdataobj}{ Functional explanatory data.} 
-\item {mdist}{ Distance matrix between \code{x} and \code{newx}.}
-\item {Ker}{ Asymmetric kernel used.} 
-\item {h.opt}{ smoothing parameter or' bandwidth.}
+\item \code{call}: The matched call. 
+\item \code{fitted.values}: Estimated scalar response. 
+\item \code{H}: Hat matrix. 
+\item \code{residuals}: \code{y} minus \code{fitted values}. 
+\item \code{df.residual}: The residual degrees of freedom. 
+\item \code{r2}: Coefficient of determination. 
+\item \code{sr2}: Residual variance. 
+\item \code{y}: Response. 
+\item \code{fdataobj}: Functional explanatory data. 
+\item \code{mdist}: Distance matrix between \code{x} and \code{newx}.
+\item \code{Ker}: Asymmetric kernel used. 
+\item \code{h.opt}: Smoothing parameter or bandwidth.
 }
 }
 \description{

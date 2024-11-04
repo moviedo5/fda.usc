@@ -15,9 +15,9 @@
 #'   \eqn{\mbox{pe}\tilde{\mbox{n}}\mbox{a} }{} \code{DP} respectively.
 #' @return Return:
 #' \itemize{
-#'  \item \code{DCP}{ Cook's Distance for Prediction.}
-#'  \item \code{DCE}{ Cook's Distance for Estimation.}
-#'  \item \code{DP}{ \eqn{\mbox{Pe}\tilde{\mbox{n}}\mbox{a's} }{} Distance.}
+#'  \item \code{DCP}: Cook's Distance for Prediction.
+#'  \item \code{DCE}: Cook's Distance for Estimation.
+#'  \item \code{DP}:\eqn{\mbox{Pe}\tilde{\mbox{n}}\mbox{a's} }{} Distance.
 #'  }
 #' @references
 #' Febrero-Bande, M., Galeano, P. and Gonzalez-Manteiga, W. (2010). \emph{Measures of influence for the functional linear model with scalar response}. Journal of Multivariate Analysis 101, 327-339.

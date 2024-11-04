@@ -24,9 +24,11 @@ object of test data.}
 
 \item{depth}{Type of depth function from functional data:
 \itemize{ 
-\item {\code{FM}}{ Fraiman and Muniz depth.  \item \code{mode}: modal depth.  }
-\item {\code{RT}}{ random Tukey depth.  \item \code{RP}: random project depth.}
-\item {\code{RPD}}{ double random project depth.  }
+\item \code{FM}: Fraiman and Muniz depth.
+\item \code{mode}: Modal depth.
+\item \code{RT}: Random Tukey depth.
+\item \code{RP}: Random project depth.
+\item \code{RPD}: Double random project depth.
 }}
 
 \item{par.depth}{List of parameters for \code{depth}.}

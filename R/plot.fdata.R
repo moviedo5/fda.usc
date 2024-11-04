@@ -19,7 +19,7 @@
 #' \code{"names"}: (optional) list with \code{main} an overall title,
 #' \code{xlab} title for \code{x} axis and \code{ylab} title for \code{y} axis.
 #' } 
-#' or a two-argument functional data object, see \code{\link{bifd}}.
+#' or a two-argument functional data object, see \link[fda]{bifd}.
 #' @param type 1-character string giving the type of plot desired.\cr The
 #' following values are possible for \code{fdata} class object: "l" for lines
 #' (by default),"p" for points, , "o" for overplotted points and lines, "b",

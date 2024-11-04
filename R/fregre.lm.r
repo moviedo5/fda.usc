@@ -24,12 +24,12 @@
 #' 
 #' \code{basis.x} is a list of basis for represent each functional covariate.
 #' The basis object can be created by the function:
-#' \code{\link{create.pc.basis}}, \code{\link{pca.fd}}
+#' \code{\link{create.pc.basis}}, \link[fda]{pca.fd}
 #' \code{\link{create.pc.basis}}, \code{\link{create.fdata.basis}} or
-#' \code{\link{create.basis}}.\cr \code{basis.b} is a list of basis for
+#' \link[fda]{create.basis}.\cr \code{basis.b} is a list of basis for
 #' represent each functional \eqn{\beta_k} parameter. If \code{basis.x} is a
 #' list of functional principal components basis (see
-#' \code{\link{create.pc.basis}} or \code{\link{pca.fd}}) the argument
+#' \code{\link{create.pc.basis}} or \link[fda]{pca.fd}) the argument
 #' \code{basis.b} \emph{(is unnecessary and)} is ignored.\cr
 #' 
 #' Penalty options are under development, not guaranteed to work properly.
@@ -52,14 +52,14 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Return \code{lm} object plus:
 #' \itemize{
-#' \item \code{sr2}{ Residual variance.}
-#' \item \code{Vp}{ Estimated covariance matrix for the parameters.} 
-#' \item \code{lambda}{ A roughness penalty.} 
-#' \item \code{basis.x}{ Basis used for \code{fdata} or \code{fd} covariates.} 
-#' \item \code{basis.b}{ Basis used for beta parameter estimation.}
-#' \item \code{beta.l}{ List of estimated beta parameter of functional covariates.}
-#' \item \code{data}{ List that containing the variables in the model.}
-#' \item \code{formula}{ formula.}
+#' \item \code{sr2}: Residual variance.
+#' \item \code{Vp}: Estimated covariance matrix for the parameters. 
+#' \item \code{lambda}: A roughness penalty. 
+#' \item \code{basis.x}: Basis used for \code{fdata} or \code{fd} covariates. 
+#' \item \code{basis.b}: Basis used for beta parameter estimation.
+#' \item \code{beta.l}: List of estimated beta parameter of functional covariates.
+#' \item \code{data}: List containing the variables in the model.
+#' \item \code{formula}: Formula used in the model.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@usc.es}
