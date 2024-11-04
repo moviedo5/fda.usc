@@ -70,71 +70,30 @@ library(roxygen2)
 getwd()
 pkgbuild::compile_dll()
 roxygenize()
-devtools::document()
+devtools::document() 
 
 tools::checkRd("man/Outliers.fdata.Rd")
-tools::checkRd("man/LMDC.select.Rd")
-tools::checkRd("man/accuracy.Rd")
-tools::checkRd("man/classif.DD.Rd")
-tools::checkRd("man/classif.depth.Rd")
-tools::checkRd("man/cond.mode.Rd")
-tools::checkRd("man/depth.mdata.Rd")
-tools::checkRd("man/dfv.test.Rd")
-tools::checkRd("man/fEqDistrib.test.Rd")
-tools::checkRd("man/fanova.RPm.Rd")
-tools::checkRd("man/fanova.hetero.Rd")
-tools::checkRd("man/fanova.onefactor.Rd")
-tools::checkRd("man/fdata.bootstrap.Rd")
-tools::checkRd("man/fdata2basis.Rd")
-tools::checkRd("man/fdata2pc.Rd")
-tools::checkRd("man/flm.Ftest.Rd")
-tools::checkRd("man/flm.test.Rd")
-tools::checkRd("man/fregre.basis.Rd")
-tools::checkRd("man/fregre.basis.cv.Rd")
-tools::checkRd("man/fregre.basis.fr.Rd")
-tools::checkRd("man/fregre.bootstrap.Rd")
-tools::checkRd("man/fregre.gkam.Rd")
-tools::checkRd("man/fregre.glm.Rd")
-tools::checkRd("man/fregre.gls.Rd")
-tools::checkRd("man/fregre.gsam.Rd")
-tools::checkRd("man/fregre.igls.Rd")
-tools::checkRd("man/fregre.lm.Rd")
-tools::checkRd("man/fregre.np.Rd")
-tools::checkRd("man/fregre.np.cv.Rd")
-tools::checkRd("man/fregre.pc.Rd")
-tools::checkRd("man/fregre.pc.cv.Rd")
-tools::checkRd("man/fregre.pls.Rd")
-tools::checkRd("man/fregre.pls.cv.Rd")
-tools::checkRd("man/fregre.plm.Rd")
-tools::checkRd("man/influence.fregre.fd.Rd")
-tools::checkRd("man/influence_quan.Rd")
-tools::checkRd("man/optim.basis.Rd")
-tools::checkRd("man/optim.np.Rd")
-tools::checkRd("man/predict.classif.DD.Rd")
-tools::checkRd("man/predict.fregre.lm.Rd")
-tools::checkRd("man/summary.fregre.fd.Rd")
-tools::checkRd("man/rp.flm.test.Rd")
-tools::checkRd("man/GCCV.S.Rd")
-
-roxygenize()
-devtools::document()
-
-
-
 
 library(devtools)
 devtools::build()
-devtools::check()
+devtools::check(manual = TRUE) 
+devtools::install()
 devtools::build_win()
 
-# devtools::install_github("moviedo5/fda.usc",auth_user="moviedo5")
-R CMD check --as-cran and R-wind-builder 
- 
-R CMD build fda.usc
-R CMD check fda.usc_2.2.0.tar.gz --as-cran  R-wind-builder 
-R CMD INSTALL fda.usc_2.2.0.tar.gz --build
+devtools::install_github("moviedo5/fda.usc",auth_user="moviedo5")
 
-Manuel Oviedo PhD thesis [Advances in functional regression and classification models](https://hdl.handle.net/10347/18236)
+# devtools::install_github("moviedo5/fda.usc",auth_user="moviedo5")
+
+R CMD build fda.usc
+R CMD check fda.usc_2.2.0.tar.gz --as-cran
+R CMD INSTALL fda.usc_2.2.0.tar.gz --build
+R-wind-builder fda.usc_2.2.0.tar.gz --as-cran
+
+library(pkgdown)
+# usethis::use_pkgdown()
+# Build website:
+#pkgdown::build_site()
+build_site(new_process = TRUE)
 
 -->
 

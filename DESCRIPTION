@@ -2,10 +2,10 @@ Package: fda.usc
 Type: Package
 Title: Functional Data Analysis and Utilities for Statistical Computing
 Version: 2.2.0
-Date: 2024-10-21
+Date: 2024-11-04
 Authors@R: c(person("Manuel Febrero Bande",role="aut", email = "manuel.febrero@usc.es"), person("Manuel Oviedo de la Fuente",role=c("aut","cre"), email="manuel.oviedo@udc.es"),
              person("Pedro Galeano",role="ctb"),
-             person("Alicia Nieto",role="ctb"),
+             person("Alicia Nieto",role="ctb"), 
              person("Eduardo Garcia-Portugues",role="ctb"))
 Depends: R (>= 3.5.0), fda, splines, MASS, mgcv, knitr 
 Imports: methods, grDevices, graphics, utils, stats, nlme, doParallel,  parallel, iterators, foreach, kSamples

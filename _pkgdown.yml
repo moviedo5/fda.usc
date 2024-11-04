@@ -1,12 +1,12 @@
 url: https://moviedo5.github.io/fda.usc
 
 template:
-  params:
-    bootswatch: cerulean
-
+  bootstrap: 5
+  bootswatch: zephyr
+ 
 authors:
   - Manuel Oviedo de la Fuente:
-    href: https://manueloviedo.shinyapps.io/
+      href: https://manueloviedo.shinyapps.io/
   - Manuel Febrero Bande
 
 news:
@@ -17,76 +17,45 @@ deploy:
 
 reference:
   - title: "Functional Data Analysis and Utilities for Statistical Computings"
-    contents:
     desc: >
        Routines for exploratory and descriptive analysis of functional data such as
        depth measurements, atypical curves detection, regression models, supervised 
        classification, unsupervised classification and functional analysis of variance.
-       
-  - title: "fda.usc Package"
-    desc: "Functional Data Analysis and Utilities for Statistical Computing (fda.usc)."
     contents:
       - fda.usc-package
       - fda.usc
-  
 
-  - title: "Create Basis and Functional Basis"
-    desc: "Create Basis Set for Functional Data of fdata class. 
-    Compute functional coefficients from functional data represented in a base of functions."
+  - title: "fdata Creation"
     contents:
-      - create.fdata.basis
-      - create.pc.basis
-      - create.pls.basis
-      - create.raw.fdata
-      - fdata2basis
-      - summary.basis.fdata
-
-  - title: "Distance Correlation"
-    desc: "Distance Correlation for functional data."
+      - fdata
+    
+  - title: "Utilites for fdata class"
+#    desc: " Functional Bootstrap, functional data centering and functional derivative."
     contents:
-      - dcor.xy
-      - dcor.dist
-      - dcor.xy()
-      - dcor.dist
-      - bcdcor.dist
-      - dcor.test  
-      - bcdcor.dist 
-      - dcor.test
-
-
-  - title: "Functional Depth"
-    desc: "Computation of depth measures for functional data."
-    contents:
-      - depth.mode
-      - depth.RP
-      - depth.RPD
-      - depth.RT
-      - depth.KFSD
-      - depth.FSD
-      - depth.FM
+      - fdata2fd
+      - fdata.bootstrap
+      - fdata.cen
+      - fdata.deriv
   
-  - title: "Multivariate Depth"
-    desc: "Provides the depth measure for multivariate data."
+  - title: "fdata S3 Methods"
+#    desc: "fdata S3 Group Generic Functions."
     contents:
-      - mdepth.LD
-      - mdepth.HS
-      - mdepth.RP
-      - mdepth.MhD
-      - mdepth.KFSD
-      - mdepth.FSD
-      - mdepth.FM
-      - mdepth.TD
-      - mdepth.SD
+      - Math.fdata
+      - Ops.fdata
+      - Summary.fdata
+      - split.fdata
+      - order.fdata
+      - is.fdata
   
-  - title: "Multivariate Functional Depth"
-    desc: "Provides the depth measure for a list of p-functional data objects."
+  - title: "Functional PCA and PLS "
+#    desc: "Principal components and Partial least squares components for functional data."
     contents:
-      - depth.modep
-      - depth.RPp
-      - depth.FMp
-  
+      - fdata2pc
+      - fdata2pls
+      - summary.fdata.comp      
+
   - title: "Functional Descriptives"
-    desc: "Descriptive measures for functional data."
+#    desc: "Descriptive measures for functional data."
     contents:
       - func.mean
       - func.var
@@ -110,155 +79,66 @@ reference:
       - func.mean.formula
       - Var.y    
   
-  
-  - title: "DFV Test"
-    desc: "Delsol, Ferraty and Vieu test for no functional-scalar interaction."
-    contents:
-      - dfv.statistic
-      - dfv.test
-  
 
-  - title: "Functional ANOVA"
-    desc: "ANOVA for functional data."
+  - title: "Create Functional Basis"
+#    desc: "Create Basis Set for Functional Data of fdata class. 
+#    Compute functional coefficients from functional data represented in a base of functions."
     contents:
-      - fanova.hetero
-      - fanova.onefactor
-      - fanova.RPm
-      - summary.fanova.RPm
-  
- 
-  - title: "Utilites for fdata class"
-    desc: " Functional Bootstrap. Functional Data Centering. Functional Derivative."
-    contents:
-      - fdata.bootstrap
-      - fdata.cen
-      - fdata.deriv
-  
-  - title: "FDATA S3 Methods"
-    desc: "fdata S3 Group Generic Functions."
-    contents:
-      - Math.fdata
-      - Ops.fdata
-      - Summary.fdata
-      - split.fdata
-      - order.fdata
-      - is.fdata
-      - subset.fdata
-  
-  - title: "FDATA Creation and Convertion"
-    desc: "Converts raw data or other functional data classes into fdata class. 
-    Converts fdata class object into fd class object"
-    contents:
-      - fdata
-      - fdata2fd
-  
-  - title: "Functional PCA and PLS "
-    desc: "Principal components and Partial least squares components for functional data."
-    contents:
-      - fdata2pc
-      - fdata2pls
-      - summary.fdata.comp      
+      - create.fdata.basis
+      - create.pc.basis
+      - create.pls.basis
+      - create.raw.fdata
+      - fdata2basis
+      - summary.basis.fdata
 
-   - title: "Functional Regression"
-    desc: "Various functional regression methods."
-    contents:
-      - fregre.basis.cv
-      - fregre.basis.fr
-      - fregre.basis
-      - fregre.bootstrap
-      - fregre.gkam
-      - fregre.glm
-      - fregre.glm.vs
-      - fregre.gls
-      - fregre.gsam
-      - fregre.gsam.vs
-      - fregre.igls
-      - fregre.lm
-      - fregre.np.cv
-      - fregre.np
-      - fregre.pc.cv
-      - fregre.pc
-      - fregre.plm
-      - fregre.pls.cv
-      - fregre.pls
-  
-  
-  - title: "False Discovery Rate"
-    desc: "False Discovery Rate (FDR)."
-    contents:
-      - FDR
-      - pvalue.FDR
-  
-  - title: "Functional Distribution Tests"
-    desc: "Tests for checking the equality of distributions between two functional populations."
-    contents:
-      - XYRP.test
-      - MMD.test
-      - MMDA.test
-      - fEqDistrib.test
-  
-  - title: "Functional Mean and Covariance Tests"
-    desc: "Tests for checking the equality of means and/or covariance between two populations under gaussianity."
-    contents:
-      - fmean.test.fdata
-      - cov.test.fdata
-  
-  - title: "Functional F-test,  PCvM Statistic and Random Projections"
-    desc: "F-test for the Functional Linear Model with scalar response. 
-    Goodness-of-fit test for the Functional Linear Model with scalar response.
-    PCvM statistic for the Functional Linear Model with scalar response.
-    Testing and goodness-of-fit for functional linear models using random projections."
-    contents:
-      - Ftest.statistic
-      - flm.Ftest
-      - flm.test
-      - Adot
-      - PCvM.statistic 
-      - rp.flm.statistic
-      - rp.flm.test
- 
-  - title: "Functional Influence Measures"
-    desc: "Functional influence measures."
-    contents:
-      - influence.fregre.fd
-      - influence_quan
-  
-  - title: "Functional Inner Products and Functional Norm."
-    desc: "Inner products of Functional Data Objects or class (fdata).  Simpson Integration.
-    Approximates Lp-norm for functional data."
-    contents:
-      - inprod.fdata
-      - int.simpson
-      - int.simpson2
-      - norm.fdata
-      - norm.fd
 
-  - title: "Smoothing Kernels"
-    desc: "Various types of smoothing kernels."
+  - title: "Functional Depth"
+#    desc: "Computation of depth measures for functional data."
     contents:
-      - Kernel.asymmetric
-      - Kernel.integrate
-      - Kernel
+      - depth.mode
+      - depth.RP
+      - depth.RPD
+      - depth.RT
+      - depth.KFSD
+      - depth.FSD
+      - depth.FM
   
-  - title: "Functional K-Means"
-    desc: "K-Means Clustering for functional data."
+  - title: "Multivariate Depth"
+#    desc: "Provides the depth measure for multivariate data."
     contents:
-      - kmeans.center.ini
-      - kmeans.fd
+      - mdepth.LD
+      - mdepth.HS
+      - mdepth.RP
+      - mdepth.MhD
+      - mdepth.KFSD
+      - mdepth.FSD
+      - mdepth.FM
+      - mdepth.TD
+      - mdepth.SD
   
-  - title: "ldata Class"
-    desc: "ldata class definition and utilities."
+  - title: "Multivariate Functional Depth"
+#    desc: "Provides the depth measure for a list of p-functional data objects."
     contents:
-      - ldata
-      - names.ldata
-      - is.ldata
-      - "[.ldata"
-      - subset.ldata
-      - plot.ldata
-  
+      - depth.modep
+      - depth.RPp
+      - depth.FMp
+
+  - title: "Functional Smoothing"
+#    desc: "Parametric (select the number of basis) and  Nonparametric (select the
+#    bandwidth parameter) using CV or GCV method. 
+#    Various smoothing matrix methods."
+    contents:
+      - optim.basis
+      - optim.np
+      - S.basis
+      - S.LLR
+      - S.LPR
+      - S.LCR
+      - S.KNN
+      - S.NW      
 
   - title: "Distance Metrics (Functional Proximities)"
-    desc: "Various distance metrics (and semi-metrics) for functional data."
+#    desc: "Various distance metrics (and semi-metrics) for functional data."
     contents:
       - metric.dist
       - metric.DTW
@@ -275,73 +155,8 @@ reference:
       - semimetric.mplsr
       - semimetric.pca
       
-  - title: "mfdata Class"
-    desc: "mfdata class definition and utilities."
-    contents:
-      - mfdata
-      - names.mfdata
-      - subset.mfdata
-      
-  - title: "fdata NA Handling"
-    desc: "A wrapper for the na.omit and na.fail function for fdata object."
-    contents:
-      - na.omit.fdata
-      - na.fail.fdata
-  
-
-  - title: "FDA USC Options"
-    desc: "ops.fda.usc Options Settings."
-    contents:
-      - ops.fda.usc
-  
-  - title: "Functional Smoothing"
-    desc: "Parametric (optim.basis), select the number of basis using GCV method.
-     Nonparametric (optim.np) using nonparametric kernel estimation.
-     Various smoothing matrix methods."
-    contents:
-      - optim.basis
-      - optim.np
-      - S.basis
-      - S.LLR
-      - S.LPR
-      - S.LCR
-      - S.KNN
-      - S.NW      
-  
-  - title: "Functional Outliers"
-    desc: "Outliers for functional dataset."
-    contents:
-      - outliers.depth.pond
-      - outliers.depth.trim
-      - outliers.lrt
-      - outliers.thres.lrt
-  
- 
-   - title: "Functional Classification"
-    desc: "Functional Classification Models."
-    contents:
-      - classif.depth      
-      - classif.gkam
-      - classif.glm
-      - classif.gsam
-      - classif.gsam.vs
-      - classif.kfold
-      - classif.nnet()
-      - classif.rpart
-      - classif.svm()
-      - classif.ksvm()
-      - classif.randomForest
-      - classif.lda() 
-      - classif.qda()
-      - classif.naiveBayes
-      - classif.cv.glmnet()
-      - classif.gbm()
-      - classif.np
-      - classif.knn
-      - classif.kernel()
-
- - title: "Functional Plotting"
-    desc: "Plot functional data: fdata class object."
+  - title: "Functional Plotting"
+#    desc: "Plot functional data: fdata class object."
     contents:
       - plot.fdata
       - lines.fdata
@@ -349,9 +164,153 @@ reference:
       - plot.mdepth
       - plot.depth
       - plot.bifd
+      
+      
+  - title: "fdata NA Handling"
+#    desc: "A wrapper for the na.omit and na.fail function for fdata object."
+    contents:
+      - na.omit.fdata
+      - na.fail.fdata
+
+  - title: "Data sets"
+#    desc: "Data sets included in the package."
+    contents:
+      - aemet
+      - MCO
+      - phoneme
+      - poblenou
+      - tecator
+      
+  - title: "Functional Outliers"
+#    desc: "Outliers for functional dataset."
+    contents:
+      - outliers.depth.pond
+      - outliers.depth.trim
+      - outliers.lrt
+      - outliers.thres.lrt
+      
+  - title: "Functional ANOVA"
+#    desc: "ANOVA for functional data."
+    contents:
+      - fanova.hetero
+      - fanova.onefactor
+      - fanova.RPm
+      - summary.fanova.RPm
+ 
+  - title: "Distance Correlation"
+#    desc: "Distance Correlation for functional data."
+    contents:
+      - dcor.xy
+      - dcor.dist
+      - bcdcor.dist
+      - dcor.test  
+      - bcdcor.dist 
+      - dcor.test
+
+  - title: "Functional Regression: scalar response and functional covariate "
+#    desc: "Various functional regression methods."
+    contents:
+      - fregre.basis.cv
+      - fregre.basis
+      - fregre.bootstrap
+      - fregre.np.cv
+      - fregre.np
+      - fregre.pc.cv
+      - fregre.pc
+      - fregre.pls.cv
+      - fregre.pls
+
+  - title: "Functional Regression: scalar response and functional covariates"
+#    desc: "Various functional regression methods."
+    contents:
+      - fregre.gkam
+      - fregre.glm
+      - fregre.gls
+      - fregre.gsam
+      - fregre.igls
+      - fregre.lm
+      - fregre.plm
+
+  - title: "Functional Regression: Variable Selection "
+#    desc: "Various functional regression methods."
+    contents:
+      - fregre.glm.vs
+      - fregre.gsam.vs
+      - LMDC.select
+      - LMDC.regre
+
+  - title: "Functional Response Regression "
+#    desc: "Various functional regression methods."
+    contents:
+      - fregre.basis.fr
+      #
+        
+  - title: "False Discovery Rate"
+#    desc: "False Discovery Rate (FDR)."
+    contents:
+      - FDR
+      - pvalue.FDR
   
+  - title: "DFV Test"
+#    desc: "Delsol, Ferraty and Vieu test for no functional-scalar interaction."
+    contents:
+      - dfv.statistic
+      - dfv.test
+
+  - title: "Functional Distribution Tests"
+#    desc: "Tests for checking the equality of distributions between two functional populations."
+    contents:
+      - XYRP.test
+      - MMD.test
+      - MMDA.test
+      - fEqDistrib.test
+  
+  - title: "Functional Mean and Covariance Tests"
+#    desc: "Tests for checking the equality of means and/or covariance between two populations under gaussianity."
+    contents:
+      - fmean.test.fdata
+      - cov.test.fdata
+  
+  - title: "Functional F-test,  PCvM Statistic and Random Projections"
+#    desc: "F-test for the Functional Linear Model with scalar response. 
+#    Goodness-of-fit test for the Functional Linear Model with scalar response.
+#    PCvM statistic for the Functional Linear Model with scalar response.
+#    Testing and goodness-of-fit for functional linear models using random projections."
+    contents:
+      - Ftest.statistic
+      - flm.Ftest
+      - flm.test
+      - Adot
+      - PCvM.statistic 
+      - rp.flm.statistic
+      - rp.flm.test
+
+  - title: "Functional Classification"
+#    desc: "Functional Classification Models."
+    contents:
+      - classif.DD
+      - classif.depth      
+      - classif.gkam
+      - classif.glm
+      - classif.gsam
+      - classif.gsam.vs
+      - classif.kfold
+      - classif.nnet
+      - classif.rpart
+      - classif.svm
+      - classif.ksvm
+      - classif.randomForest
+      - classif.lda 
+      - classif.qda
+      - classif.naiveBayes
+      - classif.cv.glmnet
+      - classif.gbm
+      - classif.np
+      - classif.knn
+      - classif.kernel
+
   - title: "Functional Prediction"
-    desc: "Various prediction methods for functional data models."
+#    desc: "Various prediction methods for functional data models."
     contents:
       - predict.classif.DD
       - predict.classif
@@ -365,17 +324,42 @@ reference:
       - predict.fregre.lm
       - predict.fregre.plm
   
-  - title: "LMDC Methods"
-    desc: "Impact points selection of functional predictor and regression using local maxima distance correlation (LMDC)."
+  - title: "Classification and Regression Summary"
+#    desc: "Summarizes information from classification and regression methods."
     contents:
-      - LMDC.select
-      - LMDC.regre
+      - summary.classif
+      - print.classif
+      - summary.fregre.fd
+      - summary.fregre.gkam
+
+  - title: "Functional Influence Measures"
+#    desc: "Functional influence measures."
+    contents:
+      - influence.fregre.fd
+      - influence_quan
+
+  - title: "Functional K-Means"
+#    desc: "K-Means Clustering for functional data."
+    contents:
+      - kmeans.center.ini
+      - kmeans.fd
+      
+  - title: "Functional Inner Products and  Norm"
+#    desc: "Inner products of Functional Data Objects or class (fdata).  Simpson Integration.
+#    Approximates Lp-norm for functional data."
+    contents:
+      - inprod.fdata
+      - int.simpson
+      - int.simpson2
+      - norm.fdata
+      - norm.fd
+
 
   - title: "Functional Data Generation and Random Directions"
-    desc: "Utils for generate functional data. Ornstein-Uhlenbeck process.
-    Data-driven sampling of random directions guided by sample of functional data.
-    Random Process Simulation, rproc2fdata simulates several random processes.
-    Wild Bootstrap."
+#    desc: "Utils for generate functional data. Ornstein-Uhlenbeck process.
+#    Data-driven sampling of random directions guided by sample of functional data.
+#    Random Process Simulation, rproc2fdata simulates several random processes.
+#    Wild Bootstrap."
     contents:
       - rcombfdata
       - gridfdata
@@ -384,39 +368,32 @@ reference:
       - rproc2fdata
       - rwild
 
-  
-  - title: "Classification and Regression Summary"
-    desc: "Summarizes information from classification and regression methods."
+  - title: "ldata and mfdata Class"
+#    desc: "mfdata class definition and utilities."
     contents:
-      - summary.classif
-      - print.classif
-      - summary.fregre.fd
-      - summary.fregre.gkam
-  
-
-    - title: "Performance measures"
-      desc: "Performance measures for regression and classification models. Classification Weights"
-      contents:
-        - cat2meas
-        - tab2meas
-        - pred.MSE
-        - pred.RMSE
-        - pred.MAE
-        - pred2meas
-        - weights4class        
-  
-
-  - title: "Data sets"
-    desc: "Data sets included in the package."
+      - mfdata
+      - names.mfdata
+      - subset.mfdata
+      - ldata
+      - names.ldata
+      - is.ldata
+      - "[.ldata"
+      - subset.ldata
+      - plot.ldata
+      
+  - title: "Performance measures"
+#    desc: "Performance measures for regression and classification models. Classification Weights"
     contents:
-      - aemet
-      - MCO
-      - phoneme
-      - poblenou
-      - tecator
+      - cat2meas
+      - tab2meas
+      - pred.MSE
+      - pred.RMSE
+      - pred.MAE
+      - pred2meas
+      - weights4class      
 
- - title: "FDA USC Internals"
-    desc: "fda.usc internal functions."
+  - title: "fda.usc Internals"
+#    desc: "fda.usc internal functions."
     contents:
       - trace.matrix
       - argvals.equi
@@ -444,28 +421,35 @@ reference:
       - anyNA.fdata
       - count.na.fdata
       - unlist_fdata
+      - subset.fdata
+
+  - title: "fda.usc Options"
+#    desc: "ops.fda.usc Options Settings."
+    contents:
+      - ops.fda.usc
       
-  - title: "Conditional Distribution Function"
-    desc: "Conditional mode and quantile."
+  - title: "Conditional Distribution, Mode and Quantile Functions"
+#    desc: "Conditional mode and quantile."
     contents:
       - cond.F 
       - cond.mode
       - cond.quantile
       
-  - title: "Cross-validation"
-    desc: "The (generalized correlated) cross-validation score."
+  - title: "Utilities"
+    desc:  "Other utilities and internal functions."
+#    desc: "The deviance score (dev.S). Proximities between functional data (dis.cos.cor).
+#    Calculation of the smoothing parameter (h) for functional data.
+#    Penalty matrix for higher order differences."
     contents:
       - CV.S
       - GCV.S
-      - GCCV.S      
-      
-  - title: "Other utilities"
-    desc: "The deviance score (dev.S). Proximities between functional data (dis.cos.cor).
-    Calculation of the smoothing parameter (h) for functional data.
-    Penalty matrix for higher order differences."
-    contents:
+      - GCCV.S   
       - dev.S  
       - dis.cos.cor
       - h.default
+      - Kernel.asymmetric
+      - Kernel.integrate
+      - Kernel
       - P.penalty
+
   

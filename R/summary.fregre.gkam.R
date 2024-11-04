@@ -42,9 +42,10 @@
 #' yfat=as.integer(cut(tecator$y[ind,"Fat"],c(0,15,100)))-1
 #' xlist=list("df"=data.frame(yfat),"ab2"=ab2,"ab"=ab)
 #' f<-yfat~ab+ab2
-#' res=fregre.gkam(f,data=xlist,family=binomial("logit"),control=list(maxit=2))
+#' res=fregre.gkam(f, data = xlist, family = binomial("logit"),
+#'                 control = list(maxit = 2))
 #' summary(res)
-#' res
+#' 
 #' }
 #' 
 #' @export 
