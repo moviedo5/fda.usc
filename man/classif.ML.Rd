@@ -126,7 +126,7 @@ the following items in the \code{data} list.\cr \code{basis.x} is a list of
 basis for represent each functional covariate. The b object can be
 created by the function: \code{\link{create.pc.basis}}, \link[fda]{pca.fd}
 \code{\link{create.pc.basis}}, \code{\link{create.fdata.basis}} o
-\code{\link{create.basis}}.\cr \code{basis.b} is a list of basis for
+\link[fda]{create.basis}.\cr \code{basis.b} is a list of basis for
 represent each functional beta parameter. If \code{basis.x} is a list of
 functional principal components basis (see \code{\link{create.pc.basis}} or
 \link[fda]{pca.fd}) the argument \code{basis.b} is ignored.

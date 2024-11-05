@@ -55,7 +55,7 @@ norm.fd(fd.bspl2)
 }
 \seealso{
 See also \code{\link{metric.lp}} and \code{\link{norm}}\cr
-Alternative method: \code{\link{inprod}} of fda-package
+Alternative method: \link[fda]{inprod} of fda-package
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente

@@ -75,7 +75,7 @@ several ways.
 \tab \code{\link{fregre.lm}}: Functional Linear Regression (an extension of  \code{\link{lm}} model) \cr 
 \tab \code{\link{fregre.glm}}: Functional Generalized Linear Regression (an extension of  \code{\link{glm}} model) \cr 
 \tab \code{\link{fregre.gsam}}: Functional Generalized Spectral Additive Regression  (an extension of  \link[mgcv]{gam} model)\cr
-\tab \code{\link{fregre.gkam}}: Functional Generalized Kernel Additive Reg. (an extension of  \code{\link{fregre.np}} model) \cr 
+\tab \code{\link{fregre.gkam}}: Functional Generalized Kernel Additive Regression (an extension of  \code{\link{fregre.np}} model) \cr 
 }
 
 C.4. Functional response model (\code{\link{fregre.basis.fr}}) allows the
@@ -144,7 +144,8 @@ fda.usc.} Journal of Statistical Software, 51(4), 1-28.
 and Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 
 \emph{Contributors:} Pedro Galeano, Alicia Nieto-Reyes, Eduardo
-Garcia-Portugues and STAPH group \url{https://www.math.univ-toulouse.fr/~ferraty/} 
+Garcia-Portugues \email{eduardo.garcia@usc.es} and STAPH group
+\url{https://www.math.univ-toulouse.fr/~ferraty/} 
 
 \emph{Maintainer:} Manuel Oviedo de la Fuente \email{manuel.oviedo@udc.es}
 }

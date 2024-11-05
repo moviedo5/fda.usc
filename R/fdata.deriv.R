@@ -9,7 +9,7 @@
 #' The functional data are converted to class \code{fd} using the \link[fda]{Data2fd}
 #' function and the basis indicated in the \code{method}.
 #' Finally, the function calculates the derivative of order \code{nderiv} of
-#' curves using \code{\link{deriv.fd}} function.\cr 
+#' curves using \link[fda]{deriv.fd} function.\cr 
 #' \item If \code{method}=\emph{"fmm"}, \emph{"periodic"}, \emph{"natural"} or
 #' \emph{"monoH.FC"} is used \code{\link{splinefun}} function.
 #' \item If \code{method}=\emph{"diff"}, raw derivation is applied.  Not recommended to

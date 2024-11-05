@@ -72,7 +72,7 @@ pkgbuild::compile_dll()
 roxygenize()
 devtools::document() 
 
-tools::checkRd("man/Outliers.fdata.Rd")
+tools::checkRd("man/classif.ML.Rd")
 
 library(devtools)
 devtools::build()

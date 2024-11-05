@@ -18,7 +18,7 @@
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}
 #' @seealso See also \code{\link{metric.lp}} and \code{\link{norm}}\cr
-#' Alternative method: \code{\link{inprod}} of fda-package
+#' Alternative method: \link[fda]{inprod} of fda-package
 #' @keywords math
 #' @examples
 #' \dontrun{

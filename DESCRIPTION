@@ -13,7 +13,7 @@ Suggests: rmarkdown
 Description: Routines for exploratory and descriptive analysis of functional data such as depth measurements, atypical curves detection, regression models, supervised classification, unsupervised classification and functional analysis of variance.
 License: GPL-2
 URL: https://github.com/moviedo5/fda.usc, https://www.jstatsoft.org/v51/i04/
-BugReports: https://github.com/moviedo5/fda.usc
+BugReports: https://github.com/moviedo5/fda.usc/issues
 LazyLoad: yes
 Author: Manuel Febrero Bande [aut],
   Manuel Oviedo de la Fuente [aut, cre],
