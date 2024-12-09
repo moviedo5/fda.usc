@@ -44,21 +44,21 @@
 #' metric function.
 #' @return Return:
 #' \itemize{
-#' \item \code{call}{ The matched call.} 
-#' \item \code{residuals}{ \code{y} minus \code{fitted values}.} 
-#' \item \code{fitted.values}{ Estimated scalar response.} 
-#' \item \code{df.residual}{ The residual degrees of freedom.} 
-#' \item \code{r2}{ Coefficient of determination.} 
-#' \item \code{sr2}{ Residual variance.} 
-#' \item \code{H}{ Hat matrix.} 
-#' \item \code{y}{ Response.} 
-#' \item \code{fdataobj}{ Functional explanatory data.}
-#' \item \code{mdist}{ Distance matrix between \code{x} and \code{newx}.} 
-#' \item \code{Ker}{ Asymmetric kernel used.} 
-#' \item \code{gcv}{ CV or GCV values.} 
-#' \item \code{h.opt}{ smoothing parameter or bandwidth that minimizes CV or GCV method.} 
-#' \item \code{h}{ Vector of smoothing parameter or bandwidth.} 
-#' \item \code{cv}{ List with the fitted values and residuals estimated by CV, without the same curve.}
+#' \item \code{call}: The matched call.
+#' \item \code{residuals}: \code{y} minus \code{fitted values}.
+#' \item \code{fitted.values}: Estimated scalar response.
+#' \item \code{df.residual}: The residual degrees of freedom.
+#' \item \code{r2}: Coefficient of determination.
+#' \item \code{sr2}: Residual variance.
+#' \item \code{H}: Hat matrix.
+#' \item \code{y}: Response.
+#' \item \code{fdataobj}: Functional explanatory data.
+#' \item \code{mdist}: Distance matrix between \code{x} and \code{newx}.
+#' \item \code{Ker}: Asymmetric kernel used.
+#' \item \code{gcv}: CV or GCV values.
+#' \item \code{h.opt}: Smoothing parameter or bandwidth that minimizes CV or GCV method.
+#' \item \code{h}: Vector of smoothing parameter or bandwidth.
+#' \item \code{cv}: List with the fitted values and residuals estimated by CV, without the same curve.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}

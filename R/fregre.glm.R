@@ -22,12 +22,12 @@
 #' Functional covariates of class \code{fdata} or \code{fd} are introduced in
 #' the following items in the \code{data} list.\cr \code{basis.x} is a list of
 #' basis for represent each functional covariate. The basis object can be
-#' created by the function: \code{\link{create.pc.basis}}, \code{\link{pca.fd}}
+#' created by the function: \code{\link{create.pc.basis}}, \link[fda]{pca.fd}
 #' \code{\link{create.pc.basis}}, \code{\link{create.fdata.basis}} o
-#' \code{\link{create.basis}}.\cr \code{basis.b} is a list of basis for
+#' \link[fda]{create.basis}.\cr \code{basis.b} is a list of basis for
 #' represent each \eqn{\beta(t)} parameter. If \code{basis.x} is a list of
 #' functional principal components basis (see \code{\link{create.pc.basis}} or
-#' \code{\link{pca.fd}}) the argument \code{basis.b} is ignored.
+#'\link[fda]{pca.fd}) the argument \code{basis.b} is ignored.
 #' 
 #' %When using functional data derived recommend using a number of basis to
 #' represent beta lower than the number of basis used to represent the
@@ -48,13 +48,14 @@
 #' used in the fitting process.
 #' @param weights weights
 #' @param \dots Further arguments passed to or from other methods.
-#' @return Return \code{glm} object plus:
+#' @return 
+#' Return \code{glm} object plus:
 #' \itemize{ 
-#' \item \code{basis.x}{ Basis used for \code{fdata} or \code{fd} covariates.} 
-#' \item \code{basis.b}{ Basis used for beta parameter estimation.} 
-#' \item \code{beta.l}{ List of estimated beta parameter of functional covariates.} 
-#' \item \code{data}{ List that containing the variables in the model.} 
-#' \item \code{formula}{ formula.} 
+#' \item \code{basis.x}: Basis used for \code{fdata} or \code{fd} covariates. 
+#' \item \code{basis.b}: Basis used for beta parameter estimation. 
+#' \item \code{beta.l}: List of estimated beta parameter of functional covariates. 
+#' \item \code{data}: List that contains the variables in the model. 
+#' \item \code{formula}: Formula. 
 # \item \code{CV}{ predicted response by cross-validation.}
 #' }
 #' @note If the formula only contains a non functional explanatory variables

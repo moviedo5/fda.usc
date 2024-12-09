@@ -44,10 +44,10 @@ derivative (curvature).}
 \value{
 Return:
 \itemize{
-\item \code{fregre.pc}{ Fitted regression object by the best (\code{pc.opt}) components.} 
-\item \code{pc.opt}{ Index of PC components selected.} 
-\item \code{MSC.min}{ Minimum Model Selection Criteria (MSC) value for the (\code{pc.opt} components.} 
-\item \code{MSC}{ Minimum Model Selection Criteria (MSC) value for \code{kmax} components.}
+\item \code{fregre.pc}: Fitted regression object by the best (\code{pc.opt}) components.
+\item \code{pc.opt}: Index of PC components selected.
+\item \code{MSC.min}: Minimum Model Selection Criteria (MSC) value for the (\code{pc.opt}) components.
+\item \code{MSC}: Minimum Model Selection Criteria (MSC) value for \code{kmax} components.
 }
 }
 \description{

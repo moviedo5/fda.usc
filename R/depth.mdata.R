@@ -47,15 +47,14 @@
 #' \code{dep} component can be included.
 #' @param \dots Further arguments passed to or from other methods.
 #' @return 
-#' \itemize{
-#' \item {lmed}{ Index of deepest element \code{median} of \code{xx}.}
-#' \item {ltrim}{ Index of set of points \code{x} with trimmed mean
-#' \code{mtrim}. } 
-#' \item {dep}{ Depth of each point \code{x} w.r.t. \code{xx}.}
-#' \item {proj}{ The projection value of each point on set of points. }
-#' \item {x}{is a set of points to be evaluated.}
-#' \item {xx}{ a reference sample}
-#' \item {name}{ Name of depth method }
+#' \itemize{ 
+#' \item \code{lmed}: Index of the deepest element (median) of \code{xx}.
+#' \item \code{ltrim}: Index of the set of points \code{x} with trimmed mean \code{mtrim}. 
+#' \item \code{dep}: Depth of each point in \code{x} with respect to \code{xx}.
+#' \item \code{proj}: The projection value of each point onto the set of points.
+#' \item \code{x}: A set of points to be evaluated.
+#' \item \code{xx}: A reference sample.
+#' \item \code{name}: Name of the depth method.
 #' }
 #' @author \code{\link{mdepth.RP}}, \code{\link{mdepth.MhD}} and
 #' \code{\link{mdepth.HS}} are versions created by Manuel Febrero Bande and

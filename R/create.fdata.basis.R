@@ -22,11 +22,11 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return 
 #' \itemize{
-#' \item \code{basis}{ basis} 
-#' \item \code{x}{ if \code{TRUE} the value of the rotated data (the centred data multiplied by the basis matrix) is returned}
-#' \item \code{mean}{ functional mean of \code{fdataobj}} 
-#' \item \code{df}{ degree of freedom} 
-#' \item \code{type}{ type of basis}
+#' \item \code{basis}: basis object.
+#' \item \code{x}: if \code{TRUE} the value of the rotated data (the centred data multiplied by the basis matrix) is returned.
+#' \item \code{mean}: functional mean of \code{fdataobj}.
+#' \item \code{df}: degree of freedom.
+#' \item \code{type}: type of basis.
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}

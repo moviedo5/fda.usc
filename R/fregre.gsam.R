@@ -1,42 +1,39 @@
-#' Fitting Functional Generalized Spectral Additive Models
+#' @title Fitting Functional Generalized Spectral Additive Models
 #' 
-#' Computes functional GAM model between functional covariate
-#' \eqn{(X^1(t_1),\cdots,X^{q}(t_q))}{(X(t_1),...,X(t_q))} (and non functional
-#' covariate \eqn{(Z^1,...,Z^p)}{(Z1,...,Zp)}) and scalar response \eqn{Y}.
+#' @description Computes a functional GAM model between a functional covariate
+#' \eqn{(X^1(t_1), \dots, X^{q}(t_q))}{(X(t_1), ..., X(t_q))} and a non-functional
+#' covariate \eqn{(Z^1, ..., Z^p)}{(Z1, ..., Zp)} with a scalar response \eqn{Y}.
 #' 
-#' This function is an extension of the functional generalized linear
-#' regression models: \code{\link{fregre.glm}} where the \eqn{E[Y|X,Z]} is
-#' related to the linear prediction \eqn{\eta} via a link function
+#' This function extends functional generalized linear regression models (\code{\link{fregre.glm}}) 
+#' where \eqn{E[Y|X,Z]} is related to the linear predictor \eqn{\eta} via a link function 
 #' \eqn{g(\cdot)}{g(.)} with integrated smoothness estimation by the smooth
 #' functions \eqn{f(\cdot)}{f(.)}.
 #' 
-#' \deqn{E[Y|X,Z])=\eta=g^{-1}(\alpha+\sum_{i=1}^{p}f_{i}(Z^{i})+\sum_{k=1}^{q}\sum_{j=1}^{k_q}{f_{j}^{k}(\xi_j^k)})}{E[Y|X,Z]=\eta=g^{-1}(\alpha+\sum_i
-#' f_i(Z_{i})+\sum_k^q\sum_{j=1}^{k_q}{f_j^k(\xi_j^k)})} where
-#' \eqn{\xi_j^k}{\xi_j^k} is the coefficient of the basis function expansion of
-#' \eqn{X^k}, (in PCA analysis \eqn{\xi_j^k}{\xi_j^k} is the score of the
+#' \deqn{E[Y|X,Z]=\eta=g^{-1}\left(\alpha+\sum_{i=1}^{p}f_{i}(Z^{i})+\sum_{k=1}^{q}\sum_{j=1}^{k_q} f_{j}^{k}(\xi_j^k)\right)}{E[Y|X,Z]=\eta=g^{-1}(\alpha+\sum_i f_i(Z_{i})+\sum_k^q \sum_{j=1}^{k_q} f_j^k(\xi_j^k))}
+#' 
+#' where \eqn{\xi_j^k}{\xi_j^k} is the coefficient of the basis function expansion of
+#' \eqn{X^k}; in PCA analysis, \eqn{\xi_j^k}{\xi_j^k} is the score of the
 #' \eqn{j}-functional PC of \eqn{X^k}.
 #' 
-#' The smooth functions \eqn{f(\cdot)}{f(.)} can be added to the right hand
+#' @details The smooth functions \eqn{f(\cdot)}{f(.)} can be added to the right-hand
 #' side of the formula to specify that the linear predictor depends on smooth
-#' functions of predictors using smooth terms \code{\link{s}} and
-#' \code{\link{te}} as in \code{\link{gam}} (or linear functionals of these as
-#' \eqn{Z\beta} and \eqn{\big<X(t),\beta\big>}{< X(t),\beta(t) >} in
+#' functions of predictors using smooth terms \code{\link[mgcv]{s}} and
+#' \code{\link[mgcv]{te}} as in \code{\link[mgcv]{gam}} (or linear functionals of these as
+#' \eqn{Z \beta} and \eqn{\langle X(t), \beta \rangle}{< X(t),\beta(t) >} in
 #' \code{\link{fregre.glm}}).
 #' 
 #' The first item in the \code{data} list is called \emph{"df"} and is a data
-#' frame with the response and non functional explanatory variables, as
-#' \code{\link{gam}}.\cr
+#' frame with the response and non-functional explanatory variables, as in
+#' \code{\link[mgcv]{gam}}.\cr
 #' 
 #' Functional covariates of class \code{fdata} or \code{fd} are introduced in
-#' the following items in the \code{data} list.\cr \code{basis.x} is a list of
-#' basis for represent each functional covariate. The basis object can be
-#' created by the function: \code{\link{create.pc.basis}}, \code{\link{pca.fd}}
-#' \code{\link{create.pc.basis}}, \code{\link{create.fdata.basis}} o
-#' \code{\link{create.basis}}.\cr \code{basis.b} is a list of basis for
-#' represent each functional beta parameter. If \code{basis.x} is a list of
-#' functional principal components basis (see \code{\link{create.pc.basis}} or
-#' \code{\link{pca.fd}}) the argument \code{basis.b} is ignored.
-#' 
+#' the following items of the \code{data} list.\cr \code{basis.x} is a list of
+#' basis functions for representing each functional covariate. The basis object can be
+#' created using functions such as \code{\link{create.pc.basis}}, \code{\link[fda]{pca.fd}},
+#' \code{\link{create.fdata.basis}}, or \code{\link[fda]{create.basis}}.\cr 
+#' \code{basis.b} is a list of basis functions for representing each functional beta parameter. 
+#' If \code{basis.x} is a list of functional principal components basis functions 
+#' (see \code{\link{create.pc.basis}} or \code{\link[fda]{pca.fd}}), the argument \code{basis.b} is ignored.
 #' @param formula an object of class \code{formula} (or one that can be coerced
 #' to that class): a symbolic description of the model to be fitted. The
 #' details of model specification are given under \code{Details}.
@@ -52,11 +49,11 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Return \code{gam} object plus:
 #' \itemize{
-#' \item {basis.x}{ Basis used for \code{fdata} or \code{fd} covariates.} 
-#' \item {basis.b}{ Basis used for beta parameter estimation.} 
-#' \item {data}{ List that containing the variables in the model.} 
-#' \item {formula}{ formula.} 
-#' \item {y.pred}{ predicted response by cross-validation.}
+#' \item \code{basis.x}: Basis used for \code{fdata} or \code{fd} covariates. 
+#' \item \code{basis.b}: Basis used for beta parameter estimation. 
+#' \item \code{data}: List containing the variables in the model. 
+#' \item \code{formula}: Formula used in the model. 
+#' \item \code{y.pred}: Predicted response by cross-validation.
 #' }
 #' @note If the formula only contains a non functional explanatory variables
 #' (multivariate covariates), the function compute a standard \code{\link{glm}}
@@ -64,7 +61,7 @@
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{predict.fregre.gsam}} and
-#' \code{\link{summary.gam}}.\cr Alternative methods: \code{\link{fregre.glm}}
+#' \link[mgcv]{summary.gam}.\cr Alternative methods: \code{\link{fregre.glm}}
 #' and \code{\link{fregre.gkam}}.
 #' @references Muller HG and Stadtmuller U. (2005). \emph{Generalized
 #' functional linear models.} Ann. Statist.33 774-805.

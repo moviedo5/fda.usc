@@ -66,18 +66,14 @@ used in do.call function like "what" argument.}
 is used in do.call function like "args" argument.}
 }
 \value{
-LMDC.select function return a list of two elements:
-\itemize{
-\item \code{cor}{ the value of distance correlation for each covariate.} 
-\item \code{maxLocal}{ index or locations of local maxima distance correlations.}
-}
-LMDC.regre function return a list of folowing elements:
-\itemize{
-\item{model}{ object corresponding to the estimated method using the selected variables}
-\item{xvar}{ names of selected variables (impact points).} 
-\item{edf}{ Effective Degrees of Freedom.} 
-\item{nvar}{Number of selected variables (impact points).}
-}
+\item{\code{LMDC.select}}{ function returns a list of two elements:}
+\item{\code{cor}}{ the value of distance correlation for each covariate.} 
+\item{\code{maxLocal}}{ index or locations of local maxima distance correlations.} 
+\item{\code{LMDC.regre}}{ function returns a list of folowing elements:}
+\item{\code{model}}{ object corresponding to the estimated method using the selected variables.}
+\item{\code{xvar}}{ names of selected variables (impact points).}
+\item{\code{edf}}{ effective degrees of freedom.}
+\item{\code{nvar}}{ number of selected variables (impact points).}
 }
 \description{
 LMDC.select function selects impact points of functional predictior using
@@ -90,33 +86,33 @@ String of characters corresponding to the name of the regression method
 called.
 Model available options:
 \itemize{ 
-\item "lm": Step-wise lm regression model (uses lm function, stats
-package). Recommended for linear models, test linearity using
+\item \code{"lm"}: Step-wise lm regression model (uses lm function, stats
+package). Recommended for linear models, test linearity using.
 \code{\link{flm.test}} function.  
-\item "gam": Step-wise gam regression
-model (uses gam function, mgcv package). Recommended for non-linear models.
+\item \code{"gam"}: Step-wise gam regression model (uses gam function, mgcv package).
+ Recommended for non-linear models.
 }
 Models that use the indicated function of the required package: 
 \itemize{
-\item "svm": Support vector machine (svm function, e1071 package).#' 
-\item "knn": k-nearest neighbor regression (knnn.reg function, FNN package).#' 
-\item "lars": Least Angle Regression using Lasso (lars function, lars
-package). 
-\item "glmnet": Lasso and Elastic-Net Regularized Generalized Linear Models
-(glmnet and cv.glmnet function, glmnet package).  
-\item "rpart": Recursive partitioning for regression a (rpart function, rpart package).
-\item "flam": Fit the Fused Lasso Additive Model for a Sequence of Tuning
+\item \code{"svm"}: Support vector machine (svm function, e1071 package).
+\item \code{"knn"}: k-nearest neighbor regression (knnn.reg function, FNN package).
+\item \code{"lars"}: Least Angle Regression using Lasso (lars function, lars
+package).
+\item \code{"glmnet"}: Lasso and Elastic-Net Regularized Generalized Linear Models
+(glmnet and cv.glmnet function, glmnet package).
+\item \code{"rpart"}: Recursive partitioning for regression a (rpart function, rpart package).
+\item \code{"flam"}: Fit the Fused Lasso Additive Model for a Sequence of Tuning
 Parameters (flam function, flam package). 
-\item "novas": NOnparametric VAriable Selection (code available in
+\item \code{"novas"}: NOnparametric VAriable Selection (code available in
 \url{https://www.math.univ-toulouse.fr/~ferraty/SOFTWARES/NOVAS/novas-routines.R}).
-\item "cosso": Fit Regularized Nonparametric Regression Models Using COSSO
-Penalty (cosso function, cosso package).  
-\item "npreg": kernel regression estimate of a one (1) dimensional dependent
+\item \code{"cosso"}: Fit Regularized Nonparametric Regression Models Using COSSO
+Penalty (cosso function, cosso package). 
+\item \code{"npreg"}: kernel regression estimate of a one (1) dimensional dependent
  variable on p-variate explanatory data (npreg function, np package). 
-\item "mars": Multivariate adaptive regression splines (mars function, mda
+\item \code{"mars"}: Multivariate adaptive regression splines (mars function, mda
 package). 
-\item "nnet": Fit Neural Networks (nnet function, nnet package). 
-\item"lars": Fits Least Angle Regression, Lasso and Infinitesimal Forward
+\item \code{"nnet"}:  Fit Neural Networks (nnet function, nnet package). 
+\item \code{"lars"}: Fits Least Angle Regression, Lasso and Infinitesimal Forward
 Stagewise regression models (lars function, lars package).  
 }
 }
@@ -184,7 +180,7 @@ water content estimation from reflectance: A distance correlation approach.
 \doi{10.1016/j.chemolab.2017.12.001}.
 }
 \seealso{
-See Also as: \code{\link{lm}}, \code{\link{gam}},
+See Also as: \link[stats]{lm}, \link[mgcv]{gam},
 \code{\link{dcor.xy}}.
 }
 \author{

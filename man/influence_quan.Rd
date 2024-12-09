@@ -30,12 +30,12 @@ basis is fixed by \code{model} object.}
 \value{
 Return:
 \itemize{ 
-\item \code{quan.cook.for}{ Distance Cook Prediction Quantile.}
-\item \code{quan.cook.est}{ Distance Cook Estimation Quantile.}
-\item \code{quan.cook.Pena}{ Pena Distance Quantile.}
-\item \code{mues.est}{ Sample Cook generated.} 
-\item \code{mues.pena}{ Sample Pena generated.} 
-\item \code{beta.boot}{ Functional beta estimated by bootstrap method.}
+\item \code{quan.cook.for}:  Distance Cook Prediction Quantile.
+\item \code{quan.cook.est}: Distance Cook Estimation Quantile.
+\item \code{quan.cook.Pena}: Pena Distance Quantile.
+\item \code{mues.est}: Sample Cook generated. 
+\item \code{mues.pena}: Sample Pena generated.
+\item \code{beta.boot}: Functional beta estimated by bootstrap method.
 }
 }
 \description{

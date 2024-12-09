@@ -17,10 +17,10 @@ cond.mode(Fc, method = "monoH.FC", draw = TRUE)
 }
 \value{
 Return the mode for conditional distribution function.
-\itemize{
-\item \code{mode.cond}{ Conditional mode.} 
-\item \code{x}{ Grid of length \code{n} where the the conditional density function is evaluated.} 
-\item \code{f}{ The conditional density function evaluated in \code{x}.}
+\itemize{ 
+\item \code{mode.cond}: Conditional mode.
+\item \code{x}: A grid of length \code{n} where the conditional density function is evaluated.
+\item \code{f}: The conditional density function evaluated at \code{x}.
 }
 }
 \description{

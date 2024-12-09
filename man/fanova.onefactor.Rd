@@ -30,9 +30,9 @@ fanova.onefactor(
 \value{
 Returns:
 \itemize{
-\item  \code{p-value} probability of rejecting the null hypothesis H0 at a significance level
-\item  \code{stat}{ statistic value of test.}
-\item  \code{wm}{ statistic values of bootstrap resamples.}
+\item \code{p-value}: Probability of rejecting the null hypothesis H0 at a significance level.
+\item \code{stat}: Statistic value of the test.
+\item \code{wm}: Statistic values of bootstrap resamples.
 }
 }
 \description{

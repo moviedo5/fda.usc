@@ -6,10 +6,10 @@
 #' \emph{"monomial"} or \emph{"polynomial"}.
 #'  \code{fdata.deriv} function creates a basis to represent the functional
 #' data. 
-#' The functional data are converted to class \code{fd} using the
-#' \code{\link{Data2fd}} function and the basis indicated in the \code{method}.
+#' The functional data are converted to class \code{fd} using the \link[fda]{Data2fd}
+#' function and the basis indicated in the \code{method}.
 #' Finally, the function calculates the derivative of order \code{nderiv} of
-#' curves using \code{\link{deriv.fd}} function.\cr 
+#' curves using \link[fda]{deriv.fd} function.\cr 
 #' \item If \code{method}=\emph{"fmm"}, \emph{"periodic"}, \emph{"natural"} or
 #' \emph{"monoH.FC"} is used \code{\link{splinefun}} function.
 #' \item If \code{method}=\emph{"diff"}, raw derivation is applied.  Not recommended to
@@ -29,7 +29,7 @@
 #' 
 #' @return Returns the derivative of functional data of \code{fd} class if
 #' \code{class.out}="\emph{fd}" or  \code{fdata} class if \code{class.out}="\emph{fdata}".
-#' @seealso See also \code{\link{deriv.fd}}, \code{\link{splinefun}} and
+#' @seealso See also \link[fda]{deriv.fd} , \code{\link{splinefun}} and
 #' \code{\link{fdata}}
 #' @keywords manip
 #' @examples

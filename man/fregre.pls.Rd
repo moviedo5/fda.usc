@@ -26,22 +26,22 @@ penalty matrix object.}
 \value{
 Return: 
 \itemize{
-\item \code{call}{ The matched call of \code{\link{fregre.pls}} function.} 
-\item \code{beta.est}{ Beta coefficient estimated of class \code{fdata}.} 
-\item \code{coefficients}{ A named vector of coefficients.}
-\item \code{fitted.values}{ Estimated scalar response.} 
-\item \code{residuals}{\code{y}-\code{fitted values}.} 
-\item \code{H}{ Hat matrix.} 
-\item \code{df.residual}{ The residual degrees of freedom.} 
-\item \code{r2}{ Coefficient of determination.}
-\item \code{GCV}{ GCV criterion.} 
-\item \code{sr2}{ Residual variance.} 
-\item \code{l}{ Index of components to include in the model.} 
-\item \code{lambda}{ Amount of shrinkage.}
-\item \code{fdata.comp}{ Fitted object in \code{\link{fdata2pls}} function.}
-\item \code{lm}{ Fitted object in \code{\link{lm}} function} 
-\item \code{fdataobj}{ Functional explanatory data.} 
-\item \code{y}{ Scalar response.}
+\item \code{call}: The matched call of \code{\link{fregre.pls}} function.
+\item \code{beta.est}: Beta coefficient estimated of class \code{fdata}.
+\item \code{coefficients}: A named vector of coefficients.
+\item \code{fitted.values}: Estimated scalar response.
+\item \code{residuals}: \code{y} minus \code{fitted values}.
+\item \code{H}: Hat matrix.
+\item \code{df.residual}: The residual degrees of freedom.
+\item \code{r2}: Coefficient of determination.
+\item \code{GCV}: GCV criterion.
+\item \code{sr2}: Residual variance.
+\item \code{l}: Index of components to include in the model.
+\item \code{lambda}: Amount of shrinkage.
+\item \code{fdata.comp}: Fitted object in \code{\link{fdata2pls}} function.
+\item \code{lm}: Fitted object in \code{\link{lm}} function.
+\item \code{fdataobj}: Functional explanatory data.
+\item \code{y}: Scalar response.
 }
 }
 \description{

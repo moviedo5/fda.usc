@@ -28,9 +28,9 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return 
 #' \itemize{
-#' \item {Influence}{ Vector of influence measures.} 
-#' \item {i.influence}{ Index of possible influence curves.} 
-#' \item {i.atypical}{ Index of possible atypical curves or possible outliers.}
+#' \item \code{Influence}: Vector of influence measures.
+#' \item \code{i.influence}: Index of possible influence curves.
+#' \item \code{i.atypical}: Index of possible atypical curves or possible outliers.
 #' }
 #' @author Manuel Febrero-Bande and Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #' @seealso Summary function for \code{\link{fregre.pc}},

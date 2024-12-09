@@ -99,17 +99,8 @@ computed.  \code{\link{fdata}} class object.}
 \item{metric}{Metric function, by default \code{\link{metric.lp}}. Distance
 matrix between \code{fdataobj} and \code{fdataori}.}
 
-\item{h}{Bandwidth parameter. 
- \itemize{ 
-\item If \code{h} is a numerical value, the procedure considers the argument
-value as the bandwidth.  
-\item If is \code{NULL} (by default) the bandwidth is provided as the 
- 15\%--quantile of the distance among curves of
-\code{fdataori}.
-\item If \code{h} is a character string (like \code{"0.15"}), the procedure
-reads the numeric value and consider it as the quantile of the distance in
-\code{fdataori} (as in the second case).  
-}}
+\item{h}{Bandwidth, \code{h>0}. Default argument values are provided as the
+15\%--quantile of the distance between \code{x} and \code{xx}.}
 
 \item{scale}{=TRUE, the depth is scaled respect to depths in
 \code{fdataori}.}
@@ -144,21 +135,29 @@ RPD depth, by default \code{\link{mdepth.LD}}. Any user function with the
 pattern \code{FUN.USER(x,xx,...)} can be employed.}
 
 \item{method}{Type of derivative method. See \code{\link{fdata.deriv}} for
-more details.}
+more details.
+ \itemize{ 
+\item \code{numeric}: the procedure considers the argument value as the bandwidth.
+\item \code{NULL}: (by default) the bandwidth is provided as the 
+ 15\%--quantile of the distance among curves of  \code{fdataori}.
+\item \code{character}:  a  string (like \code{"0.15"}), the procedure
+reads the numeric value and consider it as the quantile of the distance in
+\code{fdataori} (as in the second case). 
+}}
 
 \item{xeps}{Accuracy. The left limit of the empirical distribution function.}
 }
 \value{
 Return a list with:
 \itemize{
-\item {median}{ Deepest curve.} 
-\item {lmed}{ Index deepest element \code{median}.}
-\item {mtrim}{ \code{fdata} class object with the average from the \code{(1-trim)\%} deepest curves. }
-\item {ltrim}{ Indexes of curves that conform the trimmed mean \code{mtrim}. }
-\item {dep}{ Depth of each curve of fdataobj w.r.t. fdataori.}
-\item {dep.ori}{ Depth of each curve of fdataori w.r.t. fdataori.}
-\item {proj}{ The projection value of each point on the curves. } 
-\item {dist}{ Distance matrix between curves or functional data.}
+\item \code{median}: Deepest curve.
+\item \code{lmed}: Index deepest element \code{median}.
+\item \code{mtrim}: \code{fdata} class object with the average from the \code{(1-trim)\%} deepest curves. 
+\item \code{ltrim}: Indexes of curves that conform the trimmed mean \code{mtrim}. 
+\item \code{dep}: Depth of each curve of fdataobj w.r.t. fdataori.
+\item \code{dep.ori}: Depth of each curve of fdataori w.r.t. fdataori.
+\item \code{proj}: The projection value of each point on the curves.  
+\item \code{dist}: Distance matrix between curves or functional data.
 }
 }
 \description{
@@ -170,47 +169,47 @@ Type of depth functions: Fraiman and Muniz (FM)
 depth, modal depth, random Tukey (RT), random projection (RP) depth and
 double random projection depth (RPD).
 \itemize{ 
-\item \code{\link{depth.FM}} computes the integration of an univariate depth
+\item \code{\link{depth.FM}}: computes the integration of an univariate depth
 along the axis x (see Fraiman and Muniz 2001). It is also known as
 Integrated Depth.
 
-\item \code{\link{depth.mode}} implements the modal depth (see Cuevas et al
+\item \code{\link{depth.mode}}: implements the modal depth (see Cuevas et al
 2007).
 
-\item \code{\link{depth.RT}} implements the Random Tukey depth (see
+\item \code{\link{depth.RT}}: implements the Random Tukey depth (see
 Cuesta--Albertos and Nieto--Reyes 2008).
 
-\item \code{\link{depth.RP}} computes the Random Projection depth (see
+\item \code{\link{depth.RP}}: computes the Random Projection depth (see
 Cuevas et al. 2007).
 
-\item \code{\link{depth.RPD}} implements a depth measure based on random
+\item \code{\link{depth.RPD}}: implements a depth measure based on random
 projections possibly using several derivatives (see Cuevas et al. 2007).
 
-\item \code{\link{depth.FSD}} computes the Functional Spatial Depth (see
+\item \code{\link{depth.FSD}}: computes the Functional Spatial Depth (see
 Sguera et al. 2014).
 
-\item \code{\link{depth.KFSD}} implements the Kernelized Functional Spatial
-Depth (see Sguera et al. 2014).  
+\item \code{\link{depth.KFSD}}: implements the Kernelized Functional Spatial
+Depth (see Sguera et al. 2014).
 } 
 \itemize{ 
-\item The \code{\link{depth.mode}} function calculates the depth of a datum
+\item \code{\link{depth.mode}}: calculates the depth of a datum
 accounting the number of curves in its neighbourhood. By default, the
 distance is calculated using \code{\link{metric.lp}} function although any
 other distance could be employed through argument \code{metric} (with the
 general pattern \code{USER.DIST(fdataobj,fdataori)}).
-\item The \code{\link{depth.RP}} function summarizes the random projections
+\item \code{\link{depth.RP}}: summarizes the random projections
 through averages whereas the \code{\link{depth.RT}} function uses the
 minimum of all projections.
-\item The \code{\link{depth.RPD}} function involves the original
+\item \code{\link{depth.RPD}}: involves the original
 trajectories and the derivatives of each curve in two steps. It builds
 random projections for the function and their derivatives (indicated in the
 parameter \code{deriv}) and then applies a depth function (by default
 \code{\link{depth.mode}}) to this set of random projections (by default the
 Tukey one).
-\item The \code{\link{depth.FSD}} and \code{\link{depth.KFSD}} are the
+\item \code{\link{depth.FSD}} and \code{\link{depth.KFSD}}: are the
 implementations of the default versions of the functional spatial depths
 proposed in Sguera et al 2014. At this moment, it is not possible to change
-the kernel in the second one.#' 
+the kernel in the second one.
 }
 }
 \examples{

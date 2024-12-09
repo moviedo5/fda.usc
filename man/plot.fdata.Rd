@@ -7,6 +7,7 @@
 \alias{plot.bifd}
 \alias{plot.depth}
 \alias{plot.mdepth}
+\alias{plot.lfdata}
 \title{Plot functional data: fdata class object}
 \usage{
 \method{plot}{fdata}(x, type, main, xlab, ylab, lty = 1, mfrow = c(1, 1), time = 1, ...)
@@ -20,6 +21,8 @@ title.fdata(x, main = NULL, xlab = NULL, ylab = NULL, rownames = NULL)
 \method{plot}{depth}(x, trim, levgray = 0.9, ...)
 
 \method{plot}{bifd}(x, argvals.s, argvals.t, ...)
+
+\method{plot}{lfdata}(x, ask = FALSE, col, ...)
 }
 \arguments{
 \item{x}{\code{fdata} class object with:  \itemize{ 
@@ -37,7 +40,7 @@ discretizations points values, by default range(\code{argvals}).  \item
 \code{"names"}: (optional) list with \code{main} an overall title,
 \code{xlab} title for \code{x} axis and \code{ylab} title for \code{y} axis.
 } 
-or a two-argument functional data object, see \code{\link{bifd}}.}
+or a two-argument functional data object, see \link[fda]{bifd}.}
 
 \item{type}{1-character string giving the type of plot desired.\cr The
 following values are possible for \code{fdata} class object: "l" for lines
@@ -82,6 +85,10 @@ functional data object to be evaluated.}
 
 \item{argvals.t}{a vector of argument values for the second argument t of
 the functional data object to be evaluated.}
+
+\item{ask}{Logical. If \code{TRUE}, prompts for user interaction with the current graphics device.}
+
+\item{col}{The colors for curves, lines and points.}
 }
 \description{
 Plot object of class \code{fdata}.

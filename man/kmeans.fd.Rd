@@ -66,8 +66,8 @@ it is eliminated and the process is continued with a less cluster.}
 \value{
 Return:
 \itemize{
- \item \code{cluster}{ Indexes of groups assigned.}  
-\item \code{centers}{ Curves centers.}
+ \item \code{cluster}: Indexes of groups assigned.
+\item \code{centers}: Curves centers.
 }
 }
 \description{
@@ -90,18 +90,18 @@ a vector of integers, indicating the position of the initial centers with
 \dontrun{
 library(fda.usc)
 data(phoneme)
-mlearn<-phoneme$learn[c(1:50,101:150,201:250),]
+mlearn <- phoneme$learn[c(1:50,101:150,201:250),]
 # Unsupervised classification
-out.fd1=kmeans.fd(mlearn,ncl=3,draw=TRUE)
-out.fd2=kmeans.fd(mlearn,ncl=3,draw=TRUE,method="exact")
+out.fd1 <- kmeans.fd(mlearn,ncl=3,draw=TRUE)
+out.fd2 <- kmeans.fd(mlearn,ncl=3,draw=TRUE,method="exact")
 # Different Depth function
-ind=c(17,77,126)
-out.fd3=kmeans.fd(mlearn,ncl=mlearn[ind,],draw=FALSE,
-dfunc=func.trim.FM,par.dfunc=list(trim=0.1))
-out.fd4=kmeans.fd(mlearn,ncl=mlearn[ind,],draw=FALSE,
-dfunc=func.med.FM)
-group=c(rep(1,50),rep(2,50),rep(3,50))
-table(out.fd4$cluster,group)
+ind <- c(17,77,126)
+out.fd3 <- kmeans.fd(mlearn,ncl=mlearn[ind,],draw=FALSE,
+dfunc <- func.trim.FM,par.dfunc=list(trim=0.1))
+out.fd4 <- kmeans.fd(mlearn, ncl=mlearn[ind,], draw=FALSE, 
+dfunc = func.med.FM)
+group <- c(rep(1,50), rep(2,50),rep(3,50))
+table(out.fd4$cluster, group)
 }
 
 }

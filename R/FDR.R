@@ -15,9 +15,8 @@
 #' dependence between tests.
 #' @return Return:
 #' \itemize{
-#' \item \code{out.FDR}{ \code{=TRUE}. If there are significative
-#' differences.} 
-#' \item \code{pv.FDR}{ p-value for False Discovery Rate test.}
+#' \item \code{out.FDR=TRUE}: If there are significative differences.
+#' \item \code{pv.FDR}: p-value for False Discovery Rate test.
 #' }
 #' @author Febrero-Bande, M.  and Oviedo de la Fuente, M.
 #' @seealso Function used in \code{\link{fanova.RPm}}
@@ -34,7 +33,7 @@
 #' @name FDR
 #' @rdname FDR
 #' @export
-FDR=function(pvalues=NULL,alpha=0.95,dep=1){
+FDR <- function(pvalues=NULL,alpha=0.95,dep=1){
  if (is.null(pvalues)) stop("No p-values entered")
 	m=length(pvalues)
 	if (dep<0) {const.m=sum(1/(1:m))} else {const.m=1}
@@ -45,7 +44,7 @@ FDR=function(pvalues=NULL,alpha=0.95,dep=1){
 
 #' @rdname FDR
 #' @export
-pvalue.FDR=function(pvalues=NULL,dep=1){
+pvalue.FDR <- function(pvalues=NULL,dep=1){
  if (is.null(pvalues)) stop("No p-values entered")
 	m=length(pvalues)
 	if (dep<0) {const.m=sum(1/(1:m))} else {const.m=1}

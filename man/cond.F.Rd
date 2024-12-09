@@ -44,12 +44,12 @@ Epanechnikov kernel is selected by default.\cr.}
 }
 \value{
 \itemize{
-\item {Fc}{ Conditional distribution function.} 
-\item {y0}{ Vector of conditional response.} 
-\item {g}{ Smoothing parameter or bandwidth of explanatory functional data (\code{fdataobj}).} 
-\item {h}{ Smoothing parameter or bandwidth of respone, \code{y}.} 
-\item {x.dist}{ Distance matrix between curves of \code{fdataobj} object.} 
-\item {xy.dist}{ Distance matrix between cuves of \code{fdataobj} and \code{fdata0} objects.}
+\item \code{Fc}: Conditional distribution function.
+\item \code{y0}: Vector of conditional response.
+\item \code{g}: Smoothing parameter or bandwidth of explanatory functional data (\code{fdataobj}).
+\item \code{h}: Smoothing parameter or bandwidth of respone, \code{y}.
+\item \code{x.dist}: Distance matrix between curves of \code{fdataobj} object.
+\item \code{xy.dist}: Distance matrix between cuves of \code{fdataobj} and \code{fdata0} objects.
 }
 }
 \description{

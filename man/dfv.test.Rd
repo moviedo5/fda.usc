@@ -50,18 +50,18 @@ Other possibility is to consider a grid of bandwidths. This is the default optio
 The value of \code{dfv.statistic} is a vector of length \code{length(h)} with the values
  of the statistic for each bandwidth. The value of \code{dfv.test} is an object with class 
  \code{"htest"} whose underlying structure is a list containing the following components:
- \itemize{
- \item {statistic}{ The value of the Delsol, Ferraty and Vieu test statistic.}
- \item {boot.statistics}{ A vector of length \code{B} with the values of the bootstrap test statistics.}
- \item {p.value}{ The p-value of the test.}
- \item {method}{ The character string "Delsol, Ferraty and Vieu test for no functional-scalar interaction".}
- \item {B}{The number of bootstrap replicates used.}
- \item {h}{Bandwidth parameters for the test.}
- \item {K}{Kernel function used.}
- \item {weights}{The weights considered.}
- \item {d}{Matrix of distances of the functional data.}
- \item {data.name}{The character string "Y=0+e"}
- }
+\itemize{
+\item \code{statistic}: The value of the Delsol, Ferraty and Vieu test statistic.
+\item \code{boot.statistics}: A vector of length \code{B} with the values of the bootstrap test statistics.
+\item \code{p.value}: The p-value of the test.
+\item \code{method}: The character string "Delsol, Ferraty and Vieu test for no functional-scalar interaction".
+\item \code{B}: The number of bootstrap replicates used.
+\item \code{h}: Bandwidth parameters for the test.
+\item \code{K}: Kernel function used.
+\item \code{weights}: The weights considered.
+\item \code{d}: Matrix of distances of the functional data.
+\item \code{data.name}: The character string "Y=0+e".
+}
 }
 \description{
 The function \code{dfv.test} tests the null hypothesis of no interaction between a functional covariate and a scalar response in a general framework. The null hypothesis is \deqn{H_0:\,m(X)=0,}{H_0: m(X)=0,} where \eqn{m(\cdot)}{m(.)} denotes the regression function of the functional variate \eqn{X}{X} over the centred scalar response \eqn{Y}{Y} (\eqn{E[Y]=0}{E[Y]=0}). The null hypothesis is tested by the smoothed integrated square error of the response (see Details).

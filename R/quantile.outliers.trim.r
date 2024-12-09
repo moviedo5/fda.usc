@@ -1,4 +1,4 @@
-quantile.outliers.trim<-function(x,dfunc=depth.mode,trim=0.25,nb=200,
+quantile_outliers_trim<-function(x,dfunc=depth.mode,trim=0.25,nb=200,
 smo=0.05,ns=0.01,...){
  if (!is.fdata(x)) x=fdata(x)
  dat<-x[["data"]]

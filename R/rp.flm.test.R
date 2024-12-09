@@ -216,11 +216,11 @@ rdir.pc <- function(n, X.fdata, ncomp = 0.95, fdata2pc.obj =
 #' @param F.code whether to use faster \code{FORTRAN} code or \code{R} code.
 #' @return A list containing: 
 #' \itemize{ 
-#' \item {list("statistic")}{ a matrix of size \code{c(n.proj, 2)} with the the CvM (first column) and KS (second)
-#' statistics, for the \code{n.proj} different projections.}
-#' \item {list("proj.X.ord")}{the computed row permutations of \code{proj.X},
+#' \item \code{list("statistic")}: a matrix of size \code{c(n.proj, 2)} with the the CvM (first column) and KS (second)
+#' statistics, for the \code{n.proj} different projections.
+#' \item \code{list("proj.X.ord")}: the computed row permutations of \code{proj.X},
 #' useful for recycling in subsequent calls to \code{rp.flm.statistic} with the
-#' same projections but different residuals.} 
+#' same projections but different residuals.
 #' }
 #' @author Eduardo Garcia-Portugues (\email{edgarcia@@est-econ.uc3m.es}) and
 #' Manuel Febrero-Bande (\email{manuel.febrero@@usc.es}).
@@ -370,17 +370,17 @@ rp.flm.statistic <- function(proj.X, residuals, proj.X.ord = NULL, F.code = TRUE
 #' @param B number of bootstrap replicates to calibrate the distribution of the
 #' test statistic.
 #' @param n.proj vector with the number of projections to consider.
-#' @param est.method estimation method for \eqn{\beta}{\beta}, only used in the
+#' @param est.method Estimation method for \eqn{\beta}{\beta}, only used in the
 #' composite case. There are three methods: 
 #' \itemize{ 
-#' \item {list("\"pc\"")}{ if \code{p} is given, then \eqn{\beta}{\beta} is estimated by
-#' \code{\link{fregre.pc}}. Otherwise, \code{p} is chosen using \code{\link{fregre.pc.cv}} and the \code{p.criterion} criterion.}
-#' \item {list("\"pls\"")}{ if \code{p} is given, \eqn{\beta}{\beta} is estimated by \code{\link{fregre.pls}}. 
-#' Otherwise, \code{p} is chosen using \code{\link{fregre.pls.cv}} and the \code{p.criterion} criterion.}
-#' \item {list("\"basis\"")}{ if \code{p} is given, \eqn{\beta}{\beta} is estimated by \code{\link{fregre.basis}}. 
-#' Otherwise, \code{p} is' chosen using \code{\link{fregre.basis.cv}} and the \code{p.criterion} criterion. 
+#' \item \code{"pc"}: if \code{p} is given, then \eqn{\beta}{\beta} is estimated by
+#' \code{\link{fregre.pc}}. Otherwise, \code{p} is chosen using \code{\link{fregre.pc.cv}} and the \code{p.criterion} criterion.
+#' \item \code{"pls"}: if \code{p} is given, \eqn{\beta}{\beta} is estimated by \code{\link{fregre.pls}}. 
+#' Otherwise, \code{p} is chosen using \code{\link{fregre.pls.cv}} and the \code{p.criterion} criterion.
+#' \item \code{"basis"}: if \code{p} is given, \eqn{\beta}{\beta} is estimated by \code{\link{fregre.basis}}. 
+#' Otherwise, \code{p} is chosen using \code{\link{fregre.basis.cv}} and the \code{p.criterion} criterion. 
 #' Both in \code{\link{fregre.basis}} and \code{\link{fregre.basis.cv}}, the same basis for
-#' \code{basis.x} and \code{basis.b} is considered.} 
+#' \code{basis.x} and \code{basis.b} is considered.
 #' }
 #' @param p number of elements for the basis representation of
 #' \code{beta0.fdata} and \code{X.fdata} with the \code{est.method} (only
@@ -400,29 +400,30 @@ rp.flm.statistic <- function(proj.X, residuals, proj.X.ord = NULL, F.code = TRUE
 #' progress.
 #' @param same.rwild wether to employ the same wild bootstrap residuals for
 #' different projections or not.
+#' @param seed seed to be employed with \code{set.seed} for initializing random projections.
 #' @param ... further arguments passed to \link[fda]{create.basis} (not
 #' \code{rangeval} that is taken as the \code{rangeval} of \code{X.fdata}).
 #' @return An object with class \code{"htest"} whose underlying structure is a
 #' list containing the following components: 
 #' \itemize{
-#' \item {list("p.values.fdr")}{ a matrix of size \code{c(n.proj, 2)}, containing
-#' in each row the FDR p-values of the CvM and KS tests up to that projection.}
-#' \item {list("proj.statistics")}{ a matrix of size \code{c(max(n.proj), 2)}
-#' with the value of the test statistic on each projection.}
-#' \item {list("boot.proj.statistics")}{ an array of size \code{c(max(n.proj), 2,
-#' B)} with the values of the bootstrap test statistics for each projection.}
-#' \item {list("proj.p.values")}{ a matrix of size \code{c(max(n.proj), 2)}}
-#' \item {list("method")}{ information about the test performed and the kind of
-#' estimation performed.} 
-#' \item {list("B")}{ number of bootstrap replicates used.} 
-#' \item {list("n.proj")}{ number of projections specified}
-#' \item {list("projs")}{ random directions employed to project \code{X.fdata}.}
-#' \item {list("type.basis")}{ type of basis for \code{est.method = "basis"}.}
-#' \item {list("beta.est")}{ estimated functional parameter \eqn{\hat \beta}{\hat
-#' \beta} in the composite hypothesis. For the simple hypothesis, \code{beta0.fdata}.} 
-#' \item {list("p")}{ number of basis elements considered for estimation of \eqn{\beta}{\beta}.} 
-#' \item {list("p.criterion")}{ criterion employed for selecting \code{p}.} 
-#' \item {list("data.name")}{ the character string "Y = <X, b> + e"} 
+#' \item \code{p.values.fdr}: a matrix of size \code{c(n.proj, 2)}, containing
+#' in each row the FDR p-values of the CvM and KS tests up to that projection.
+#' \item \code{proj.statistics}: a matrix of size \code{c(max(n.proj), 2)}
+#' with the value of the test statistic on each projection.
+#' \item \code{boot.proj.statistics}: an array of size \code{c(max(n.proj), 2,
+#' B)} with the values of the bootstrap test statistics for each projection.
+#' \item \code{proj.p.values}: a matrix of size \code{c(max(n.proj), 2)}.
+#' \item \code{method}: information about the test performed and the kind of
+#' estimation performed.
+#' \item \code{B}: number of bootstrap replicates used.
+#' \item \code{n.proj}: number of projections specified.
+#' \item \code{projs}: random directions employed to project \code{X.fdata}.
+#' \item \code{type.basis}: type of basis for \code{est.method = "basis"}.
+#' \item \code{beta.est}: estimated functional parameter \eqn{\hat \beta}{\hat
+#' \beta} in the composite hypothesis. For the simple hypothesis, \code{beta0.fdata}.
+#' \item \code{p}: number of basis elements considered for estimation of \eqn{\beta}{\beta}.
+#' \item \code{p.criterion}: criterion employed for selecting \code{p}.
+#' \item \code{data.name}: the character string "Y = <X, b> + e".
 #' }
 #' @author Eduardo Garcia-Portugues (\email{edgarcia@@est-econ.uc3m.es}) and
 #' Manuel Febrero-Bande (\email{manuel.febrero@@usc.es}).
@@ -549,7 +550,7 @@ rp.flm.statistic <- function(proj.X, residuals, proj.X.ord = NULL, F.code = TRUE
 rp.flm.test <- function(X.fdata, Y, beta0.fdata = NULL, B = 1000, n.proj = 10, 
                         est.method = "pc", p = NULL, p.criterion = "SICc", 
                         pmax = 20, type.basis = "bspline", projs = 0.95, 
-                        verbose = TRUE, same.rwild = FALSE, ...) {
+                        verbose = TRUE, same.rwild = FALSE, seed=NULL,...) {
   
   # Sample size
   n <- dim(X.fdata)[1]
@@ -722,8 +723,11 @@ rp.flm.test <- function(X.fdata, Y, beta0.fdata = NULL, B = 1000, n.proj = 10,
   ## Computation of the statistic
   
   # Fix seed for projections and bootstrap samples
-  old <- .Random.seed
-  set.seed(987654321)
+  if (is.null(seed)) seed=20030101
+  if (exists(".Random.seed")) {
+  old <- .Random.seed } else {set.seed(seed);old<- .Random.seed}
+  set.seed(seed)
+  #set.seed(987654321)
   on.exit({.Random.seed <<- old})
   
   # Sample random directions

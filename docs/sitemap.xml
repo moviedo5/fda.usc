@@ -1,375 +1,127 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/accuracy.html</loc>
-  </url>
-  <url>
-    <loc>/reference/aemet.html</loc>
-  </url>
-  <url>
-    <loc>/reference/classif.DD.html</loc>
-  </url>
-  <url>
-    <loc>/reference/classif.depth.html</loc>
-  </url>
-  <url>
-    <loc>/reference/classif.gkam.html</loc>
-  </url>
-  <url>
-    <loc>/reference/classif.glm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/classif.gsam.html</loc>
-  </url>
-  <url>
-    <loc>/reference/classif.gsam.vs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/classif.kfold.html</loc>
-  </url>
-  <url>
-    <loc>/reference/classif.ML.html</loc>
-  </url>
-  <url>
-    <loc>/reference/classif.np.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cond.F.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cond.mode.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cond.quantile.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create.fdata.basis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/CV.S.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dcor.xy.html</loc>
-  </url>
-  <url>
-    <loc>/reference/depth.fdata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/depth.mdata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/depth.mfdata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Descriptive.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dev.S.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dfv.test.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dis.cos.cor.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fanova.hetero.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fanova.onefactor.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fanova.RPm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fda.usc-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fda.usc.internal.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fdata.bootstrap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fdata.cen.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fdata.deriv.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fdata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fdata.methods.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fdata2basis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fdata2fd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fdata2pc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fdata2pls.html</loc>
-  </url>
-  <url>
-    <loc>/reference/FDR.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fEqDistrib.test.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fEqMoments.test.html</loc>
-  </url>
-  <url>
-    <loc>/reference/flm.Ftest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/flm.test.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.basis.cv.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.basis.fr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.basis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.bootstrap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.gkam.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.glm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.glm.vs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.gls.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.gsam.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.gsam.vs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.igls.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.lm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.np.cv.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.np.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.pc.cv.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.pc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.plm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.pls.cv.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fregre.pls.html</loc>
-  </url>
-  <url>
-    <loc>/reference/GCCV.S.html</loc>
-  </url>
-  <url>
-    <loc>/reference/GCV.S.html</loc>
-  </url>
-  <url>
-    <loc>/reference/h.default.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/influence.fregre.fd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/influence_quan.html</loc>
-  </url>
-  <url>
-    <loc>/reference/inprod.fdata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/int.simpson.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Kernel.asymmetric.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Kernel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Kernel.integrate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/kmeans.fd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ldata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/LMDC.select.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MCO.html</loc>
-  </url>
-  <url>
-    <loc>/reference/metric.dist.html</loc>
-  </url>
-  <url>
-    <loc>/reference/metric.DTW.html</loc>
-  </url>
-  <url>
-    <loc>/reference/metric.hausdorff.html</loc>
-  </url>
-  <url>
-    <loc>/reference/metric.kl.html</loc>
-  </url>
-  <url>
-    <loc>/reference/metric.ldata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/metric.lp.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mfdata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/na.omit.fdata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/norm.fdata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ops.fda.usc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/optim.basis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/optim.np.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Outliers.fdata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/P.penalty.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PCvM.statistic.html</loc>
-  </url>
-  <url>
-    <loc>/reference/phoneme.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.fdata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/poblenou.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predict.classif.DD.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predict.classif.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predict.fregre.fd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predict.fregre.fr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predict.fregre.gls.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predict.fregre.lm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/r.ou.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rcombfdata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rdir.pc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rp.flm.statistic.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rp.flm.test.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rproc2fdata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rwild.html</loc>
-  </url>
-  <url>
-    <loc>/reference/S.basis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/S.np.html</loc>
-  </url>
-  <url>
-    <loc>/reference/semimetric.basis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/semimetric.NPFDA.html</loc>
-  </url>
-  <url>
-    <loc>/reference/subset.fdata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summary.classif.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summary.fdata.comp.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summary.fregre.fd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summary.fregre.gkam.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tecator.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Var.y.html</loc>
-  </url>
-  <url>
-    <loc>/reference/weights4class.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://moviedo5.github.io/fda.usc/404.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/authors.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/index.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/news/index.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/accuracy.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/aemet.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/classif.DD.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/classif.depth.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/classif.gkam.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/classif.glm.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/classif.gsam.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/classif.gsam.vs.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/classif.kfold.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/classif.ML.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/classif.np.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/cond.F.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/cond.mode.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/cond.quantile.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/create.fdata.basis.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/CV.S.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/dcor.xy.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/depth.fdata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/depth.mdata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/depth.mfdata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/Descriptive.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/dev.S.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/dfv.test.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/dis.cos.cor.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fanova.hetero.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fanova.onefactor.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fanova.RPm.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fda.usc-package.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fda.usc.internal.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fdata.bootstrap.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fdata.cen.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fdata.deriv.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fdata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fdata.methods.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fdata2basis.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fdata2fd.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fdata2pc.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fdata2pls.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/FDR.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fEqDistrib.test.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fEqMoments.test.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/flm.Ftest.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/flm.test.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.basis.cv.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.basis.fr.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.basis.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.bootstrap.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.gkam.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.glm.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.glm.vs.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.gls.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.gsam.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.gsam.vs.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.igls.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.lm.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.np.cv.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.np.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.pc.cv.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.pc.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.plm.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.pls.cv.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/fregre.pls.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/GCCV.S.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/GCV.S.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/h.default.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/index.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/influence.fregre.fd.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/influence_quan.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/inprod.fdata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/int.simpson.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/Kernel.asymmetric.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/Kernel.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/Kernel.integrate.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/kmeans.fd.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/ldata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/LMDC.select.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/MCO.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/metric.dist.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/metric.DTW.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/metric.hausdorff.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/metric.kl.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/metric.ldata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/metric.lp.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/mfdata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/na.omit.fdata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/norm.fdata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/ops.fda.usc.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/optim.basis.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/optim.np.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/Outliers.fdata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/P.penalty.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/PCvM.statistic.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/phoneme.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/plot.fdata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/poblenou.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/predict.classif.DD.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/predict.classif.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/predict.fregre.fd.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/predict.fregre.fr.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/predict.fregre.gls.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/predict.fregre.lm.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/r.ou.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/rcombfdata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/rdir.pc.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/rp.flm.statistic.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/rp.flm.test.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/rproc2fdata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/rwild.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/S.basis.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/S.np.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/semimetric.basis.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/semimetric.NPFDA.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/subset.fdata.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/summary.classif.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/summary.fdata.comp.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/summary.fregre.fd.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/summary.fregre.gkam.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/tecator.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/Var.y.html</loc></url>
+<url><loc>https://moviedo5.github.io/fda.usc/reference/weights4class.html</loc></url>
 </urlset>
+

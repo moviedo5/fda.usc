@@ -16,7 +16,7 @@ norm.fd(fdobj)
 
 \item{\dots}{Further arguments passed to or from other methods.}
 
-\item{fdobj}{Functional data or curves of \code{\link{fd}} class.}
+\item{fdobj}{Functional data or curves of \link[fda]{fd} class.}
 }
 \description{
 Approximates Lp-norm for functional data (fdata) object using metric or
@@ -55,7 +55,7 @@ norm.fd(fd.bspl2)
 }
 \seealso{
 See also \code{\link{metric.lp}} and \code{\link{norm}}\cr
-Alternative method: \code{\link{inprod}} of fda-package
+Alternative method: \link[fda]{inprod} of fda-package
 }
 \author{
 Manuel Febrero-Bande, Manuel Oviedo de la Fuente

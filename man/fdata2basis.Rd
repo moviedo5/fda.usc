@@ -28,15 +28,14 @@ Otherwise, index vector indicates taht curvesare plotted.}
 \item{\dots}{Further arguments passed to or from other methods.}
 }
 \value{
-fdata2basis \code{fdata2bais} function return: 
+The \code{fdata2basis} function returns: 
 \itemize{
-\item {coef}{a matrix or two-dimensional array of coefficients.}
-\item {basis}{basis of \code{\link{fdata}} class evaluated in the same grid of \code{fdataobj}. } 
+\item \code{coef}:  A matrix or two-dimensional array of coefficients.
+\item \code{basis}:  Basis of \code{\link{fdata}} class evaluated on the same grid as \code{fdataobj}. 
 }
-
-summary function return: 
+And  summary function return: 
 \itemize{
-\item {R}{a matrix with a measure similar to R-sq for each curve aproximation (by row) and number of basis elements (by column).}
+\item \code{R}: a matrix with a measure similar to R-sq for each curve aproximation (by row) and number of basis elements (by column).
 }
 }
 \description{

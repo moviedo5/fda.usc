@@ -21,15 +21,15 @@
 #' test statistic is approximated by a wild bootstrap resampling on the residuals, using the 
 #' \emph{golden section bootstrap}.
 #' 
-#' @return  The value for \code{Ftest.statistic} is simply the F-test statistic. The value for \code{flm.Ftest} is an object with class \code{"htest"} whose underlying structure is a list containing the following components:
+#' @return The value for \code{Ftest.statistic} is simply the F-test statistic. The value for \code{flm.Ftest} is an object with class \code{"htest"} whose underlying structure is a list containing the following components:
 #' \itemize{
-#'  \item {statistic}{ The value of the F-test statistic.}
-#'  \item {boot.statistics} {A vector of length \code{B} with the values of the bootstrap F-test statistics.}
-#'  \item {p.value} {The p-value of the test.}
-#'  \item {method}{ The character string "Functional Linear Model F-test".}
-#'  \item {B}{ The number of bootstrap replicates used.}
-#'  \item {data.name}{ The character string "Y=<X,0>+e"}
-#'  }
+#'  \item \code{statistic}: The value of the F-test statistic.
+#'  \item \code{boot.statistics}: A vector of length \code{B} with the values of the bootstrap F-test statistics.
+#'  \item \code{p.value}: The p-value of the test.
+#'  \item \code{method}: The character string "Functional Linear Model F-test".
+#'  \item \code{B}: The number of bootstrap replicates used.
+#'  \item \code{data.name}: The character string "Y=<X,0>+e".
+#' }
 #'  
 #' @references
 #' Garcia-Portugues, E., Gonzalez-Manteiga, W. and Febrero-Bande, M. (2014). A goodness--of--fit test for the functional linear model with scalar response. Journal of Computational and Graphical Statistics, 23(3), 761-778. \doi{10.1080/10618600.2013.812519}
@@ -76,12 +76,9 @@
 #' @rdname flm.Ftest
 #' @export 
 Ftest.statistic=function(X.fdata,Y){
-	
 	# Statistic
 	res=as.numeric(norm.fdata(func.mean(fdata.cen(X.fdata)$Xcen*(Y-mean(Y)))))
-
 	return(res)
-	
 }
 
 # FLM F-Test with bootstrap calibration

@@ -11,7 +11,7 @@ PCvM.statistic(X, residuals, p, Adot.vec)
 }
 \arguments{
 \item{X}{Functional covariate for the FLM. 
-The object must be either in the class \code{\link{fdata}} or in the class \code{\link{fd}}.
+The object must be either in the class \code{\link{fdata}} or in the class \link[fda]{fd}.
 It is used to compute the matrix of inner products.}
 
 \item{inpr}{Matrix of inner products of \code{X}. Computed if not given.}

@@ -24,9 +24,11 @@ object of test data.}
 
 \item{depth}{Type of depth function from functional data:
 \itemize{ 
-\item \code{FM}: Fraiman and Muniz depth.  \item \code{mode}: modal depth.  
-\item \code{RT}: random Tukey depth.  \item \code{RP}: random project depth.
-\item \code{RPD}: double random project depth.  
+\item \code{FM}: Fraiman and Muniz depth.
+\item \code{mode}: Modal depth.
+\item \code{RT}: Random Tukey depth.
+\item \code{RP}: Random project depth.
+\item \code{RPD}: Double random project depth.
 }}
 
 \item{par.depth}{List of parameters for \code{depth}.}
@@ -36,12 +38,12 @@ estimated by cross-validation, =FALSE \code{group.est} is estimated.}
 }
 \value{
 \itemize{ 
-\item{group.est}{ Vector of classes of train sample data.}
-\item{group.pred}{ Vector of classes of test sample data.}
-\item{prob.classification}{ Probability of correct classification by group.}
-\item{max.prob}{ Highest probability of correct classification.}
-\item{fdataobj}{ \code{\link{fdata}} class object.} 
-\item{group}{ Factor of length \emph{n}.} 
+\item \code{group.est}: Vector of classes of train sample data.
+\item \code{group.pred}: Vector of classes of test sample data.
+\item \code{prob.classification}: Probability of correct classification by group.
+\item \code{max.prob}: Highest probability of correct classification.
+\item \code{fdataobj}: \code{\link{fdata}} class object.
+\item \code{group}: Factor of length \emph{n}.
 }
 }
 \description{

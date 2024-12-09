@@ -51,15 +51,15 @@ a voting scheme is applied: requires  G (G - 1) / 2 binary classifiers.}
 \value{
 Return \code{gam} object plus:
 \itemize{
-\item \code{formula}{ formula.}
-\item \code{data}{ List that containing the variables in the model.} 
-\item \code{group}{ Factor of length \emph{n}} 
-\item \code{group.est}{ Estimated vector groups}
-\item \code{prob.classification}{ Probability of correct classification by group.}
-\item \code{prob.group}{ Matrix of predicted class probabilities. For each
-functional point shows the probability of each possible group membership.}
-\item \code{max.prob}{ Highest probability of correct classification.}
-\item \code{type}  Type of classification scheme: 1 vs all  or majority voting.
+\item \code{formula}: formula.
+\item \code{data}: List that containing the variables in the model.
+\item \code{group}: Factor of length \emph{n}. 
+\item \code{group.est}: Estimated vector groups
+\item \code{prob.classification}: Probability of correct classification by group.
+\item \code{prob.group}: Matrix of predicted class probabilities. For each
+functional point shows the probability of each possible group membership.
+\item \code{max.prob}: Highest probability of correct classification.
+\item \code{type}: Type of classification scheme: 1 vs all  or majority voting.
 }
 }
 \description{
@@ -74,9 +74,9 @@ frame with the response and non functional explanatory variables, as
 Functional covariates of class \code{fdata} or \code{fd} are introduced in
 the following items in the \code{data} list.\cr \code{basis.x} is a list of
 basis for represent each functional covariate. The basis object can be
-created by the function: \code{\link{create.pc.basis}}, \code{\link{pca.fd}}
+created by the function: \code{\link{create.pc.basis}}, \link[fda]{pca.fd}
 \code{\link{create.pc.basis}}, \code{\link{create.fdata.basis}} o
-\code{\link{create.basis}}.
+\link[fda]{create.basis}.
 }
 \note{
 If the formula only contains a non functional explanatory variables

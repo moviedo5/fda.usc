@@ -68,7 +68,7 @@
 #' \tab \code{\link{fregre.plm}}: Semifunctional Partial Linear Regression (an extension of  \code{\link{lm}} model)\cr 
 #' \tab \code{\link{fregre.lm}}: Functional Linear Regression (an extension of  \code{\link{lm}} model) \cr 
 #' \tab \code{\link{fregre.glm}}: Functional Generalized Linear Regression (an extension of  \code{\link{glm}} model) \cr 
-#' \tab \code{\link{fregre.gsam}}: Functional Generalized Spectral Additive Regression  (an extension of  \code{\link{gam}} model)\cr
+#' \tab \code{\link{fregre.gsam}}: Functional Generalized Spectral Additive Regression  (an extension of  \link[mgcv]{gam} model)\cr
 #' \tab \code{\link{fregre.gkam}}: Functional Generalized Kernel Additive Regression (an extension of  \code{\link{fregre.np}} model) \cr 
 #' }
 #' 
@@ -129,7 +129,6 @@
 #' 
 #' @name fda.usc-package
 #' @aliases fda.usc-package fda.usc
-#' @docType package
 #' @author \emph{Authors:} Manuel Febrero Bande \email{manuel.febrero@@usc.es}
 #' and Manuel Oviedo de la Fuente \email{manuel.oviedo@@udc.es}
 #' 
@@ -143,4 +142,6 @@
 #' fda.usc.} Journal of Statistical Software, 51(4), 1-28.
 #' \doi{10.18637/jss.v051.i04}
 #' @keywords package
+# @docType package
+#' "_PACKAGE"
 NULL

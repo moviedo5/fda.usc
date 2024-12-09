@@ -1,3 +1,22 @@
+# fda.usc 2.2.0 
+
+* Modification in several Rd fiels: Lost braces in itemize.
+* classif.DD.aux.r, `solve.ab`  has been renamed to `solve_ab`.
+* classif.kfold.R, `all.vars1`  has been renamed to `all_vars1`.
+* kmeans.fd.dist.R, `predict.kmeans.fd`  has been renamed to `predict_kmeans.fd`.
+* kmeans.fd.R, `kmeans.assig.groups`  has been renamed to `kmeans_assig_groups`.
+* kmeans.fd.R, `kmeans.centers.update`  has been renamed to `kmeans_centers_update`.
+* kmeans.assig.groups.R, `kmeans.assig.groups`  has been renamed to `kmeans_assig_groups`.
+* kmeans.assig.groups.R, `kmeans.assig.groups`  has been renamed to `kmeans_assig_groups`.
+* plot.fdata.R, `image.scale`  has been renamed to `image_scale`.
+* predict.gls.nlme.r, `predict.gls`  has been renamed to `predict_gls`.
+* predict.gls.nlme.r, `predict.mregre`  has been renamed to `predict_._mregre`.
+* predict.mfregre.r, `predict.gls`  has been renamed to `predict_gls`.
+* quantile.outliers.pond.r, `quantile_outliers.pond`  has been renamed to `quantile_outliers_pond`.
+* quantile.outliers.trim.r, `quantile_outliers.trim`  has been renamed to `quantile_outliers_trim`.
+* the `plot.lfdata` function is exported, no longer internal
+
+
 # fda.usc 2.1.0 
 
 * fda.usc 2.1.0 is a major release with several new feature and fixed bugs.

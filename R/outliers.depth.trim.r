@@ -12,7 +12,7 @@ dfunc=depth.mode,...){
 # print(dfunc=depth.mode)
  if (is.null(n) && is.null(m)) stop("ERROR IN THE DATA DIMENSIONS")
  if (is.null(row.names(fdataobj[["data"]]))) row.names(fdataobj[["data"]])=1:n
-    cutoff<-quantile(quantile.outliers.trim(fdataobj,dfunc=dfunc,nb=nb,smo=smo,
+    cutoff<-quantile(quantile_outliers_trim(fdataobj,dfunc=dfunc,nb=nb,smo=smo,
     trim=trim,...),probs=quan)
     hay<-1
     outliers<-dep.out<-ite<-c()

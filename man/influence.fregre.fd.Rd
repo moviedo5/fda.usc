@@ -14,9 +14,9 @@
 \value{
 Return:
 \itemize{
- \item \code{DCP}{ Cook's Distance for Prediction.}
- \item \code{DCE}{ Cook's Distance for Estimation.}
- \item \code{DP}{ \eqn{\mbox{Pe}\tilde{\mbox{n}}\mbox{a's} }{} Distance.}
+ \item \code{DCP}: Cook's Distance for Prediction.
+ \item \code{DCE}: Cook's Distance for Estimation.
+ \item \code{DP}:\eqn{\mbox{Pe}\tilde{\mbox{n}}\mbox{a's} }{} Distance.
  }
 }
 \description{

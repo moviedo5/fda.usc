@@ -11,7 +11,7 @@
 #' bivariate resgression function and \eqn{\epsilon(t)} are the error term with
 #' mean zero.
 #'  
-#' The function is a wrapped of \code{\link{linmod}} function proposed by
+#' The function is a wrapped of \link[fda]{linmod} function proposed by
 #' Ramsay and Silverman (2005) to model the relationship between the functional
 #' response \eqn{Y(t)} and the functional covariate \eqn{X(t)} by basis
 #' representation of both.
@@ -35,12 +35,12 @@
 #' default values to arguments \code{basis.s} and \code{basis.t} for construct
 #' the bifd class object used in the estimation of \eqn{\beta(s,t)}.  If
 #' \code{basis.s=}\code{NULL} or \code{basis.t=}\code{NULL} the function
-#' creates a \code{bspline} basis by \code{\link{create.bspline.basis}}.
+#' creates a \code{bspline} basis by \link[fda]{create.bspline.basis}.
 #' 
 #' \code{fregre.basis.fr} incorporates a roughness penalty using an appropiate
-#' linear differential operator; {\code{lambda.s},\code{Lfdobj.s}} for
+#' linear differential operator; \code{lambda.s}, \code{Lfdobj.s} for
 #' penalization of \eqn{\beta}{\beta}'s variations with respect to \eqn{s} and
-#' \cr {\code{lambda.t},\code{Lfdobj.t}} for penalization of
+#' \cr \code{lambda.t}, \code{Lfdobj.t} for penalization of
 #' \eqn{\beta}{\beta}'s variations with respect to \eqn{t}.\cr
 #' 
 #' @param x Functional explanatory variable.
@@ -63,24 +63,24 @@
 #' @param \dots Further arguments passed to or from other methods.
 #' @return Return:
 #' \itemize{
-#' \item \code{call}{ The matched call.} 
-#' \item \code{a.est}{ Intercept parameter estimated.} 
-#' \item \code{coefficientes}{ the matrix of the coefficients.}
-#' \item \code{beta.est}{ A bivariate functional data object of class \code{bifd} with the estimated parameters of \eqn{\beta(s,t)}{\beta(s,t)}.}
-#' \item \code{fitted.values}{ Estimated response.} 
-#' \item \code{residuals}{ \code{y} minus \code{fitted values}.} 
-#' \item \code{y}{ Functional response.} 
-#' \item \code{x}{ Functional explanatory data.} 
-#' \item \code{lambda.s}{ A roughness penalty with respect to \code{s} .} 
-#' \item \code{lambda.t}{ A roughness penalty with respect to \code{t}.}
-#' \item \code{Lfdobj.s}{ A linear differential operator with respect to \code{s}.}
-#' \item \code{Lfdobj.t}{ A linear differential operator with respect to \code{t}.}
-#' \item \code{weights}{ Weights.} 
+#' \item \code{call}: The matched call. 
+#' \item \code{a.est}: Intercept parameter estimated. 
+#' \item \code{coefficients}: The matrix of the coefficients. 
+#' \item \code{beta.est}: A bivariate functional data object of class \code{bifd} with the estimated parameters of \eqn{\beta(s,t)}{\beta(s,t)}. 
+#' \item \code{fitted.values}: Estimated response. 
+#' \item \code{residuals}: \code{y} minus \code{fitted values}. 
+#' \item \code{y}: Functional response. 
+#' \item \code{x}: Functional explanatory data. 
+#' \item \code{lambda.s}: A roughness penalty with respect to \code{s}. 
+#' \item \code{lambda.t}: A roughness penalty with respect to \code{t}. 
+#' \item \code{Lfdobj.s}: A linear differential operator with respect to \code{s}. 
+#' \item \code{Lfdobj.t}: A linear differential operator with respect to \code{t}. 
+#' \item \code{weights}: Weights. 
 #' }
 #' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
 #' \email{manuel.oviedo@@udc.es}
 #' @seealso See Also as: \code{\link{predict.fregre.fr}}.
-#' Alternative method: \code{\link{linmod}}.
+#' Alternative method: \link[fda]{linmod}.
 #' @references Ramsay, James O., and Silverman, Bernard W. (2006), \emph{
 #' Functional Data Analysis}, 2nd ed., Springer, New York.
 #' @keywords regression

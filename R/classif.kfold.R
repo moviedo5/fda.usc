@@ -3,9 +3,6 @@ kfold.B <- function(call,par.call,param.kfold,vfunc,name.param,lista,nparams
                     ,classif,par.classif,data,cost,ntrain
                     ,it,verbose,default,response,models
                     ,ifold,folds,lparam.kfold,measure){
-#print("kfold.B entra")  
-#  print(par.classif$classif)
- # print(classif)
   nfun <- length(vfunc)
   name.param <- names(param.kfold)
   if (classif == "classif.adaboost"){
@@ -27,10 +24,6 @@ kfold.B <- function(call,par.call,param.kfold,vfunc,name.param,lista,nparams
   if (classif == "classif.bootstrap"){
     # lista <- list(smo=0B=5, nb=200, Nhull=4, Nnbh=9)
     lista <- list(smo=0,  Nhull=NULL, Nnbh=NULL) 
-    #if (any(name.param=="B")){
-     # print("entra BBB")
-      #  lista[["B"]]  <-  param.kfold[["B"]]
-    #}
     if (any(name.param=="nb")){
       lista[["nb"]]  <-  param.kfold[["nb"]]
     }
@@ -47,9 +40,6 @@ kfold.B <- function(call,par.call,param.kfold,vfunc,name.param,lista,nparams
     #BB <- param.kfold[[name.param]]
     #for (i in 1:nfun)  param.kfold[[vfunc[i]]][[name.param]]  <-  BB
     #nparams[i]  <- length(lista[[vfunc[i]]])
-# print("   ** lista **  ")
-      #print(lista)
-      #print("la lista se tiene que expandir y no lo hace")    
     params <- do.call("expand.grid",lista)
     nexpand <- nrow(params)
     max.params <- apply(params,2,max)
@@ -105,23 +95,15 @@ kfold.B <- function(call,par.call,param.kfold,vfunc,name.param,lista,nparams
   names(error)  <-   paste0("param ",apply(params,1,paste0,collapse="-"))
   imin  <-   which(error==min(error))
   imin2 <- imin[1] 
-  par.call$data <- data
-#print("se fue del for del kfold")  
+  par.call$data <- data  
   if (classif == "classif.bootstrap"){
   for (iparam in 1:4){
     par.call$par.boot[[name.param[iparam]]] <-  params[imin[1],iparam]
   }
-#  print(par.call$par.boot)
   } else   par.call$B <- BB[imin]
-  
-  # fin kfold.aux
-  #print("kfold.B sale")
-  
-  output <- list(par.call=par.call,imin=imin,params=params
+   output <- list(par.call=par.call,imin=imin,params=params
                ,error=error,pred=pred)
   if (models) output$models.pred=models.pred
-  #print(params)
-  #print("kfold. B sale")  
   return(output)
 }
 ########################################################################
@@ -129,7 +111,6 @@ kfold.aux <- function(call,par.call,param.kfold,vfunc,name.param,lista,nparams
                     ,classif,par.classif,data,cost,ntrain
                     ,it,verbose,default,response,models
                     ,ifold,folds,lparam.kfold,measure){
- # print("kfold.aux numbasis o num h")   
   nfun <- length(vfunc)
   for (i in 1:nfun){
     if (default) {
@@ -282,9 +263,9 @@ kfold.aux <- function(call,par.call,param.kfold,vfunc,name.param,lista,nparams
 
 ############################################################
 ############################################################
-# wrapper of mgcv:::all.vars1
+# wrapper of mgcv:::all.vars1 (eleminated from mgcv)
 
-all.vars1 <- function (form) 
+allvars1 <- function (form) 
 {
   vars <- all.vars(form)
   vn <- all.names(form)
@@ -460,7 +441,7 @@ classif.kfold = function(formula, data,  classif="classif.glm",
     tf <- terms.formula(formula, specials = c("s", "te", "t2"))
     #vtab <- rownames(attr(tf,"factors"))
     gp <- interpret.gam(formula)
-    terms <- all.vars1(gp$fake.formula[-2])
+    terms <- allvars1(gp$fake.formula[-2])
     vnf=intersect(terms,names.data)
     vfunc=intersect(terms,names(data[-idf]))
   }  else {  
@@ -507,7 +488,6 @@ classif.kfold = function(formula, data,  classif="classif.glm",
   } 
   else{
   #if (!ensamble){
-# print(" no entra ensamble")   
   for (i in 1:nfun){
     #if (is.null(param.kfold[[vfunc[i]]])) param.kfold[[vfunc[i]]] <- list("pc"=1:3)
     #if (param.kfold[[vfunc[i]]]=="default") {
@@ -525,7 +505,6 @@ classif.kfold = function(formula, data,  classif="classif.glm",
    #for (ifun in 1:nfun){
    # name.param[ifun]  <-  names(param.kfold[[vfunc[ifun]]])
   #}
-#print(params)  
   max.params <- apply(params,2,max)
   error <- rep(NA,nexpand)
   if (missing(par.classif)) par.classif=list()
@@ -560,8 +539,6 @@ classif.kfold = function(formula, data,  classif="classif.glm",
       }
   }
   }
- 
-  #pred
   it <- TRUE
   if (models) models.pred <- list()
   
@@ -573,7 +550,7 @@ classif.kfold = function(formula, data,  classif="classif.glm",
 }
     for (i in ifold){ 
       if (verbose) cat("j,",j,"params",as.numeric(params[j,])," kfold i,",i,"\n")
-        #Segement your data by fold using the which() function 
+        #Segment your data by fold using the which() function 
       testIndexes <- which(folds==i,arr.ind=TRUE)
       trainData <- subset.ldata(data,folds!=i)
       ipred <- folds==i
@@ -639,37 +616,24 @@ classif.kfold = function(formula, data,  classif="classif.glm",
       # par.boot = list(B=50, N=1000, Nhull=4, Nnbh=9) 
       if (ensamble) {
         if (classif=="classif.bootstrap"){
-#print("ensamble1")
           #par.call$par.boot <- lista[[j]
-          #print(params)
-          #print(params[j,])
           par.call$par.boot<- as.list(params[j,]) # para bootstrap pero no para adaboost
           
           #print("ensamble2")
           names(par.call$par.boot)<-name.param
         } else{
-          #print("ensamble1")
-          #par.call$par.boot <- lista[[j]
-          #print(params)
-          #print(params[j,])
           par.call[["B"]]<-params[j,]
         }
         
       }
-      #print("ensamble3");      print(names(par.call))
-      
-#       par.call$B=2###############
       res <- do.call(call,par.call)
       pred[ipred]  <-  predict.classif(res,testData)
- #     print("sale pred")
       } 
       if (models) {
           nam.ji <- paste0("Params",j,"-Kfold",i)
           models.pred[[nam.ji]]  <-  res
       }
   } # fin i kfold  
-# print("fin  i kfold")
-    
     #error[j]  <-  1-cat2meas(yresp, pred, measure = measure)
     error[j]  <-  1-cat2meas(yresp, pred, measure = measure, cost = cost)
     
@@ -712,7 +676,6 @@ classif.kfold = function(formula, data,  classif="classif.glm",
      }
     }
   }
-  
   res <- do.call(call, par.call)
   res$param.min <- params[imin,]
   res$params.error = error
@@ -725,56 +688,3 @@ classif.kfold = function(formula, data,  classif="classif.glm",
   return(res)
 } 
 ###########################################################
-
-# data2 <- ldata(data[["df"]],mfdata=data[-1])[101:200,row=T]
-# nrow.ldata(data2)
-# #data2 <- ldata(data[["df"]],mfdata=data[-1])[1:215,row=T]
-# output <- classif.kfold( class ~ x2, data2, classif = "classif.bootstrap"
-# , kfold = 10, param.kfold = pr.kfold, verbose=T)
-# pr.kfold <- list("Nnbh"=c(8,16,32), "Nhull"=c(4,9))
-# pr.kfold <- list("Nnbh"=c(8,16,32))
-# 
-# pr.kfold <- list("Nhull"=c(4,8))
-# pr.kfold <- list("smo"=c(0.05,0.1,0))
-# pr.kfold <- list("Nnbh"=c(8,16,32))
-# # pr.kfold <- list("smo"=c(8,16,32), "Nhull"=c(4,9)) no funciona aviso!
-# 
-# pr.kfold <- list("smo"=c(0,.2))
-# output <- classif.kfold( class ~ x+x2, data2, classif = "classif.bootstrap"
-#                          , kfold = 4, param.kfold = pr.kfold, verbose=T,model=T)
-# 
-# names(output$models)
-# summary(output)
-# output$param.min
-# output$params.error
-# output$pred.kfold
-# 
-# names(output$models[[10]]$list.fit[[1]])
-# # output$models[[1]]$list.fit[[1]]$fit[[1]]$residuals
-# # output$models[[21]]$list.fit[[1]]$fit[[1]]$residuals
-# 
-# 
-# args(classif.adaboost)
-# pr.kfold <- list("B"=c(1,5,10))
-# output <- classif.kfold( class ~ x2, data2, classif = "classif.adaboost"
-#                          , kfold = 4, param.kfold = pr.kfold, verbose=T)
-# summary(output)
-# output$param.min
-# output$params.error
-# names(output)
-# length(output$B)
-# 
-# names(output$call)
-# output$pred.kfold
-#  traceback()
-# # subset.ldata <- fda.usc:::subset.ldata
-# # predict.classif <- fda.usc:::predict.classif
-# # cat2alpha <- fda.usc:::cat2alpha
-# # predict.classif.bootstrap <-fda.usc:::predict.classif.bootstrap
-# 
-# args(classif.bootstrap)
-# out <- classif.bootstrap( class ~ x, data, par.boot = list("Nhull"=4,"Nnbh"=9 ))
-# summary(out)
-# 
-# 
-# data3 <- ldata(data[["df"]],mfdata=data[-1])[1:215,row=T]

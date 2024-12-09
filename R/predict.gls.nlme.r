@@ -1,4 +1,4 @@
-predict.gls<-function (object, newdata, na.action = na.fail, ...)
+predict_gls <- function (object, newdata, na.action = na.fail, ...)
 {
   if (missing(newdata)) {
     return(fitted(object))
@@ -37,12 +37,10 @@ predict.gls<-function (object, newdata, na.action = na.fail, ...)
   }
   val
 }
-################
 
 
 
-##predictions not accounting for correlation structure - using Delta method
-##gls
+## predictions not accounting for correlation structure - using Delta method
 predictSE.gls <- function(mod, newdata, se.fit = TRUE, ...){
   
   ##first part of code converts data.frame (including factors) into design matrix of model
@@ -74,7 +72,6 @@ predictSE.gls <- function(mod, newdata, se.fit = TRUE, ...){
   #################################################################################################################
   ########################### The previous piece of code is modified from predict.lme( ) from nlme package
   #################################################################################################################
-  
   m <- model.frame(TT, data=dataMix)
   des.matrix <- model.matrix(TT, m)
      # newdata <- des.matrix  #we now have a design matrix 
@@ -84,18 +81,14 @@ predictSE.gls <- function(mod, newdata, se.fit = TRUE, ...){
   ncoefs <- length(fix.coef)
   names.coef <- labels(fix.coef)
   nvals <- dim(newdata)[1]
-  
   ##check for intercept fixed effect term in model
   int.yes <- any(names.coef == "(Intercept)")
-  
   ##if no intercept term, return error
   if(!int.yes) stop("\nThis function does not work with models excluding the intercept terms\n")
   
   formula <- character(length=ncoefs)
   
-  
   nbetas <- ncoefs - 1
-  
   if(int.yes & nbetas >= 1) {
     ##create loop to construct formula for derivative
     formula <- paste("Beta", 1:nbetas, sep="")
@@ -107,14 +100,12 @@ predictSE.gls <- function(mod, newdata, se.fit = TRUE, ...){
   }
   ##for models without intercept - formula <- paste("Beta", 1:ncoefs, sep="")
   
-  
   ##a loop to assemble formula
   ##first, identify interaction terms
   inters <- rep(NA, ncoefs)
   for (m in 1:ncoefs) {
     inters[m] <- attr(regexpr(pattern = ":", text = names.coef[m]), "match.length")
   }
-  
   ##change the name of the labels for flexibility
   names.cov <- paste("cov", 1:ncoefs-1, sep="")
   
@@ -124,7 +115,6 @@ predictSE.gls <- function(mod, newdata, se.fit = TRUE, ...){
   for (k in 1:length(id)) {
     names.cov[id[k]] <- paste("inter", k, sep="")
   }
-  
   ##iterate and combine betas and covariates
   formula2 <- character(length = ncoefs)
   for(b in 1:ncoefs) {
@@ -143,30 +133,21 @@ predictSE.gls <- function(mod, newdata, se.fit = TRUE, ...){
   no.space <- gsub("[[:space:]]+", "", as.character(eq.space))
   equation <- parse(text = as.expression(no.space))
   
-  
-  
-  ##
-  
   if(identical(se.fit, TRUE)) {
     ##determine number of partial derivatives to compute
     part.devs <- list( )
     for(j in 1:ncoefs) {
       part.devs[[j]] <- D(equation, formula[j])
     }
-    
   }
-  
   ##determine number of covariates excluding interaction terms
   ncovs <- ncoefs - length(id)
-  
-  ##assign values of covariates
+    ##assign values of covariates
   cov.values <- list()
-  
   ##if only intercept, then add column
   if(int.yes && ncovs == 1) {
     cov.values[[1]] <- 1
   }
-  
   if(int.yes && ncovs > 1) {
     cov.values[[1]] <- rep(1, nvals)
     for (q in 2:ncoefs) {
@@ -177,11 +158,8 @@ predictSE.gls <- function(mod, newdata, se.fit = TRUE, ...){
       cov.values[[q]] <- newdata[, labels(fix.coef)[q]]
     }
   }
-  
   names(cov.values) <- names.cov
   cov.values.mat <- matrix(data = unlist(cov.values), nrow = nvals, ncol = ncoefs)
-  
-  
   if(identical(se.fit, TRUE)) {
     ##substitute a given row for each covariate
     predicted.SE <- matrix(NA, nrow = nvals, ncol = 2)
@@ -199,12 +177,9 @@ predictSE.gls <- function(mod, newdata, se.fit = TRUE, ...){
       ##  part.devs.eval[[p]] <-  cov.values[names.cov[p]][[1]][w]
       ##}
       ##}
-      
       part.devs.solved <- unlist(part.devs.eval)
-      
       ##extract vc matrix
       vcmat <- vcov(mod)
-      
       mat_partialdevs<-data.matrix(part.devs.solved) #create matrix from vector of 2 rows by 1 column
       mat_tpartialdevs<-t(part.devs.solved)        #transpose of partial derivatives to have 2 columns by 1 row
       
@@ -215,10 +190,7 @@ predictSE.gls <- function(mod, newdata, se.fit = TRUE, ...){
       predicted.SE[w, 1] <- predicted.vals
       predicted.SE[w, 2] <- SE
     }
-    
-    
     out.fit.SE <- list(fit = predicted.SE[,"Pred.value"], se.fit = predicted.SE[, "SE"])
-    
   } else {
     predicted.SE <- matrix(NA, nrow = nvals, ncol = 1)
     colnames(predicted.SE) <- c("Pred.value")
@@ -227,13 +199,10 @@ predictSE.gls <- function(mod, newdata, se.fit = TRUE, ...){
       predicted.vals <- fix.coef%*%cov.values.mat[w,]
       predicted.SE[w, 1] <- predicted.vals
     }
-    
     out.fit.SE <- predicted.SE
     colnames(out.fit.SE) <- "fit"
-    
   }
   return(out.fit.SE)
 }
 
-#####################################
 

@@ -36,12 +36,12 @@ be passed by default to \link[fda]{create.basis}}
 \value{
 Return the smoothing matrix \code{S}.
 \itemize{
- \item {\code{S.LLR}}{ return the smoothing matrix by  Local Linear Smoothing.}
- \item { \code{S.NW}}{ return the smoothing matrix by Nadaraya-Watson kernel estimator.}
- \item {\code{S.KNN}}{ return the smoothing matrix by k nearest neighbors estimator.}
- \item {\code{S.LPR}}{ return the smoothing matrix by Local Polynomial Regression Estimator.}
- \item {\code{S.LCR}}{ return the smoothing matrix by Cubic Polynomial Regression.}
- }
+ \item \code{S.LLR}: Local Linear Smoothing.
+ \item \code{S.NW}:  Nadaraya-Watson kernel estimator.
+ \item \code{S.KNN}: k nearest neighbors estimator.
+ \item \code{S.LPR}: Local Polynomial Regression Estimator.
+ \item \code{S.LCR}: Cubic Polynomial Regression.
+}
 }
 \description{
 Provides the smoothing matrix \code{S} for the discretization points \code{tt}
@@ -49,27 +49,27 @@ Provides the smoothing matrix \code{S} for the discretization points \code{tt}
 \details{
 Options: 
 \itemize{
- \item Nadaraya-Watson kernel estimator (S.NW) with bandwidth parameter \code{h}. 
- \item Local Linear Smoothing (S.LLR) with bandwidth parameter \code{h}.
- \item K nearest neighbors estimator (S.KNN) with parameter \code{knn}.
- \item Polynomial Local Regression Estimator (S.LCR) with parameter of polynomial \code{p} and of kernel \code{Ker}.
- \item Local Cubic Regression Estimator (S.LPR) with kernel \code{Ker}.
- }
+ \item \code{S.NW}: Nadaraya-Watson kernel estimator with bandwidth parameter \code{h}.
+ \item \code{S.LLR}: Local Linear Smoothing with bandwidth parameter \code{h}.
+ \item \code{S.KNN}: K nearest neighbors estimator with parameter \code{knn}.
+ \item \code{S.LPR}: Polynomial Local Regression Estimator with parameter of polynomial \code{p} and of kernel \code{Ker}.
+ \item \code{S.LCR}: Local Cubic Regression Estimator with kernel \code{Ker}.
+}
 }
 \examples{
 \dontrun{
-  tt=1:101
-  S=S.LLR(tt,h=5)
-  S2=S.LLR(tt,h=10,Ker=Ker.tri)
-  S3=S.NW(tt,h=10,Ker=Ker.tri)
-  S4=S.KNN(tt,h=5,Ker=Ker.tri)
+  tt <- 1:101
+  S <- S.LLR(tt,h=5)
+  S2 <- S.LLR(tt,h=10,Ker=Ker.tri)
+  S3 <- S.NW(tt,h=10,Ker=Ker.tri)
+  S4 <- S.KNN(tt,h=5,Ker=Ker.tri)
   par(mfrow=c(2,3))
   image(S)
   image(S2)
   image(S3)
   image(S4)
-  S5=S.LPR(tt,h=10,p=1, Ker=Ker.tri)
-  S6=S.LCR(tt,h=10,Ker=Ker.tri)
+  S5 <- S.LPR(tt,h=10,p=1, Ker=Ker.tri)
+  S6 <- S.LCR(tt,h=10,Ker=Ker.tri)
   image(S5)
   image(S6)
 }

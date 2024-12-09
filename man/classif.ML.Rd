@@ -100,16 +100,16 @@ a voting scheme is applied: requires  G (G - 1) / 2 binary classifiers.}
 \value{
 Return \code{classif} object plus:
 \itemize{
-\item \code{formula}{ formula.}
-\item \code{data}{ List that containing the variables in the model.} 
-\item \code{group}{ Factor of length \emph{n}} 
-\item \code{group.est}{ Estimated vector groups}
-\item \code{prob.classification}{ Probability of correct classification by group.}
-\item \code{prob.group}{ Matrix of predicted class probabilities. For each
-functional point shows the probability of each possible group membership.}
-\item \code{max.prob}{ Highest probability of correct classification.}
-\item \code{type}  Type of classification scheme: 1 vs all  or majority voting.
-\item \code{fit} list of binary classification fitted models.
+\item \code{formula}: formula.
+\item \code{data}: List that containing the variables in the model.
+\item \code{group}: Factor of length \emph{n}. 
+\item \code{group.est}: Estimated vector groups.
+\item \code{prob.classification}: Probability of correct classification by group.
+\item \code{prob.group}: Matrix of predicted class probabilities. For each
+functional point shows the probability of each possible group membership.
+\item \code{max.prob}: Highest probability of correct classification.
+\item\code{type}:  Type of classification scheme: 1 vs all  or majority voting.
+\item \code{fit}: list of binary classification fitted models.
 }
 }
 \description{
@@ -124,12 +124,12 @@ frame with the response and non functional explanatory variables, as
 Functional covariates of class \code{fdata} or \code{fd} are introduced in
 the following items in the \code{data} list.\cr \code{basis.x} is a list of
 basis for represent each functional covariate. The b object can be
-created by the function: \code{\link{create.pc.basis}}, \code{\link{pca.fd}}
+created by the function: \code{\link{create.pc.basis}}, \link[fda]{pca.fd}
 \code{\link{create.pc.basis}}, \code{\link{create.fdata.basis}} o
-\code{\link{create.basis}}.\cr \code{basis.b} is a list of basis for
+\link[fda]{create.basis}.\cr \code{basis.b} is a list of basis for
 represent each functional beta parameter. If \code{basis.x} is a list of
 functional principal components basis (see \code{\link{create.pc.basis}} or
-\code{\link{pca.fd}}) the argument \code{basis.b} is ignored.
+\link[fda]{pca.fd}) the argument \code{basis.b} is ignored.
 }
 \note{
 Wrapper versions for multivariate and functional classification:
@@ -137,7 +137,7 @@ Wrapper versions for multivariate and functional classification:
 \item \code{classif.lda},\code{classif.qda}: uses \code{lda} and  \code{qda} functions and requires \code{MASS} package.
 \item \code{classif.nnet}: uses \code{nnet} function and requires \code{nnet} package.
 \item \code{classif.rpart}: uses \code{nnet} function and requires \code{rpart} package.
-\item \code{classif.svm},\code{classif.naiveBayes}: uses \code{svm} and  \code{naiveBayes} functions and requires \code{e1071} package.
+\item \code{classif.svm}, \code{classif.naiveBayes}: uses \code{svm} and  \code{naiveBayes} functions and requires \code{e1071} package.
 \item \code{classif.ksvm}: uses \code{weighted.ksvm } function and requires \code{personalized} package.
 \item \code{classif.randomForest}: uses \code{randomForest} function and requires \code{randomForest} package.
 \item \code{classif.cv.glmnet}: uses \code{cv.glmnet} function and requires \code{glmnet} package.
@@ -180,7 +180,7 @@ with S}, New York: Springer.  %Wood (2001) mgcv:GAMs and Generalized Ridge
 Regression for R. R News 1(2):20-25
 }
 \seealso{
-See Also as: \code{\link{rpart}}.\cr Alternative method:
+See Also as: \link[rpart]{rpart}.\cr Alternative method:
 \code{\link{classif.np}}, \code{\link{classif.glm}},
 \code{\link{classif.gsam}} and \code{\link{classif.gkam}}.
 }

@@ -1,4 +1,4 @@
-predict.kmeans.fd <- function(object, newdata, ...){
+predict_kmeans.fd <- function(object, newdata, ...){
   x = object$centers
   n = NROW(x)
   np <- NCOL(x)

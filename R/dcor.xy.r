@@ -41,18 +41,18 @@
 #' @return 
 #' \code{dcor.test} returns a list with class \code{htest} containing
 #' \itemize{
-#' \item \code{method}{ description of test} 
-#' \item \code{statistic}{ observed value of the test statistic} 
-#' \item \code{parameter}{ degrees of freedom} 
-#' \item \code{estimate}{ bias corrected distance correlation \code{bcdcor(x,y)}} 
-#' \item \code{p.value}{ p-value of the t-test} 
-#' \item \code{data.name}{ description of data}
+#' \item \code{method}: description of test.
+#' \item \code{statistic}: observed value of the test statistic.
+#' \item \code{parameter}: degrees of freedom.
+#' \item \code{estimate}: bias corrected distance correlation \code{bcdcor(x,y)}.
+#' \item \code{p.value}: p-value of the t-test.
+#' \item \code{data.name}: description of data.
 #' }
 #' 
 #' \code{dcor.xy} returns the previous list with class \code{htest} and 
 #' \itemize{
-#' \item \code{D1}{ the distance matrix of \code{x}} 
-#' \item \code{D2}{ the distance matrix of \code{y}}
+#' \item \code{D1}: the distance matrix of \code{x}.
+#' \item \code{D2}: the distance matrix of \code{y}.
 #' }
 #' 
 #' \code{dcor.dist} returns the distance correlation statistic.

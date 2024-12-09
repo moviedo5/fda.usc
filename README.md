@@ -51,7 +51,7 @@ A hands on introduction to  can be found in the reference
 [vignette](https://www.jstatsoft.org/article/view/v051i04/).
 
 Details on specific functions are in the [reference
-manual](https://cran.r-project.org/package=fda.usc/fda.usc.pdf).
+manual](docs/fda.usc-manual.pdf).
 
 Cheatsheet [fda.usc reference
 card](https://zenodo.org/record/3386752/files/RefCard_fda.usc_v1.pdf?download=1).
@@ -66,21 +66,34 @@ of Statistical Software*, 51(4):1-28.
 <!-- 
 <https://www.jstatsoft.org/v51/i04/>
 library(roxygen2)
-setwd("C:/Users/moviedo/github/fda.usc/")
+# setwd("D:/Users/moviedo/github/fda.usc/")
 getwd()
 pkgbuild::compile_dll()
 roxygenize()
-devtools::document()
+devtools::document() 
+
+tools::checkRd("man/classif.ML.Rd")
 
 library(devtools)
+devtools::build()
+devtools::check(manual = TRUE) 
+devtools::install()
+devtools::build_win()
+
+devtools::install_github("moviedo5/fda.usc",auth_user="moviedo5")
 
 # devtools::install_github("moviedo5/fda.usc",auth_user="moviedo5")
 
 R CMD build fda.usc
-R CMD check fda.usc_2.1.0.tar.gz --as-cran
-R CMD INSTALL fda.usc_2.1.0.tar.gz --build
+R CMD check fda.usc_2.2.0.tar.gz --as-cran
+R CMD INSTALL fda.usc_2.2.0.tar.gz --build
+R-wind-builder fda.usc_2.2.0.tar.gz --as-cran
 
-Manuel Oviedo PhD thesis [Advances in functional regression and classification models](https://hdl.handle.net/10347/18236)
+library(pkgdown)
+# usethis::use_pkgdown()
+# Build website:
+#pkgdown::build_site()
+build_site(new_process = TRUE)
 
 -->
 

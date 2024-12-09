@@ -20,9 +20,8 @@ dependence between tests.}
 \value{
 Return:
 \itemize{
-\item \code{out.FDR}{ \code{=TRUE}. If there are significative
-differences.} 
-\item \code{pv.FDR}{ p-value for False Discovery Rate test.}
+\item \code{out.FDR=TRUE}: If there are significative differences.
+\item \code{pv.FDR}: p-value for False Discovery Rate test.
 }
 }
 \description{

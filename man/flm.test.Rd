@@ -40,32 +40,31 @@ of \code{X.fdata}. A possibility to do this is to consider, for example for \eqn
 \item{est.method}{Estimation method for the unknown parameter \eqn{\beta}{\beta}, 
 only used in the composite case. Mainly, there are two options: specify the number of basis 
 elements for the estimated \eqn{\beta}{\beta} by \code{p} or optimally select \code{p} by a
- data-driven criteria (see Details section for discussion). Then, it must be one of the following 
- methods:
- \itemize{
- \item \code{"pc"} If \code{p}, the number of basis elements, is given, then \eqn{\beta}{\beta} is estimated by \code{\link{fregre.pc}}. Otherwise, an optimum \code{p} is chosen using \code{\link{fregre.pc.cv}} and the \code{"SICc"} criteria.
- \item \code{"pls"} If \code{p} is given, \eqn{\beta}{\beta} is estimated by \code{\link{fregre.pls}}. Otherwise, an optimum \code{p} is chosen using \code{\link{fregre.pls.cv}} and the \code{"SICc"} criteria. 
- This is the default argument as it has been checked empirically that provides a good balance between the performance of the test and the estimation of \eqn{\beta}{\beta}.
- \item \code{"basis"} If \code{p} is given, \eqn{\beta}{\beta} is estimated by \code{\link{fregre.basis}}. Otherwise, an optimum \code{p} is chosen using \code{\link{fregre.basis.cv}} and the \code{"GCV.S"} criteria. In these functions, the same basis for the arguments \code{basis.x} and \code{basis.b} is considered.
- The type of basis used will be the given by the argument \code{type.basis} and must be one of the class of \code{create.basis}. Further arguments passed to \code{\link{create.basis}} (not \code{rangeval} that is taken as the \code{rangeval} of \code{X.fdata}), can be passed throughout \code{\dots} .
- }}
-
-\item{p}{{Number of elements of the basis considered. If it is not given, an optimal \code{p} will be chosen using a specific criteria (see \code{est.method} and \code{type.basis} arguments). }}
-
-\item{type.basis}{{Type of basis used to represent the functional process. Depending on the hypothesis it will have a different interpretation:
+data-driven criteria (see Details section for discussion). Then, it must be one of the following 
+methods:
 \itemize{
-\item Simple hypothesis. One of these options:
- \itemize{
- \item \code{"bspline"} If \code{p} is given, the functional process is expressed in a basis of \code{p} B-splines. If not, an optimal \code{p} will be chosen by \code{\link{optim.basis}}, using the \code{"GCV.S"} criteria.
- \item \code{"fourier"} If \code{p} is given, the functional process is expressed in a basis of \code{p} fourier functions. If not, an optimal \code{p} will be chosen by \code{\link{optim.basis}}, using the \code{"GCV.S"} criteria.
- \item \code{"pc"} \code{p} must be given. Expresses the functional process in a basis of \code{p} PC.
- \item \code{"pls"} \code{p} must be given. Expresses the functional process in a basis of \code{p} PLS.
- }
-Although other of the basis supported by \code{\link{create.basis}} are possible too, \code{"bspline"} and \code{"fourier"} are recommended. Other basis may cause incompatibilities.
-\item Composite hypothesis. This argument is only used when \if{latex}{\cr}\code{est.method="basis"} and, in this case, claims for the type of basis used in the basis estimation method of the functional parameter. Again, basis
-\code{"bspline"} and \code{"fourier"} are recommended, as other basis may cause incompatibilities.
-}
+ \item \code{"pc"}: If \code{p}, the number of basis elements, is given, then \eqn{\beta}{\beta} is estimated by \code{\link{fregre.pc}}. Otherwise, an optimum \code{p} is chosen using \code{\link{fregre.pc.cv}} and the \code{"SICc"} criteria.
+ \item \code{"pls"}: If \code{p} is given, \eqn{\beta}{\beta} is estimated by \code{\link{fregre.pls}}. Otherwise, an optimum \code{p} is chosen using \code{\link{fregre.pls.cv}} and the \code{"SICc"} criteria. 
+ This is the default argument as it has been checked empirically that provides a good balance between the performance of the test and the estimation of \eqn{\beta}{\beta}.
+ \item \code{"basis"}: If \code{p} is given, \eqn{\beta}{\beta} is estimated by \code{\link{fregre.basis}}. Otherwise, an optimum \code{p} is chosen using \code{\link{fregre.basis.cv}} and the \code{"GCV.S"} criteria. In these functions, the same basis for the arguments \code{basis.x} and \code{basis.b} is considered.
+ The type of basis used will be the given by the argument \code{type.basis} and must be one of the class of \code{create.basis}. Further arguments passed to \code{\link{create.basis}} (not \code{rangeval} that is taken as the \code{rangeval} of \code{X.fdata}), can be passed throughout \code{\dots}.
 }}
+
+\item{p}{Number of elements of the basis considered. If it is not given, an optimal \code{p} will be chosen using a specific criteria (see \code{est.method} and \code{type.basis} arguments).}
+
+\item{type.basis}{Type of basis used to represent the functional process. Depending on the hypothesis, it will have a different interpretation:
+\itemize{
+ \item Simple hypothesis. One of these options:
+  \itemize{
+  \item \code{"bspline"}: If \code{p} is given, the functional process is expressed in a basis of \code{p} B-splines. If not, an optimal \code{p} will be chosen by \code{\link{optim.basis}}, using the \code{"GCV.S"} criteria.
+  \item \code{"fourier"}: If \code{p} is given, the functional process is expressed in a basis of \code{p} Fourier functions. If not, an optimal \code{p} will be chosen by \code{\link{optim.basis}}, using the \code{"GCV.S"} criteria.
+  \item \code{"pc"}: \code{p} must be given. Expresses the functional process in a basis of \code{p} principal components.
+  \item \code{"pls"}: \code{p} must be given. Expresses the functional process in a basis of \code{p} partial least squares.
+  }
+ Although other basis types supported by \code{\link{create.basis}} are possible, \code{"bspline"} and \code{"fourier"} are recommended. Other basis types may cause incompatibilities.
+ \item Composite hypothesis. This argument is only used when \if{latex}{\cr}\code{est.method="basis"} and, in this case, it specifies the type of basis used in the basis estimation method of the functional parameter. Again, basis
+ \code{"bspline"} and \code{"fourier"} are recommended, as other basis types may cause incompatibilities.
+ }}
 
 \item{verbose}{Either to show or not information about computing progress.}
 
@@ -87,17 +86,17 @@ lower or equal to \code{B}.}
 An object with class \code{"htest"} whose underlying structure is a list containing 
 the following components:
 \itemize{
- \item {statistic} {The value of the test statistic.}
- \item {boot.statistics} {A vector of length \code{B} with the values of the bootstrap test statistics.}
- \item {p.value} {The p-value of the test.}
- \item {method} {The method used.}
- \item {B} {The number of bootstrap replicates used.}
- \item {type.basis} {The type of basis used.}
- \item {beta.est} {The estimated functional parameter \eqn{\beta}{\beta} in the composite 
- hypothesis. For the simple hypothesis, the given \code{beta0.fdata}.}
- \item {p} {The number of basis elements passed or automatically chosen.}
- \item {ord} {The optimal order for PC and PLS given by \code{\link{fregre.pc.cv}} and\if{latex}{\cr} \code{\link{fregre.pls.cv}}. For other methods is setted to \code{1:p}.}
- \item {data.name} {The character string "Y=<X,b>+e"}
+ \item \code{statistic}: The value of the test statistic.
+ \item \code{boot.statistics}: A vector of length \code{B} with the values of the bootstrap test statistics.
+ \item \code{p.value}: The p-value of the test.
+ \item \code{method}: The method used.
+ \item \code{B}: The number of bootstrap replicates used.
+ \item \code{type.basis}: The type of basis used.
+ \item \code{beta.est}: The estimated functional parameter \eqn{\beta}{\beta} in the composite 
+ hypothesis. For the simple hypothesis, the given \code{beta0.fdata}.
+ \item \code{p}: The number of basis elements passed or automatically chosen.
+ \item \code{ord}: The optimal order for PC and PLS given by \code{\link{fregre.pc.cv}} and \if{latex}{\cr} \code{\link{fregre.pls.cv}}. For other methods, it is set to \code{1:p}.
+ \item \code{data.name}: The character string "Y=<X,b>+e".
 }
 }
 \description{
@@ -243,7 +242,7 @@ Garcia-Portugues, E., Gonzalez-Manteiga, W. and Febrero-Bande, M. (2014). A good
  \code{\link{fregre.pc}}, \code{\link{fregre.pls}},\if{latex}{\cr} \code{\link{fregre.basis}}, 
  \code{\link{fregre.pc.cv}}, \code{\link{fregre.pls.cv}},
  \code{\link{fregre.basis.cv}}, \code{\link{optim.basis}}, \if{latex}{\cr}
- \code{\link{create.basis}}
+ \link[fda]{create.basis}
 }
 \author{
 Eduardo Garcia-Portugues. Please, report bugs and suggestions to

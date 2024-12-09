@@ -6,7 +6,7 @@
 #' \eqn{Y=\big<X,\beta\big>+\varepsilon}{Y=<X,\beta>+\epsilon}.
 #' 
 #' @param  X Functional covariate for the FLM. 
-#' The object must be either in the class \code{\link{fdata}} or in the class \code{\link{fd}}.
+#' The object must be either in the class \code{\link{fdata}} or in the class \link[fda]{fd}.
 #' It is used to compute the matrix of inner products.
 #' @param residuals Residuals of the estimated FLM.
 #' @param p Number of elements of the functional basis where the functional covariate is represented.

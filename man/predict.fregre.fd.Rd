@@ -48,10 +48,10 @@ is returned or a matrix of predictions and bounds with column names fit,
 lwr, and upr if interval is set.
 If \code{se.fit =TRUE} a list with the following components is returned: 
 \itemize{
-\item  \code{fit}{ A vector of predictions or a matrix of predictions and bounds as above} 
-\item  \code{se.fit}{ Associated standard error estimates of predictions} 
-\item  \code{residual.scale}{ Residual standard deviations} 
-\item  \code{df}{ Degrees of freedom for residual}
+\item  \code{fit}: A vector of predictions or a matrix of predictions and bounds as above.
+\item  \code{se.fit}: Associated standard error estimates of predictions.
+\item  \code{residual.scale}: Residual standard deviations.
+\item  \code{df}: Degrees of freedom for residual.
 }
 }
 \description{

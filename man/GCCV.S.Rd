@@ -44,16 +44,19 @@ Returns GCCV score calculated for input parameters.
 The generalized correlated cross-validation (GCV) score.
 }
 \details{
-\deqn{ }{\sum(y-y.fit)^2 / (1-tr(C)/n)^2}\deqn{GCCV=\frac{\sum_{i=1}^n
-{y_{i}-\hat{y}_{i,b}}^2}{1-\frac{tr(C)}{n}^2} }{\sum(y-y.fit)^2 /
-(1-tr(C)/n)^2} %where \eqn{C=2{S\Sigma(\theta)}-{S\Sigma(\theta)S'}} \cr
-%and \eqn{\Sigma=\sigma C} is the n x n covariance matrix with
-\eqn{cor(\epsilon_i,\epsilon_j ) =\sigma}\cr
+\deqn{GCCV = \frac{\sum_{i=1}^n {(y_{i} - \hat{y}_{i, b})}^2}{(1 - \frac{tr(C)}{n})^2}}{\sum(y - y.fit)^2 / (1 - tr(C) / n)^2}
 
-where \eqn{S} is the smoothing matrix \eqn{S} and:\cr A.-If \eqn{C=2S\Sigma
-- S\Sigma S} \cr B.-If \eqn{C=S\Sigma} \cr C.-If \eqn{C=S\Sigma S'} \cr with
-\eqn{\Sigma} is the n x n covariance matrix with
-\eqn{cor(\epsilon_i,\epsilon_j ) =\sigma}
+where \eqn{C = 2S\Sigma(\theta) - S\Sigma(\theta)S'} \cr
+and \eqn{\Sigma} is the \eqn{n \times n} covariance matrix with \eqn{cor(\epsilon_i, \epsilon_j) = \sigma}.\cr
+
+Here, \eqn{S} is the smoothing matrix, and there are options for \eqn{C}:
+\itemize{
+\item A.- If \eqn{C = 2S\Sigma - S\Sigma S}
+\item B.- If \eqn{C = S\Sigma}
+\item C.- If \eqn{C = S\Sigma S'}
+}
+
+with \eqn{\Sigma} as the \eqn{n \times n} covariance matrix and \eqn{cor(\epsilon_i, \epsilon_j) = \sigma}.
 }
 \note{
 Provided that \eqn{C = I} and the smoother matrix S is symmetric and
@@ -93,10 +96,9 @@ Carmack, P. S., Spence, J. S., and Schucany, W. R. (2012).
 Generalised correlated cross-validation. Journal of Nonparametric
 Statistics, 24(2):269--282.
 
-Oviedo de la Fuente, M., Febrero-Bande, M., Pilar Munoz, and Dominguez, A.
+Oviedo de la Fuente, M., Febrero-Bande, M., Munoz, P., and Dominguez, A.
 Predicting seasonal influenza transmission using Functional Regression
-Models with Temporal Dependence. arXiv:1610.08718.
-\url{https://arxiv.org/abs/1610.08718}
+Models with Temporal Dependence.\url{https://arxiv.org/abs/1610.08718}
 }
 \seealso{
 See Also as \code{\link{optim.np}}. \cr Alternative method

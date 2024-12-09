@@ -18,12 +18,12 @@
 #' @details
 #'   The function returns the p--value of  test using one--way anova model over \code{nboot} runs.
 #'   
-#' @return  Returns:
+#' @return Returns:
 #' \itemize{
-#' \item  \code{p-value} probability of rejecting the null hypothesis H0 at a significance level
-#' \item  \code{stat}{ statistic value of test.}
-#' \item  \code{wm}{ statistic values of bootstrap resamples.}
-#' } 
+#' \item \code{p-value}: Probability of rejecting the null hypothesis H0 at a significance level.
+#' \item \code{stat}: Statistic value of the test.
+#' \item \code{wm}: Statistic values of bootstrap resamples.
+#' }
 #' @references
 #'   Cuevas, A., Febrero, M., & Fraiman, R. (2004). \emph{An anova test for functional data.} Computational statistics & data analysis, \bold{47}(1), 111-122.
 #' @author Juan A. Cuesta-Albertos, Manuel Febrero-Bande, Manuel Oviedo de la

@@ -24,10 +24,10 @@ contrasts are used (\code{contrast}=\code{NULL}).}
 \value{
 Return: 
 \itemize{
-\item{ans}{ A list with components including: the Beta estimation \code{Est},
- the factor degrees of freedom \code{df1}, the residual degrees of freedom
-  \code{df2} and \code{p-value} for each factor. }
-\item{contrast}{ List of special contrasts.}
+\item \code{ans}: A list with components including: the Beta estimation \code{Est},
+the factor degrees of freedom \code{df1}, the residual degrees of freedom
+\code{df2}, and the \code{p-value} for each factor. 
+\item \code{contrast}: List of special contrasts.
 }
 }
 \description{

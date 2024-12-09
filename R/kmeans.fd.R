@@ -24,7 +24,6 @@
 #' @param max.iter Maximum number of iterations for the detection of centers.
 #' @param draw =TRUE, draw the curves in the color of the centers.
 #' @param par.dfunc List of arguments to pass to the \code{dfunc} function .
-# @param par.ini List of arguments to pass to the \code{kmeans.center.ini} function .
 #' @param method Method for selecting initial centers. If
 #' \code{method}=\emph{"Sample"} (by default) takes \code{n} times a random
 #' selection by the \code{ncl} centers. The \code{ncl} curves with greater
@@ -41,8 +40,8 @@
 #' 
 #' @return Return:
 #' \itemize{
-#'  \item \code{cluster}{ Indexes of groups assigned.}  
-#' \item \code{centers}{ Curves centers.}
+#'  \item \code{cluster}: Indexes of groups assigned.
+#' \item \code{centers}: Curves centers.
 #  %\item{lcenters}{ Indexes of initial curves centers.}
 #' }
 #' 
@@ -59,23 +58,23 @@
 #' \dontrun{
 #' library(fda.usc)
 #' data(phoneme)
-#' mlearn<-phoneme$learn[c(1:50,101:150,201:250),]
+#' mlearn <- phoneme$learn[c(1:50,101:150,201:250),]
 #' # Unsupervised classification
-#' out.fd1=kmeans.fd(mlearn,ncl=3,draw=TRUE)
-#' out.fd2=kmeans.fd(mlearn,ncl=3,draw=TRUE,method="exact")
+#' out.fd1 <- kmeans.fd(mlearn,ncl=3,draw=TRUE)
+#' out.fd2 <- kmeans.fd(mlearn,ncl=3,draw=TRUE,method="exact")
 #' # Different Depth function
-#' ind=c(17,77,126)
-#' out.fd3=kmeans.fd(mlearn,ncl=mlearn[ind,],draw=FALSE,
-#' dfunc=func.trim.FM,par.dfunc=list(trim=0.1))
-#' out.fd4=kmeans.fd(mlearn,ncl=mlearn[ind,],draw=FALSE,
-#' dfunc=func.med.FM)
-#' group=c(rep(1,50),rep(2,50),rep(3,50))
-#' table(out.fd4$cluster,group)
+#' ind <- c(17,77,126)
+#' out.fd3 <- kmeans.fd(mlearn,ncl=mlearn[ind,],draw=FALSE,
+#' dfunc <- func.trim.FM,par.dfunc=list(trim=0.1))
+#' out.fd4 <- kmeans.fd(mlearn, ncl=mlearn[ind,], draw=FALSE, 
+#' dfunc = func.med.FM)
+#' group <- c(rep(1,50), rep(2,50),rep(3,50))
+#' table(out.fd4$cluster, group)
 #' }
 #' 
 #' @rdname kmeans.fd
 #' @export
-kmeans.fd=function(fdataobj,ncl=2,metric=metric.lp
+kmeans.fd <- function(fdataobj,ncl=2,metric=metric.lp
                    ,dfunc=func.trim.FM,max.iter=100
                    ,par.metric=NULL,par.dfunc=list(trim=0.05)
                    ,method="sample", cluster.size=5,draw=TRUE,...) {
@@ -105,7 +104,7 @@ if (is.vector(ncl)) {
        par.ini$par.metric<-par.metric
     par.ini$... <- par.metric
     out1=do.call(kmeans.center.ini,par.ini)
-    lxm<-out1$lcenters
+    lxm <- out1$lcenters
     out1$d=rbind(out1$z.dist,out1$z.dist[lxm,])
     }  else {
      ngroups <- length(ncl)
@@ -129,14 +128,14 @@ if (is.vector(ncl)) {
    xm=ncl[["data"]]
    if (is.null(par.metric)
    ) par.metric=list("p"=2,"w"=1)
-   par.metric$fdata1<-fdataobj
+   par.metric$fdata1 <- fdataobj
    #mdist=metric(fdataobj,...)
    mdist=do.call(metric,par.metric)
-   par.metric2<-par.metric
-   par.metric2$fdata2<-ncl
+   par.metric2 <- par.metric
+   par.metric2$fdata2 <- ncl
    mdist2=do.call(metric,par.metric2)
    out1 = list()
-   out1$fdataobj<-fdataobj
+   out1$fdataobj <- fdataobj
    out1$centers = ncl
    out1$lcenters <- NULL
    ngroups=nrow(ncl)
@@ -145,14 +144,14 @@ if (is.vector(ncl)) {
    class(out1) = "kmeans.fd"
 }
  ngroups=nrow(out1$centers[["data"]])
- a=0;aa<-i<-1
+ a=0;aa <- i <- 1
  same_centers=FALSE
 if (is.null(colnames(out1$d))) 
-  cnames<-colnames(out1$d)<-1:NCOL(out1$d)
-else cnames<-colnames(out1$d)
+  cnames <- colnames(out1$d) <- 1:NCOL(out1$d)
+else cnames <- colnames(out1$d)
 while ((i<max.iter) & (!same_centers)) {
-  iterar<-FALSE
- out3=kmeans.assig.groups(out1,draw=draw)
+  iterar <- FALSE
+ out3 <- kmeans_assig_groups(out1,draw=draw)
   names(out3$cluster) <- cnames
  
   tab <- table(out3$cluster)
@@ -166,21 +165,21 @@ while ((i<max.iter) & (!same_centers)) {
     dist.aux <- out1$d[imin,]
     icambios <- as.numeric(names(sort( out1$d[imin,])[1:cluster.size]))
     #out1$d[imin,iclust]<- 0
-    out1$d[imin,icambios]<- 0
+    out1$d[imin,icambios] <- 0
     #out1$d[icambios,icambios]<- 0
-    out1$z.dist<-out1$d
+    out1$z.dist <- out1$d
     out3$cluster[icambios] <- imin
-    out2<-out3
+    out2 <- out3
      out1$cluster <- out3$cluster
-    par.dfunc$fdataobj<-fdataobj[c(icambios)]
+    par.dfunc$fdataobj <- fdataobj[c(icambios)]
     out1$centers[imin]=do.call(dfunc,par.dfunc)
-    iterar <-TRUE
-    i=i+1
+    iterar <- TRUE
+    i <- i+1
     
  }
 #else{
 #     # print("2. update")
-     out2=kmeans.centers.update(out1, group=out3$cluster
+     out2=kmeans_centers_update(out1, group=out3$cluster
                              , dfunc=dfunc, draw=draw
                              , par.dfunc=par.dfunc
                              #,cluster.size=cluster.size
@@ -194,7 +193,7 @@ while ((i<max.iter) & (!same_centers)) {
     #cat("iterations: ",i)
   }
 
-out<-list("cluster"=out2$cluster,"centers"=out2$centers)
+out <- list("cluster"=out2$cluster,"centers"=out2$centers)
 return(out)
 }
 

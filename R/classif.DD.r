@@ -18,20 +18,21 @@
 #' 
 #' (i) Type of depth function from functional data, see \code{\link{Depth}}:
 #' \itemize{ 
-#' \item \code{"FM"}: Fraiman and Muniz depth.  
-#' \item \code{"mode"}: h--modal depth. 
-#' \item \code{"RT"}: random Tukey depth. 
-#' \item \code{"RP"}: random project depth.
-#' \item \code{"RPD"}: double random project depth.
+#' \item \code{"FM"}: Fraiman and Muniz depth.
+#' \item \code{"mode"}: h-modal depth.
+#' \item \code{"RT"}: Random Tukey depth.
+#' \item \code{"RP"}: Random projection depth.
+#' \item \code{"RPD"}: Double random projection depth.
 #'   }
 #' (ii) Type of depth function from multivariate functional data, see \code{\link{depth.mfdata}}:
 #' \itemize{ 
-#' \item \code{"FMp"}: Fraiman and Muniz depth with common support.
-#' Suppose that all p--fdata objects have the same support (same rangevals),
-#' see \code{\link{depth.FMp}}.  
-#' \item \code{"modep"}: h--modal depth using a p--dimensional metric, see \code{\link{depth.modep}}.
-#' \item \code{"RPp"}: random project depth using a p--variate depth with the
-#' projections, see \code{\link{depth.RPp}}.  
+#' \item \code{"FMp"}: Fraiman and Muniz depth with common support. 
+#' Suppose that all p-fdata objects have the same support (same rangevals); 
+#' see \code{\link{depth.FMp}}.
+#' \item \code{"modep"}: h-modal depth using a p-dimensional metric; 
+#' see \code{\link{depth.modep}}.
+#' \item \code{"RPp"}: Random projection depth using a p-variate depth 
+#' with the projections; see \code{\link{depth.RPp}}.
 #' }
 #' 
 #' If the procedure requires to compute a distance such as in \code{"knn"} or \code{"np"} classifier or
@@ -42,31 +43,31 @@
 #' (iii) Type of depth function from multivariate data, see
 #' \code{\link{Depth.Multivariate}}: 
 #' \itemize{ 
-#' \item \code{"SD"}: Simplicial depth (for bivariate data).  
-#' \item \code{"HS"}: Half-space depth.  
+#' \item \code{"SD"}: Simplicial depth (for bivariate data).
+#' \item \code{"HS"}: Half-space depth.
 #' \item \code{"MhD"}: Mahalanobis depth.
-#' \item \code{"RD"}: random projections depth. 
-#' \item \code{"LD"}: Likelihood depth.  
+#' \item \code{"RD"}: Random projections depth.
+#' \item \code{"LD"}: Likelihood depth.
 #' }
 #' 
 #' \item The function calculates the misclassification rate based on data depth
 #' computed in step (1) using the following classifiers.
 #' 
 #' \itemize{ 
-#' \item \code{"MaxD"}: Maximum depth.  
-#' \item \code{"DD1"}: Search the best separating polynomial of degree 1.  
-#' \item \code{"DD2"}: Search the best separating polynomial of degree 2.
-#' \item \code{"DD3"}: Search the best separating polynomial of degree 3.
-#' \item \code{"glm"}: Logistic regression is computed using Generalized Linear Models
-#'  \code{\link{classif.glm}}.  
-#' \item \code{"gam"}: Logistic regression is computed using Generalized Additive Models
-#'  \code{\link{classif.gsam}}.
-#' \item \code{"lda"}: Linear Discriminant Analysis is computed using
-#' \code{\link{lda}}. 
-#' \item \code{"qda"}: Quadratic Discriminant Analysis is computed using \code{\link{qda}}.  
-#' \item \code{"knn"}: k-Nearest Neighbour classification is computed using \code{\link{classif.knn}}.  
-#' \item \code{"np"}: Non-parametric Kernel classifier is computed using
-#' \code{\link{classif.np}}.  
+#' \item \code{"MaxD"}: Maximum depth.
+#' \item \code{"DD1"}: Search for the best separating polynomial of degree 1.
+#' \item \code{"DD2"}: Search for the best separating polynomial of degree 2.
+#' \item \code{"DD3"}: Search for the best separating polynomial of degree 3.
+#' \item \code{"glm"}: Logistic regression computed using Generalized Linear Models; 
+#' see \code{\link{classif.glm}}.
+#' \item \code{"gam"}: Logistic regression computed using Generalized Additive Models; 
+#' see \code{\link{classif.gsam}}.
+#' \item \code{"lda"}: Linear Discriminant Analysis computed using \link[MASS]{lda}. 
+#' \item \code{"qda"}: Quadratic Discriminant Analysis computed using \link[MASS]{qda}.
+#' \item \code{"knn"}: k-Nearest Neighbour classification computed using 
+#' \code{\link{classif.knn}}.
+#' \item \code{"np"}: Non-parametric Kernel classifier computed using 
+#' \code{\link{classif.np}}.
 #' }
 #' The user can be specify the parameters for classifier function in \code{par.classif} such as the smoothing parameter
 #' \code{par.classif[["h"]]}, if \code{classif="np"} or the k-Nearest
@@ -84,20 +85,20 @@
 #' \eqn{g} groups, so the procedure applies some multiple-start optimization
 #' scheme to save time:
 #' 
-#' \itemize{
+#' \itemize{ 
+#' \item Generate all combinations of the elements of \( n \) taken \( k \) at a time: 
+#' \eqn{g \times combn(N,k)}{g x combs(N, k)} candidate solutions. When this number 
+#' exceeds \code{nmax=10000}, a random sample of \code{10000} combinations is selected.
 #' 
-#' \item generate all combinations of the elements of n taken k at a time:
-#' \eqn{g \times combn(N,k)}{g x combs(N, k)} candidate solutions, and, when
-#' this number is larger than \code{nmax=10000}, a random sample of
-#' \code{10000} combinations.
-#' 
-#' \item smooth the empirical loss with the logistic function
-#' \eqn{1/(1+e^{-tx})}{1/(1+e^{- tt x})}. The classification rule is
-#' constructed optimizing the best \code{noptim} combinations in this random
-#' sample (by default \code{noptim=1} and \code{tt=50/range(depth values)}).
-#' Note that Li et al.  found that the optimization results become stable for
-#' \eqn{t \in [50, 200]}{t between [50, 200]} when the depth is standardized
-#' with upper bound 1.  } The original procedure (Li et al. (2012)) not need to
+#' \item Smooth the empirical loss with the logistic function: 
+#' \eqn{1/(1+e^{-tx})}{1/(1+e^{- tt x})}. The classification rule is constructed by 
+#' optimizing the best \code{noptim} combinations in this random sample (by default, 
+#' \code{noptim=1} and \code{tt=50/range(depth values)}). Note that Li et al. found 
+#' that the optimization results become stable for 
+#' \eqn{t \in [50, 200]}{t between [50, 200]} when the depth is standardized 
+#' with an upper bound of 1.  
+#' }
+#' The original procedure (Li et al. (2012)) not need to
 #' try many initial polynomials (\code{nmax=1000}) and that the procedure
 #' optimize the best (\code{noptim=1}), but we recommended to repeat the last
 #' step for different solutions, as for example \code{nmax=250} and
@@ -134,18 +135,17 @@
 
 #' @return 
 #' \itemize{
-#' \item \code{group.est} {Estimated vector groups by classified method
-#' selected.}  
-#' \item \code{misclassification} { Probability of misclassification.} 
-#' \item \code{prob.classification} { Probability of correct classification by group level.} 
-#' \item  \code{dep} { Data frame with the depth of the curves for functional data (or points for multivariate data) in
-#' \code{fdataobj} w.r.t. each \code{group} level.} 
-#' \item \code{depth} { Character vector specifying the type of depth functions used.} 
-#' \item \code{par.depth} { List of parameters for \code{depth} function.} 
-#' \item \code{classif} { Type of classifier used.} 
-#' \item \code{par.classif}{ List of parameters for \code{classif} procedure.}
-#' \item \code{w}{ Optional case weights.} 
-#' \item \code{fit}{ Fitted object by \code{classif} method using the depth as covariate.}
+#' \item \code{group.est}: Estimated vector groups by classified method selected.
+#' \item \code{misclassification}:  Probability of misclassification.
+#' \item \code{prob.classification}:  Probability of correct classification by group level.
+#' \item \code{dep}:  Data frame with the depth of the curves for functional data (or points for multivariate data) in
+#' \code{fdataobj} w.r.t. each \code{group} level.
+#' \item \code{depth}:  Character vector specifying the type of depth functions used.
+#' \item \code{par.depth}:  List of parameters for \code{depth} function.
+#' \item \code{classif}:  Type of classifier used.
+#' \item \code{par.classif}:  List of parameters for \code{classif} procedure.
+#' \item \code{w}:  Optional case weights.
+#' \item \code{fit}: Fitted object by \code{classif} method using the depth as covariate.
 #' }
 #' @author This version was created by Manuel Oviedo de la Fuente and Manuel
 #' Febrero Bande and includes the original version for polynomial classifier
@@ -170,7 +170,7 @@
 #' out01 <- classif.DD(gfat,ab,depth="mode",classif="np")
 #' out02 <- classif.DD(gfat,ab2,depth="mode",classif="np")
 #' # DD-plot in gray scale
-#' ctrl< <- list(draw=T,col=gray(c(0,.5)),alpha=.2)
+#' ctrl <- list(draw=T,col=gray(c(0,.5)),alpha=.2)
 #' out02bis <- classif.DD(gfat,ab2,depth="mode",classif="np",control=ctrl)
 #' 
 #' # 2 depth functions (same curves) 
@@ -207,9 +207,10 @@
 
 #' @rdname classif.DD
 #' @export 
-classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
-                       par.classif = list(), par.depth = list(),
-                       control = list(verbose = FALSE,draw = TRUE, col = NULL, alpha = .25))  {
+classif.DD <- function(group, fdataobj, depth = "FM", classif = "glm", 
+					   w, par.classif = list(), par.depth = list(),
+                       control = list(verbose = FALSE,draw = TRUE, 
+					   col = NULL, alpha = .25))  {
   ################################################################################
   # classif.DD: Fits Nonparametric Classification Procedure Based on DD-plot
   # File created by Manuel Oviedo de la Fuente  using code from paper:
@@ -907,7 +908,7 @@ classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
                ind0 <- combs1[which.min(mcrs),] 
                A <- matrix(c( Df0[,1][ind0[1]],( Df0[,1][ind0[1]])^2, Df0[,1][ind0[2]],( Df0[,1][ind0[2]])^2),byrow=TRUE,2,2)
                ww <- c(Df0[,2][ind0[1]],Df0[,2][ind0[2]])
-               a0.2 <- solve.ab(A,ww)
+               a0.2 <- solve_ab(A,ww)
                group.log<-sapply(Df0[,1],RR,a=a0.2)<Df0[,2]
                votos[cvot[1,ivot],i2a2]<-votos[cvot[1,ivot],i2a2]+as.numeric(!group.log)
                votos[cvot[2,ivot],i2a2]<-votos[cvot[2,ivot],i2a2]+as.numeric(group.log)    
@@ -948,7 +949,7 @@ classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
                ind0 <- combs1[which.min(mcrs),] 
                A <- matrix(c( Df[,1][ind0[1]],( Df[,1][ind0[1]])^2, Df[,1][ind0[2]],( Df[,1][ind0[2]])^2),byrow=TRUE,2,2)
                ww <- c(Df[,2][ind0[1]],Df[,2][ind0[2]])
-               a0.2 <- solve.ab(A,ww)
+               a0.2 <- solve_ab(A,ww)
                #################################################################
                #      mcrs <- apply(comb1,1, quad.fit, Df=Df,Dg=Dg,x=x,y=y,n1=n1,n2=n2)
                #      ind <- comb1[which.min(mcrs),] 
@@ -969,7 +970,7 @@ classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
                               Df[,1][ind0[2]],( Df[,1][ind0[2]])^2,( Df[,1][ind0[2]])^3,
                               Df[,1][ind0[3]],( Df[,1][ind0[3]])^2,( Df[,1][ind0[3]])^3),byrow=TRUE,3,3)
                ww <- c(Df[,2][ind0[1]],Df[,2][ind0[2]],Df[,2][ind0[3]])
-               a0.3 <- solve.ab(A,ww)
+               a0.3 <- solve_ab(A,ww)
                x.g1<-fdataobj[group==lev[1], ]
                x.g2<-fdataobj[group==lev[2], ]
                if (is.fdata(fdataobj))
@@ -999,7 +1000,7 @@ classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
                  ind0 <- combs1[which.min(mcrs),] 
                  A <- matrix(c( Df[,1][ind0[1]],( Df[,1][ind0[1]])^2, Df[,1][ind0[2]],( Df[,1][ind0[2]])^2),byrow=TRUE,2,2)
                  ww <- c(Df[,2][ind0[1]],Df[,2][ind0[2]])
-                 a0.22 <- solve.ab(A,ww)
+                 a0.22 <- solve_ab(A,ww)
                  group.est2<-factor(ifelse(sapply(Df[,1],RR,a=a0.22)<Df[,2],lev[1],lev[2])   )#intercambio
                  incorrect<-group.est2!=group
                  mis2<-mean(incorrect) 
@@ -1088,7 +1089,11 @@ classif.DD <- function(group, fdataobj, depth = "FM",classif = "glm", w,
              }
          },
          rpart={
-           require("rpart")
+           #require("rpart")
+           suppressWarnings(rqr2<-require(eval("rpart"), 
+                                          character.only = TRUE,quietly = TRUE, 
+                                          warn.conflicts = FALSE))
+           
            dat<-data.frame(group,Df)
            names(dat)<-c("group1",nam2)
            par.classif$formula<-formula(paste("group1~",paste(names(dat)[-1],collapse="+")))
