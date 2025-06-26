@@ -222,7 +222,7 @@ if (lambda==0) {
        b.est<-object.lm$coefficients[-1]
        beta.est=fd(b.est,basis.b)
        a.est<-object.lm$coefficients[1]
-       df=basis.b$nbasis+1
+       df=sum(diag(S))
        rdf<-n-sum(diag(S))
        sr2 <- sum(e^2)/ rdf
        Vp<-sr2*SS 
