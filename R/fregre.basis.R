@@ -249,7 +249,7 @@ else {
        e <- y - yp                   
        b.est=Sb2%*%y
        beta.est=fd(b.est[-1,1],basis.b)
-       df=basis.b$nbasis+1     
+       df=sum(diag(S))   
        rdf <- n-sum(diag(S))
        sr2 <- sum(e^2)/ rdf
        r2 <- 1 - sum(e^2)/sum(ycen^2)
@@ -266,7 +266,7 @@ else {
        object.lm$fitted.values<-yp
        object.lm$y<-y
        object.lm$rank<-df
-       object.lm$df.residual<-n-df
+       object.lm$df.residual<-rdf
        colnames(Z)[1]="(Intercept)"
        vcov2=sr2*Cinv
        std.error=sqrt(diag(vcov2))
