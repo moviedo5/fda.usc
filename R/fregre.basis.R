@@ -223,7 +223,7 @@ if (lambda==0) {
        beta.est=fd(b.est,basis.b)
        a.est<-object.lm$coefficients[1]
        df=basis.b$nbasis+1
-       rdf<-n-df
+       rdf<-n-sum(diag(S))
        sr2 <- sum(e^2)/ rdf
        Vp<-sr2*SS 
        r2 <- 1 - sum(e^2)/sum(ycen^2)
@@ -250,7 +250,7 @@ else {
        b.est=Sb2%*%y
        beta.est=fd(b.est[-1,1],basis.b)
        df=basis.b$nbasis+1     
-       rdf <- n-df
+       rdf <- n-sum(diag(S))
        sr2 <- sum(e^2)/ rdf
        r2 <- 1 - sum(e^2)/sum(ycen^2)
        Vp <- sr2*Cinv       
@@ -283,7 +283,7 @@ else {
 
 #hat<-diag(hat(Z, intercept = TRUE),ncol=n)
 out<-list("call"=call, coefficients=coefficients, "residuals"=e, "fitted.values"=yp
-,"beta.est"=beta.est,weights= weights,"df.residual"=n-df,"r2"=r2,"sr2"=sr2,
+,"beta.est"=beta.est,weights= weights,"df.residual"=rdf,"r2"=r2,"sr2"=sr2,
 "Vp"=Vp,"H"=S,"y"=y,"fdataobj"=fdataobj, "basis.x.opt"=basis.x, #x.fd=x.fd,
 "basis.b.opt"=basis.b,"J"=J,"lambda.opt"=lambda,P=R, Lfdobj=Lfdobj,
   lm=object.lm,"mean"=xmean, "b.est"=b.est,"a.est"=a.est,XX=Z)

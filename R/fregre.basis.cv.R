@@ -280,7 +280,8 @@ fregre.basis.cv <- function(fdataobj,y,basis.x=NULL,basis.b=NULL,
       a.est=b.est[1,1]
       e=drop(y)-drop(yp)
       names(e)<-rownames(x)
-      df=basis.b.opt$nbasis+1
+      df=sum(diag(S))
+#      df=basis.b.opt$nbasis+1
       sr2=sum(e^2)/(n-df)
       Vp<-sr2*Cinv.opt    
       r2=1-sum(e^2)/sum(ycen^2)
