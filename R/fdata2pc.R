@@ -389,7 +389,7 @@ mplsr <- function(X, Y, ncomp = 2, lambda=0, P=c(0,0,1),...)
 #'  summary(pc)
 #'  }
 #' @export
-fdata2pc<-function (fdataobj,  ncomp = 2,norm = TRUE,lambda=0,P=c(0,0,1),...)
+fdata2pc<-function (fdataobj,  ncomp = 2, norm = TRUE,lambda=0,P=c(0,0,1),...)
 {
   C <- match.call()
   if (!is.fdata(fdataobj))
@@ -418,35 +418,54 @@ fdata2pc<-function (fdataobj,  ncomp = 2,norm = TRUE,lambda=0,P=c(0,0,1),...)
     M <- solve( diag(J) + lambda*P)
     Xcen.fdata$data<- Xcen.fdata$data %*%t(M)
   }
-  eigenres <- svd(Xcen.fdata$data)
+
+  # Get integration weights
+  w <- apply(diag(nrow = J), 1, \(y) {
+    int.simpson2(tt, y, equi = argvals.equi(tt), ...)
+  }) # quadrature weights vector
+  sqrt.W <- diag(sqrt(w))
+  sqrt.n_1 <- sqrt(n - 1)
+
+  eigenres <- svd(Xcen.fdata$data%*%sqrt.W/sqrt.n_1)
   v <- eigenres$v
   u <- eigenres$u
   d <- eigenres$d
   D <- diag(d)
-  vs <- fdata(t(v), tt, rtt, list(main = "fdata PCs", xlab = "t",
-                                  ylab = "rotation"))
-  scores <- matrix(0, ncol = J, nrow = n)
-  if (norm) {
-    dtt <- diff(tt)
-    drtt <- diff(rtt)
-    eps <- as.double(.Machine[[1]] * 10)
-    inf <- dtt - eps
-    sup <- dtt + eps
-    if (all(dtt > inf) & all(dtt < sup))
-      delta <- sqrt(drtt/(J - 1))
-    else delta <- 1/sqrt(mean(1/dtt))
-    no <- norm.fdata(vs)
-    vs <- vs/delta
-    d <- d * delta
-  }  #  else {    newd <- d  }
-  scores[, 1:Jmin] <- inprod.fdata(Xcen.fdata, vs, ...)
-  colnames(scores) <- paste("PC", 1:J, sep = "")
+
+#  vs <- fdata(t(v), tt, rtt, list(main = "fdata PCs", xlab = "t",
+#                                  ylab = "rotation"))
+#  scores <- matrix(0, ncol = J, nrow = n)
   l <- 1:ncomp
-#  vs$names$main <-   "pls"
-  out <- list(call = C,d = d, basis = vs[1:ncomp], rotation = vs[1:ncomp],
+  scores <- sqrt.n_1 * u[, l, drop = FALSE] %*% diag(d[l])
+  colnames(scores) <- paste0("PC", l) # cambiar ncomp a Jmin si se devuelven todos
+
+  vs <- fdata(
+    mdata = t(solve(sqrt.W, v[, l, drop = FALSE])), # ya se construyen solo ncomp
+    argvals = tt, rangeval = rtt, 
+    names = list( main = "FPCs", xlab = fdataobj$names$xlab, ylab = "Rotation") 
+    # TODO: cambie los nombres, esto a tu preferencia
+  )
+#  if (norm) {
+#    dtt <- diff(tt)
+#    drtt <- diff(rtt)
+#    eps <- as.double(.Machine[[1]] * 10)
+#    inf <- dtt - eps
+#    sup <- dtt + eps
+#    if (all(dtt > inf) & all(dtt < sup))
+#      delta <- sqrt(drtt/(J - 1))
+#    else delta <- 1/sqrt(mean(1/dtt))
+#    no <- norm.fdata(vs)
+#    vs <- vs/delta
+#    d <- d * delta
+#  }  #  else {    newd <- d  }
+#  scores[, 1:Jmin] <- inprod.fdata(Xcen.fdata, vs, ...)
+#  colnames(scores) <- paste("PC", 1:J, sep = "")
+
+
+  out <- list(call = C,d = d, basis = vs, rotation = vs,
               coefs = scores, x = scores,
               lambda = lambda,P=P, fdataobj.cen = Xcen.fdata,norm=norm, type="pc",
-              mean = xmean, fdataobj = fdataobj,l=l, u=u[,1:ncomp,drop=FALSE])
+              mean = xmean, fdataobj = fdataobj,l=l, u=u[,l,drop=FALSE])
   class(out) = "fdata.comp"
   return(out)
 }
