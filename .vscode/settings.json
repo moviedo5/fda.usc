@@ -1,5 +1,6 @@
 {
     "r.alwaysUseActiveTerminal": true,
     "r.useRenvLibPath": true,
-    "r.rpath.windows": "%R_HOME%\\bin\\x64\\Rterm.exe"
+    "r.rpath.windows": "${env:R_HOME}/bin/x64/Rterm.exe",
+    "svn.ignoreMissingSvnWarning": true
 }
