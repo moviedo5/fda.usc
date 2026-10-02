@@ -6,7 +6,7 @@
 #' @param fdataobj \code{\link{fdata}} class object.
 #' @param type.basis Type of basis. A function \code{create."type.basis".basis}
 #' must exists. By default, \code{bspline} basis is used.
-#' @param nbasis Number of basis which is used in \code{create.basis} function.
+#' @param nbasis Number of elements of the basis which is used in \code{create.basis} function.
 #' @param nderiv Order of derivation which is used in \code{deriv.fd} function
 #' (optional).
 #' @param lambda Weight on the smoothing operator specified by \code{nderiv}.
