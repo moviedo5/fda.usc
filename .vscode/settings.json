@@ -1,6 +1,9 @@
 {
     "r.alwaysUseActiveTerminal": true,
     "r.useRenvLibPath": true,
-    "r.rpath.windows": "${env:R_HOME}/bin/x64/Rterm.exe",
-    "svn.ignoreMissingSvnWarning": true
+    "r.rpath.windows": "${env:R_HOME}\\bin\\x64\\Rterm.exe",
+    "svn.ignoreMissingSvnWarning": true,
+    "emmet.syntaxProfiles": {
+
+    }
 }

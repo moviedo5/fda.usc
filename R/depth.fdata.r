@@ -260,7 +260,7 @@ if (scale) out$dscale=mx
 
 #' @rdname depth.fdata
 #' @export depth.RP
-depth.RP<-function(fdataobj,fdataori=fdataobj,trim=0.25,nproj=50,proj="vexponential",
+depth.RP<-function(fdataobj,fdataori=fdataobj,trim=0.25,nproj=20,proj="vexponential",
                    dfunc="TD1",par.dfunc=list(),scale=FALSE,draw=FALSE,...){
   if (!is.fdata(fdataobj)) fdataobj=fdata(fdataobj)
   if (!is.fdata(fdataori)) fdataori=fdata(fdataori)
@@ -473,7 +473,7 @@ depth.RPD<-function (fdataobj,fdataori=fdataobj, nproj = 20, proj=1,deriv = c(0,
 
 #' @rdname depth.fdata
 #' @export 
-depth.RT  <-function (fdataobj,fdataori=fdataobj, trim = 0.25, nproj = 10, proj = 1, xeps = 1e-07, 
+depth.RT  <-function (fdataobj,fdataori=fdataobj, trim = 0.25, nproj = 20, proj = 1, xeps = 1e-07, 
                       draw = FALSE, ...) 
 {
   if (!is.fdata(fdataobj)) fdataobj = fdata(fdataobj)
