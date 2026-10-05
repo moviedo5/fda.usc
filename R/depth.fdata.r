@@ -478,7 +478,7 @@ depth.RT  <-function (fdataobj,fdataori=fdataobj, trim = 0.25, nproj = 50, proj 
 {
   if (!is.fdata(fdataobj)) fdataobj = fdata(fdataobj)
   if (!is.fdata(fdataori)) fdataobj=fdata(fdataori)    
-  if (is.null(rownames(fdataobj$data)))  rownames(fdataobj$data)<-1:nrow(fdataobj$data)
+  if (is.null(rownames(fdataobj$data)))  rownames(fdataobj$data)<-seq_len(nrow(fdataobj$data))
   nms<-rownames(fdataobj$data)
   m0<-nrow(fdataobj)
   fdataobj2<-fdataobj
