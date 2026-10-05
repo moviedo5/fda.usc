@@ -397,7 +397,7 @@ pred2np <- function(object, new.fdataobj = NULL, ...) {
   isfdata <- is.fdata(new.fdataobj)
   #if (!isfdata) new.fdataobj<-fdata(new.fdataobj)
   #print(isfdata)  
-  gg <- 1:nrow(new.fdataobj)
+  gg <- seq_len(nrow(new.fdataobj))
   if (isfdata) {
     nas <- is.na.fdata(new.fdataobj)
     if (any(nas)) {
