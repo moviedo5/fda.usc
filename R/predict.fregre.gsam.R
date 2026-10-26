@@ -40,7 +40,7 @@ predict.fregre.gsam <- function(object, newx = NULL, type = "response",...){
         first=TRUE
       }
       lenfunc <- length(vfunc)
-      bsp1 <- object$bsp
+      bsp1 <- object$fix.b
       if (lenfunc>0) {
         k <- 1
         mean.list=vs.list=JJ=list()
@@ -58,7 +58,7 @@ predict.fregre.gsam <- function(object, newx = NULL, type = "response",...){
             xaux <- fdata2basis(data[[vfunc[i]]], basis.x[[vfunc[i]]],method="inprod")
             name.coef[[vfunc[i]]] <- colnames(xaux$coefs) <- paste(vfunc[i],".",colnames(xaux$coefs),sep="")
             Z <- xaux$coefs
-            if ( object$bsp ){
+            if ( object$fix.b ){
               Z = Z %*% inprod(basis.x[[vfunc[i]]], object$basis.b[[vfunc[i]]])  
              }
             if (first) {
@@ -107,7 +107,7 @@ effect.gam <- function(object,terms){
 ###############################
 # Modification 20221007 (adapted from  fregre.gsam.fr)
 # New code included:
-# if ( object$bsp ){
+# if ( object$bsp ){ cambiado por object$fix.b
 #    Z = Z %*% inprod(basis.x[[vfunc[i]]], object$basis.b[[vfunc[i]]])  
 #   colnames(Z)<-colnames(object$XX)[-1]
 # }

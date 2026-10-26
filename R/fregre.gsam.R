@@ -406,7 +406,7 @@ fregre.gsam <- function (formula
   z$data=data
   z$XX <- XX
   #z$basis <- aux$basis
-  z$bsp <- bsp1
+  z$fix.b<- bsp1
   z$vfunc <- vfunc;   z$nnf <- nnf;   z$vnf <- vnf
   z$fnf2<-fnf2
   class(z) <- c("fregre.gsam",class(z))

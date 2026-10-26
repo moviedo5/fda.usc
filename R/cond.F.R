@@ -11,9 +11,8 @@
 #' @param y0 Vector of conditional response with length \code{n}.
 #' @param fdataobj \code{\link{fdata}} class object.
 #' @param y Vector of scalar response with length \code{nn}.
-#' @param h Smoothing parameter or bandwidth of response \code{y}.
-#' @param g Smoothing parameter or bandwidth of explanatory functional data
-#' \code{fdataobj}.
+#' @param h Smoothing parameter or bandwidth for explanatory functional data \code{fdataobj}. Its value is a quantile of the distances among objects.
+#' @param g Smoothing parameter or bandwidth of response \code{y}. Its value is a proportion of the range.
 #' @param metric Metric function, by default \code{\link{metric.lp}}.
 #' @param Ker List of 2 arguments. The fist argument is a character string that
 #' determines the type of asymetric kernel (see
