@@ -114,8 +114,8 @@ argvals.equi = function(tt){
   if (!inhe.fdata1 && !inhe.fdata2)
     stop("Neither argument for - is a functional data object fdata.")
   if (inhe.fdata1 && inhe.fdata2) {
-    if (ncol(fdata1)!=ncol(fdata2)) stop("Error in columns dimensions")
-    if (!(all(fdata1[["argvals"]] == fdata2[["argvals"]])))  stop("Error in argvals")
+    if (ncol(fdata1)!=ncol(fdata2)) stop("Error in argvals dimensions.")
+    if (!(all(fdata1[["argvals"]] == fdata2[["argvals"]])))  stop("Error. Argvals are not coincident.")
     n1=nrow(fdata1)
     n2=nrow(fdata2)
     if (n1==n2){

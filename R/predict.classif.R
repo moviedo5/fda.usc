@@ -421,7 +421,7 @@ pred2np <- function(object, new.fdataobj = NULL, ...) {
   lev <- levels(y)
   numg <- nlevels(y)
   if (is.null(rownames(newx))) 
-    rownames(newx) <- 1:nn
+    rownames(newx) <- seq_len(nn)
   bs = as = list()
   C <- object$call
   m <- object$m
