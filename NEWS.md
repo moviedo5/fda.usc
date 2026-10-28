@@ -15,6 +15,11 @@
 * quantile.outliers.pond.r, `quantile_outliers.pond`  has been renamed to `quantile_outliers_pond`.
 * quantile.outliers.trim.r, `quantile_outliers.trim`  has been renamed to `quantile_outliers_trim`.
 * the `plot.lfdata` function is exported, no longer internal
+* `fdata.bootstrap()` gains the argument `par.metric` to control the metric used to
+  compute the bootstrap confidence ball (`par.metric$metric`, by default `metric.lp`;
+  the remaining components are passed to the metric). The `...` arguments are now
+  passed only to `statistic` and no longer to the metric: code that used `...` to
+  set metric arguments (e.g. `lp`) must now use `par.metric = list(lp = ...)`.
 
 
 # fda.usc 2.1.0 

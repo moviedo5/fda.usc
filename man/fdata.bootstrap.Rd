@@ -13,7 +13,8 @@ fdata.bootstrap(
   smo = 0,
   draw = FALSE,
   draw.control = NULL,
-  ...
+  ...,
+  par.metric = list()
 )
 }
 \arguments{
@@ -37,7 +38,14 @@ of the sample variance matrix.}
 \code{lwd} for objects: \code{fdataobj}, \code{statistic}, \code{IN} and
 \code{OUT}.}
 
-\item{\dots}{Further arguments passed to or from other methods.}
+\item{\dots}{Further arguments passed to \code{statistic}.}
+
+\item{par.metric}{List of arguments for the metric used to compute the
+distances between the bootstrap replicates and the statistic. The
+component \code{metric} sets the metric function (by default
+\code{\link{metric.lp}}) and the remaining components are passed to it,
+e.g. \code{par.metric = list(lp = 1)} or
+\code{par.metric = list(metric = semimetric.deriv, nderiv = 1)}.}
 }
 \value{
 \itemize{
@@ -49,7 +57,7 @@ of the sample variance matrix.}
 }
 }
 \description{
-provides bootstrap samples for functional data.
+Provides bootstrap samples for functional data.
 }
 \details{
 The \code{\link{fdata.bootstrap}} computes a confidence ball using bootstrap in
@@ -96,6 +104,9 @@ names(out.boot)
 control=list("col"=c("grey","blue","cyan"),"lty"=c(2,1,1),"lwd"=c(1,3,1))
 out.boot=fdata.bootstrap(absorp,statistic=func.med.mode,
 draw=TRUE,draw.control=control)
+#Bootstrap for Trimmed Mean with distances based on the second derivative
+out.boot=fdata.bootstrap(absorp,statistic=func.trim.FM,nb=200,draw=TRUE,
+par.metric=list(metric=semimetric.deriv,nderiv=2))
 }
 }
 \references{

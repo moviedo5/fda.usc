@@ -1,6 +1,6 @@
 #' @title Bootstrap samples of a functional statistic
 #' 
-#' @description provides bootstrap samples for functional data.
+#' @description Provides bootstrap samples for functional data.
 #' 
 #' @param fdataobj \code{fdata} class object.
 #' @param statistic Sample statistic. It must be a function that returns an
@@ -15,7 +15,13 @@
 #' @param draw.control List that it specifies the \code{col}, \code{lty} and
 #' \code{lwd} for objects: \code{fdataobj}, \code{statistic}, \code{IN} and
 #' \code{OUT}.
-#' @param \dots Further arguments passed to or from other methods.
+#' @param \dots Further arguments passed to \code{statistic}.
+#' @param par.metric List of arguments for the metric used to compute the
+#' distances between the bootstrap replicates and the statistic. The
+#' component \code{metric} sets the metric function (by default
+#' \code{\link{metric.lp}}) and the remaining components are passed to it,
+#' e.g. \code{par.metric = list(lp = 1)} or
+#' \code{par.metric = list(metric = semimetric.deriv, nderiv = 1)}.
 #' 
 #' @details The \code{\link{fdata.bootstrap}} computes a confidence ball using bootstrap in
 #' the following way: 
@@ -85,13 +91,24 @@
 #' control=list("col"=c("grey","blue","cyan"),"lty"=c(2,1,1),"lwd"=c(1,3,1))
 #' out.boot=fdata.bootstrap(absorp,statistic=func.med.mode,
 #' draw=TRUE,draw.control=control)
+#' #Bootstrap for Trimmed Mean with distances based on the second derivative
+#' out.boot=fdata.bootstrap(absorp,statistic=func.trim.FM,nb=200,draw=TRUE,
+#' par.metric=list(metric=semimetric.deriv,nderiv=2))
 #' }
 #' @aliases fdata.bootstrap fdata.bootstrap2
 #' 
 #' @export 
-fdata.bootstrap <- function(fdataobj, statistic  =func.mean
-                            ,alpha = 0.05, nb= 200, smo = 0
-                            ,draw = FALSE,draw.control = NULL,...){
+fdata.bootstrap <- function(
+  fdataobj,
+  statistic = func.mean,
+  alpha = 0.05,
+  nb = 200, 
+  smo = 0,
+  draw = FALSE,
+  draw.control = NULL,
+  ...,
+  par.metric = list()
+) {
   if (!is.fdata(fdataobj)) fdataobj=fdata(fdataobj)
   data<-fdataobj[["data"]]
   if (smo > 0) varX <- var(data) * smo
@@ -140,9 +157,12 @@ fdata.bootstrap <- function(fdataobj, statistic  =func.mean
   #  distboot[i]<-metric.lp(center,aux,...)  }
   #print(dim(estboot))  print(class(estboot))
   
-  distboot <- metric.lp(fdata(estboot,tt,rtt),center,...)
-  dist <- max(distboot[rank(distboot)<=floor((1-alpha)*nb)])
+  # distboot <- metric.lp(fdata(estboot,tt,rtt),center,...) 
   resample <- fdata(estboot,tt,rtt,names)
+  metric <- if (is.null(par.metric$metric)) metric.lp else par.metric$metric
+  par.metric$metric <- NULL
+  distboot <- do.call(metric, c(list(resample, center), par.metric))
+  dist <- max(distboot[rank(distboot)<=floor((1-alpha)*nb)])
   if (draw){
     if (is.null(draw.control)) draw.control=list("col"=c("grey","blue","pink"),"lty"=c(2,1,1),"lwd"=c(1,2,1))
     if (is.null(draw.control$lwd)) draw.control$lwd=c(1,2,1)
