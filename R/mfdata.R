@@ -35,13 +35,12 @@
 #' class(mdat)
 #' plot(mdat[[1]])
 #' plot(mdat[[2]]) 
-#' plot(mdat)
-# # plot(mdat,var.name="Fat")
+#' plot(mdat, var.name="Fat")
 #' @export 
 mfdata <-function(...){
   C <- match.call()
   lenC <- length(C)
-  mf<-TRUE
+  #  mf<-TRUE
   #if (missing(mfdata)){
   #  mf <- FALSE
   #}  else lenC <-  lenC-1
@@ -108,14 +107,13 @@ names.mfdata<-function(x){
 
 #' @export
 is.mfdata=function(x){
-  nc=length(x)
-  nam=names(x)
-  n=NROW(x[[1]])
-  lo1=all(unlist(sapply(x,NROW))==n)
+#  nc=length(x)
+#  nam <- names(x)
+  n <- NROW(x[[1]])
+  lo1 = all(unlist(sapply(x, NROW)) == n)
   if (!lo1) warning("The number of rows are different")
-  clas=unlist(lapply(x,class))
-  
-  if (all(clas=="fdata")) return(TRUE)
+  clas <- unlist(lapply(x, class))
+  if (all(clas == "fdata")) return(TRUE)
   else return(FALSE)
 }
 
@@ -126,18 +124,18 @@ is.mfdata=function(x){
   if (!row){
     var.name <- names(x)
     class(x) <- "list"
-    hay.df <- FALSE
+#    hay.df <- FALSE
     if (is.numeric(i))  {
       x <- x[i]
-      names(x)<-var.name[i]
-      if (all(names(x)!="df"  ))         class(x) <- "list"
-      else class(x) <- c("mfdata","list")
+      names(x) <- var.name[i]
+      if (all(names(x) != "df")) class(x) <- "list"
+      else class(x) <- c("mfdata", "list")
       return(x)
     }
-    int.x <- intersect(i,var.name)
+#    int.x <- intersect(i, var.name)
     x <- x[i]
     return(x)
-  } else{
+  } else {
   for (m in seq_along(x)){
     x[[m]] = x[[m]][i]
   }
@@ -155,21 +153,21 @@ is.mfdata=function(x){
 
 #' @rdname mfdata
 #' @export 
-subset.mfdata<-function(x, subset,...){
+subset.mfdata<-function(x, subset, ...){
   nvar <- length(x)
-  namx <- names(x)
+#  namx <- names(x)
   if (missing(subset)) subset <- !logical(nrow(x[[1]]))
-  if (is.numeric(subset) & max(subset) < nrow(x[[1]])) {
+  if (is.numeric(subset) && max(subset) < nrow(x[[1]])) {
     subset2 <- logical(nrow(x[[1]]))
     subset2[subset] <- TRUE
-    subset<-subset2    
-  }  
-  newx<-x
-  for (i in 1:nvar){
+    subset <- subset2
+  }
+  newx <- x
+  for (i in seq_len(nvar)){
     if (is.fdata(x[[i]])) {
-      newx[[i]] <- subset.fdata(x[[i]],subset,drop=FALSE,...)
+      newx[[i]] <- subset.fdata(x[[i]], subset, drop=FALSE, ...)
     } else {
-      newx[[i]] <- subset(x[[i]],subset,drop=FALSE,...)	
+      newx[[i]] <- subset(x[[i]], subset, drop=FALSE, ...)	
     }
   } 
   return(invisible(newx))
@@ -184,8 +182,8 @@ subset.mfdata<-function(x, subset,...){
 plot.mfdata <- function(x, ask=FALSE, color, ...){
   if (!is.mfdata(x)) stop("No mfdata class object")
   col.bar=FALSE
-  if (missing(color)) color= 1:nrow(x[[1]])
-  xfact <- 1:NROW(x[[1]])
+  if (missing(color)) color = seq_len(nrow(x[[1]]))
+#  xfact <- seq_len(NROW(x[[1]]))
   ticks <- NULL
   mf <- 5
   nvar <- length(x)
@@ -195,37 +193,37 @@ plot.mfdata <- function(x, ask=FALSE, color, ...){
     dev.interactive()
     oask <- devAskNewPage(TRUE)
     on.exit(devAskNewPage(oask))
-  }  else{    
-    mf<-switch(nvar,
+  }  else {
+    mf <- switch(nvar,
                "1"={c(1,1)},
                "2"={c(1,2)},
                "3"={c(1,3)},
-               "4"={c(2,2)})            
-    par(mfrow =mf)                    
+               "4"={c(2,2)})
+    par(mfrow = mf)
   }
   #    tr<-paste("mode.tr",trim*100,"\u0025",sep="")         
   nam <- names(x)
   min.col <- 0#min(color)
   max.col <- 1#max(color)
   for (idat in nam) {
-    data<-x[[idat]]$data
-    tt<-x[[idat]]$argvals
-    rtt<-x[[idat]]$rangeval
-    var.color<-  color[xfact]
+  #  data <- x[[idat]]$data
+  #  tt <- x[[idat]]$argvals
+  #  rtt <- x[[idat]]$rangeval
+  #  var.color <- color[xfact]
     plot(x[[idat]], col = color,
           #     main  =paste0(idat,"-",x[[idat]]$names$main),...)
-          main  = x[[idat]]$names$main,...)
-    if (col.bar)    color.bar(color,min.col,max.col,ro=0,ticks=ticks)
+          main  = x[[idat]]$names$main, ...)
+    if (col.bar)    color.bar(color, min.col, max.col, ro=0, ticks=ticks)
     }
 }
 #plot.mfdata(mdat)
 
 ##################################################################
 #' @export
-mean.mfdata <- function (x,...){
-  if (!is.mfdata(x) | !is.list(x))
+mean.mfdata <- function(x, ...){
+  if (!is.mfdata(x) || !is.list(x))
     stop("No mfdata or list object")
-  out <- lapply(x,func.mean)
+  out <- lapply(x, func.mean)
   class(out) <- class(x)
   return(out)
 }
@@ -236,11 +234,10 @@ mean.mfdata <- function (x,...){
 ##################################################################
 
 #' @export
-mfdata.cen<- function (x, meanX = mean.mfdata(x)) 
-{
+mfdata.cen<- function (x, meanX = mean.mfdata(x)) {
 #  print("mfdata.cen")
   if (is.fdata(x)) return(fdata.cen(x))
-  if (!is.mfdata(x) | !is.list(x))
+  if (!is.mfdata(x) || !is.list(x))
     stop("No mfdata or list object")
   #data <- fdataobj[["data"]]
   #fdataobj$data <- sweep(fdataobj$data, 2, meanX$data, FUN = "-")
@@ -249,28 +246,27 @@ mfdata.cen<- function (x, meanX = mean.mfdata(x))
   nam <- names(x)
   lenl <- length(x)
   for (i in 1:lenl)
-    x[[nam[i]]]$data <- sweep(x[[nam[i]]]$data
-                              , 2, meanX[[nam[i]]]$data, FUN = "-")
+    x[[nam[i]]]$data <- sweep(x[[nam[i]]]$data, 2,
+                     meanX[[nam[i]]]$data, FUN = "-")
   return(list(Xcen = x, meanX = meanX))
 }
 
-#' @export 
-mean.mfdata <- function (x,...){
-  if (!is.mfdata(x) & !is.list(x))
+#' @export
+mean.mfdata <- function (x, ...) {
+  if (!is.mfdata(x) && !is.list(x))
     stop("No ldata or list object")
-  out <- lapply(x,func.mean)
+  out <- lapply(x, func.mean)
   class(out) <- class(x)
   return(out)
 }
 
 #' @export 
-nrow.mfdata <- function (x) 
-{
+nrow.mfdata <- function(x){
   if (is.mfdata(x)){
-    nc = length(x)
-    nam = names(x)
-    n = nrow(x[[1]])
-    lo1 = all(unlist(sapply(x, nrow)) == n)
+#    nc = length(x)
+#    nam = names(x)
+    n <- nrow(x[[1]])
+    lo1 <- all(unlist(sapply(x, nrow)) == n)
     if (!lo1) 
       warning("The number of rows are different")
     n
@@ -278,13 +274,12 @@ nrow.mfdata <- function (x)
 }
 
 #' @export 
-NROW.mfdata <- function (x) 
-{
+NROW.mfdata <- function(x) {
   if (is.fdata(x)){
-    nc = length(x)
-    nam = names(x)
-    n = NROW(x[[1]])
-    lo1 = all(unlist(sapply(x, NROW)) == n)
+  #  nc = length(x)
+  #  nam = names(x)
+    n <- NROW(x[[1]])
+    lo1 <- all(unlist(sapply(x, NROW)) == n)
     if (!lo1) 
       warning("The number of rows are different")
     n
@@ -292,22 +287,20 @@ NROW.mfdata <- function (x)
 }
 
 #' @export 
-NCOL.mfdata <- function (x) 
-{
-  nc = length(x)
-  nam = names(x)
-  n = NCOL(x[[1]])
-  lo1 = all(unlist(sapply(x, NCOL)) == n)
+NCOL.mfdata <- function(x) {
+  #  nc = length(x)
+  #  nam = names(x)
+  n <- NCOL(x[[1]])
+  lo1 <- all(unlist(sapply(x, NCOL)) == n)
   if (!lo1) 
     warning("The number of columns are different")
   n
 }
 
 #' @export 
-ncol.mfdata <- function (x) 
-{
-  nc = length(x)
-  nam = names(x)
+ncol.mfdata <- function(x) {
+  #  nc = length(x)
+  #  nam = names(x)
   n = ncol(x[[1]])
   lo1 = all(unlist(sapply(x, ncol)) == n)
   if (!lo1) 
@@ -316,8 +309,8 @@ ncol.mfdata <- function (x)
 }
 
 #' @export 
-Ops.mfdata <- function(e1, e2){
-  out<-Map(.Generic,e1,e1)
+Ops.mfdata <- function(e1, e2) {
+  out <- Map(.Generic, e1, e2)
   class(out) <- class(e1)
   out
 }
@@ -325,7 +318,7 @@ Ops.mfdata <- function(e1, e2){
 #' @export 
 Math.mfdata <- function(x, ...){
   # Math(x,...)
-  lapply(x,.Generic,...)
+  lapply(x, .Generic, ...)
 }
 
 #' @export 
@@ -333,10 +326,8 @@ Summary.mfdata<- function(..., na.rm = FALSE){
   #  lapply(...,.Generic, na.rm = FALSE)
   # Seguramente se quiera que se devuelva otra casa
   # por ejemplo el minimo para cada variable del df y por columnas del fdata
-  out<-sapply(...,.Generic,2, na.rm = FALSE)
+  out <- sapply(..., .Generic,2, na.rm = FALSE)
   #out<-c(out,sapply(...,.Generic,2, na.rm = FALSE))
   out
 }
 #########################
-
-

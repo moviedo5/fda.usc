@@ -3,11 +3,11 @@
 # Allow the user to set and examine a variety of global or local options which affect
 # the way in which fda.usc functions computes and displays its results.
 # internal parameter
-par.fda.usc<-list()
+par.fda.usc <- list()
 par.fda.usc$verbose <- FALSE
 par.fda.usc$trace <- FALSE
 par.fda.usc$warning <- FALSE
-par.fda.usc$ncores <- 1 
+par.fda.usc$ncores <- 1
 par.fda.usc$int.method <- "TRAPZ"
 par.fda.usc$eps <- as.double(.Machine[[1]]*10)
 ###############################################################################
@@ -39,36 +39,34 @@ par.fda.usc$eps <- as.double(.Machine[[1]]*10)
 #' }
 #'
 #' @export 
-ops.fda.usc = function(verbose = FALSE,trace = FALSE,warning = FALSE,
+ops.fda.usc = function(verbose = FALSE, trace = FALSE, warning = FALSE,
                        ncores = NULL,
-                       int.method = "TRAPZ",reset = FALSE,
+                       int.method = "TRAPZ", reset = FALSE,
                        eps = as.double(.Machine[[1]]*10)){
   
   if (reset)   foreach::registerDoSEQ()
-  if (is.null(ncores)) ncores = max(parallel::detectCores() -1,1)
+  if (is.null(ncores)) ncores <- max(parallel::detectCores() - 1, 1)
   # If worker initialization failed, please execute this code
- 
-   #print("entra ops.fda.usc")
-  .par.fda.usc = list()
-  .par.fda.usc$verbose = verbose
-  .par.fda.usc$trace = trace
-  .par.fda.usc$warning = warning 
-  .par.fda.usc$ncores = ncores
-  .par.fda.usc$int.method = int.method
-  .par.fda.usc$eps =  eps
- # stp <- FALSE
-  #par.fda.usc <- eval(parse(text="par.fda.usc"), envir=.GlobalEnv)
- #cat(" ncores:",ncores)
-  #if (foreach:::getDoParRegistered())
+
+  .par.fda.usc <- list()
+  .par.fda.usc$verbose <- verbose
+  .par.fda.usc$trace <- trace
+  .par.fda.usc$warning <- warning
+  .par.fda.usc$ncores <- ncores
+  .par.fda.usc$int.method <- int.method
+  .par.fda.usc$eps <- eps
+# stp <- FALSE
+#par.fda.usc <- eval(parse(text="par.fda.usc"), envir=.GlobalEnv)
+#cat(" ncores:",ncores)
+#if (foreach:::getDoParRegistered())
   ## Use a dummy loop to suppress possible (non-)warning from
   ## initial call to %dopar% with a sequential backend...
-  
   if (ncores==1) {
-     foreach::registerDoSEQ()
-  }  else{
-    if (foreach::getDoParWorkers()!=ncores){
+    foreach::registerDoSEQ()
+  }  else {
+    if (foreach::getDoParWorkers() != ncores) {
       # cat("getDoParWorkers != ncores")
-      cl <-  suppressWarnings(parallel::makePSOCKcluster(ncores ))
+      cl <-  suppressWarnings(parallel::makePSOCKcluster(ncores))
       doParallel::registerDoParallel(cl)
     }
   }
@@ -79,10 +77,10 @@ ops.fda.usc = function(verbose = FALSE,trace = FALSE,warning = FALSE,
    # return (new.env(parent=env))
   #}
   #e <- unlockEnvironment(e)
-  e<-environment(ops.fda.usc)
+  e <- environment(ops.fda.usc)
   #unlockBinding("par.fda.usc", e)
-  par.unlock<-list("sym"="par.fda.usc","env"=e)
-  do.call("unlockBinding",par.unlock)
+  par.unlock <- list("sym"="par.fda.usc", "env"=e)
+  do.call("unlockBinding", par.unlock)
   assign("par.fda.usc", .par.fda.usc, envir = e)
   get("par.fda.usc", envir = e)
   #globalVariables(names=c("i'), package="fda.usc", add=F)

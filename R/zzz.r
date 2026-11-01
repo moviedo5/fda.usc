@@ -1,7 +1,7 @@
-globalVariables('icnt')
+globalVariables("icnt")
 
 #' @keywords internal
- 
+
 
 #' @import fda 
 #' @import splines

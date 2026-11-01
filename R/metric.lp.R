@@ -77,7 +77,7 @@
 #' 
 #' @export
 
-metric.lp=function (fdata1, fdata2 = NULL, lp = 2, w = 1, dscale=1,...) {
+metric.lp=function (fdata1, fdata2 = NULL, lp = 2, w = 1, dscale = 1, ...) {
   p <- lp
   C1 <- match.call()
   same <- FALSE
@@ -120,13 +120,13 @@ metric.lp=function (fdata1, fdata2 = NULL, lp = 2, w = 1, dscale=1,...) {
   np <- ncol(DATA1)
   inumgr <- 1:numgr
   inumgr2 <- 1:numgr2
-  if ((length(w) != np) & (length(w) != 1)) {
+  if ((length(w) != np) && (length(w) != 1)) {
     stop("DATA ERROR: The weight vector hasn't the length of the functions\n")
   }
   testfordim <- sum(dim(DATA1) == dim(DATA2)) == 2
   twodatasets <- TRUE
-  etiq1=rownames(DATA1)
-  etiq2=rownames(DATA2)    
+  etiq1 = rownames(DATA1)
+  etiq2 = rownames(DATA2)    
   if (testfordim) 
     twodatasets <- sum(DATA1 - DATA2, na.rm = TRUE) == 0
  
@@ -134,7 +134,7 @@ metric.lp=function (fdata1, fdata2 = NULL, lp = 2, w = 1, dscale=1,...) {
   # requireNamespace("parallel", quietly = TRUE)
   # requireNamespace("doParallel", quietly = TRUE)
   
-  par.fda.usc <- eval(parse(text="fda.usc:::par.fda.usc"), envir=.GlobalEnv)
+  par.fda.usc <- eval(parse(text = "fda.usc:::par.fda.usc"), envir=.GlobalEnv)
   ncores <- par.fda.usc$ncores
   int.method <- par.fda.usc$int.method
   #if (ncores==1) {
